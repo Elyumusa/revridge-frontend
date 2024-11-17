@@ -36,7 +36,8 @@ export default function BlogPage() {
   const [loading,setLoading]=useState(true);
 useEffect(()=>{
     const fetchJobs=async (params) => {
-      const apiUrl="http://127.0.0.1:8000/api/posts/"
+      const mainURL=process.env.REACT_APP_REVRIDGE_BACKEND_URL;
+      const apiUrl=`${mainURL}/api/posts/`
     try {
       const result=await axios.get(apiUrl)
       const data=result.data

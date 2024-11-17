@@ -60,7 +60,8 @@ export default function DividendCalendar() {
   )*/
   useEffect(()=>{
     const fetchDividends= async (params)=>{
-        const apiUrl=`http://127.0.0.1:8000/api/div_calendar/?start=${date.toLocaleDateString('en-CA')}`;
+        const mainURL=process.env.REACT_APP_REVRIDGE_BACKEND_URL;
+        const apiUrl=`${mainURL}/api/div_calendar/?start=${date.toLocaleDateString('en-CA')}`;
         try {
             const result=await axios.get(apiUrl)
             const data=result.data
@@ -85,7 +86,7 @@ export default function DividendCalendar() {
     // In a real application, this would trigger an API call or filter the data
     console.log("Searching for:", searchTerm)
     const fetchDividends= async (params)=>{
-      const apiUrl=`http://127.0.0.1:8000/api/div_cal_stock/?query=${searchTerm}`;
+      const apiUrl=`${mainURL}/api/div_cal_stock/?query=${searchTerm}`;
       try {
           const result=await axios.get(apiUrl)
           const data=result.data

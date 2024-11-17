@@ -15,7 +15,8 @@ const StayUpdated = ({stayUpdatedSectionRef}) => {
         return;
       }
       try {
-        const response= await axios.post('http://127.0.0.1:8000/email_list/',{email});
+        const mainURL=process.env.REACT_APP_REVRIDGE_BACKEND_URL;
+        const response= await axios.post(`${mainURL}/email_list/`,{email});
         console.log(`status: ${response.status}`)
       if(response.status===201){
         setIsSubmitted(true)
