@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowUp, ArrowDown } from "lucide-react"
 import Tesla  from '../../assets/logos/tesla.svg'
-import Apple  from '../../assets/logos/Apple.svg'
+import Apple  from '../../assets/logos/Apple.svg?url'
 import Spot  from '../../assets/logos/spotify.svg'
 import MSFT  from '../../assets/logos/microsoft.svg'
 import Nvidia  from '../../assets/logos/nvidia-7.svg'
