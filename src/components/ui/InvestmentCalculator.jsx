@@ -5,15 +5,15 @@ import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowUp, ArrowDown } from "lucide-react"
-import Tesla  from '../../assets/images/logos/tesla.svg'
-import Apple  from '../../assets/images/logos/Apple.svg'
-import Spot  from '../../assets/images/logos/spotify.svg'
-import MSFT  from '../../assets/images/logos/microsoft.svg'
-import Nvidia  from '../../assets/images/logos/nvidia-7.svg'
-import SBUX  from '../../assets/images/logos/starbucks.svg'
-import Google  from '../../assets/images/logos/google.svg'
-import Meta  from '../../assets/images/logos/meta.svg'
-import Netflix  from '../../assets/images/logos/netflix.svg'
+import Tesla  from '../../assets/logos/tesla.svg'
+import Apple  from '../../assets/logos/Apple.svg'
+import Spot  from '../../assets/logos/spotify.svg'
+import MSFT  from '../../assets/logos/microsoft.svg'
+import Nvidia  from '../../assets/logos/nvidia-7.svg'
+import SBUX  from '../../assets/logos/starbucks.svg'
+import Google  from '../../assets/logos/google.svg'
+import Meta  from '../../assets/logos/meta.svg'
+import Netflix  from '../../assets/logos/netflix.svg'
 
 import axios from "axios";
 
@@ -53,7 +53,8 @@ export default function InvestmentCalculator() {
   useEffect(()=>{
     
     const fetchReturns= async (params)=>{
-        const apiUrl=`http://127.0.0.1:8000/api/investment_calculator/?start=${selectedDate.toLocaleDateString('en-CA')}&symbol=${selectedCompany.id}&amount=${investmentAmount}`;
+        const mainURL=import.meta.env.VITE_REVRIDGE_BACKEND_URL;
+        const apiUrl=`${mainURL}/api/investment_calculator/?start=${selectedDate.toLocaleDateString('en-CA')}&symbol=${selectedCompany.id}&amount=${investmentAmount}`;
         try {
             const result=await axios.get(apiUrl)
             const data=result.data
