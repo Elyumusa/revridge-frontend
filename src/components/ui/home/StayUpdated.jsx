@@ -15,7 +15,7 @@ const StayUpdated = ({stayUpdatedSectionRef}) => {
         return;
       }
       try {
-        const mainURL=process.env.REACT_APP_REVRIDGE_BACKEND_URL;
+        const mainURL=import.meta.env.VITE_REVRIDGE_BACKEND_URL;
         const response= await axios.post(`${mainURL}/email_list/`,{email});
         console.log(`status: ${response.status}`)
       if(response.status===201){

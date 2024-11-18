@@ -60,11 +60,12 @@ export default function DividendCalendar() {
   )*/
   useEffect(()=>{
     const fetchDividends= async (params)=>{
-        const mainURL=process.env.REACT_APP_REVRIDGE_BACKEND_URL;
+        const mainURL=import.meta.env.VITE_REVRIDGE_BACKEND_URL;
         const apiUrl=`${mainURL}/api/div_calendar/?start=${date.toLocaleDateString('en-CA')}`;
         try {
             const result=await axios.get(apiUrl)
             const data=result.data
+            console.log(`Data show: ${import.meta.env.VITE_REVRIDGE_BACKEND_URL}`)
             if ('cash_dividends' in data && data['cash_dividends'].length!==0) {
                 console.log(`dividend: ${data['cash_dividends'][0].ex_date}`)
                 setDividends(data['cash_dividends'])
@@ -176,7 +177,7 @@ export default function DividendCalendar() {
                   selected={date}
                   onSelect={(newDate) => {
                     console.log(`newDate: ${newDate.toLocaleDateString('en-CA')}`)
-                    newDate.setDate(1);
+                    //newDate.setDate(1);
                     newDate && setDate(newDate)}}
                   initialFocus
                 />
