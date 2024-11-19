@@ -17,13 +17,23 @@ export default defineConfig(({ mode }) => {
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    historyApiFallback: true,
+  },
   build: {
+    //chunkSizeWarningLimit: 1000,
     assetsInclude: ['src/assets/**/*'],
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
         //assets: resolve(__dirname, 'src/assets'),
       },
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          // Add other chunks as needed
+        },
+      }
     },
   },
 }})
