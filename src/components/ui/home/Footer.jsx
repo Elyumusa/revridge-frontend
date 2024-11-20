@@ -57,7 +57,7 @@ export default function Footer() {
         </div>
         <div className="mt-8 border-t border-gray-200 pt-8">
           <p className="text-xs text-gray-600">
-            © 2024 Revridge Inc. All rights reserved.
+            © 2023 Revridge Inc. All rights reserved.
           </p>
           <p className="mt-4 text-xs text-gray-600">
             Revridge Inc. is registered with the Zambian Securities and Exchange Commission as an investment adviser. 
