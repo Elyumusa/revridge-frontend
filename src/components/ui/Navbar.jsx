@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import {TrendingUp } from "lucide-react"
-import logo from '../../assets/images/Bredge.png'
+import logo from '../../assets/images/Revridge.png'
 import React, { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 

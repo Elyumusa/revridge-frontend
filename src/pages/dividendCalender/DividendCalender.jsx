@@ -87,6 +87,7 @@ export default function DividendCalendar() {
     // In a real application, this would trigger an API call or filter the data
     console.log("Searching for:", searchTerm)
     const fetchDividends= async (params)=>{
+      const mainURL=import.meta.env.VITE_REVRIDGE_BACKEND_URL;
       const apiUrl=`${mainURL}/api/div_cal_stock/?query=${searchTerm}`;
       try {
           const result=await axios.get(apiUrl)
@@ -213,8 +214,8 @@ export default function DividendCalendar() {
                 </TableBody>
               </Table>
             </div>
-          ) : (searchTerm!=""?<p className="text-center text-muted-foreground py-4">The company you searched for either does not exist or was incorrectly entered. 
-          <br/>Try entering the company name correctly or the company ticker symbol e.g the Ticker symbol for "The Coca-Cola Company" is "KO"</p>:
+          ) : (searchTerm!=""?<p className="text-center text-muted-foreground py-4">The company you searched for either does not exist, was incorrectly entered or does not give out Dividends. 
+          <br/>Ensure you are entering the company name correctly or the company ticker symbol e.g the Ticker symbol for "The Coca-Cola Company" is "KO"</p>:
             <p className="text-center text-muted-foreground py-4">No dividends found for the selected month.</p>
           )}
         </CardContent>

@@ -2,9 +2,9 @@ import React from 'react';
 import { Button } from "../../components/ui/button"
 import { Card, CardContent } from "../../components/ui/card"
 import { BarChart, Globe, ShieldCheck, TrendingUp, Users } from "lucide-react"
-import Elyu from '../../assets/images/Elyu.jpg'
+import Elyu from '../../assets/images/papa.jpg'
 import Lishiba from '../../assets/images/lishiba.jpg'
-import Wo from '../../assets/images/Wo.jpg'
+import Wo from '../../assets/images/Wongani.jpg'
 export default function AboutPage() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -45,7 +45,7 @@ export default function AboutPage() {
               
             <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Core Mission and Values</h1>
             <p className="text-gray-500 dark:text-gray-400 mb-8">
-            Our mission at Revridge is to make global investing accessible to all Africans.. We believe that with the right information and technology, everyone can have the ability to invest in their favorite global brands and make smart investment decisions while doing so.
+            Our mission at Revridge is to make global Stock Market investing accessible to all Africans. We believe that with the right information and technology, everyone can have the ability to invest in their favorite global brands and make smart investment decisions while doing so.
             </p>
             </div>
             {/* <h2 className="text-2xl font-bold mb-6 sm:text-4xl text-center">Our Values</h2> */}
@@ -100,7 +100,7 @@ export default function AboutPage() {
               ].map((member) => (
                 <Card key={member.name}>
                   <CardContent className="flex flex-col items-center p-6 pt-8">
-                    <div className="relative w-40 h-40 mb-6 overflow-hidden">
+                    <div className="relative w-70 h-80 mb-6 overflow-hidden">
                       <img
                         src={member.image}
                         alt={member.name}

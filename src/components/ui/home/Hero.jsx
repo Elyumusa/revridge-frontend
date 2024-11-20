@@ -14,13 +14,12 @@ const Hero = ({stayUpdatedSectionRef}) => {
                   Smart Investing for Your Future
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Empowering Southern Africans to invest in the global financial markets. Our platform simplifies access to diverse investment options, from stocks to various ETFs. 
+                Empowering  Africans to invest in the global financial markets. Our platform enables access to diverse investment options, from stocks to various ETFs. 
                 </p>
               </div>
               <div className="space-x-4">
                 <Button onClick={onGetStartedButtonClicked} size="lg">Get Started</Button>
-                <NavLink to="/blog"><Button variant="outline" size="lg">Learn More</Button></NavLink>
-                
+                <NavLink to="/about"><Button variant="outline" size="lg">Learn More</Button></NavLink>
               </div>
             </div>
           </div>

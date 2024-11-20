@@ -5,15 +5,15 @@ import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowUp, ArrowDown } from "lucide-react"
-import Tesla  from '../../assets/logos/tesla.svg'
-import Apple  from '../../assets/logos/Apple.svg?url'
-import Spot  from '../../assets/logos/spotify.svg'
-import MSFT  from '../../assets/logos/microsoft.svg'
-import Nvidia  from '../../assets/logos/nvidia-7.svg'
-import SBUX  from '../../assets/logos/starbucks.svg'
-import Google  from '../../assets/logos/google.svg'
-import Meta  from '../../assets/logos/meta.svg'
-import Netflix  from '../../assets/logos/netflix.svg'
+import Tesla  from '../../../public/tesla.svg'
+import Apple  from "../../../public/Apple.svg"//'@/assets/logos/apple-logo.svg?'
+import Spot  from '../../../public/spotify.svg'
+import MSFT  from '../../../public/microsoft.svg'
+import Nvidia  from '../../../public/nvidia-7.svg'
+import SBUX  from '../../../public/starbucks.svg'
+import Google  from '../../../public/google.svg'
+import Meta  from '../../../public/meta-facebook.svg'
+import Netflix  from '../../../public/netflix.svg'
 
 import axios from "axios";
 

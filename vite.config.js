@@ -7,7 +7,7 @@ import path from 'path'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
-  plugins: [react()],
+  plugins: [react(),],
   define:{
     'import.meta.env.VITE_REVRIDGE_BACKEND_URL': JSON.stringify(env.VITE_REVRIDGE_BACKEND_URL)
   },
@@ -23,6 +23,7 @@ export default defineConfig(({ mode }) => {
   build: {
     //chunkSizeWarningLimit: 1000,
     assetsInclude: ['src/assets/**/*'],
+    assetsInlineLimit:0,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
@@ -33,6 +34,14 @@ export default defineConfig(({ mode }) => {
           vendor: ['react', 'react-dom', 'react-router-dom'],
           // Add other chunks as needed
         },
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.')
+          let extType = info[info.length - 1]
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            extType = 'img'
+          }
+          return `assets/${extType}/[name]-[hash][extname]`
+        }
       }
     },
   },

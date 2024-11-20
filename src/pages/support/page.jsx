@@ -48,7 +48,7 @@ export default function SupportPage() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Mail className="w-4 h-4" />
-                  <span>support@Revridge.com</span>
+                  <span>support@revridge.net</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <MessageCircle className="w-4 h-4" />
@@ -77,12 +77,12 @@ export default function SupportPage() {
                   To create an account, click on the "Sign Up" button on the homepage and follow the prompts.
                 </p>
               </div>
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <h3 className="text-xl font-semibold">What are the fees for using Revridge?</h3>
                 <p className="text-gray-500 dark:text-gray-400">
                   Our fee structure varies depending on the services you use. Please visit our pricing page for detailed information.
                 </p>
-              </div>
+              </div> */}
               <div className="space-y-2">
                 <h3 className="text-xl font-semibold">How secure is my data?</h3>
                 <p className="text-gray-500 dark:text-gray-400">
