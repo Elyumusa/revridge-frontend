@@ -49,7 +49,7 @@ export default function InvestmentCalculator() {
   let year = selectedDate.getFullYear();
     let newYear = year - selectedTimeFrame;
     selectedDate.setFullYear(newYear);
-    console.log(`Date: ${selectedDate.toLocaleDateString('en-CA')}`)
+    //console.log(`Date: ${selectedDate.toLocaleDateString('en-CA')}`)
   useEffect(()=>{
     
     const fetchReturns= async (params)=>{
@@ -58,14 +58,14 @@ export default function InvestmentCalculator() {
         try {
             const result=await axios.get(apiUrl)
             const data=result.data
-            console.log(`perc: ${data['split']} ${typeof data['old_price']}`);
+            //console.log(`perc: ${data['split']} ${typeof data['old_price']}`);
             setReturnedData(data)
             let f=calculateReturns(investmentAmount,data['split'],data['latest_price'],data['old_price'])
             let p = ((f - investmentAmount) / investmentAmount) * 100
             setPercentageGain(p)
             setfinalAmount(f)
           } catch (error) {
-            console.log(`Error: ${error}`);
+            //console.log(`Error: ${error}`);
           }finally{
             setLoading(false);
           }
@@ -80,7 +80,7 @@ export default function InvestmentCalculator() {
     let shares_after_split=split*shares_at_old_price
     let new_amount=shares_after_split*parseFloat(latest_price)
     let perc_increase=100*((new_amount-amount)/amount)
-    console.log(`Follow: ${new_amount}, ${parseFloat(latest_price)} ${parseFloat(old_price)}`)
+    //console.log(`Follow: ${new_amount}, ${parseFloat(latest_price)} ${parseFloat(old_price)}`)
     return new_amount
   }
 
@@ -123,7 +123,7 @@ export default function InvestmentCalculator() {
                 let year = selectedDate.getFullYear();
                 let newYear = year - timeFrame.id;
                 selectedDate.setFullYear(newYear);
-                console.log(`Date: ${selectedDate}`)
+                //console.log(`Date: ${selectedDate}`)
                 setSelectedTimeFrame(timeFrame.id)}}
           >
             {timeFrame.label}
@@ -140,7 +140,7 @@ export default function InvestmentCalculator() {
         <Slider
           value={[investmentAmount]}
           onValueChange={(value) => {
-            console.log(`${parseFloat(value[0])} ${returnedData['split']}`)
+            //console.log(`${parseFloat(value[0])} ${returnedData['split']}`)
             let f=calculateReturns(parseFloat(value[0]),returnedData['split'],returnedData['latest_price'],returnedData['old_price'])
             let p = ((f - value[0]) / value[0]) * 100
             if(parseFloat(value[0])<1){

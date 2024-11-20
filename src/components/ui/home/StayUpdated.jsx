@@ -17,7 +17,7 @@ const StayUpdated = ({stayUpdatedSectionRef}) => {
       try {
         const mainURL=import.meta.env.VITE_REVRIDGE_BACKEND_URL;
         const response= await axios.post(`${mainURL}/email_list/`,{email});
-        console.log(`status: ${response.status}`)
+        //console.log(`status: ${response.status}`)
       if(response.status===201){
         setIsSubmitted(true)
         setErrorMessage('')
@@ -25,7 +25,7 @@ const StayUpdated = ({stayUpdatedSectionRef}) => {
         setErrorMessage('An error occurred. Please try again later.');
         setIsSubmitted(false)
       }
-      console.log("Email submitted:", email)
+      //console.log("Email submitted:", email)
       } catch (error) {
         if (error.response && error.response.status === 400) {
           if (`${error.response.data}`.includes("Email is already on the waiting list")) {

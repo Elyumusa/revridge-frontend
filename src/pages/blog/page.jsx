@@ -42,10 +42,10 @@ useEffect(()=>{
     try {
       const result=await axios.get(apiUrl)
       const data=result.data
-      console.log(`data: ${data['news'][0].author}`)
+      //console.log(`data: ${data['news'][0].author}`)
       setArticles(data['news'])
     } catch (error) {
-      console.log(`Error: ${error}`);
+      //console.log(`Error: ${error}`);
     }finally{
       setLoading(false);
     }

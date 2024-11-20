@@ -23,7 +23,7 @@ export default function DownloadAppButton() {
   const handleSubmit = useCallback((e) => {
     e.preventDefault()
     // Simulate email submission
-    console.log("Email submitted:", email)
+    //console.log("Email submitted:", email)
     setSuccessMessage(`Thank you for joining our waitlist! We'll notify ${email} when the app is ready.`)
     setShowConfetti(true)
     setTimeout(() => {

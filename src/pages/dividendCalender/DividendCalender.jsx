@@ -66,9 +66,9 @@ export default function DividendCalendar() {
         try {
             const result=await axios.get(apiUrl)
             const data=result.data
-            console.log(`Data show: ${import.meta.env.VITE_REVRIDGE_BACKEND_URL}`)
+            //console.log(`Data show: ${import.meta.env.VITE_REVRIDGE_BACKEND_URL}`)
             if ('cash_dividends' in data && data['cash_dividends'].length!==0) {
-                console.log(`dividend: ${data['cash_dividends'][0].ex_date}`)
+                //console.log(`dividend: ${data['cash_dividends'][0].ex_date}`)
                 setDividends(data['cash_dividends'])
             }else{
                 setDividends([])
@@ -86,7 +86,7 @@ export default function DividendCalendar() {
   },[date])
   const handleSearch = () => {
     // In a real application, this would trigger an API call or filter the data
-    console.log("Searching for:", searchTerm)
+    //console.log("Searching for:", searchTerm)
     const fetchDividends= async (params)=>{
       const mainURL=import.meta.env.VITE_REVRIDGE_BACKEND_URL;
       const apiUrl=`${mainURL}/api/div_cal_stock/?query=${searchTerm}`;
@@ -94,7 +94,7 @@ export default function DividendCalendar() {
           const result=await axios.get(apiUrl)
           const data=result.data
           if ('cash_dividends' in data && data['cash_dividends'].length!==0) {
-              console.log(`dividend in search: ${data['cash_dividends'][0].ex_date}`)
+              //console.log(`dividend in search: ${data['cash_dividends'][0].ex_date}`)
               setDividends(data['cash_dividends'])
           }else{
               setDividends([])
@@ -102,7 +102,7 @@ export default function DividendCalendar() {
           
         } catch (error) {
           setDividends([])
-          console.log(`Error: ${error}`);
+          //console.log(`Error: ${error}`);
         }finally{
           setLoading(false);
         }
@@ -178,7 +178,7 @@ export default function DividendCalendar() {
                   mode="single"
                   selected={date}
                   onSelect={(newDate) => {
-                    console.log(`newDate: ${newDate.toLocaleDateString('en-CA')}`)
+                    //console.log(`newDate: ${newDate.toLocaleDateString('en-CA')}`)
                     //newDate.setDate(1);
                     newDate && setDate(newDate)}}
                   initialFocus
