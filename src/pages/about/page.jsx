@@ -5,6 +5,7 @@ import { BarChart, Globe, ShieldCheck, TrendingUp, Users } from "lucide-react"
 import Elyu from '../../assets/images/papa.jpg'
 import Lishiba from '../../assets/images/lishiba.jpg'
 import Wo from '../../assets/images/Wongani.jpg'
+import Footer from '@/components/ui/home/Footer';
 export default function AboutPage() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -121,7 +122,7 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
+        {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6 text-center">
             <h2 className="text-2xl font-bold mb-4">Join Our Team</h2>
             <p className="text-gray-500 dark:text-gray-400 mb-8">
@@ -129,21 +130,9 @@ export default function AboutPage() {
             </p>
             <Button>View Open Positions</Button>
           </div>
-        </section>
+        </section> */}
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          © 2024 Revridge Inc. All rights reserved.
-        </p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <a className="text-xs hover:underline underline-offset-4" href="#">
-            Terms of Service
-          </a>
-          <a className="text-xs hover:underline underline-offset-4" href="#">
-            Privacy
-          </a>
-        </nav>
-      </footer>
+      <Footer/>
     </div>
   )
 }

@@ -36,6 +36,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import axios from "axios";
 import { Input } from '@/components/ui/input'
+import DownloadAppButton from '@/components/ui/DownloadAppButton'
 
 // Mock data for dividends
 const mockDividends = [
@@ -252,14 +253,15 @@ export default function DividendCalendar() {
             </CardHeader>
             <CardContent>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="w-full sm:w-auto" size="lg">
+              <DownloadAppButton/>
+                {/* <Button className="w-full sm:w-auto" size="lg">
                   <AppleIcon className="mr-2 h-5 w-5" />
                   Download for iOS
                 </Button>
                 <Button className="w-full sm:w-auto" size="lg">
                   <PlayIcon className="mr-2 h-5 w-5" />
                   Download for Android
-                </Button>
+                </Button> */}
               </div>
             </CardContent>
           </Card>

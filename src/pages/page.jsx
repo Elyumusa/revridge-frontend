@@ -41,7 +41,7 @@ export default function HomePage() {
         <FeaturesAndPerks/>
         <StayUpdated stayUpdatedSectionRef={stayUpdatedSectionRef} />
         <DownloadOurApp/>
-        <StartInvestingToday/>
+        {/* <StartInvestingToday/> */}
       </main>
       <Footer/>
     </div>
