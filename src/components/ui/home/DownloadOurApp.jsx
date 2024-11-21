@@ -3,6 +3,7 @@ import { AppleIcon, BarChart3, BookOpen, DollarSign, Lock, Mail, PlayIcon, Smart
 import { Input} from '../input';
 import { Button} from '../button';
 import DownloadAppButton from '../DownloadAppButton';
+import { NavLink } from 'react-router-dom';
 const DownloadOurApp = () => {
   //bg-gray-100 dark:bg-gray-800">
   return (
@@ -15,15 +16,15 @@ const DownloadOurApp = () => {
                 Get started with stock market Investing today. Download our app and begin your financial growth journey.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <DownloadAppButton/>
-                {/* <Button className="w-full sm:w-auto" size="lg">
+                {/* <DownloadAppButton/> */}
+                <NavLink to="/download"><Button className="w-full sm:w-auto" size="lg">
                   <AppleIcon className="mr-2 h-5 w-5" />
                   Download for iOS
-                </Button>
-                <Button className="w-full sm:w-auto" size="lg">
+                </Button></NavLink>
+                <NavLink to="/download"><Button className="w-full sm:w-auto" size="lg">
                   <PlayIcon className="mr-2 h-5 w-5" />
                   Download for Android
-                </Button> */}
+                </Button></NavLink>
               </div>
             </div>
           </div>

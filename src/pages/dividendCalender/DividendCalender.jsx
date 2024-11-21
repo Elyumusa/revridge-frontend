@@ -221,20 +221,16 @@ export default function DividendCalendar() {
           )}
         </CardContent>
         <CardFooter className="flex flex-col items-start">
-          <Accordion type="single" className="w-full">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>Column Definitions</AccordionTrigger>
-              <AccordionContent>
-                <ul className="list-disc pl-4 space-y-2">
-                  <li><strong>Company:</strong> The name of the company paying the dividend.</li>
-                  <li><strong>Symbol:</strong> The stock ticker symbol for the company.</li>
-                  <li><strong>Amount:</strong> The dividend amount per share in USD.</li>
-                  <li><strong>Payment Date:</strong> The date when the dividend will be paid to shareholders.</li>
-                  <li><strong>Ex-Dividend Date:</strong> The date on or after which a security trades without its dividend. To receive the dividend, you must own the stock before this date.</li>
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+        <div className="w-full">
+          <h3 className="font-bold">Column Definitions</h3>
+          <ul className="list-disc pl-4 space-y-2">
+            <li><strong>Company:</strong> The name of the company paying the dividend.</li>
+            <li><strong>Symbol:</strong> The stock ticker symbol for the company.</li>
+            <li><strong>Amount:</strong> The dividend amount per share in USD.</li>
+            <li><strong>Payment Date:</strong> The date when the dividend will be paid to shareholders.</li>
+            <li><strong>Ex-Dividend Date:</strong> The date on or after which a security trades without its dividend. To receive the dividend, you must own the stock before this date.</li>
+          </ul>
+        </div>
 
           <Alert variant="warning" className="mt-6">
             <AlertTriangle className="h-4 w-4" />

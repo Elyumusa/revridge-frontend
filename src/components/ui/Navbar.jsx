@@ -18,7 +18,7 @@ const Navbar = () => {
     { to: "/div_calendar", label: "Dividend Calendar" },
     { to: "/stock-predictor", label: "Stock Predictor" },
     { to: "/support", label: "Support" },
-    { to: "/compliance", label: "Compliance" },
+    { to: "/download", label: "Download" },
   ]
 
   return (

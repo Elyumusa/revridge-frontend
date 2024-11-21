@@ -18,7 +18,8 @@ const Hero = ({stayUpdatedSectionRef}) => {
                 </p>
               </div>
               <div className="space-x-4">
-                <Button onClick={onGetStartedButtonClicked} size="lg">Get Started</Button>
+              <NavLink to="/download"><Button  size="lg">Get Started</Button></NavLink>
+                {/* <Button onClick={onGetStartedButtonClicked} size="lg">Get Started</Button> */}
                 <NavLink to="/about"><Button variant="outline" size="lg">Learn More</Button></NavLink>
               </div>
             </div>

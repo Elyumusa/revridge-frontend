@@ -10,6 +10,7 @@ import AboutPage from './pages/about/page'
 import NotFoundPage from './pages/notfound/NotFoundPage'
 import ArticlePage from './pages/blog/article_page.jsx'
 import DividendCalendar from './pages/dividendCalender/DividendCalender'
+import DownloadAppPage from './pages/appPage/DownloadAppPage';
 
 // const HomePage = lazy(() => import('./pages/page'));
 // const SupportPage = lazy(() => import('./pages/support/page'));
@@ -34,6 +35,7 @@ function App() {
         <Route path='/about' element={<AboutPage/>}/>
         <Route path='/article' element={<ArticlePage/>}/>
         <Route path='/div_calendar' element={<DividendCalendar/>}/>
+        <Route path='/download' element={<DownloadAppPage/>}/>
         <Route path='*' element={<NotFoundPage/>}/>
       </Route>
     )

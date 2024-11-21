@@ -7,6 +7,11 @@ import Lishiba from '../../assets/images/lishiba.jpg'
 import Wo from '../../assets/images/Wongani.jpg'
 import Footer from '@/components/ui/home/Footer';
 export default function AboutPage() {
+  const team=[
+    { name: "Ely'umusa Njobvu", role: "CEO & Co-Founder", image: `${Elyu}?` },
+    { name: "Wongani Chilongo", role: "COO & Co-Founder", image: `${Wo}` },
+    { name: "Lishiba Chiboboka", role: "Founding Software Engineer", image: `${Lishiba}` },
+  ]
   return (
     <div className="flex flex-col min-h-screen">
       {/* <header className="px-4 lg:px-6 h-14 flex items-center">
@@ -33,7 +38,7 @@ export default function AboutPage() {
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">About Revridge</h1>
                 <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                Revridge is a pioneering fintech company founded in 2023 with a mission to empower Africans to participate in the global financial landscape. Our innovative platform provides a seamless and accessible way for individuals across Africa to invest in their favorite international brands, right from the comfort of their homes.
+                Revridge is a pioneering fintech company with a mission to empower Africans to participate in the global financial landscape. Our innovative platform provides a seamless and accessible way for individuals across Africa to invest in their favorite international brands, right from the comfort of their homes.
                 </p>
               </div>
             </div>
@@ -90,7 +95,28 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32">
+        <section className="w-full py-12 md:py-24">
+      <div className="container px-4 md:px-6 mx-auto max-w-7xl">
+        <h2 className="text-2xl md:text-3xl font-bold mb-12">Executive Leadership Team</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          {team.map((member) => (
+            <div key={member.name} className="flex flex-col items-center">
+              <div className="relative aspect-[3/4] w-full max-w-[250px] mb-6 rounded-2xl overflow-hidden">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="eager"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-1">{member.name}</h3>
+              <p className="text-gray-600 text-lg">{member.role}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+        {/* <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <h2 className="text-2xl font-bold mb-4">Our Team</h2>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -121,7 +147,7 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
         {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6 text-center">
             <h2 className="text-2xl font-bold mb-4">Join Our Team</h2>
