@@ -13,13 +13,14 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-
+import axios from 'axios';
 export default function DownloadAppButton() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [email, setEmail] = useState("")
   const [showConfetti, setShowConfetti] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [successMessage, setSuccessMessage] = useState("")
-
+  const [errorMessage, setErrorMessage] = useState('');
      const handleSubmit = async (e) => {
       e.preventDefault()
       // Here you would typically send the email to your backend
@@ -59,6 +60,11 @@ export default function DownloadAppButton() {
       setIsSubmitted(false)
     }   
     }
+  
+  function isValidEmail(email){
+    const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 
   return (
     <div className="flex flex-col items-center">
@@ -77,6 +83,7 @@ export default function DownloadAppButton() {
               Our mobile and Android apps are still in development. Join our waitlist to be notified when they're ready!
             </DialogDescription>
           </DialogHeader>
+          {errorMessage && <p>{errorMessage}</p>}
           {successMessage ? (
             <div className="text-center py-4">
               <p className="text-green-600 font-semibold">{successMessage}</p>
