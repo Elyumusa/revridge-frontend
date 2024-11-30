@@ -33,7 +33,14 @@ export default function DownloadAppButton() {
         //console.log(`status: ${response.status}`)
       if(response.status===201){
         setIsSubmitted(true)
-        setErrorMessage('')
+        setSuccessMessage(`Thank you for joining our waitlist! We'll notify ${email} when the app is ready.`)
+    setShowConfetti(true)
+    setTimeout(() => {
+      setShowConfetti(false)
+      setIsDialogOpen(false)
+      setEmail("")
+      setSuccessMessage("")
+    }, 5000)
       }else{
         setErrorMessage('An error occurred. Please try again later.');
         setIsSubmitted(false)
