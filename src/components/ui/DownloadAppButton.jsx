@@ -20,19 +20,38 @@ export default function DownloadAppButton() {
   const [showConfetti, setShowConfetti] = useState(false)
   const [successMessage, setSuccessMessage] = useState("")
 
-  const handleSubmit = useCallback((e) => {
-    e.preventDefault()
-    // Simulate email submission
-    //console.log("Email submitted:", email)
-    setSuccessMessage(`Thank you for joining our waitlist! We'll notify ${email} when the app is ready.`)
-    setShowConfetti(true)
-    setTimeout(() => {
-      setShowConfetti(false)
-      setIsDialogOpen(false)
-      setEmail("")
-      setSuccessMessage("")
-    }, 5000)
-  }, [email])
+     const handleSubmit = async (e) => {
+      e.preventDefault()
+      // Here you would typically send the email to your backend
+      if(!isValidEmail(email)){
+        setErrorMessage('Invalid email address.');
+        return;
+      }
+      try {
+        const mainURL=import.meta.env.VITE_REVRIDGE_BACKEND_URL;
+        const response= await axios.post(`${mainURL}/email_list/`,{email});
+        //console.log(`status: ${response.status}`)
+      if(response.status===201){
+        setIsSubmitted(true)
+        setErrorMessage('')
+      }else{
+        setErrorMessage('An error occurred. Please try again later.');
+        setIsSubmitted(false)
+      }
+      //console.log("Email submitted:", email)
+      } catch (error) {
+        if (error.response && error.response.status === 400) {
+          if (`${error.response.data}`.includes("Email is already on the waiting list")) {
+            setErrorMessage(`Wow, so Great News........Your Email is already on our waiting list, thank you once again for embarking on your finance journey with us:), check your email for further details😊`);
+          }else{
+          setErrorMessage(`${error.response.data}`);}
+      } else {
+          setErrorMessage(`An error occurred. Please try again later. ${error}`);
+      }
+      setIsSubmitted(false)
+      setIsSubmitted(false)
+    }   
+    }
 
   return (
     <div className="flex flex-col items-center">
