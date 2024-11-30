@@ -30,7 +30,7 @@ export default function DownloadAppButton() {
       try {
         const mainURL=import.meta.env.VITE_REVRIDGE_BACKEND_URL;
         const response= await axios.post(`${mainURL}/email_list/`,{email});
-        //console.log(`status: ${response.status}`)
+        console.log(`status: ${response.status}`)
       if(response.status===201){
         setIsSubmitted(true)
         setSuccessMessage(`Thank you for joining our waitlist! We'll notify ${email} when the app is ready.`)
