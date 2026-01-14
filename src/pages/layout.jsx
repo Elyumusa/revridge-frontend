@@ -1,10 +1,9 @@
 import React from 'react';
 import './globals.css'
-//import { Inter } from 'next/font/google'
+
 import Navbar from '../components/ui/Navbar';
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
-//const inter = Inter({ subsets: ['latin'] })
 
 const metadata = {
   title: 'Revridge',
@@ -18,15 +17,26 @@ export default function RootLayout() {
     <Outlet/>
     <ToastContainer/>
     </>
-    // <html lang="en">
+    
+  )
+}
+
+
+
+
+
+
+
+
+//const inter = Inter({ subsets: ['latin'] })
+//import { Inter } from 'next/font/google'
+// <html lang="en">
     //   <head>
     //     <title>{metadata.title}</title>
     //     <meta name="description" content={metadata.description} />
     //   </head>
     //   <body className={`${inter.className} bg-background text-foreground`}>{children}</body>
     // </html>
-  )
-}
 
 /*import './globals.css'
 import type { Metadata } from 'next'

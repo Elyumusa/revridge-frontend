@@ -10,33 +10,10 @@ import {useQuery} from 'react-query';
 import SubscribeToNewsletter from "@/components/ui/blog/SubscribeToNewsletter";
 import Footer from "@/components/ui/home/Footer";
 export default function BlogPage() {
-  const blogPosts = [
-    {
-      title: "Understanding Market Trends in 2024",
-      excerpt: "An in-depth analysis of the current market trends and predictions for the coming year.",
-      date: "May 15, 2024",
-      author: "Jane Doe",
-      category: "Market Analysis",
-    },
-    {
-      title: "The Impact of AI on Stock Trading",
-      excerpt: "Exploring how artificial intelligence is revolutionizing the stock trading industry.",
-      date: "May 10, 2024",
-      author: "John Smith",
-      category: "Technology",
-    },
-    {
-      title: "Beginner's Guide to Diversifying Your Portfolio",
-      excerpt: "Learn the basics of portfolio diversification and why it's crucial for long-term investing success.",
-      date: "May 5, 2024",
-      author: "Alice Johnson",
-      category: "Investing Basics",
-    },
-  ]
   const [articles,setArticles]=useState([]);
   const [loading,setLoading]=useState(true);
 useEffect(()=>{
-    const fetchJobs=async (params) => {
+    const fetchBlogs=async (params) => {
       const mainURL=import.meta.env.VITE_REVRIDGE_BACKEND_URL;
       const apiUrl=`${mainURL}/api/posts/`
     try {
@@ -45,12 +22,12 @@ useEffect(()=>{
       //console.log(`data: ${data['news'][0].author}`)
       setArticles(data['news'])
     } catch (error) {
-      //console.log(`Error: ${error}`);
+      console.log(`Error: ${error}`);
     }finally{
       setLoading(false);
     }
     }
-    fetchJobs();
+    fetchBlogs();
     
   },[])
   return (
@@ -132,7 +109,31 @@ useEffect(()=>{
 
 
 
-/*import { Button } from "@/components/ui/button"
+/*
+  const blogPosts = [
+    {
+      title: "Understanding Market Trends in 2024",
+      excerpt: "An in-depth analysis of the current market trends and predictions for the coming year.",
+      date: "May 15, 2024",
+      author: "Jane Doe",
+      category: "Market Analysis",
+    },
+    {
+      title: "The Impact of AI on Stock Trading",
+      excerpt: "Exploring how artificial intelligence is revolutionizing the stock trading industry.",
+      date: "May 10, 2024",
+      author: "John Smith",
+      category: "Technology",
+    },
+    {
+      title: "Beginner's Guide to Diversifying Your Portfolio",
+      excerpt: "Learn the basics of portfolio diversification and why it's crucial for long-term investing success.",
+      date: "May 5, 2024",
+      author: "Alice Johnson",
+      category: "Investing Basics",
+    },
+  ]
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { BookOpen, ChevronRight, Search, TrendingUp } from "lucide-react"

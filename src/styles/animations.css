@@ -1,0 +1,435 @@
+/**
+ * REVRIDGE ANIMATIONS
+ * 
+ * Micro-interactions and animations for enhanced user experience.
+ * All animations follow the 200-500ms guideline for optimal UX.
+ */
+
+/* ================================
+ * FADE ANIMATIONS
+ * ================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================================
+ * SLIDE ANIMATIONS
+ * ================================ */
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* ================================
+ * SCALE ANIMATIONS
+ * ================================ */
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* ================================
+ * LOADING ANIMATIONS
+ * ================================ */
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+
+    50% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* ================================
+ * HOVER EFFECTS
+ * ================================ */
+
+@keyframes hoverLift {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes hoverGrow {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.05);
+    }
+}
+
+/* ================================
+ * SUCCESS/ERROR ANIMATIONS
+ * ================================ */
+
+@keyframes checkmark {
+    0% {
+        stroke-dashoffset: 100;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-10px);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(10px);
+    }
+}
+
+/* ================================
+ * UTILITY CLASSES
+ * ================================ */
+
+/* Fade Animations */
+.animate-fade-in {
+    animation: fadeIn var(--duration-300) var(--ease-out);
+}
+
+.animate-fade-out {
+    animation: fadeOut var(--duration-300) var(--ease-in);
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp var(--duration-500) var(--ease-out);
+}
+
+.animate-fade-in-down {
+    animation: fadeInDown var(--duration-500) var(--ease-out);
+}
+
+/* Slide Animations */
+.animate-slide-in-left {
+    animation: slideInLeft var(--duration-300) var(--ease-out);
+}
+
+.animate-slide-in-right {
+    animation: slideInRight var(--duration-300) var(--ease-out);
+}
+
+/* Scale Animations */
+.animate-scale-in {
+    animation: scaleIn var(--duration-200) var(--ease-out);
+}
+
+.animate-scale-out {
+    animation: scaleOut var(--duration-200) var(--ease-in);
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Loading Animations */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+.animate-bounce {
+    animation: bounce 1s infinite;
+}
+
+.animate-shimmer {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(to right,
+            var(--color-gray-200) 0%,
+            var(--color-gray-100) 20%,
+            var(--color-gray-200) 40%,
+            var(--color-gray-200) 100%);
+    background-size: 1000px 100%;
+}
+
+/* Success/Error Animations */
+.animate-shake {
+    animation: shake var(--duration-500) var(--ease-in-out);
+}
+
+/* ================================
+ * STAGGER ANIMATIONS
+ * ================================ */
+
+.stagger-fade-in>* {
+    animation: fadeInUp var(--duration-500) var(--ease-out);
+    animation-fill-mode: both;
+}
+
+.stagger-fade-in>*:nth-child(1) {
+    animation-delay: 0ms;
+}
+
+.stagger-fade-in>*:nth-child(2) {
+    animation-delay: 100ms;
+}
+
+.stagger-fade-in>*:nth-child(3) {
+    animation-delay: 200ms;
+}
+
+.stagger-fade-in>*:nth-child(4) {
+    animation-delay: 300ms;
+}
+
+.stagger-fade-in>*:nth-child(5) {
+    animation-delay: 400ms;
+}
+
+.stagger-fade-in>*:nth-child(6) {
+    animation-delay: 500ms;
+}
+
+.stagger-fade-in>*:nth-child(7) {
+    animation-delay: 600ms;
+}
+
+.stagger-fade-in>*:nth-child(8) {
+    animation-delay: 700ms;
+}
+
+/* ================================
+ * TRANSITION UTILITIES
+ * ================================ */
+
+.transition-all {
+    transition-property: all;
+    transition-timing-function: var(--ease-in-out);
+    transition-duration: var(--duration-200);
+}
+
+.transition-colors {
+    transition-property: color, background-color, border-color;
+    transition-timing-function: var(--ease-in-out);
+    transition-duration: var(--duration-200);
+}
+
+.transition-transform {
+    transition-property: transform;
+    transition-timing-function: var(--ease-in-out);
+    transition-duration: var(--duration-200);
+}
+
+.transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: var(--ease-in-out);
+    transition-duration: var(--duration-200);
+}
+
+/* ================================
+ * HOVER EFFECTS
+ * ================================ */
+
+.hover-lift {
+    transition: transform var(--duration-200) var(--ease-out);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+}
+
+.hover-grow {
+    transition: transform var(--duration-200) var(--ease-out);
+}
+
+.hover-grow:hover {
+    transform: scale(1.05);
+}
+
+.hover-shadow {
+    transition: box-shadow var(--duration-200) var(--ease-out);
+}
+
+.hover-shadow:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+/* ================================
+ * GLASS MORPHISM EFFECTS
+ * ================================ */
+
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+}
+
+.glass-light {
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+}
+
+/* ================================
+ * ACCESSIBILITY
+ * ================================ */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

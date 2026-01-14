@@ -36,78 +36,67 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import axios from "axios";
 import { Input } from '@/components/ui/input'
-import DownloadAppButton from '@/components/ui/DownloadAppButton'
+// import DownloadAppButton from '@/components/ui/DownloadAppButton'
 
-// Mock data for dividends
-const mockDividends = [
-  { id: 1, company: "Apple Inc.", symbol: "AAPL", amount: 0.24, paymentDate: "2024-05-15", ex_date: "2024-05-11" },
-  { id: 2, company: "Microsoft Corporation", symbol: "MSFT", amount: 0.68, paymentDate: "2024-05-10", ex_date: "2024-05-06" },
-  { id: 3, company: "Johnson & Johnson", symbol: "JNJ", amount: 1.19, paymentDate: "2024-05-22", ex_date: "2024-05-18" },
-  { id: 4, company: "Procter & Gamble Co.", symbol: "PG", amount: 0.94, paymentDate: "2024-05-17", ex_date: "2024-05-13" },
-  { id: 5, company: "Coca-Cola Company", symbol: "KO", amount: 0.46, paymentDate: "2024-05-30", ex_date: "2024-05-26" },
-]
 
 export default function DividendCalendar() {
-  let currentDate= new Date();
+  let currentDate = new Date();
   currentDate.setDate(1)
   const [date, setDate] = useState(currentDate)
-  const [dividends, setDividends]=useState([])
-  const [loading,setLoading]=useState(true);
+  const [dividends, setDividends] = useState([])
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("")
 
-  /*const filteredDividends = mockDividends.filter(dividend => 
-    new Date(dividend.paymentDate).getMonth() === date.getMonth() &&
-    new Date(dividend.paymentDate).getFullYear() === date.getFullYear()
-  )*/
-  useEffect(()=>{
-    const fetchDividends= async (params)=>{
-        const mainURL=import.meta.env.VITE_REVRIDGE_BACKEND_URL;
-        const apiUrl=`${mainURL}/api/div_calendar/?start=${date.toLocaleDateString('en-CA')}`;
-        try {
-            const result=await axios.get(apiUrl)
-            const data=result.data
-            //console.log(`Data show: ${import.meta.env.VITE_REVRIDGE_BACKEND_URL}`)
-            if ('cash_dividends' in data && data['cash_dividends'].length!==0) {
-                //console.log(`dividend: ${data['cash_dividends'][0].ex_date}`)
-                setDividends(data['cash_dividends'])
-            }else{
-                setDividends([])
-            }
-            
-          } catch (error) {
-            setDividends([])
-            console.log(`Error: ${error}`);
-          }finally{
-            setLoading(false);
-          }
+
+  useEffect(() => {
+    const fetchDividends = async (params) => {
+      const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
+      const apiUrl = `${mainURL}/api/div_calendar/?start=${date.toLocaleDateString('en-CA')}`;
+      try {
+        const result = await axios.get(apiUrl)
+        const data = result.data
+        //console.log(`Data show: ${import.meta.env.VITE_REVRIDGE_BACKEND_URL}`)
+        if ('cash_dividends' in data && data['cash_dividends'].length !== 0) {
+          //console.log(`dividend: ${data['cash_dividends'][0].ex_date}`)
+          setDividends(data['cash_dividends'])
+        } else {
+          setDividends([])
+        }
+
+      } catch (error) {
+        setDividends([])
+        console.log(`Error: ${error}`);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchDividends();
 
-  },[date])
+  }, [date])
   const handleSearch = () => {
     // In a real application, this would trigger an API call or filter the data
     //console.log("Searching for:", searchTerm)
-    const fetchDividends= async (params)=>{
-      const mainURL=import.meta.env.VITE_REVRIDGE_BACKEND_URL;
-      const apiUrl=`${mainURL}/api/div_cal_stock/?query=${searchTerm}`;
+    const fetchDividends = async (params) => {
+      const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
+      const apiUrl = `${mainURL}/api/div_cal_stock/?query=${searchTerm}`;
       try {
-          const result=await axios.get(apiUrl)
-          const data=result.data
-          if ('cash_dividends' in data && data['cash_dividends'].length!==0) {
-              //console.log(`dividend in search: ${data['cash_dividends'][0].ex_date}`)
-              setDividends(data['cash_dividends'])
-          }else{
-              setDividends([])
-          }
-          
-        } catch (error) {
+        const result = await axios.get(apiUrl)
+        const data = result.data
+        if ('cash_dividends' in data && data['cash_dividends'].length !== 0) {
+          //console.log(`dividend in search: ${data['cash_dividends'][0].ex_date}`)
+          setDividends(data['cash_dividends'])
+        } else {
           setDividends([])
-          //console.log(`Error: ${error}`);
-        }finally{
-          setLoading(false);
         }
-  }
-  fetchDividends();
+
+      } catch (error) {
+        setDividends([])
+        //console.log(`Error: ${error}`);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchDividends();
   }
 
   return (
@@ -180,7 +169,8 @@ export default function DividendCalendar() {
                   onSelect={(newDate) => {
                     //console.log(`newDate: ${newDate.toLocaleDateString('en-CA')}`)
                     //newDate.setDate(1);
-                    newDate && setDate(newDate)}}
+                    newDate && setDate(newDate)
+                  }}
                   initialFocus
                 />
               </PopoverContent>
@@ -215,22 +205,22 @@ export default function DividendCalendar() {
                 </TableBody>
               </Table>
             </div>
-          ) : (searchTerm!=""?<p className="text-center text-muted-foreground py-4">The company you searched for either does not exist, was incorrectly entered or does not give out Dividends. 
-          <br/>Ensure you are entering the company name correctly or the company ticker symbol e.g the Ticker symbol for "The Coca-Cola Company" is "KO"</p>:
+          ) : (searchTerm != "" ? <p className="text-center text-muted-foreground py-4">The company you searched for either does not exist, was incorrectly entered or does not give out Dividends.
+            <br />Ensure you are entering the company name correctly or the company ticker symbol e.g the Ticker symbol for "The Coca-Cola Company" is "KO"</p> :
             <p className="text-center text-muted-foreground py-4">No dividends found for the selected month.</p>
           )}
         </CardContent>
         <CardFooter className="flex flex-col items-start">
-        <div className="w-full">
-          <h3 className="font-bold">Column Definitions</h3>
-          <ul className="list-disc pl-4 space-y-2">
-            <li><strong>Company:</strong> The name of the company paying the dividend.</li>
-            <li><strong>Symbol:</strong> The stock ticker symbol for the company.</li>
-            <li><strong>Amount:</strong> The dividend amount per share in USD.</li>
-            <li><strong>Payment Date:</strong> The date when the dividend will be paid to shareholders.</li>
-            <li><strong>Ex-Dividend Date:</strong> The date on or after which a security trades without its dividend. To receive the dividend, you must own the stock before this date.</li>
-          </ul>
-        </div>
+          <div className="w-full">
+            <h3 className="font-bold">Column Definitions</h3>
+            <ul className="list-disc pl-4 space-y-2">
+              <li><strong>Company:</strong> The name of the company paying the dividend.</li>
+              <li><strong>Symbol:</strong> The stock ticker symbol for the company.</li>
+              <li><strong>Amount:</strong> The dividend amount per share in USD.</li>
+              <li><strong>Payment Date:</strong> The date when the dividend will be paid to shareholders.</li>
+              <li><strong>Ex-Dividend Date:</strong> The date on or after which a security trades without its dividend. To receive the dividend, you must own the stock before this date.</li>
+            </ul>
+          </div>
 
           <Alert variant="warning" className="mt-6">
             <AlertTriangle className="h-4 w-4" />
@@ -249,7 +239,7 @@ export default function DividendCalendar() {
             </CardHeader>
             <CardContent>
               <div className="flex flex-col sm:flex-row gap-4">
-              <DownloadAppButton/>
+                {/* <DownloadAppButton/> */}
                 {/* <Button className="w-full sm:w-auto" size="lg">
                   <AppleIcon className="mr-2 h-5 w-5" />
                   Download for iOS
@@ -266,3 +256,19 @@ export default function DividendCalendar() {
     </div>
   )
 }
+
+
+
+// Mock data for dividends
+// const mockDividends = [
+//   { id: 1, company: "Apple Inc.", symbol: "AAPL", amount: 0.24, paymentDate: "2024-05-15", ex_date: "2024-05-11" },
+//   { id: 2, company: "Microsoft Corporation", symbol: "MSFT", amount: 0.68, paymentDate: "2024-05-10", ex_date: "2024-05-06" },
+//   { id: 3, company: "Johnson & Johnson", symbol: "JNJ", amount: 1.19, paymentDate: "2024-05-22", ex_date: "2024-05-18" },
+//   { id: 4, company: "Procter & Gamble Co.", symbol: "PG", amount: 0.94, paymentDate: "2024-05-17", ex_date: "2024-05-13" },
+//   { id: 5, company: "Coca-Cola Company", symbol: "KO", amount: 0.46, paymentDate: "2024-05-30", ex_date: "2024-05-26" },
+// ]
+
+/*const filteredDividends = mockDividends.filter(dividend => 
+  new Date(dividend.paymentDate).getMonth() === date.getMonth() &&
+  new Date(dividend.paymentDate).getFullYear() === date.getFullYear()
+)*/
