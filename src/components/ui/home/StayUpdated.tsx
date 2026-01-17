@@ -11,6 +11,7 @@ interface StayUpdatedProps {
 
 const StayUpdated: React.FC<StayUpdatedProps> = ({ stayUpdatedSectionRef }) => {
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState('');
 
@@ -32,6 +33,7 @@ const StayUpdated: React.FC<StayUpdatedProps> = ({ stayUpdatedSectionRef }) => {
             const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
             const response = await axios.post(`${mainURL}/email_list/`, {
                 email,
+                name,
                 source: 'homepage'
             });
 
@@ -39,6 +41,7 @@ const StayUpdated: React.FC<StayUpdatedProps> = ({ stayUpdatedSectionRef }) => {
                 setStatus('success');
                 setMessage(getEmailSignupSuccessMessage(email));
                 setEmail('');
+                setName('');
             }
         } catch (error: any) {
             setStatus('error');
@@ -73,16 +76,28 @@ const StayUpdated: React.FC<StayUpdatedProps> = ({ stayUpdatedSectionRef }) => {
                     </div>
 
                     <Card variant="glass" className="w-full max-w-md p-2 bg-white/5 border-white/10 shadow-2xl">
-                        <form onSubmit={submitEmail} className="flex flex-col sm:flex-row gap-2 p-1">
-                            <div className="relative flex-1">
-                                <Input
-                                    type="email"
-                                    placeholder="name@example.com"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="h-12 bg-transparent border-transparent focus:border-transparent focus:ring-0 text-white placeholder:text-zinc-500 pl-4"
-                                    disabled={status === 'loading' || status === 'success'}
-                                />
+                        <form onSubmit={submitEmail} className="flex flex-col gap-2 p-1">
+                            <div className="flex flex-col sm:flex-row gap-2">
+                                <div className="relative flex-1">
+                                    <Input
+                                        type="text"
+                                        placeholder="Your name (optional)"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        className="h-12 bg-transparent border-transparent focus:border-transparent focus:ring-0 text-white placeholder:text-zinc-500 pl-4"
+                                        disabled={status === 'loading' || status === 'success'}
+                                    />
+                                </div>
+                                <div className="relative flex-1">
+                                    <Input
+                                        type="email"
+                                        placeholder="name@example.com"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="h-12 bg-transparent border-transparent focus:border-transparent focus:ring-0 text-white placeholder:text-zinc-500 pl-4"
+                                        disabled={status === 'loading' || status === 'success'}
+                                    />
+                                </div>
                             </div>
                             <Button
                                 type="submit"

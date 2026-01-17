@@ -7,6 +7,7 @@ import { parseApiError, getEmailValidationError, getEmailSignupSuccessMessage } 
 
 const SubscribeToNewsletter = () => {
   const [email, setEmail] = useState("")
+  const [name, setName] = useState("")
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [errorMessage, setErrorMessage] = useState('');
   const handleSubmit = async (e) => {
@@ -20,12 +21,14 @@ const SubscribeToNewsletter = () => {
       const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
       const response = await axios.post(`${mainURL}/email_list/`, {
         email,
+        name,
         source: 'blog'
       });
       //console.log(`status: ${response.status}`)
       if (response.status === 201) {
         setIsSubmitted(true)
         setErrorMessage('')
+        setName('')
       } else {
         setErrorMessage('An error occurred. Please try again later.');
         setIsSubmitted(false)
@@ -58,15 +61,23 @@ const SubscribeToNewsletter = () => {
             Get the latest blog posts and market insights delivered directly to your inbox.
           </p>
           <div className="w-full max-w-sm space-y-2">
-            <form onSubmit={handleSubmit} className="flex w-full max-w-sm items-center space-x-2">
+            <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-sm space-y-2">
               <Input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
+                type="text"
+                placeholder="Your name (optional)"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
-              <Button type="submit">Subscribe</Button>
+              <div className="flex w-full space-x-2">
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <Button type="submit">Subscribe</Button>
+              </div>
             </form>
             {errorMessage && <p>{errorMessage}</p>}
             {isSubmitted && (

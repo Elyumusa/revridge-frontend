@@ -19,6 +19,7 @@ const AppleLogo = '/Apple.svg';
 const DownloadAppPage: React.FC = () => {
     const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState("");
     const [showConfetti, setShowConfetti] = useState(false);
@@ -29,6 +30,7 @@ const DownloadAppPage: React.FC = () => {
         setStatus('idle');
         setMessage("");
         setEmail("");
+        setName("");
     };
 
     const submitEmail = async (e: React.FormEvent) => {
@@ -48,6 +50,7 @@ const DownloadAppPage: React.FC = () => {
             const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
             const response = await axios.post(`${mainURL}/email_list/`, {
                 email,
+                name,
                 source: 'download_page'
             });
 
@@ -213,6 +216,16 @@ const DownloadAppPage: React.FC = () => {
                                 </div>
                             ) : (
                                 <form onSubmit={submitEmail} className="space-y-4">
+                                    <div className="space-y-2 text-left">
+                                        <label className="text-sm font-medium">Name (optional)</label>
+                                        <Input
+                                            type="text"
+                                            placeholder="Your name"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            disabled={status === 'loading'}
+                                        />
+                                    </div>
                                     <div className="space-y-2 text-left">
                                         <label className="text-sm font-medium">Email Address</label>
                                         <Input
