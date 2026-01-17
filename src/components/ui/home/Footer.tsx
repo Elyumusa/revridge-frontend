@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
                         <div className="flex gap-4">
                             <SocialLink href="https://facebook.com/revridge" icon={<Facebook size={20} />} label="Facebook" />
                             <SocialLink href="https://linkedin.com/company/revridge" icon={<Linkedin size={20} />} label="LinkedIn" />
-                            <SocialLink href="https://instagram.com/revridge" icon={<Instagram size={20} />} label="Instagram" />
+                            <SocialLink href="https://instagram.com/revridgeapp" icon={<Instagram size={20} />} label="Instagram" />
                             <SocialLink href="https://twitter.com/revridge" icon={<Twitter size={20} />} label="Twitter" />
                         </div>
                     </div>
