@@ -16,6 +16,8 @@ import DividendCalendar from './pages/dividendCalender/DividendCalender'
 import DownloadAppPage from './pages/appPage/DownloadAppPage';
 import StockTradingBot from './pages/tradingBot/tradingBot';
 import FAQPage from './pages/faq/page';
+import PrivacyPolicyPage from './pages/privacy/page';
+import TermsOfServicePage from './pages/terms/page';
 
 function App() {
 
@@ -33,6 +35,8 @@ function App() {
         <Route path='/div_calendar' element={<DividendCalendar />} />
         <Route path='/faq' element={<FAQPage />} />
         <Route path='/download' element={<DownloadAppPage />} />
+        <Route path='/privacy' element={<PrivacyPolicyPage />} />
+        <Route path='/terms' element={<TermsOfServicePage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Route>
     )

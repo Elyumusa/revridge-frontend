@@ -4,6 +4,7 @@ import './globals.css'
 import Navbar from '../components/ui/Navbar';
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
+import ScrollToTop from '../components/ScrollToTop';
 
 const metadata = {
   title: 'Revridge',
@@ -13,11 +14,12 @@ const metadata = {
 export default function RootLayout() {
   return (
     <>
-    <Navbar/>
-    <Outlet/>
-    <ToastContainer/>
+      <ScrollToTop />
+      <Navbar />
+      <Outlet />
+      <ToastContainer />
     </>
-    
+
   )
 }
 
@@ -31,12 +33,12 @@ export default function RootLayout() {
 //const inter = Inter({ subsets: ['latin'] })
 //import { Inter } from 'next/font/google'
 // <html lang="en">
-    //   <head>
-    //     <title>{metadata.title}</title>
-    //     <meta name="description" content={metadata.description} />
-    //   </head>
-    //   <body className={`${inter.className} bg-background text-foreground`}>{children}</body>
-    // </html>
+//   <head>
+//     <title>{metadata.title}</title>
+//     <meta name="description" content={metadata.description} />
+//   </head>
+//   <body className={`${inter.className} bg-background text-foreground`}>{children}</body>
+// </html>
 
 /*import './globals.css'
 import type { Metadata } from 'next'

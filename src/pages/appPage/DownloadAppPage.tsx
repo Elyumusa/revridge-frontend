@@ -35,7 +35,6 @@ const DownloadAppPage: React.FC = () => {
 
     const submitEmail = async (e: React.FormEvent) => {
         e.preventDefault();
-
         // Validate email
         const validationError = getEmailValidationError(email);
         if (validationError) {
@@ -53,7 +52,6 @@ const DownloadAppPage: React.FC = () => {
                 name,
                 source: 'download_page'
             });
-
             if (response.status === 201) {
                 setStatus('success');
                 setMessage(`You're on the list! We'll notify ${email} when ready.`);
