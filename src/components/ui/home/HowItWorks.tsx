@@ -124,7 +124,7 @@ const HowItWorks: React.FC = () => {
                         </div>
 
                         {/* Right: App Screenshot Placeholder */}
-                        <div className="relative">
+                        <div className="relative hidden md:block">
                             {/* Phone Frame */}
                             <div className="relative mx-auto w-full max-w-[300px] aspect-[9/19] bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-[3rem] p-3 shadow-2xl border-8 border-zinc-700">
                                 {/* Notch */}
