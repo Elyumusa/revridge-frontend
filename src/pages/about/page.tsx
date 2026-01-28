@@ -205,7 +205,7 @@ export default function AboutPage() {
                         </div>
                         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                             {values.map((val, idx) => (
-                                <Card key={idx} variant="glass" className="border-none shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                                <Card key={idx} variant="glass" hoverEffect className="border-secondary/20 bg-card/30 h-full">
                                     <CardHeader>
                                         <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-transform group-hover:scale-110", val.bg, val.color)}>
                                             <val.icon size={24} />

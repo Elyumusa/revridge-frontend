@@ -105,17 +105,7 @@ const SupportPage: React.FC = () => {
                         <Heading level="h1" className="text-4xl md:text-6xl font-bold tracking-tight text-white">
                             How can we help you?
                         </Heading>
-                        <div className="max-w-2xl mx-auto relative group">
-                            <div className="absolute inset-0 bg-white/20 blur-xl rounded-full opacity-0 group-hover:opacity-50 transition-opacity" />
-                            <div className="relative flex items-center">
-                                <Search className="absolute left-4 text-zinc-400 h-5 w-5" />
-                                <input
-                                    type="text"
-                                    placeholder="Search for answers..."
-                                    className="w-full h-14 pl-12 pr-4 rounded-full bg-white/10 border border-white/10 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all backdrop-blur-md"
-                                />
-                            </div>
-                        </div>
+
                     </div>
                 </section>
 

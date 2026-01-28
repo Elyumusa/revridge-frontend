@@ -75,10 +75,10 @@ const FeaturesAndPerks: React.FC = () => {
                     {perks.map((perk, index) => (
                         <Card
                             key={index}
-                            variant="flat"
+                            variant="glass"
                             hoverEffect
                             className={cn(
-                                "border-none bg-background/50 hover:bg-background transition-colors duration-300 animate-fade-in-up",
+                                "border-secondary/20 bg-card/30 animate-fade-in-up",
                             )}
                             style={{ animationDelay: `${index * 100}ms` }}
                         >

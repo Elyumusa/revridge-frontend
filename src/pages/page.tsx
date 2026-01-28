@@ -19,8 +19,8 @@ export default function HomePage() {
         <WhatWeDo />
         <HowItWorks />
         <FeaturesAndPerks />
-        <StayUpdated stayUpdatedSectionRef={stayUpdatedSectionRef} />
         <DownloadOurApp />
+        <StayUpdated stayUpdatedSectionRef={stayUpdatedSectionRef} />
       </main>
       <Footer />
     </div>

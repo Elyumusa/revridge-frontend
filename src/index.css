@@ -79,3 +79,11 @@
     -moz-osx-font-smoothing: grayscale;
   }
 }
+
+@layer components {
+
+  /* Ensure containers are centered on all screen sizes */
+  .container {
+    @apply mx-auto;
+  }
+}

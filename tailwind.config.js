@@ -8,13 +8,30 @@ const config = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        lg: '3rem',
+        xl: '4rem',
+        '2xl': '5rem',
+      },
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1440px',      // Increased for larger laptops
+        '2xl': '1920px',   // Increased for 24" monitors and MacBook Pro
+      },
+    },
     extend: {
       // Revridge Brand Colors - Black & White Theme
       colors: {
         // Base colors
         black: '#000000',
         white: '#FFFFFF',
-        
+
         // Gray scale
         gray: {
           50: '#FAFAFA',
@@ -29,7 +46,7 @@ const config = {
           900: '#171717',
           950: '#0A0A0A',
         },
-        
+
         // Accent colors for data visualization
         blue: {
           400: '#60A5FA',
@@ -51,7 +68,7 @@ const config = {
           400: '#FACC15',
           500: '#EAB308',
         },
-        
+
         // Shadcn/ui compatibility
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -94,31 +111,31 @@ const config = {
           '5': 'hsl(var(--chart-5))'
         }
       },
-      
+
       // Typography
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         display: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
-      
+
       // Border radius
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)'
       },
-      
+
       // Shadows
       boxShadow: {
         'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.1)',
       },
-      
+
       // Backdrop blur for glass morphism
       backdropBlur: {
         glass: '10px',
       },
-      
+
       // Keyframes
       keyframes: {
         'accordion-down': {
@@ -150,7 +167,7 @@ const config = {
           to: { transform: 'translateX(0)' }
         },
       },
-      
+
       // Animations
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
