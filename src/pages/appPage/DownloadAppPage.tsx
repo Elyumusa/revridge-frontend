@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
-import { Button, Input, Heading, Text, Card } from "@/components/design-system";
+import { Button, Input, Heading, Text } from "@/components/design-system";
 import { Apple, Play, CheckCircle2, X } from "lucide-react";
 import Footer from '@/components/ui/home/Footer';
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactConfetti from 'react-confetti';
 import axios from 'axios';
-import { parseApiError, getEmailValidationError, getEmailSignupSuccessMessage } from '@/utils/errorHandler';
+import { parseApiError, getEmailValidationError } from '@/utils/errorHandler';
 
 // Image Assets
-const StockPage = '/stock_resized.png';
-const InvestInWhatYouBelieveIn = '/invest.png';
+const HeroAppImage = '/portfolio_page.png';
 const Google = '/google.svg';
 const Nike = '/nike.svg';
-const Microsoft = '/microsoft.svg';
-const Netflix = '/netflix.svg';
 const AppleLogo = '/Apple.svg';
 
 const DownloadAppPage: React.FC = () => {
@@ -111,7 +108,7 @@ const DownloadAppPage: React.FC = () => {
 
                                     {/* Phone Image */}
                                     <img
-                                        src={StockPage}
+                                        src={HeroAppImage}
                                         alt="Revridge App"
                                         className="relative z-10 w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
                                     />
@@ -126,35 +123,154 @@ const DownloadAppPage: React.FC = () => {
                     </div>
                 </section>
 
-                {/* Features Section */}
+                {/* App Preview Gallery */}
                 <section className="py-24 bg-secondary/30">
                     <div className="container px-4 md:px-6">
-                        <div className="grid md:grid-cols-2 gap-16 items-center">
-                            <div className="relative order-2 md:order-1">
-                                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
-                                    <img src={InvestInWhatYouBelieveIn} alt="Invest in what you believe in" className="w-full h-auto" />
+                        {/* Section Header */}
+                        <div className="text-center mb-16 space-y-4">
+                            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary">
+                                <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse" />
+                                <span>App Preview</span>
+                            </div>
+                            <Heading level="h2" className="text-3xl md:text-5xl font-bold">
+                                See Revridge in Action
+                            </Heading>
+                            <Text size="lg" className="text-muted-foreground max-w-2xl mx-auto">
+                                Explore the app's key features with real screenshots. Simple, intuitive, and built for you.
+                            </Text>
+                        </div>
+
+                        {/* Screenshot Gallery Grid */}
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {/* Portfolio View */}
+                            <div className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
+                                <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
+                                    <img
+                                        src="/portfolio_page.png"
+                                        alt="Portfolio view showing your investments"
+                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                    />
                                 </div>
-                                <FloatingBadge src={Netflix} className="-top-8 -left-8 w-20 h-20" />
-                                <FloatingBadge src={Microsoft} className="-bottom-8 -right-8 w-20 h-20" />
+                                <div className="p-6 space-y-2">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                                        <Heading level="h3" className="text-lg font-bold">Your Portfolio</Heading>
+                                    </div>
+                                    <Text muted className="text-sm">
+                                        Track all your investments in one place. See real-time values, gains, and performance at a glance.
+                                    </Text>
+                                </div>
                             </div>
 
-                            <div className="space-y-8 order-1 md:order-2">
-                                <Heading level="h2" className="text-3xl md:text-5xl font-bold">Invest in what <br /> matters to you.</Heading>
-                                <ul className="space-y-6">
-                                    <FeatureItem title="U.S. Stock Trading">
-                                        Trade U.S. stocks in sandbox mode with real-time quotes and fractional shares. Commission-free during beta.
-                                    </FeatureItem>
-                                    <FeatureItem title="Zambian Market Tracking">
-                                        View and track Lusaka Securities Exchange (LuSE) stocks with real-time data. Full trading coming Q2 2026.
-                                    </FeatureItem>
-                                    <FeatureItem title="Demo Mode">
-                                        Practice trading risk-free before using real money. Perfect for learning and building confidence.
-                                    </FeatureItem>
-                                </ul>
-                                <Button size="lg" onClick={openWaitlist} className="mt-4">
-                                    Start Investing Today
-                                </Button>
+                            {/* Stock Details */}
+                            <div className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
+                                <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
+                                    <img
+                                        src="/stock_page.png"
+                                        alt="Stock details with charts and information"
+                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                </div>
+                                <div className="p-6 space-y-2">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-2 h-2 rounded-full bg-blue-500" />
+                                        <Heading level="h3" className="text-lg font-bold">Stock Details</Heading>
+                                    </div>
+                                    <Text muted className="text-sm">
+                                        View detailed stock information, price charts, and company data to make informed decisions.
+                                    </Text>
+                                </div>
                             </div>
+
+                            {/* Search & Discover */}
+                            <div className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
+                                <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
+                                    <img
+                                        src="/search_page.png"
+                                        alt="Search for stocks and companies"
+                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                </div>
+                                <div className="p-6 space-y-2">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-2 h-2 rounded-full bg-purple-500" />
+                                        <Heading level="h3" className="text-lg font-bold">Search & Discover</Heading>
+                                    </div>
+                                    <Text muted className="text-sm">
+                                        Find stocks from U.S. and Zambian markets. Search by company name or ticker symbol.
+                                    </Text>
+                                </div>
+                            </div>
+
+                            {/* Buy & Sell */}
+                            <div className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
+                                <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
+                                    <img
+                                        src="/buy_sell_page.png"
+                                        alt="Buy and sell stocks interface"
+                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                </div>
+                                <div className="p-6 space-y-2">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-2 h-2 rounded-full bg-orange-500" />
+                                        <Heading level="h3" className="text-lg font-bold">Buy & Sell</Heading>
+                                    </div>
+                                    <Text muted className="text-sm">
+                                        Simple trading interface. Buy or sell stocks with just a few taps. Practice with virtual money first.
+                                    </Text>
+                                </div>
+                            </div>
+
+                            {/* Watchlist */}
+                            <div className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
+                                <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
+                                    <img
+                                        src="/wishlist.png"
+                                        alt="Watchlist of favorite stocks"
+                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                </div>
+                                <div className="p-6 space-y-2">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-2 h-2 rounded-full bg-pink-500" />
+                                        <Heading level="h3" className="text-lg font-bold">Watchlist</Heading>
+                                    </div>
+                                    <Text muted className="text-sm">
+                                        Save stocks you're interested in. Monitor price changes and get ready to invest when the time is right.
+                                    </Text>
+                                </div>
+                            </div>
+
+                            {/* Zambian Market */}
+                            <div className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
+                                <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
+                                    <img
+                                        src="/Zambian market.png"
+                                        alt="Zambian stock market (LUSE)"
+                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                </div>
+                                <div className="p-6 space-y-2">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-2 h-2 rounded-full bg-green-500" />
+                                        <Heading level="h3" className="text-lg font-bold">Zambian Markets</Heading>
+                                    </div>
+                                    <Text muted className="text-sm">
+                                        Track Lusaka Securities Exchange (LuSE) stocks. Support local businesses and invest in Zambia's growth.
+                                    </Text>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* CTA Below Gallery */}
+                        <div className="text-center mt-16">
+                            <Text className="text-muted-foreground mb-6">
+                                Ready to start your investment journey?
+                            </Text>
+                            <Button size="lg" onClick={openWaitlist} className="h-14 px-8">
+                                Download the App
+                            </Button>
                         </div>
                     </div>
                 </section>
@@ -255,18 +371,6 @@ const DownloadAppPage: React.FC = () => {
 const FloatingBadge = ({ src, className }: { src: string, className?: string }) => (
     <div className={`absolute w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform ${className}`}>
         <img src={src} className="w-8 h-8 object-contain" alt="Brand" />
-    </div>
-);
-
-const FeatureItem = ({ title, children }: { title: string, children: React.ReactNode }) => (
-    <div className="flex gap-4">
-        <div className="mt-1 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-            <CheckCircle2 size={14} className="text-primary" />
-        </div>
-        <div>
-            <h4 className="font-bold text-lg">{title}</h4>
-            <Text muted>{children}</Text>
-        </div>
     </div>
 );
 

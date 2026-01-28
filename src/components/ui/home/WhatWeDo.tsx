@@ -54,7 +54,7 @@ const WhatWeDo: React.FC = () => {
                         What We Do
                     </Heading>
                     <Text className="max-w-[700px] text-muted-foreground md:text-xl">
-                        Comprehensive financial solutions designed to help you invest with confidence.
+                        Everything you need to buy stocks, track your investments, and learn how to grow your money.
                     </Text>
                 </div>
 

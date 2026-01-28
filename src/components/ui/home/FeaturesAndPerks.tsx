@@ -5,14 +5,14 @@ import { cn } from '@/lib/utils';
 
 const perks = [
     {
-        title: "Grow your wealth",
-        description: "Diversify your investment portfolio with well-structured investments and risk management. Watch your investments grow over time.",
+        title: "Watch Your Money Grow",
+        description: "Buy stocks in different companies to spread your risk. As companies do well, your shares become more valuable over time.",
         icon: TrendingUp,
         color: "bg-emerald-500/10 text-emerald-500",
     },
     {
-        title: "Start with as low as K100",
-        description: "Begin your investment journey with a minimal initial deposit and unlock a world of opportunities accessible to everyone.",
+        title: "Start Small ",
+        description: "You don't need to be rich to invest. Start with a small amount and buy your first stock today.",
         icon: DollarSign,
         color: "bg-blue-500/10 text-blue-500",
     },
@@ -23,8 +23,8 @@ const perks = [
         color: "bg-indigo-500/10 text-indigo-500",
     },
     {
-        title: "Invest in favorite Brands",
-        description: "Back the companies you love and support their growth while earning potential returns on your investment.",
+        title: "Own Shares in Your Favorite Brands",
+        description: "Buy pieces of companies like Apple, Google, or Zambian businesses(Zambeef, Lafarge) you believe in. When they profit, you profit too.",
         icon: BarChart3,
         color: "bg-pink-500/10 text-pink-500",
     },
@@ -35,8 +35,8 @@ const perks = [
         color: "bg-yellow-500/10 text-yellow-500",
     },
     {
-        title: "Passive Income",
-        description: "Sit back and watch your investments generate income while you focus on other important aspects of your life.",
+        title: "Earn Money While You Sleep",
+        description: "Some stocks pay you dividends (cash payments) just for owning them. Your money works for you, even when you're not actively trading.",
         icon: Users,
         color: "bg-purple-500/10 text-purple-500",
     },
@@ -61,8 +61,8 @@ const FeaturesAndPerks: React.FC = () => {
                             More than just <br /> an investment platform.
                         </Heading>
                         <Text size="lg" className="text-muted-foreground max-w-xl">
-                            We provide the tools, security, and education you need to build a robust financial future.
-                            Experience the Revridge difference.
+                            We give you everything you need to start investing: easy-to-use tools, bank-level security, and free lessons to help you learn.
+                            Join thousands learning to invest with Revridge.
                         </Text>
                     </div>
 

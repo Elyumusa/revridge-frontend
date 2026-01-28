@@ -5,6 +5,7 @@ import DownloadOurApp from '@/components/ui/home/DownloadOurApp';
 import StayUpdated from '@/components/ui/home/StayUpdated';
 import FeaturesAndPerks from '@/components/ui/home/FeaturesAndPerks';
 import WhatWeDo from '@/components/ui/home/WhatWeDo';
+import HowItWorks from '@/components/ui/home/HowItWorks';
 import Footer from '@/components/ui/home/Footer';
 
 export default function HomePage() {
@@ -16,6 +17,7 @@ export default function HomePage() {
         <Hero stayUpdatedSectionRef={stayUpdatedSectionRef} />
         <InvestmentCalculator />
         <WhatWeDo />
+        <HowItWorks />
         <FeaturesAndPerks />
         <StayUpdated stayUpdatedSectionRef={stayUpdatedSectionRef} />
         <DownloadOurApp />

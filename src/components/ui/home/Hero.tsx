@@ -56,7 +56,7 @@ const Hero: React.FC<HeroProps> = ({ stayUpdatedSectionRef }) => {
                         </Heading>
 
                         <Text size="xl" className="max-w-[700px] text-muted-foreground md:text-2xl pt-4">
-                            Revridge brings the power of U.S. and Zambian stock markets to your fingertips. Start building wealth today with as little as you have.
+                            Buy and sell stocks from the U.S. and Zambia(LUSE) right from your phone. Practice with virtual cash, learn how investing works, then trade for real when you're ready.
                         </Text>
                     </div>
 

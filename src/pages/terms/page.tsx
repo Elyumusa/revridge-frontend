@@ -53,7 +53,7 @@ const TermsOfServicePage: React.FC = () => {
                                             <li>All current trading is conducted with <strong>VIRTUAL MONEY</strong> for practice and education</li>
                                             <li>You <strong>cannot yet</strong> deposit real money or conduct actual stock transactions</li>
                                             <li>This demo environment allows you to learn trading <strong>without financial risk</strong></li>
-                                            <li>You start with <strong>$100,000 in virtual cash</strong> to practice with</li>
+                                            <li>You start with <strong>virtual cash</strong> to practice with</li>
                                             <li className="font-semibold">We are actively working toward launching real trading features - stay tuned!</li>
                                         </ul>
                                     </div>
@@ -90,7 +90,7 @@ const TermsOfServicePage: React.FC = () => {
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">2.2 Virtual Cash</Heading>
                                 <Text className="mb-6">
-                                    Upon registration, you will receive <strong>$100,000 in virtual cash</strong> for practice trading. This is <strong>NOT real money</strong> and has no monetary value.
+                                    Upon registration, you will receive <strong>virtual cash</strong> for practice trading. This is <strong>NOT real money</strong> and has no monetary value.
                                 </Text>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">2.3 Account Security</Heading>
