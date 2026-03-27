@@ -124,7 +124,7 @@ export default function CompliancePage() {
           </div>
         </section>
       </main>
-      <Footer/>
+      <Footer />
     </div>
   )
 }

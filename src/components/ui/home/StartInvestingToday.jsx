@@ -1,7 +1,7 @@
 import React from 'react'
-import { AppleIcon, BarChart3, BookOpen, DollarSign, Lock, Mail, PlayIcon, Smartphone, TrendingUp, Users } from "lucide-react"
-import { Input} from '../input';
+import { Smartphone } from "lucide-react"
 import { Button} from '../button';
+import { NavLink } from 'react-router-dom';
 
 const StartInvestingToday = () => {
   return (
@@ -9,11 +9,13 @@ const StartInvestingToday = () => {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <Smartphone className="h-12 w-12 text-primary" />
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Start Investing Today</h2>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Start Learning Today</h2>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Join thousands of successful investors. Sign up now and get a free consultation with our experts.
+                Join thousands of Zambians building their investing knowledge with Revridge. Practice for free \u2014 no real money required.
               </p>
-              <Button size="lg">Sign Up Now</Button>
+              <NavLink to="/download">
+                <Button size="lg">Get Early Access</Button>
+              </NavLink>
             </div>
           </div>
         </section>

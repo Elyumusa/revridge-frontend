@@ -20,52 +20,52 @@ const faqCategories: FAQCategory[] = [
         faqs: [
             {
                 question: "What is Revridge?",
-                answer: "Revridge is a mobile-first investment platform that democratizes access to both U.S. and Zambian stock markets, making investing simple, accessible, and educational for everyone—especially those new to investing or underserved by traditional financial institutions."
+                answer: "Revridge is a learning and simulation platform that helps beginners understand how investing works. You can explore real stock market data, practice trades with virtual money, and build investing confidence — all without any real money involved."
+            },
+            {
+                question: "Can I invest real money on Revridge?",
+                answer: "No — not yet. Revridge currently operates in simulation mode only. No real money changes hands at any point. Real-money investing is a future capability we're actively building toward."
             },
             {
                 question: "Is Revridge a bank?",
-                answer: "No, Revridge is an investment platform, not a bank. We facilitate stock trading and portfolio management."
+                answer: "No, Revridge is not a bank. It's a learning and simulation platform designed to help you understand investing before you commit real money."
             },
             {
-                question: "How much do I need to start?",
-                answer: "There's no minimum. You can start with any amount thanks to fractional shares. For U.S. stocks, you can invest as little as $1."
-            },
-            {
-                question: "Is Revridge free?",
-                answer: "During beta, there are no commission fees for U.S. stock trades. After launch, standard commission fees will apply. We're committed to transparent pricing and keeping costs competitive for our users."
+                question: "Is this safe to use?",
+                answer: "Yes. Because no real money is involved in simulation mode, there is zero financial risk. You're free to practice, make mistakes, and learn. Your account data is protected using bank-level security."
             },
             {
                 question: "Who can use Revridge?",
-                answer: "Revridge services are currently available to residents of Zambia. Expansion to other African countries is planned for the future."
+                answer: "Revridge is currently available to residents of Zambia. Expansion to other African countries is planned for the future."
             }
         ]
     },
     {
-        title: "Trading",
+        title: "Markets & Simulation",
         faqs: [
             {
                 question: "Can I trade Zambian stocks?",
-                answer: "Not yet. Currently, you can view and track LuSE (Lusaka Securities Exchange) stocks with real-time data. Full trading capabilities are coming in Q2 2026 pending regulatory approval."
+                answer: "Not yet. You can currently browse and explore Lusaka Securities Exchange (LuSE) stocks with real price data. Simulated LuSE trading is coming soon."
             },
             {
-                question: "What U.S. stocks can I trade?",
-                answer: "Most stocks listed on major U.S. exchanges (NYSE, NASDAQ). Currently, trading is in sandbox mode for testing purposes."
+                question: "What U.S. stocks can I explore?",
+                answer: "You can explore and simulate trades for most stocks listed on major U.S. exchanges (NYSE, NASDAQ). All U.S. trading is in simulation mode — no real money is involved."
             },
             {
-                question: "Are there trading fees?",
-                answer: "During beta, there are no commission fees. After full launch, standard commission fees will apply to trades. Detailed pricing will be available before launch."
+                question: "What is simulation mode?",
+                answer: "Simulation mode lets you practice buying and selling stocks using virtual money. It's completely risk-free — there's no real money involved. It's designed to help you learn how markets work and build confidence before eventually investing for real."
             },
             {
-                question: "What is sandbox mode?",
-                answer: "Sandbox mode is a testing environment where U.S. stock trading is simulated. It allows us to test the platform's functionality before going live with real money trading."
+                question: "What are the fees?",
+                answer: "Revridge is currently free to use in simulation mode. No fees, no deposits, no financial risk. When real-money investing launches in the future, fee details will be shared clearly and in advance."
             },
             {
-                question: "When will live trading be available?",
-                answer: "We're working toward Q2 2026 for live Zambian stock trading. U.S. stock trading will transition from sandbox to live as we complete beta testing and regulatory requirements."
+                question: "When will real-money investing be available?",
+                answer: "We're actively working toward launching real-money investing in the future. We'll notify users on our waitlist when this becomes available. For now, we're focused on making the learning and simulation experience excellent."
             },
             {
                 question: "What are fractional shares?",
-                answer: "Fractional shares allow you to buy a portion of a stock rather than a whole share. For example, if a stock costs $1,000 per share, you can invest $10 and own 1% of a share. This makes expensive stocks accessible to everyone."
+                answer: "Fractional shares allow you to buy a portion of a stock rather than a whole share. For example, if a stock costs $1,000 per share, you could invest $10 and own 1% of a share. This makes expensive stocks more accessible — a concept you can explore in simulation today."
             }
         ]
     },

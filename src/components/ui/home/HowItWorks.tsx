@@ -53,7 +53,7 @@ const HowItWorks: React.FC = () => {
                         How It Works
                     </Heading>
                     <Text size="lg" className="max-w-2xl text-muted-foreground">
-                        Start investing in 4 simple steps. No complicated forms, no confusing jargon - just straightforward investing.
+                        Start practicing in 4 simple steps. No complicated forms, no confusing jargon — just a clear path from total beginner to confident investor.
                     </Text>
                 </div>
 
@@ -154,7 +154,7 @@ const HowItWorks: React.FC = () => {
                 {/* Bottom Note */}
                 <div className="text-center mt-12">
                     <Text className="text-muted-foreground">
-                        💡 <strong>Pro Tip:</strong> Most users spend 2-3 weeks practicing before they feel ready for real trading. Take your time!
+                        💡 <strong>Good to know:</strong> Most users spend a few weeks exploring and practicing before they feel truly confident. There's no rush — this is about learning, not timing the market!
                     </Text>
                 </div>
             </div>

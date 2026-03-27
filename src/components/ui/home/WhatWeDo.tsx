@@ -5,20 +5,20 @@ import { cn } from '@/lib/utils';
 
 const features = [
     {
-        title: "U.S. Stock Trading",
-        description: "Trade U.S. stocks with real-time quotes and fractional shares. Commission-free during beta.",
+        title: "U.S. Stock Simulator",
+        description: "Practice buying and selling U.S. stocks using virtual money. Real quotes, real market data — zero real money risk.",
         icon: TrendingUp,
         color: "text-blue-500",
     },
     {
         title: "Zambian Market Data",
-        description: "Track Lusaka Securities Exchange (LuSE) stocks with real-time data and market insights. Full trading coming Q2 2026.",
+        description: "Explore real Lusaka Securities Exchange (LuSE) prices and market insights. Simulated LuSE trading is coming soon.",
         icon: BarChart3,
         color: "text-green-500",
     },
     {
-        title: "Portfolio Management",
-        description: "Real-time portfolio tracking with live price updates, performance analytics, and profit/loss calculations.",
+        title: "Simulated Portfolio",
+        description: "Track your virtual portfolio in real time. See simulated gains, losses, and performance analytics — just like the real thing, without real money.",
         icon: PieChart,
         color: "text-purple-500",
     },
@@ -36,7 +36,7 @@ const features = [
     },
     {
         title: "Mobile-First Design",
-        description: "Seamlessly invest from your smartphone with our mobile app, optimized for African mobile users.",
+        description: "Learn and practice investing from your smartphone, optimized for African mobile users. Available on iOS and Android.",
         icon: Bot,
         color: "text-orange-500",
     },
@@ -51,10 +51,10 @@ const WhatWeDo: React.FC = () => {
                         Our Services
                     </div>
                     <Heading level="h2" className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                        What We Do
+                        What You Can Do Today
                     </Heading>
                     <Text className="max-w-[700px] text-muted-foreground md:text-xl">
-                        Everything you need to buy stocks, track your investments, and learn how to grow your money.
+                        Explore real stock market data, practice with simulated trades, and build investing knowledge — all without spending a single kwacha.
                     </Text>
                 </div>
 

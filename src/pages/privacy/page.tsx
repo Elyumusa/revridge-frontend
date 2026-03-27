@@ -1,6 +1,6 @@
 import React from 'react';
 import { Heading, Text } from '@/components/design-system';
-import { Shield, Lock, Eye, Users, FileText, Mail } from 'lucide-react';
+import { Shield, Lock, Eye, Users, FileText, Mail, Smartphone, Camera, HardDrive, Fingerprint } from 'lucide-react';
 import Footer from '@/components/ui/home/Footer';
 
 const PrivacyPolicyPage: React.FC = () => {
@@ -86,6 +86,53 @@ const PrivacyPolicyPage: React.FC = () => {
                                     <li>Crash reports and error logs</li>
                                     <li>Performance metrics</li>
                                 </ul>
+
+                                {/* Section 1.5 */}
+                                <div className="flex items-center gap-3 mt-8 mb-3">
+                                    <Smartphone className="h-5 w-5 text-primary flex-shrink-0" />
+                                    <Heading level="h3" className="text-xl font-semibold">1.5 Device Permissions and Access</Heading>
+                                </div>
+                                <Text className="mb-5">
+                                    In order to provide core application functionality, the Revridge mobile application may request access to certain specialized features of your device. We only access these features with your explicit, on-device consent:
+                                </Text>
+                                <div className="space-y-4 mb-2">
+                                    {/* Camera & Photos */}
+                                    <div className="flex gap-4 p-4 rounded-lg border border-border bg-zinc-50 dark:bg-zinc-900">
+                                        <div className="p-2 rounded-md bg-primary/10 h-fit flex-shrink-0">
+                                            <Camera className="h-5 w-5 text-primary" />
+                                        </div>
+                                        <div>
+                                            <Text className="font-semibold mb-1">Camera and Photos (Storage)</Text>
+                                            <Text className="text-sm text-muted-foreground">
+                                                We request access to your device's camera and photo library exclusively to allow you to capture and upload a profile picture or to facilitate identity verification. We do not access your camera or photos in the background, and we only collect the specific images you choose to upload.
+                                            </Text>
+                                        </div>
+                                    </div>
+                                    {/* Storage */}
+                                    <div className="flex gap-4 p-4 rounded-lg border border-border bg-zinc-50 dark:bg-zinc-900">
+                                        <div className="p-2 rounded-md bg-primary/10 h-fit flex-shrink-0">
+                                            <HardDrive className="h-5 w-5 text-primary" />
+                                        </div>
+                                        <div>
+                                            <Text className="font-semibold mb-1">Storage Access</Text>
+                                            <Text className="text-sm text-muted-foreground">
+                                                We request read and write access to your device's storage to save generated files, such as financial statements or transaction receipts, directly to your device for your personal records.
+                                            </Text>
+                                        </div>
+                                    </div>
+                                    {/* Biometrics */}
+                                    <div className="flex gap-4 p-4 rounded-lg border border-border bg-zinc-50 dark:bg-zinc-900">
+                                        <div className="p-2 rounded-md bg-primary/10 h-fit flex-shrink-0">
+                                            <Fingerprint className="h-5 w-5 text-primary" />
+                                        </div>
+                                        <div>
+                                            <Text className="font-semibold mb-1">Biometric Authentication</Text>
+                                            <Text className="text-sm text-muted-foreground">
+                                                We utilize your device's native biometric hardware (such as Fingerprint or Face ID) to provide secure, frictionless login to the application. We do not collect, store, or transmit your biometric data to our servers. All biometric verification happens entirely locally on your device's secure hardware.
+                                            </Text>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             {/* Section 2 */}

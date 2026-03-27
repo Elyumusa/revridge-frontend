@@ -1,6 +1,5 @@
-import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, Heading, Text, Button } from "@/components/design-system";
-import { BookOpen, Globe, ShieldCheck, Users, Target, Rocket, TrendingUp, Zap, Heart, ArrowRight } from "lucide-react";
+import { BookOpen, Globe, ShieldCheck, Target, Rocket, TrendingUp, Zap, Heart, ArrowRight } from "lucide-react";
 import Footer from '@/components/ui/home/Footer';
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -36,7 +35,7 @@ const values = [
     },
     {
         title: "Local + Global",
-        description: "Invest in both Zambian companies (like Zambeef) and U.S. giants (like Apple). Best of both worlds.",
+        description: "Explore both Zambian companies (like Zambeef) and U.S. giants (like Apple). Learn how each market works and what makes companies grow.",
         icon: Globe,
         color: "text-orange-500",
         bg: "bg-orange-500/10"
@@ -64,11 +63,11 @@ export default function AboutPage() {
                             <span>About Revridge</span>
                         </div>
                         <Heading level="h1" className="text-4xl md:text-6xl font-black tracking-tight">
-                            Investing Made Simple <br /> for Everyone
+                            Practice First, <br /> Invest with Confidence
                         </Heading>
                         <div className="max-w-4xl mx-auto space-y-6">
                             <Text size="lg" className="text-muted-foreground md:text-xl leading-relaxed">
-                                Revridge is an investing platform designed to make stock market investing <strong className="text-foreground">simple and accessible</strong> for everyday people,
+                                Revridge is a learning and simulation platform designed to make investing <strong className="text-foreground">simple and accessible</strong> for everyday people,
                                 especially in Zambia and across Africa.
                             </Text>
 
@@ -185,7 +184,7 @@ export default function AboutPage() {
                                         </li>
                                         <li className="flex items-start gap-2">
                                             <span className="text-emerald-500 mt-1">✓</span>
-                                            <span><strong>Global access</strong> - Invest in both Zambian and U.S. companies</span>
+                                            <span><strong>Explore global markets</strong> — Browse both Zambian and U.S. companies in one app</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -272,10 +271,10 @@ export default function AboutPage() {
                     <div className="container px-4 md:px-6">
                         <div className="max-w-3xl mx-auto text-center space-y-8">
                             <Heading level="h2" className="text-3xl md:text-4xl font-bold">
-                                Ready to Start Your Investment Journey?
+                                Ready to Start Learning?
                             </Heading>
                             <Text size="lg" className="text-muted-foreground">
-                                Join thousands of Zambians learning to invest with Revridge. Download the app and start practicing today - completely free.
+                                Join thousands of Zambians learning how investing works with Revridge. Get early access and start practicing today — completely free, no real money required.
                             </Text>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                                 <NavLink to="/download">

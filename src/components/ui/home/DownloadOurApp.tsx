@@ -3,10 +3,10 @@ import { Button, Heading, Text } from '@/components/design-system';
 import { Apple, Play, CheckCircle2 } from 'lucide-react';
 
 const features = [
-    "Real-time market data at your fingertips",
+    "Real-time LuSE & U.S. market data",
+    "Simulated trading with virtual money",
     "Secure biometric login",
-    "Instant deposit and withdrawal",
-    "Portfolio tracking and analysis"
+    "Portfolio tracking & performance insights"
 ];
 
 const DownloadOurApp: React.FC = () => {
@@ -26,10 +26,10 @@ const DownloadOurApp: React.FC = () => {
                                 Mobile App
                             </div>
                             <Heading level="h2" className="text-4xl md:text-5xl font-bold tracking-tight">
-                                Invest on the go.
+                                Practice investing on the go.
                             </Heading>
                             <Text size="lg" className="text-muted-foreground">
-                                Get started with stock market investing today. Download our app and begin your financial growth journey from anywhere, anytime.
+                                Download the app and start building your investing knowledge today — no real money needed. Explore stock markets, simulate trades, and learn at your own pace from anywhere.
                             </Text>
                         </div>
 

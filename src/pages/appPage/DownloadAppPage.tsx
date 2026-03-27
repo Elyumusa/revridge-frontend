@@ -81,17 +81,17 @@ const DownloadAppPage: React.FC = () => {
                         <div className="grid lg:grid-cols-2 gap-12 items-center">
                             <div className="space-y-8 animate-fade-in-up sm:text-center lg:text-left">
                                 <Heading level="h1" className="text-4xl md:text-6xl font-black tracking-tight leading-tight">
-                                    Two Markets. <br /> <span className="text-primary">One App.</span>
+                                    Two Markets. <br /> <span className="text-primary">Learn Both.</span>
                                 </Heading>
                                 <Text size="lg" className="text-muted-foreground text-xl md:max-w-xl mx-auto lg:mx-0">
-                                    Trade U.S. stocks and track Zambian markets all in one place. Build your portfolio with fractional shares starting from just $1.
+                                    Explore U.S. and Zambian stock markets in one place. Practice trading with virtual money and build the confidence to invest for real — when you're truly ready.
                                 </Text>
                                 <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start pt-4">
                                     <Button size="lg" className="h-14 px-8 min-w-[200px]" onClick={openWaitlist} leftIcon={<Apple size={20} />}>
-                                        Download on iOS
+                                        Join Waitlist (iOS)
                                     </Button>
                                     <Button size="lg" variant="outline" className="h-14 px-8 min-w-[200px]" onClick={openWaitlist} leftIcon={<Play size={20} />}>
-                                        Get it on Android
+                                        Join Waitlist (Android)
                                     </Button>
                                 </div>
                                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
@@ -147,17 +147,17 @@ const DownloadAppPage: React.FC = () => {
                                 <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
                                     <img
                                         src="/portfolio_page.png"
-                                        alt="Portfolio view showing your investments"
+                                        alt="Portfolio view showing your simulated investments"
                                         className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                                     />
                                 </div>
                                 <div className="p-6 space-y-2">
                                     <div className="flex items-center gap-2">
                                         <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                                        <Heading level="h3" className="text-lg font-bold">Your Portfolio</Heading>
+                                        <Heading level="h3" className="text-lg font-bold">Your Simulated Portfolio</Heading>
                                     </div>
                                     <Text muted className="text-sm">
-                                        Track all your investments in one place. See real-time values, gains, and performance at a glance.
+                                        Track all your practice investments in one place. See simulated values, gains, and performance — just like the real thing.
                                     </Text>
                                 </div>
                             </div>
@@ -214,10 +214,10 @@ const DownloadAppPage: React.FC = () => {
                                 <div className="p-6 space-y-2">
                                     <div className="flex items-center gap-2">
                                         <div className="w-2 h-2 rounded-full bg-orange-500" />
-                                        <Heading level="h3" className="text-lg font-bold">Buy & Sell</Heading>
+                                        <Heading level="h3" className="text-lg font-bold">Practice Buying & Selling</Heading>
                                     </div>
                                     <Text muted className="text-sm">
-                                        Simple trading interface. Buy or sell stocks with just a few taps. Practice with virtual money first.
+                                        Simple simulation interface. Practice placing buy and sell orders with virtual money — no real funds involved, just pure learning.
                                     </Text>
                                 </div>
                             </div>
@@ -237,7 +237,7 @@ const DownloadAppPage: React.FC = () => {
                                         <Heading level="h3" className="text-lg font-bold">Watchlist</Heading>
                                     </div>
                                     <Text muted className="text-sm">
-                                        Save stocks you're interested in. Monitor price changes and get ready to invest when the time is right.
+                                        Save stocks you find interesting. Monitor price changes and understand what drives them — great preparation for when real investing launches.
                                     </Text>
                                 </div>
                             </div>
@@ -254,10 +254,10 @@ const DownloadAppPage: React.FC = () => {
                                 <div className="p-6 space-y-2">
                                     <div className="flex items-center gap-2">
                                         <div className="w-2 h-2 rounded-full bg-green-500" />
-                                        <Heading level="h3" className="text-lg font-bold">Zambian Markets</Heading>
+                                        <Heading level="h3" className="text-lg font-bold">Zambian Markets (LuSE)</Heading>
                                     </div>
                                     <Text muted className="text-sm">
-                                        Track Lusaka Securities Exchange (LuSE) stocks. Support local businesses and invest in Zambia's growth.
+                                        Browse Lusaka Securities Exchange (LuSE) stocks with real price data. Simulated LuSE trading is coming soon.
                                     </Text>
                                 </div>
                             </div>
@@ -266,10 +266,10 @@ const DownloadAppPage: React.FC = () => {
                         {/* CTA Below Gallery */}
                         <div className="text-center mt-16">
                             <Text className="text-muted-foreground mb-6">
-                                Ready to start your investment journey?
+                                Ready to start learning and practicing investing?
                             </Text>
                             <Button size="lg" onClick={openWaitlist} className="h-14 px-8">
-                                Download the App
+                                Join the Waitlist
                             </Button>
                         </div>
                     </div>
@@ -282,10 +282,10 @@ const DownloadAppPage: React.FC = () => {
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800 to-zinc-950" />
                             <div className="relative z-10 space-y-6 max-w-2xl mx-auto">
                                 <Heading level="h2" className="text-3xl md:text-4xl font-bold text-white">
-                                    Invest Globally, Africa Wins.
+                                    Learn investing. Build confidence. Africa wins.
                                 </Heading>
                                 <Text className="text-zinc-400">
-                                    Join thousands of users waiting to transform their financial future.
+                                    Join our waitlist and be among the first to learn and practice investing with Revridge — completely free, no real money involved.
                                 </Text>
                                 <div className="flex justify-center gap-4 pt-4">
                                     <Button variant="secondary" onClick={openWaitlist}>Join Waitlist</Button>

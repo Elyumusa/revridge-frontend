@@ -44,19 +44,19 @@ const Hero: React.FC<HeroProps> = ({ stayUpdatedSectionRef }) => {
                     <div className="animate-fade-in-up" style={{ animationDelay: '0ms' }}>
                         <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
                             <span className="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
-                            Invest Globally, Africa Wins
+                            Confidence Before Capital
                         </div>
                     </div>
 
                     {/* Main Headline */}
                     <div className="animate-fade-in-up space-y-4" style={{ animationDelay: '200ms' }}>
                         <Heading level="h1" className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-bold text-primary">
-                            Invest in Your Future. <br />
-                            <span className="text-muted-foreground">Locally and Globally.</span>
+                            Learn and practice investing <br />
+                            <span className="text-muted-foreground">before risking real money.</span>
                         </Heading>
 
                         <Text size="xl" className="max-w-[700px] text-muted-foreground md:text-2xl pt-4">
-                            Buy and sell stocks from the U.S. and Zambia(LUSE) right from your phone. Practice with virtual cash, learn how investing works, then trade for real when you're ready.
+                            Revridge helps beginners understand how investing works — step by step. Explore real Zambian and U.S. stock data, simulate trades with virtual money, and build the confidence to invest for real when you're ready.
                         </Text>
                     </div>
 
@@ -64,32 +64,38 @@ const Hero: React.FC<HeroProps> = ({ stayUpdatedSectionRef }) => {
                     <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
                         <NavLink to="/download">
                             <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8" rightIcon={<ArrowRight size={20} />}>
-                                Start Investing
+                                Get Early Access
                             </Button>
                         </NavLink>
 
                         <NavLink to="/about">
                             <Button variant="outline" size="lg" className="w-full sm:w-auto text-lg h-14 px-8" rightIcon={<ChevronRight size={20} />}>
-                                Learn More
+                                How It Works
                             </Button>
                         </NavLink>
                     </div>
 
-                    {/* Stats / Social Proof (Optional Addition) */}
-                    <div className="pt-12 flex items-center gap-8 text-muted-foreground animate-fade-in-up" style={{ animationDelay: '600ms' }}>
-                        <div className="flex flex-col">
-                            <span className="text-2xl font-bold text-foreground">Two Markets</span>
-                            <span className="text-sm">U.S. + Zambia</span>
+                    {/* Stats / Social Proof */}
+                    <div className="pt-12 flex flex-col gap-6 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
+                        <div className="flex items-center gap-8 text-muted-foreground">
+                            <div className="flex flex-col">
+                                <span className="text-2xl font-bold text-foreground">Two Markets</span>
+                                <span className="text-sm">U.S. + Zambia (LuSE)</span>
+                            </div>
+                            <div className="w-px h-10 bg-border"></div>
+                            <div className="flex flex-col">
+                                <span className="text-2xl font-bold text-foreground">Zero Risk</span>
+                                <span className="text-sm">Simulated trading only</span>
+                            </div>
+                            <div className="w-px h-10 bg-border"></div>
+                            <div className="flex flex-col">
+                                <span className="text-2xl font-bold text-foreground">100% Free</span>
+                                <span className="text-sm">No real money required</span>
+                            </div>
                         </div>
-                        <div className="w-px h-10 bg-border"></div>
-                        <div className="flex flex-col">
-                            <span className="text-2xl font-bold text-foreground">No Minimum</span>
-                            <span className="text-sm">Start with $1</span>
-                        </div>
-                        <div className="w-px h-10 bg-border"></div>
-                        <div className="flex flex-col">
-                            <span className="text-2xl font-bold text-foreground">Beta Access</span>
-                            <span className="text-sm">Join Early</span>
+                        <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 text-sm max-w-fit">
+                            <span className="font-semibold">ℹ️ Heads up:</span>
+                            <span>Revridge does not currently support real-money trading.</span>
                         </div>
                     </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Input, Heading, Text, Card, CardHeader, CardTitle, CardContent } from "@/components/design-system";
-import { Mail, MessageCircle, Phone, Search, ChevronDown, CheckCircle2, Send, Loader2, AlertCircle } from "lucide-react";
+import { Button, Input, Heading, Text, Card } from "@/components/design-system";
+import { Mail, MessageCircle, Phone, ChevronDown, CheckCircle2, Send, Loader2, AlertCircle } from "lucide-react";
 import Footer from '@/components/ui/home/Footer';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -9,36 +9,36 @@ import { parseApiError } from '@/utils/errorHandler';
 
 const faqs = [
     {
+        question: "What is Revridge?",
+        answer: "Revridge is a learning and simulation platform that helps beginners understand how investing works before risking real money. You can explore real stock market data, practice trades with virtual money, and build confidence at your own pace."
+    },
+    {
+        question: "Can I invest real money on Revridge?",
+        answer: "No — not yet. Revridge currently operates in simulation mode only. No real money is involved at any point. Real-money investing is a future capability we are working toward, and we'll be transparent when that changes."
+    },
+    {
+        question: "What markets are available?",
+        answer: "U.S. stocks (NYSE, NASDAQ) are available in simulation mode. Zambian stocks (Lusaka Securities Exchange / LuSE) are available as real data for browsing and analysis. Simulated LuSE trading is coming soon."
+    },
+    {
+        question: "Is this safe to use?",
+        answer: "Yes. Because no real money is involved, there is no financial risk to you. You can practice, make mistakes, and learn freely. Your account and personal data are protected with bank-level security."
+    },
+    {
         question: "What is Revridge's current status?",
-        answer: "Revridge is currently in beta testing. U.S. stock trading is conducted in a sandbox environment for testing purposes, and Zambian market access (LuSE) is view-only. We're actively gathering feedback and improving the platform before full launch."
-    },
-    {
-        question: "Can I trade Zambian stocks right now?",
-        answer: "Not yet. Currently, you can view and track Lusaka Securities Exchange (LuSE) stocks with real-time data. Full trading capabilities are coming in Q2 2026 pending regulatory approval."
-    },
-    {
-        question: "Is my money safe with Revridge?",
-        answer: "We use bank-level security measures. U.S. trades are processed through our SEC-registered broker-dealer and member FINRA/SIPC. However, all investments carry risk, and you could lose money. During beta, U.S. trading is in sandbox mode (test environment)."
-    },
-    {
-        question: "What are the fees?",
-        answer: "During beta, we offer commission-free trading on U.S. stocks. After full launch, standard commission fees will apply. There are no account minimums or monthly fees. We're committed to transparent and competitive pricing."
+        answer: "Revridge is currently in beta. The platform is a learning and simulation tool. U.S. stock simulation is live. LuSE data is available for browsing, and simulated LuSE trading is coming soon. We are actively building toward real-money investing in the future."
     },
     {
         question: "How do I get started?",
-        answer: "Join our waitlist to get early beta access. You can sign up on our Download page. We'll notify you when your account is ready, and you can start exploring the platform with demo mode before trading with real money."
-    },
-    {
-        question: "Is there a demo mode?",
-        answer: "Yes! Practice trading risk-free in demo mode before using real money. This is perfect for learning how the platform works and building your investing confidence."
+        answer: "Join our waitlist to get early beta access. Sign up on our Download page. We'll notify you when your account is ready to start exploring and practicing."
     },
     {
         question: "What support is available during beta?",
-        answer: "We provide email support with responses within 24-48 hours. You can also use in-app help and bug reporting. As we grow, we plan to add live chat during market hours and phone support."
+        answer: "We provide email support with responses within 24-48 hours. You can also contact us via WhatsApp or use in-app help. As we grow, we plan to add live chat and phone support."
     },
     {
-        question: "Can I invest from anywhere in Africa?",
-        answer: "Currently, Revridge services are available to residents of Zambia. Expansion to other African countries is planned for the future as we complete regulatory requirements in each region."
+        question: "Can I use Revridge from anywhere in Zambia?",
+        answer: "Yes, Revridge is available to residents of Zambia. Expansion to other African countries is planned for the future as we complete regulatory requirements."
     }
 ];
 
