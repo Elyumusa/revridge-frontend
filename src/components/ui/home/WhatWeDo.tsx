@@ -6,13 +6,13 @@ import { cn } from '@/lib/utils';
 const features = [
     {
         title: "U.S. Stock Simulator",
-        description: "Practice buying and selling U.S. stocks using virtual money. Real quotes, real market data — zero real money risk.",
+        description: "Practice investing safely in U.S. stocks using virtual money. Real quotes, real market data — zero real money risk.",
         icon: TrendingUp,
         color: "text-blue-500",
     },
     {
         title: "Zambian Market Data",
-        description: "Explore real Lusaka Securities Exchange (LuSE) prices and market insights. Simulated LuSE trading is coming soon.",
+        description: "Explore real Lusaka Securities Exchange (LuSE) prices and market insights. Simulated LuSE investing is coming soon.",
         icon: BarChart3,
         color: "text-green-500",
     },
@@ -54,7 +54,7 @@ const WhatWeDo: React.FC = () => {
                         What You Can Do Today
                     </Heading>
                     <Text className="max-w-[700px] text-muted-foreground md:text-xl">
-                        Explore real stock market data, practice with simulated trades, and build investing knowledge — all without spending a single kwacha.
+                        Explore real stock market data, practice with simulated investing, and build your knowledge — all without spending a single kwacha.
                     </Text>
                 </div>
 

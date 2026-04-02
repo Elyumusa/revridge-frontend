@@ -27,8 +27,8 @@ const steps = [
     },
     {
         number: "04",
-        title: "Trade for Real (Coming Soon)",
-        description: "When you're ready and we launch real trading, deposit money and start building your real investment portfolio.",
+        title: "Invest for Real (Coming Soon)",
+        description: "When you're ready and we launch real investing, deposit money and start building your real investment portfolio.",
         icon: Rocket,
         color: "from-green-500 to-emerald-500",
     },

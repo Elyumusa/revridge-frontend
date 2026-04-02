@@ -87,11 +87,13 @@ const DownloadAppPage: React.FC = () => {
                                     Explore U.S. and Zambian stock markets in one place. Practice trading with virtual money and build the confidence to invest for real — when you're truly ready.
                                 </Text>
                                 <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start pt-4">
-                                    <Button size="lg" className="h-14 px-8 min-w-[200px]" onClick={openWaitlist} leftIcon={<Apple size={20} />}>
-                                        Join Waitlist (iOS)
-                                    </Button>
-                                    <Button size="lg" variant="outline" className="h-14 px-8 min-w-[200px]" onClick={openWaitlist} leftIcon={<Play size={20} />}>
-                                        Join Waitlist (Android)
+                                    <a href="https://play.google.com/store/search?q=revridge&c=apps" target="_blank" rel="noopener noreferrer">
+                                        <Button size="lg" className="h-14 px-8 min-w-[200px]" leftIcon={<Play size={20} />}>
+                                            Download Early Beta
+                                        </Button>
+                                    </a>
+                                    <Button size="lg" variant="outline" className="h-14 px-8 min-w-[200px]" onClick={openWaitlist} leftIcon={<Apple size={20} />}>
+                                        Waitlist (iOS)
                                     </Button>
                                 </div>
                                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
@@ -266,11 +268,18 @@ const DownloadAppPage: React.FC = () => {
                         {/* CTA Below Gallery */}
                         <div className="text-center mt-16">
                             <Text className="text-muted-foreground mb-6">
-                                Ready to start learning and practicing investing?
+                                Ready to start learning and practicing investing safely?
                             </Text>
-                            <Button size="lg" onClick={openWaitlist} className="h-14 px-8">
-                                Join the Waitlist
-                            </Button>
+                            <div className="flex flex-col sm:flex-row justify-center gap-4">
+                                <a href="https://play.google.com/store/apps/details?id=com.revridge.app" target="_blank" rel="noopener noreferrer">
+                                    <Button size="lg" className="h-14 px-8 min-w-[200px]">
+                                        Download App (Android)
+                                    </Button>
+                                </a>
+                                <Button size="lg" variant="outline" onClick={openWaitlist} className="h-14 px-8 min-w-[200px]">
+                                    Join Waitlist (iOS)
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -285,10 +294,13 @@ const DownloadAppPage: React.FC = () => {
                                     Learn investing. Build confidence. Africa wins.
                                 </Heading>
                                 <Text className="text-zinc-400">
-                                    Join our waitlist and be among the first to learn and practice investing with Revridge — completely free, no real money involved.
+                                    Download the early beta on Android or join our iOS waitlist to start practicing investing safely — completely free, no real money involved.
                                 </Text>
-                                <div className="flex justify-center gap-4 pt-4">
-                                    <Button variant="secondary" onClick={openWaitlist}>Join Waitlist</Button>
+                                <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+                                    <a href="https://play.google.com/store/search?q=revridge&c=apps" target="_blank" rel="noopener noreferrer">
+                                        <Button variant="secondary" className="min-w-[200px]">Download App (Android)</Button>
+                                    </a>
+                                    <Button variant="outline" className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 min-w-[200px]" onClick={openWaitlist}>Join Waitlist (iOS)</Button>
                                 </div>
                             </div>
                         </div>
@@ -316,8 +328,8 @@ const DownloadAppPage: React.FC = () => {
                             </button>
 
                             <div className="text-center mb-6">
-                                <Heading level="h3" className="text-2xl font-bold mb-2">Join Our Beta Community</Heading>
-                                <Text muted>Get early access and help shape the future of investing in Africa.</Text>
+                                <Heading level="h3" className="text-2xl font-bold mb-2">Join iOS Waitlist</Heading>
+                                <Text muted>Get notified when Revridge is available on the App Store to start practicing.</Text>
                             </div>
 
                             {status === 'success' ? (

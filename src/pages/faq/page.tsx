@@ -49,7 +49,7 @@ const faqCategories: FAQCategory[] = [
             },
             {
                 question: "What U.S. stocks can I explore?",
-                answer: "You can explore and simulate trades for most stocks listed on major U.S. exchanges (NYSE, NASDAQ). All U.S. trading is in simulation mode — no real money is involved."
+                answer: "You can explore and simulate investing safely for most stocks listed on major U.S. exchanges (NYSE, NASDAQ). All U.S. investing features are in simulation mode — no real money is involved."
             },
             {
                 question: "What is simulation mode?",
@@ -82,11 +82,11 @@ const faqCategories: FAQCategory[] = [
             },
             {
                 question: "How do I download the app?",
-                answer: "We're currently in beta testing. Join our waitlist to get early access when we launch. You can sign up on our Download page."
+                answer: "Our Android app is currently available in early beta. iOS users can join our waitlist on the Download page to be notified when the app is ready."
             },
             {
                 question: "What is the current status of the platform?",
-                answer: "Revridge is currently in beta testing with select users. U.S. stock trading is in sandbox mode, and Zambian market access is view-only. We're actively gathering feedback and improving the platform."
+                answer: "Revridge is currently in early beta. Core simulation features for U.S. stocks are available, and Zambian market access is view-only. We're actively gathering feedback and improving the learning platform."
             },
             {
                 question: "Do I need internet to use the app?",
@@ -107,7 +107,7 @@ const faqCategories: FAQCategory[] = [
             },
             {
                 question: "Is my money safe?",
-                answer: "We use bank-level security measures. U.S. trades are processed through our trusted SEC-registered broker-dealer and member FINRA/SIPC. However, all investments carry risk, and you could lose money."
+                answer: "Since Revridge currently operates purely in simulation mode, there is zero financial risk on our platform. You cannot lose real money because no real money is deposited or invested. Your personal data and account details are protected using bank-level security."
             },
             {
                 question: "What if I forget my PIN?",

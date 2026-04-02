@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
                             <span className="text-2xl font-bold text-white tracking-tight">Revridge</span>
                         </Link>
                         <Text className="max-w-xs text-zinc-500">
-                            Empowering Africans to invest in global financial markets. Secure, accessible, and built for your future.
+                            Empowering Africans to learn how investing works and build confidence safely before using real money.
                         </Text>
                         <div className="flex gap-4">
                             <SocialLink href="https://facebook.com/revridge" icon={<Facebook size={20} />} label="Facebook" />
@@ -74,19 +74,19 @@ const Footer: React.FC = () => {
                             <Info size={14} /> Beta Status
                         </p>
                         <p className="text-zinc-400">
-                            Revridge is currently in beta testing. While we strive for reliability, you may encounter bugs or service interruptions.
-                            U.S. stock trading is conducted in a sandbox environment for testing purposes. We appreciate your patience and feedback as we build the future of investing in Africa.
+                            Revridge is currently in early beta. While we strive for reliability, you may encounter bugs or service interruptions.
+                            All investments on the platform are simulated for educational purposes. We appreciate your patience and feedback as we build the future of investing in Africa.
                         </p>
                     </div>
 
-                    {/* Regulatory Status */}
+                    {/* Educational Status */}
                     <div className="p-4 rounded-lg bg-zinc-900/50 border border-white/5">
                         <p className="font-medium text-zinc-400 mb-2 flex items-center gap-2">
-                            <Info size={14} /> Regulatory Status
+                            <Info size={14} /> Educational Platform
                         </p>
                         <p className="text-zinc-500">
-                            Revridge is working toward full regulatory licensing in Zambia. U.S. stock trading is facilitated through a SEC-registered broker-dealer and member FINRA/SIPC based in the U.S.
-                            Zambian stock market access is currently view-only, with full trading capabilities coming soon pending regulatory approval.
+                            Revridge currently operates as a learning and simulation platform. We are not a broker and do not facilitate real-money transactions at this time.
+                            Zambian and U.S. stock market data are provided for educational and simulation purposes only. Real-money investing is a future capability we are actively working toward.
                         </p>
                     </div>
 
@@ -105,7 +105,6 @@ const Footer: React.FC = () => {
                     {/* Geographic Limitations */}
                     <p className="text-zinc-600">
                         Revridge services are currently available to residents of Zambia. Expansion to other African countries is planned for the future.
-                        U.S. stock trading is also something we are actively working towards.
                     </p>
                 </div>
             </div>

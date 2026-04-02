@@ -56,7 +56,7 @@ const Hero: React.FC<HeroProps> = ({ stayUpdatedSectionRef }) => {
                         </Heading>
 
                         <Text size="xl" className="max-w-[700px] text-muted-foreground md:text-2xl pt-4">
-                            Revridge helps beginners understand how investing works — step by step. Explore real Zambian and U.S. stock data, simulate trades with virtual money, and build the confidence to invest for real when you're ready.
+                            Revridge helps beginners understand how investing works — step by step. Explore real Zambian and U.S. stock data, simulate investing safely with virtual money, and build the confidence to invest for real when you're ready.
                         </Text>
                     </div>
 

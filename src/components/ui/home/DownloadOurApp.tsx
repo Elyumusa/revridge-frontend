@@ -4,7 +4,7 @@ import { Apple, Play, CheckCircle2 } from 'lucide-react';
 
 const features = [
     "Real-time LuSE & U.S. market data",
-    "Simulated trading with virtual money",
+    "Simulated investing with virtual money",
     "Secure biometric login",
     "Portfolio tracking & performance insights"
 ];
@@ -29,7 +29,7 @@ const DownloadOurApp: React.FC = () => {
                                 Practice investing on the go.
                             </Heading>
                             <Text size="lg" className="text-muted-foreground">
-                                Download the app and start building your investing knowledge today — no real money needed. Explore stock markets, simulate trades, and learn at your own pace from anywhere.
+                                Download the app and start building your investing knowledge today — no real money needed. Explore stock markets, simulate investing, and learn at your own pace from anywhere.
                             </Text>
                         </div>
 

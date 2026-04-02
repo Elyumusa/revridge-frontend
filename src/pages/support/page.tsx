@@ -30,7 +30,7 @@ const faqs = [
     },
     {
         question: "How do I get started?",
-        answer: "Join our waitlist to get early beta access. Sign up on our Download page. We'll notify you when your account is ready to start exploring and practicing."
+        answer: "You can download our early beta Android app today via our Download page. If you're on iOS, join our waitlist and we'll notify you when it's ready."
     },
     {
         question: "What support is available during beta?",
