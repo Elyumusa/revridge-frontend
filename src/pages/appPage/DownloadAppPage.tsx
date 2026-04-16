@@ -87,7 +87,7 @@ const DownloadAppPage: React.FC = () => {
                                     Explore U.S. and Zambian stock markets in one place. Practice trading with virtual money and build the confidence to invest for real — when you're truly ready.
                                 </Text>
                                 <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start pt-4">
-                                    <a href="https://play.google.com/store/search?q=revridge&c=apps" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://play.google.com/apps/testing/com.revridge.app" target="_blank" rel="noopener noreferrer">
                                         <Button size="lg" className="h-14 px-8 min-w-[200px]" leftIcon={<Play size={20} />}>
                                             Download Early Beta
                                         </Button>
@@ -271,7 +271,7 @@ const DownloadAppPage: React.FC = () => {
                                 Ready to start learning and practicing investing safely?
                             </Text>
                             <div className="flex flex-col sm:flex-row justify-center gap-4">
-                                <a href="https://play.google.com/store/apps/details?id=com.revridge.app" target="_blank" rel="noopener noreferrer">
+                                <a href="https://play.google.com/apps/testing/com.revridge.app" target="_blank" rel="noopener noreferrer">
                                     <Button size="lg" className="h-14 px-8 min-w-[200px]">
                                         Download App (Android)
                                     </Button>
@@ -297,7 +297,7 @@ const DownloadAppPage: React.FC = () => {
                                     Download the early beta on Android or join our iOS waitlist to start practicing investing safely — completely free, no real money involved.
                                 </Text>
                                 <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-                                    <a href="https://play.google.com/store/search?q=revridge&c=apps" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://play.google.com/apps/testing/com.revridge.app" target="_blank" rel="noopener noreferrer">
                                         <Button variant="secondary" className="min-w-[200px]">Download App (Android)</Button>
                                     </a>
                                     <Button variant="outline" className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 min-w-[200px]" onClick={openWaitlist}>Join Waitlist (iOS)</Button>

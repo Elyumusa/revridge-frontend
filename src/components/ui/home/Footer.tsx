@@ -85,7 +85,7 @@ const Footer: React.FC = () => {
                             <Info size={14} /> Educational Platform
                         </p>
                         <p className="text-zinc-500">
-                            Revridge currently operates as a learning and simulation platform. We are not a broker and do not facilitate real-money transactions at this time.
+                            Revridge currently operates as a learning and simulation platform. We are not a broker(yet) and do not facilitate real-money transactions at this time.
                             Zambian and U.S. stock market data are provided for educational and simulation purposes only. Real-money investing is a future capability we are actively working toward.
                         </p>
                     </div>
@@ -105,6 +105,7 @@ const Footer: React.FC = () => {
                     {/* Geographic Limitations */}
                     <p className="text-zinc-600">
                         Revridge services are currently available to residents of Zambia. Expansion to other African countries is planned for the future.
+                        U.S. stock trading is also something we are actively working towards.
                     </p>
                 </div>
             </div>
