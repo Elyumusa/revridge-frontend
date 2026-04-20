@@ -62,6 +62,7 @@ export default function InvestmentCalculator() {
   const [finalAmount, setFinalAmount] = useState(100);
   const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState<CalculationResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   // Chart data state
   const [chartData, setChartData] = useState<{ name: string, value: number }[]>([]);
@@ -73,9 +74,7 @@ export default function InvestmentCalculator() {
 
   // Recalculate when investment amount changes (local only, no API call needed if data exists)
   useEffect(() => {
-    console.log('⚡ useEffect triggered! investmentAmount:', investmentAmount);
     if (apiData) {
-      // Always calculate based on current amount and price data
       const latest = parseFloat(apiData.latest_price);
       const old = parseFloat(apiData.old_price);
       const split = typeof apiData.split === 'number' ? apiData.split : parseFloat(apiData.split as string) || 1;
@@ -86,11 +85,8 @@ export default function InvestmentCalculator() {
 
       const percIncrease = ((newAmount - investmentAmount) / investmentAmount) * 100;
 
-      console.log('✅ Calculated:', { investmentAmount, newAmount, percIncrease: percIncrease.toFixed(2) + '%' });
-
       setFinalAmount(newAmount);
       setPercentageGain(percIncrease);
-      console.log('🎨 Display updated to:', formatCurrency(newAmount));
 
       // Generate chart data
       const points = [];
@@ -105,6 +101,7 @@ export default function InvestmentCalculator() {
 
   const fetchReturns = async () => {
     setLoading(true);
+    setError(null);
     const selectedDate = new Date();
     const year = selectedDate.getFullYear();
     const newYear = year - selectedTimeFrame;
@@ -114,33 +111,27 @@ export default function InvestmentCalculator() {
     const apiUrl = `${mainURL}/api/investment_calculator/?start=${selectedDate.toLocaleDateString('en-CA')}&symbol=${selectedCompany.id}&amount=${investmentAmount}`;
 
     try {
-      // For development/demo without backend, mock the data if fetch fails
-      // or if we know backend might not be ready.
-      // But we will try to fetch first.
-
       const result = await axios.get(apiUrl);
       const data = result.data;
-
-      // Debug logging
-      console.log('API Response:', data);
-      console.log('Investment Amount:', investmentAmount);
 
       setApiData(data);
       calculateAndSetValues(investmentAmount, data);
 
     } catch (error) {
       console.error("Error fetching data:", error);
-      if (axios.isAxiosError(error)) {
-        console.error("API Error Details:", error.response?.data);
+      
+      if (axios.isAxiosError(error) && error.response?.status === 429) {
+        setError("Market throughput limit reached. Please wait a moment before your next calculation.");
+        // When throttled, we don't fall back to mock data to keep the UI honest
+        return;
       }
 
-      // Fallback mock data for demo purposes (so UI doesn't break)
+      // Fallback mock data only for other errors (network/server down)
       const mockData = {
         split: 1,
         latest_price: (Math.random() * 200 + 100).toString(),
         old_price: (Math.random() * 100 + 50).toString()
       };
-      console.log('Using mock data:', mockData);
       setApiData(mockData);
       calculateAndSetValues(investmentAmount, mockData);
     } finally {
@@ -321,7 +312,18 @@ export default function InvestmentCalculator() {
               <div className="relative z-10 flex flex-col h-full justify-between gap-8">
 
                 {/* Header Result */}
-                <div className="space-y-2">
+                <div className="space-y-4">
+                  {error && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg"
+                    >
+                      <Text className="text-red-600 dark:text-red-400 text-sm font-medium">
+                        {error}
+                      </Text>
+                    </motion.div>
+                  )}
                   <Text className="text-muted-foreground text-lg">Your {selectedTimeFrame} year investment would be worth</Text>
                   <div className="flex flex-wrap items-baseline gap-4">
                     {loading ? (
@@ -358,8 +360,8 @@ export default function InvestmentCalculator() {
                       <YAxis hide domain={['dataMin', 'auto']} />
                       <Tooltip
                         contentStyle={{ backgroundColor: 'var(--background)', borderRadius: '8px', border: '1px solid var(--border)' }}
-                        formatter={(value: number) => [formatCurrency(value || 0), 'Value']}
-                        labelStyle={{ display: 'none' }}
+                        formatter={(value: any) => [formatCurrency(Number(value) || 0), 'Value']}
+                        labelClassName="hidden"
                       />
                       <Area
                         type="monotone"
