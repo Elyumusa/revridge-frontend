@@ -1,123 +1,150 @@
 import React from 'react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../components/ui/accordion"
-import { AlertCircle, FileText, ShieldCheck } from "lucide-react"
+import { Link } from 'react-router-dom';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../components/ui/accordion";
+import { AlertCircle, FileText, ShieldCheck, Info, Scale, Lock, ShieldAlert } from "lucide-react";
 import Footer from '@/components/ui/home/Footer';
 
 export default function CompliancePage() {
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* <header className="px-4 lg:px-6 h-14 flex items-center">
-        <a className="flex items-center justify-center" href="/">
-          <ShieldCheck className="h-6 w-6" />
-          <span className="ml-2 text-2xl font-bold">Revridge Compliance</span>
-        </a>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <a className="text-sm font-medium hover:underline underline-offset-4" href="/">
-            Home
-          </a>
-          <a className="text-sm font-medium hover:underline underline-offset-4" href="/about">
-            About
-          </a>
-          <a className="text-sm font-medium hover:underline underline-offset-4" href="/support">
-            Support
-          </a>
-        </nav>
-      </header> */}
+    <div className="flex flex-col min-h-screen bg-background">
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32">
+        {/* Hero Section */}
+        <section className="w-full py-12 md:py-24 lg:py-32 border-b">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Compliance and Regulations</h1>
-                <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                  Revridge is committed to maintaining the highest standards of compliance with all applicable laws and regulations.
+                <div className="inline-flex items-center rounded-lg bg-muted px-3 py-1 text-sm font-medium">
+                  <ShieldCheck className="mr-1 h-4 w-4 text-primary" />
+                  Compliance & Transparency
+                </div>
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+                  Building Trust Through Clarity
+                </h1>
+                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Revridge is committed to building a trustworthy and transparent platform for financial education and simulated investing.
                 </p>
               </div>
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-2xl font-bold mb-4">Our Compliance Framework</h2>
-            <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="item-1">
-                <AccordionTrigger>Anti-Money Laundering (AML) Policy</AccordionTrigger>
-                <AccordionContent>
-                  Our AML policy is designed to prevent and detect money laundering activities. We conduct thorough customer due diligence, monitor transactions, and report suspicious activities to the relevant authorities.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>Know Your Customer (KYC) Procedures</AccordionTrigger>
-                <AccordionContent>
-                  We implement robust KYC procedures to verify the identity of our clients and assess their risk profiles. This helps us maintain the integrity of our platform and comply with regulatory requirements.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>Data Protection and Privacy</AccordionTrigger>
-                <AccordionContent>
-                  We adhere to strict data protection regulations, including GDPR and CCPA. Our privacy policy outlines how we collect, use, and protect your personal information.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-4">
-                <AccordionTrigger>Securities Regulations</AccordionTrigger>
-                <AccordionContent>
-                  Revridge complies with all applicable securities laws and regulations, including those set by the SEC and FINRA. We maintain necessary licenses and registrations to operate as a financial services provider.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        </section>
+
+        {/* Status & Position */}
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
-            <h2 className="text-2xl font-bold mb-4">Regulatory Disclosures</h2>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <AlertCircle className="w-4 h-4 text-yellow-500" />
-                <span>
-                  Investment involves risk. Past performance is not indicative of future results.
-                </span>
+            <div className="grid gap-12 lg:grid-cols-2">
+              <div className="space-y-6">
+                <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                  <Info className="mr-1 h-3 w-3" />
+                  Current Status
+                </div>
+                <h2 className="text-3xl font-bold">Education First</h2>
+                <div className="space-y-4 text-muted-foreground text-lg">
+                  <p>
+                    Revridge is a financial education and virtual trading platform.
+                  </p>
+                  <p className="font-medium text-foreground">
+                    We do not currently facilitate real-money trading, brokerage services, or investment execution.
+                  </p>
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <AlertCircle className="w-4 h-4 text-yellow-500" />
-                <span>
-                  Revridge is registered with the Securities and Exchange Commission (SEC) as a broker-dealer.
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <AlertCircle className="w-4 h-4 text-yellow-500" />
-                <span>
-                  We are a member of the Financial Industry Regulatory Authority (FINRA) and Securities Investor Protection Corporation (SIPC).
-                </span>
+              <div className="space-y-6">
+                <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                  <Scale className="mr-1 h-3 w-3" />
+                  Regulatory Position
+                </div>
+                <h3 className="text-3xl font-bold">Regulatory Transparency</h3>
+                <div className="space-y-4 text-muted-foreground text-lg">
+                  <p>
+                    Because Revridge operates as a simulation platform, it is not currently registered as a broker-dealer or investment advisor with regulatory authorities.
+                  </p>
+                  <p>
+                    We are actively exploring the regulatory and licensing requirements needed to support real-money investing features in the future.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
+
+        {/* Commitment & Protection */}
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-slate-50 dark:bg-slate-900">
           <div className="container px-4 md:px-6">
-            <h2 className="text-2xl font-bold mb-4">Compliance Documents</h2>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4" />
-                <a href="#" className="hover:underline">
-                  Privacy Policy
-                </a>
+            <div className="grid gap-12 lg:grid-cols-2">
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold">Our Commitment</h2>
+                <p className="text-muted-foreground">
+                  As we grow, we are committed to aligning with applicable regulations, including:
+                </p>
+                <div className="grid gap-4">
+                  {[
+                    { title: "User identity verification standards (KYC)", icon: ShieldCheck },
+                    { title: "Anti-money laundering practices (AML)", icon: Scale },
+                    { title: "Data protection and privacy laws", icon: Lock },
+                    { title: "Financial market regulations where applicable", icon: FileText }
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3 p-4 bg-background rounded-xl border shadow-sm">
+                      <item.icon className="h-5 w-5 text-primary" />
+                      <span className="font-medium">{item.title}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4" />
-                <a href="#" className="hover:underline">
-                  Terms of Service
-                </a>
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold">User Protection</h2>
+                <div className="space-y-4">
+                  {[
+                    "All trading within Revridge is virtual and risk-free",
+                    "No real funds are deposited, invested, or held",
+                    "Market data may be delayed or provided by third-party sources"
+                  ].map((text, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <div className="mt-1 h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                        <div className="h-2 w-2 rounded-full bg-primary" />
+                      </div>
+                      <span className="text-lg text-muted-foreground">{text}</span>
+                    </div>
+                  ))}
+                  <div id="risk-disclosure" className="mt-6 p-6 rounded-2xl bg-yellow-50 border border-yellow-200 dark:bg-yellow-950/20 dark:border-yellow-900/50">
+                    <div className="flex items-center gap-2 mb-2 text-yellow-800 dark:text-yellow-400">
+                      <ShieldAlert className="h-5 w-5" />
+                      <span className="font-bold uppercase tracking-wider text-xs">Risk Disclosure</span>
+                    </div>
+                    <p className="text-yellow-900 dark:text-yellow-200 font-medium">
+                      Investing involves risk. Past performance does not guarantee future results.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4" />
-                <a href="#" className="hover:underline">
-                  Risk Disclosure Statement
-                </a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4" />
-                <a href="#" className="hover:underline">
-                  Code of Ethics
+            </div>
+          </div>
+        </section>
+
+        {/* Documents */}
+        <section className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
+            <div className="max-w-3xl mx-auto text-center space-y-8">
+              <h2 className="text-3xl font-bold">Policies & Documents</h2>
+              <div className="grid gap-4 sm:grid-cols-3">
+                <Link 
+                  to="/privacy"
+                  className="flex flex-col items-center gap-3 p-6 rounded-2xl border bg-background hover:bg-muted transition-colors group"
+                >
+                  <FileText className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <span className="font-bold">Privacy Policy</span>
+                </Link>
+                <Link 
+                  to="/terms"
+                  className="flex flex-col items-center gap-3 p-6 rounded-2xl border bg-background hover:bg-muted transition-colors group"
+                >
+                  <FileText className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <span className="font-bold">Terms of Service</span>
+                </Link>
+                <a 
+                  href="#risk-disclosure"
+                  className="flex flex-col items-center gap-3 p-6 rounded-2xl border bg-background hover:bg-muted transition-colors group"
+                >
+                  <FileText className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <span className="font-bold">Risk Disclosure</span>
                 </a>
               </div>
             </div>
@@ -126,148 +153,5 @@ export default function CompliancePage() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
-
-
-
-/*import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { AlertCircle, FileText, ShieldCheck } from "lucide-react"
-
-export default function CompliancePage() {
-  return (
-    <div className="flex flex-col min-h-screen">
-      <header className="px-4 lg:px-6 h-14 flex items-center">
-        <a className="flex items-center justify-center" href="/">
-          <ShieldCheck className="h-6 w-6" />
-          <span className="ml-2 text-2xl font-bold">Revridge Compliance</span>
-        </a>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <a className="text-sm font-medium hover:underline underline-offset-4" href="/">
-            Home
-          </a>
-          <a className="text-sm font-medium hover:underline underline-offset-4" href="/about">
-            About
-          </a>
-          <a className="text-sm font-medium hover:underline underline-offset-4" href="/support">
-            Support
-          </a>
-        </nav>
-      </header>
-      <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Compliance and Regulations</h1>
-                <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                  Revridge is committed to maintaining the highest standards of compliance with all applicable laws and regulations.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-2xl font-bold mb-4">Our Compliance Framework</h2>
-            <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="item-1">
-                <AccordionTrigger>Anti-Money Laundering (AML) Policy</AccordionTrigger>
-                <AccordionContent>
-                  Our AML policy is designed to prevent and detect money laundering activities. We conduct thorough customer due diligence, monitor transactions, and report suspicious activities to the relevant authorities.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>Know Your Customer (KYC) Procedures</AccordionTrigger>
-                <AccordionContent>
-                  We implement robust KYC procedures to verify the identity of our clients and assess their risk profiles. This helps us maintain the integrity of our platform and comply with regulatory requirements.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>Data Protection and Privacy</AccordionTrigger>
-                <AccordionContent>
-                  We adhere to strict data protection regulations, including GDPR and CCPA. Our privacy policy outlines how we collect, use, and protect your personal information.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-4">
-                <AccordionTrigger>Securities Regulations</AccordionTrigger>
-                <AccordionContent>
-                  Revridge complies with all applicable securities laws and regulations, including those set by the SEC and FINRA. We maintain necessary licenses and registrations to operate as a financial services provider.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        </section>
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-2xl font-bold mb-4">Regulatory Disclosures</h2>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <AlertCircle className="w-4 h-4 text-yellow-500" />
-                <span>
-                  Investment involves risk. Past performance is not indicative of future results.
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <AlertCircle className="w-4 h-4 text-yellow-500" />
-                <span>
-                  Revridge is registered with the Securities and Exchange Commission (SEC) as a broker-dealer.
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <AlertCircle className="w-4 h-4 text-yellow-500" />
-                <span>
-                  We are a member of the Financial Industry Regulatory Authority (FINRA) and Securities Investor Protection Corporation (SIPC).
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-2xl font-bold mb-4">Compliance Documents</h2>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4" />
-                <a href="#" className="hover:underline">
-                  Privacy Policy
-                </a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4" />
-                <a href="#" className="hover:underline">
-                  Terms of Service
-                </a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4" />
-                <a href="#" className="hover:underline">
-                  Risk Disclosure Statement
-                </a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4" />
-                <a href="#" className="hover:underline">
-                  Code of Ethics
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          © 2024 Revridge Inc. All rights reserved.
-        </p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <a className="text-xs hover:underline underline-offset-4" href="#">
-            Terms of Service
-          </a>
-          <a className="text-xs hover:underline underline-offset-4" href="#">
-            Privacy
-          </a>
-        </nav>
-      </footer>
-    </div>
-  )
-}*/

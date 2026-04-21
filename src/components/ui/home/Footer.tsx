@@ -55,6 +55,7 @@ const Footer: React.FC = () => {
                             <FooterLink to="/terms">Terms of Service</FooterLink>
                             <FooterLink to="/privacy">Privacy Policy</FooterLink>
                             <FooterLink to="/compliance">Compliance</FooterLink>
+                            <FooterLink to="/compliance#risk-disclosure">Risk Disclosure</FooterLink>
                         </ul>
                     </div>
                 </div>
