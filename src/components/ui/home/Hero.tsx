@@ -44,19 +44,19 @@ const Hero: React.FC<HeroProps> = ({ stayUpdatedSectionRef }) => {
                     <div className="animate-fade-in-up" style={{ animationDelay: '0ms' }}>
                         <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
                             <span className="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
-                            Confidence Before Capital
+                            Investing on the LuSE — Launching Soon
                         </div>
                     </div>
 
                     {/* Main Headline */}
                     <div className="animate-fade-in-up space-y-4" style={{ animationDelay: '200ms' }}>
                         <Heading level="h1" className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-bold text-primary">
-                            Learn and practice investing <br />
-                            <span className="text-muted-foreground">before risking real money.</span>
+                            Invest on the Lusaka Stock Exchange <br />
+                            <span className="text-muted-foreground">through licensed brokers.</span>
                         </Heading>
 
                         <Text size="xl" className="max-w-[700px] text-muted-foreground md:text-2xl pt-4">
-                            Revridge helps beginners understand how investing works — step by step. Explore real Zambian and U.S. stock data, simulate investing safely with virtual money, and build the confidence to invest for real when you're ready.
+                            Revridge is your digital front door to the Lusaka Securities Exchange (LuSE). Place buy and sell orders, watch them move from submitted to executed, and build a portfolio — while you learn. U.S. stocks stay in a free practice sandbox.
                         </Text>
                     </div>
 
@@ -70,7 +70,7 @@ const Hero: React.FC<HeroProps> = ({ stayUpdatedSectionRef }) => {
 
                         <NavLink to="/about">
                             <Button variant="outline" size="lg" className="w-full sm:w-auto text-lg h-14 px-8" rightIcon={<ChevronRight size={20} />}>
-                                How It Works
+                                Learn How It Works
                             </Button>
                         </NavLink>
                     </div>
@@ -79,23 +79,23 @@ const Hero: React.FC<HeroProps> = ({ stayUpdatedSectionRef }) => {
                     <div className="pt-12 flex flex-col gap-6 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
                         <div className="flex items-center gap-8 text-muted-foreground">
                             <div className="flex flex-col">
-                                <span className="text-2xl font-bold text-foreground">Two Markets</span>
-                                <span className="text-sm">U.S. + Zambia (LuSE)</span>
+                                <span className="text-2xl font-bold text-foreground">LuSE Investing</span>
+                                <span className="text-sm">Licensed brokers execute</span>
                             </div>
                             <div className="w-px h-10 bg-border"></div>
                             <div className="flex flex-col">
-                                <span className="text-2xl font-bold text-foreground">Zero Risk</span>
-                                <span className="text-sm">Simulated trading only</span>
+                                <span className="text-2xl font-bold text-foreground">Full Transparency</span>
+                                <span className="text-sm">Track every order stage</span>
                             </div>
                             <div className="w-px h-10 bg-border"></div>
                             <div className="flex flex-col">
-                                <span className="text-2xl font-bold text-foreground">100% Free</span>
-                                <span className="text-sm">No real money required</span>
+                                <span className="text-2xl font-bold text-foreground">Free U.S. Sandbox</span>
+                                <span className="text-sm">Practice with virtual money</span>
                             </div>
                         </div>
-                        <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 text-sm max-w-fit">
-                            <span className="font-semibold">ℹ️ Heads up:</span>
-                            <span>Revridge does not currently support real-money trading.</span>
+                        <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm max-w-fit">
+                            <span className="font-semibold">ℹ️ How it works:</span>
+                            <span>Revridge facilitates your orders; a licensed broker executes them on the LuSE.</span>
                         </div>
                     </div>
 

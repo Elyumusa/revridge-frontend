@@ -21,7 +21,7 @@ export default function CompliancePage() {
                   Building Trust Through Clarity
                 </h1>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Revridge is committed to building a trustworthy and transparent platform for financial education and simulated investing.
+                  Revridge is committed to building a trustworthy and transparent platform for investing on the Lusaka Securities Exchange (LuSE), alongside free investment education.
                 </p>
               </div>
             </div>
@@ -37,13 +37,13 @@ export default function CompliancePage() {
                   <Info className="mr-1 h-3 w-3" />
                   Current Status
                 </div>
-                <h2 className="text-3xl font-bold">Education First</h2>
+                <h2 className="text-3xl font-bold">A Broker Integration Layer</h2>
                 <div className="space-y-4 text-muted-foreground text-lg">
                   <p>
-                    Revridge is a financial education and virtual trading platform.
+                    Revridge is an investing platform and order-routing service. We enable users to place real investment orders on the Lusaka Securities Exchange (LuSE), which are then executed by licensed third-party brokers.
                   </p>
                   <p className="font-medium text-foreground">
-                    We do not currently facilitate real-money trading, brokerage services, or investment execution.
+                    Revridge is not a broker-dealer. We do not execute trades, settle transactions, or hold client funds or securities. U.S. stock features remain a free, simulated practice sandbox.
                   </p>
                 </div>
               </div>
@@ -55,10 +55,10 @@ export default function CompliancePage() {
                 <h3 className="text-3xl font-bold">Regulatory Transparency</h3>
                 <div className="space-y-4 text-muted-foreground text-lg">
                   <p>
-                    Because Revridge operates as a simulation platform, it is not currently registered as a broker-dealer or investment advisor with regulatory authorities.
+                    Revridge is not registered as a broker-dealer or investment advisor. Real trades on the LuSE are executed, settled, and custodied by licensed third-party brokers, who are responsible for regulatory compliance on the trades they process.
                   </p>
                   <p>
-                    We are actively exploring the regulatory and licensing requirements needed to support real-money investing features in the future.
+                    We are working with licensed broker partners to facilitate order execution, and continue to align our platform with applicable Zambian capital market regulations.
                   </p>
                 </div>
               </div>
@@ -93,8 +93,8 @@ export default function CompliancePage() {
                 <h2 className="text-3xl font-bold">User Protection</h2>
                 <div className="space-y-4">
                   {[
-                    "All trading within Revridge is virtual and risk-free",
-                    "No real funds are deposited, invested, or held",
+                    "Real LuSE trades are executed and held by licensed brokers — not by Revridge",
+                    "U.S. stock features are fully simulated for practice and education",
                     "Market data may be delayed or provided by third-party sources"
                   ].map((text, i) => (
                     <div key={i} className="flex items-start gap-3">

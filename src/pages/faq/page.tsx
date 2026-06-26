@@ -20,19 +20,19 @@ const faqCategories: FAQCategory[] = [
         faqs: [
             {
                 question: "What is Revridge?",
-                answer: "Revridge is a learning and simulation platform that helps beginners understand how investing works. You can explore real stock market data, practice trades with virtual money, and build investing confidence — all without any real money involved."
+                answer: "Revridge is an investing platform and your digital front door to the Lusaka Securities Exchange (LuSE). You place real buy and sell orders on LuSE stocks, a licensed broker executes them on your behalf, and you track every stage from submitted to executed. U.S. stocks are available in a free practice sandbox."
             },
             {
                 question: "Can I invest real money on Revridge?",
-                answer: "No — not yet. Revridge currently operates in simulation mode only. No real money changes hands at any point. Real-money investing is a future capability we're actively building toward."
+                answer: "Yes. You can place real buy and sell orders on LuSE stocks through Revridge; a licensed broker executes them on your behalf. Investing on the LuSE is launching soon — join the waitlist to be notified. U.S. stocks remain a free, simulated practice sandbox."
             },
             {
-                question: "Is Revridge a bank?",
-                answer: "No, Revridge is not a bank. It's a learning and simulation platform designed to help you understand investing before you commit real money."
+                question: "Is Revridge a bank or a broker?",
+                answer: "No. Revridge is neither a bank nor a broker-dealer. It's an investing platform and order-routing service. Real trades on the LuSE are executed, settled, and custodied by licensed third-party brokers. U.S. stock features are simulated for education."
             },
             {
                 question: "Is this safe to use?",
-                answer: "Yes. Because no real money is involved in simulation mode, there is zero financial risk. You're free to practice, make mistakes, and learn. Your account data is protected using bank-level security."
+                answer: "Yes. Your real orders go to licensed brokers who handle execution, settlement, and custody of your securities. Your account data is protected with bank-level security, and you can see the status of every order at every stage."
             },
             {
                 question: "Who can use Revridge?",
@@ -41,31 +41,31 @@ const faqCategories: FAQCategory[] = [
         ]
     },
     {
-        title: "Markets & Simulation",
+        title: "Markets & Investing",
         faqs: [
             {
-                question: "Can I trade Zambian stocks?",
-                answer: "Not yet. You can currently browse and explore Lusaka Securities Exchange (LuSE) stocks with real price data. Simulated LuSE trading is coming soon."
+                question: "Can I invest in Zambian stocks?",
+                answer: "Yes. You can place real buy and sell orders on Lusaka Securities Exchange (LuSE) stocks through Revridge, routed to a licensed broker for execution. Investing on the LuSE is launching soon."
+            },
+            {
+                question: "How does execution work?",
+                answer: "When you place an order, Revridge captures your order intent and routes it to a licensed broker. The broker executes it on the LuSE and returns the fill — price, time, and any fees. You track the whole lifecycle live: Submitted → Sent to broker → Executed. Your portfolio updates from broker-confirmed executions, not estimates."
             },
             {
                 question: "What U.S. stocks can I explore?",
-                answer: "You can explore and simulate investing safely for most stocks listed on major U.S. exchanges (NYSE, NASDAQ). All U.S. investing features are in simulation mode — no real money is involved."
+                answer: "You can explore and practice investing in most stocks listed on major U.S. exchanges (NYSE, NASDAQ) in a free virtual sandbox. All U.S. features are simulated — no real money is involved."
             },
             {
                 question: "What is simulation mode?",
-                answer: "Simulation mode lets you practice buying and selling stocks using virtual money. It's completely risk-free — there's no real money involved. It's designed to help you learn how markets work and build confidence before eventually investing for real."
+                answer: "Simulation (sandbox) mode lets you practice buying and selling U.S. stocks using virtual money. It's completely risk-free — there's no real money involved — and it's designed to help you learn how markets work. It applies only to U.S. stocks; LuSE investing is real."
             },
             {
                 question: "What are the fees?",
-                answer: "Revridge is currently free to use in simulation mode. No fees, no deposits, no financial risk. When real-money investing launches in the future, fee details will be shared clearly and in advance."
-            },
-            {
-                question: "When will real-money investing be available?",
-                answer: "We're actively working toward launching real-money investing in the future. We'll notify users on our waitlist when this becomes available. For now, we're focused on making the learning and simulation experience excellent."
+                answer: "U.S. stock simulation is free to use. For investing on the LuSE, broker execution fees and any applicable charges will be shown clearly before you place an order, and detailed fee information will be shared in advance of launch."
             },
             {
                 question: "What are fractional shares?",
-                answer: "Fractional shares allow you to buy a portion of a stock rather than a whole share. For example, if a stock costs $1,000 per share, you could invest $10 and own 1% of a share. This makes expensive stocks more accessible — a concept you can explore in simulation today."
+                answer: "Fractional shares allow you to buy a portion of a stock rather than a whole share. For example, if a stock costs ZMW 1,000 per share, you could invest a smaller amount and own a fraction of a share. This makes expensive stocks more accessible — a concept you can explore today in the U.S. sandbox."
             }
         ]
     },
@@ -78,7 +78,7 @@ const faqCategories: FAQCategory[] = [
             },
             {
                 question: "Is there a demo mode?",
-                answer: "Yes! Practice trading risk-free in demo mode before using real money. This is perfect for learning how the platform works and building your investing confidence."
+                answer: "Yes! You can practice trading U.S. stocks risk-free in a virtual sandbox before (or alongside) placing real LuSE orders. It's perfect for learning how markets work and building your investing confidence."
             },
             {
                 question: "How do I download the app?",
@@ -86,7 +86,7 @@ const faqCategories: FAQCategory[] = [
             },
             {
                 question: "What is the current status of the platform?",
-                answer: "Revridge is currently in early beta. Core simulation features for U.S. stocks are available, and Zambian market access is view-only. We're actively gathering feedback and improving the learning platform."
+                answer: "Revridge is in early beta. U.S. stock simulation is available today, and investing on the LuSE through licensed brokers is launching soon. We're actively gathering feedback and improving the platform."
             },
             {
                 question: "Do I need internet to use the app?",
@@ -107,7 +107,7 @@ const faqCategories: FAQCategory[] = [
             },
             {
                 question: "Is my money safe?",
-                answer: "Since Revridge currently operates purely in simulation mode, there is zero financial risk on our platform. You cannot lose real money because no real money is deposited or invested. Your personal data and account details are protected using bank-level security."
+                answer: "Your real LuSE orders are executed and held by licensed brokers, who are responsible for execution, settlement, and custody — Revridge does not hold client funds or securities. Your personal data and account details are protected with bank-level security, and you can track the status of every order in real time. U.S. stock features are simulated, so no real money is at risk there."
             },
             {
                 question: "What if I forget my PIN?",

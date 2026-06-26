@@ -10,23 +10,23 @@ import { parseApiError } from '@/utils/errorHandler';
 const faqs = [
     {
         question: "What is Revridge?",
-        answer: "Revridge is a learning and simulation platform that helps beginners understand how investing works before risking real money. You can explore real stock market data, practice trades with virtual money, and build confidence at your own pace."
+        answer: "Revridge is an investing platform and your digital front door to the Lusaka Securities Exchange (LuSE). You place buy and sell orders on LuSE stocks, a licensed broker executes them on your behalf, and you track every stage along the way. U.S. stocks are available in a free practice sandbox."
     },
     {
-        question: "Can I invest real money on Revridge?",
-        answer: "No — not yet. Revridge currently operates in simulation mode only. No real money is involved at any point. Real-money investing is a future capability we are working toward, and we'll be transparent when that changes."
+        question: "Can I invest on Revridge?",
+        answer: "Yes. You can place buy and sell orders on LuSE stocks through Revridge, routed to a licensed broker for execution. LuSE investing is launching soon — join the waitlist to be notified. U.S. stocks remain a free practice sandbox."
     },
     {
         question: "What markets are available?",
-        answer: "U.S. stocks (NYSE, NASDAQ) are available in simulation mode. Zambian stocks (Lusaka Securities Exchange / LuSE) are available as real data for browsing and analysis. Simulated LuSE trading is coming soon."
+        answer: "Zambian stocks (Lusaka Securities Exchange / LuSE) for investing, and U.S. stocks (NYSE, NASDAQ) for practice in a free virtual sandbox. Investing on the LuSE is launching soon."
     },
     {
         question: "Is this safe to use?",
-        answer: "Yes. Because no real money is involved, there is no financial risk to you. You can practice, make mistakes, and learn freely. Your account and personal data are protected with bank-level security."
+        answer: "Yes. Your LuSE orders go to licensed brokers who handle execution, settlement, and custody of your securities — Revridge does not hold your funds or securities. Your account and personal data are protected with bank-level security, and you can track the status of every order."
     },
     {
         question: "What is Revridge's current status?",
-        answer: "Revridge is currently in beta. The platform is a learning and simulation tool. U.S. stock simulation is live. LuSE data is available for browsing, and simulated LuSE trading is coming soon. We are actively building toward real-money investing in the future."
+        answer: "Revridge is in beta. U.S. stock practice is available today, and investing on the LuSE through licensed brokers is launching soon. We are actively gathering feedback and improving the platform."
     },
     {
         question: "How do I get started?",

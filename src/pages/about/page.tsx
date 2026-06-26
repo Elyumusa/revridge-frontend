@@ -14,28 +14,28 @@ const values = [
     },
     {
         title: "Learn as You Go",
-        description: "Practice with virtual money first. We teach you how investing works before you risk real cash.",
+        description: "Investing education runs alongside investing, not before it. Plain-language lessons you can apply the moment you place an order.",
         icon: BookOpen,
         color: "text-purple-500",
         bg: "bg-purple-500/10"
     },
     {
         title: "Start Small",
-        description: "You don't need thousands to invest. Start with a small amount and grow your portfolio over time.",
+        description: "You don't need thousands to invest. Place an order with an amount you're comfortable with and grow your portfolio over time.",
         icon: TrendingUp,
         color: "text-emerald-500",
         bg: "bg-emerald-500/10"
     },
     {
         title: "Safe & Secure",
-        description: "Bank-level security protects your money and personal information. Your data is encrypted and safe.",
+        description: "Licensed brokers execute and custody your securities, and bank-level security protects your personal information and data.",
         icon: ShieldCheck,
         color: "text-red-500",
         bg: "bg-red-500/10"
     },
     {
         title: "Local + Global",
-        description: "Explore both Zambian companies (like Zambeef) and U.S. giants (like Apple). Learn how each market works and what makes companies grow.",
+        description: "Invest in Zambian companies on the LuSE (like Zambeef) and explore U.S. giants (like Apple) in a free practice sandbox.",
         icon: Globe,
         color: "text-orange-500",
         bg: "bg-orange-500/10"
@@ -63,12 +63,12 @@ export default function AboutPage() {
                             <span>About Revridge</span>
                         </div>
                         <Heading level="h1" className="text-4xl md:text-6xl font-black tracking-tight">
-                            Practice First, <br /> Invest with Confidence
+                            Invest with Confidence, <br /> Learn as You Grow
                         </Heading>
                         <div className="max-w-4xl mx-auto space-y-6">
                             <Text size="lg" className="text-muted-foreground md:text-xl leading-relaxed">
-                                Revridge is a learning and simulation platform designed to make investing <strong className="text-foreground">simple and accessible</strong> for everyday people,
-                                especially in Zambia and across Africa.
+                                Revridge is an investing platform designed to make investing <strong className="text-foreground">simple and accessible</strong> for everyday people,
+                                especially in Zambia and across Africa — your digital front door to the Lusaka Securities Exchange (LuSE).
                             </Text>
 
                             <div className="space-y-4">
@@ -79,7 +79,7 @@ export default function AboutPage() {
                                         <Heading level="h3" className="text-lg font-bold text-foreground">Right Now</Heading>
                                     </div>
                                     <Text className="text-muted-foreground">
-                                        Revridge includes a practice mode where users can simulate trading without using real money, so they can learn safely and build confidence.
+                                        Investing on the LuSE is launching soon — place buy and sell orders routed to licensed brokers, track every stage of execution, and build a portfolio. A free U.S. stock practice sandbox is available today.
                                     </Text>
                                 </div>
 
@@ -90,12 +90,12 @@ export default function AboutPage() {
                                         <Heading level="h3" className="text-lg font-bold text-foreground">Coming Soon</Heading>
                                     </div>
                                     <Text className="text-muted-foreground">
-                                        The platform will expand to support real investing and trading, giving more Africans the opportunity to grow their wealth through both local and international stock markets.
+                                        Multi-broker support, dividends and statements, and international markets — as we grow toward a multi-broker investment platform across Africa and beyond.
                                     </Text>
                                 </div>
                             </div>
                             <Text className="text-muted-foreground italic">
-                                View real stock prices, understand how the market works, and build investing knowledge in an easy, beginner-friendly way.
+                                Place orders, watch them execute, and build investing knowledge in an easy, beginner-friendly way.
                             </Text>
                         </div>
                     </div>
@@ -180,11 +180,11 @@ export default function AboutPage() {
                                         </li>
                                         <li className="flex items-start gap-2">
                                             <span className="text-emerald-500 mt-1">✓</span>
-                                            <span><strong>Practice first</strong> - Learn with virtual money before risking real cash</span>
+                                            <span><strong>Invest on the LuSE</strong> — Place orders routed to licensed brokers</span>
                                         </li>
                                         <li className="flex items-start gap-2">
                                             <span className="text-emerald-500 mt-1">✓</span>
-                                            <span><strong>Explore global markets</strong> — Browse both Zambian and U.S. companies in one app</span>
+                                            <span><strong>Explore global markets</strong> — Invest locally on the LuSE and practice with U.S. companies in one app</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -247,8 +247,8 @@ export default function AboutPage() {
                                         So we asked ourselves: <strong>"What if investing was as easy as ordering food on your phone?"</strong>
                                     </Text>
                                     <Text className="text-muted-foreground">
-                                        That question led us to build Revridge - an app where anyone can learn to invest, practice safely with virtual money,
-                                        and eventually build real wealth through smart investing. No finance degree needed. No huge capital required.
+                                        That question led us to build Revridge - an app where anyone can invest on the Lusaka Securities Exchange,
+                                        track every stage of their orders, and learn as they grow their portfolio. No finance degree needed. No huge capital required.
                                         Just you, your phone, and the desire to grow your money.
                                     </Text>
                                     <div className="pt-6 border-t border-primary/20">
@@ -256,9 +256,9 @@ export default function AboutPage() {
                                             "We're building the investment platform we wish existed when we were starting out.
                                             If you've ever felt like investing wasn't for you - this is for you."
                                         </Text>
-                                        <Text className="text-primary font-semibold mt-4">
+                                        {/* <Text className="text-primary font-semibold mt-4">
                                             - Ely'umusa & Wongani, Co-Founders
-                                        </Text>
+                                        </Text> */}
                                     </div>
                                 </div>
                             </div>
@@ -271,10 +271,10 @@ export default function AboutPage() {
                     <div className="container px-4 md:px-6">
                         <div className="max-w-3xl mx-auto text-center space-y-8">
                             <Heading level="h2" className="text-3xl md:text-4xl font-bold">
-                                Ready to Start Learning?
+                                Ready to Start Investing?
                             </Heading>
                             <Text size="lg" className="text-muted-foreground">
-                                Join thousands of Zambians learning how investing works with Revridge. Get early access and start practicing today — completely free, no real money required.
+                                Join the waitlist for early access to investing on the LuSE through Revridge. Place orders through licensed brokers, track every step, and learn as you grow your portfolio.
                             </Text>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                                 <NavLink to="/download">

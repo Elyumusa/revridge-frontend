@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
                             <span className="text-2xl font-bold text-white tracking-tight">Revridge</span>
                         </Link>
                         <Text className="max-w-xs text-zinc-500">
-                            Empowering Africans to learn how investing works and build confidence safely before using real money.
+                            Your digital front door to the Lusaka Securities Exchange (LuSE) — invest through licensed brokers, with full transparency at every step.
                         </Text>
                         <div className="flex gap-4">
                             <SocialLink href="https://facebook.com/revridgeapp" icon={<Facebook size={20} />} label="Facebook" />
@@ -76,18 +76,18 @@ const Footer: React.FC = () => {
                         </p>
                         <p className="text-zinc-400">
                             Revridge is currently in early beta. While we strive for reliability, you may encounter bugs or service interruptions.
-                            All investments on the platform are simulated for educational purposes. We appreciate your patience and feedback as we build the future of investing in Africa.
+                            Investing on the LuSE through licensed brokers is launching soon; U.S. stock features are simulated for education. We appreciate your patience and feedback as we build the future of investing in Africa.
                         </p>
                     </div>
 
-                    {/* Educational Status */}
+                    {/* Platform Status */}
                     <div className="p-4 rounded-lg bg-zinc-900/50 border border-white/5">
                         <p className="font-medium text-zinc-400 mb-2 flex items-center gap-2">
-                            <Info size={14} /> Educational Platform
+                            <Info size={14} /> Investing Platform, Not a Broker
                         </p>
                         <p className="text-zinc-500">
-                            Revridge currently operates as a learning and simulation platform. We are not a broker(yet) and do not facilitate real-money transactions at this time.
-                            Zambian and U.S. stock market data are provided for educational and simulation purposes only. Real-money investing is a future capability we are actively working toward.
+                            Revridge is an investing platform and order-routing service, not a broker-dealer. Lusaka Securities Exchange (LuSE) orders are executed by licensed third-party brokers, who handle execution, settlement, and custody.
+                            U.S. stock features are simulated for educational and practice purposes only.
                         </p>
                     </div>
 
@@ -106,7 +106,7 @@ const Footer: React.FC = () => {
                     {/* Geographic Limitations */}
                     <p className="text-zinc-600">
                         Revridge services are currently available to residents of Zambia. Expansion to other African countries is planned for the future.
-                        U.S. stock trading is also something we are actively working towards.
+                        U.S. stock features are simulated for practice; investing on the Lusaka Securities Exchange (LuSE) is launching soon.
                     </p>
                 </div>
             </div>

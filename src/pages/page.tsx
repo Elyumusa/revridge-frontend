@@ -6,6 +6,7 @@ import StayUpdated from '@/components/ui/home/StayUpdated';
 import FeaturesAndPerks from '@/components/ui/home/FeaturesAndPerks';
 import WhatWeDo from '@/components/ui/home/WhatWeDo';
 import HowItWorks from '@/components/ui/home/HowItWorks';
+import HowExecutionWorks from '@/components/ui/home/HowExecutionWorks';
 import Footer from '@/components/ui/home/Footer';
 
 export default function HomePage() {
@@ -18,6 +19,7 @@ export default function HomePage() {
         <InvestmentCalculator />
         <WhatWeDo />
         <HowItWorks />
+        <HowExecutionWorks />
         <FeaturesAndPerks />
         <DownloadOurApp />
         <StayUpdated stayUpdatedSectionRef={stayUpdatedSectionRef} />

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Input, Heading, Text } from "@/components/design-system";
 import { Apple, Play, CheckCircle2, X } from "lucide-react";
 import Footer from '@/components/ui/home/Footer';
+import HowExecutionWorks from '@/components/ui/home/HowExecutionWorks';
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactConfetti from 'react-confetti';
 import axios from 'axios';
@@ -81,13 +82,13 @@ const DownloadAppPage: React.FC = () => {
                         <div className="grid lg:grid-cols-2 gap-12 items-center">
                             <div className="space-y-8 animate-fade-in-up sm:text-center lg:text-left">
                                 <Heading level="h1" className="text-4xl md:text-6xl font-black tracking-tight leading-tight">
-                                    Two Markets. <br /> <span className="text-primary">Learn Both.</span>
+                                    Two Markets. <br /> <span className="text-primary">Invest + Practice.</span>
                                 </Heading>
                                 <Text size="lg" className="text-muted-foreground text-xl md:max-w-xl mx-auto lg:mx-0">
-                                    Explore U.S. and Zambian stock markets in one place. Practice trading with virtual money and build the confidence to invest for real — when you're truly ready.
+                                    Place buy and sell orders on the Lusaka Securities Exchange (LuSE) through licensed brokers, and explore U.S. stocks in a free practice sandbox — all in one app. Investing on the LuSE is launching soon; join the waitlist for early access.
                                 </Text>
                                 <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start pt-4">
-                                    <a href="https://play.google.com/apps/testing/com.revridge.app" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://play.google.com/store/apps/details?id=com.revridge.app" target="_blank" rel="noopener noreferrer">
                                         <Button size="lg" className="h-14 px-8 min-w-[200px]" leftIcon={<Play size={20} />}>
                                             Download Early Beta
                                         </Button>
@@ -125,6 +126,9 @@ const DownloadAppPage: React.FC = () => {
                     </div>
                 </section>
 
+                {/* How Execution Works — shared transparency component */}
+                <HowExecutionWorks />
+
                 {/* App Preview Gallery */}
                 <section className="py-24 bg-secondary/30">
                     <div className="container px-4 md:px-6">
@@ -156,10 +160,10 @@ const DownloadAppPage: React.FC = () => {
                                 <div className="p-6 space-y-2">
                                     <div className="flex items-center gap-2">
                                         <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                                        <Heading level="h3" className="text-lg font-bold">Your Simulated Portfolio</Heading>
+                                        <Heading level="h3" className="text-lg font-bold">Your Portfolio</Heading>
                                     </div>
                                     <Text muted className="text-sm">
-                                        Track all your practice investments in one place. See simulated values, gains, and performance — just like the real thing.
+                                        Track your LuSE holdings in one place. Values, gains, and performance update from broker-confirmed executions — not estimates.
                                     </Text>
                                 </div>
                             </div>
@@ -216,10 +220,10 @@ const DownloadAppPage: React.FC = () => {
                                 <div className="p-6 space-y-2">
                                     <div className="flex items-center gap-2">
                                         <div className="w-2 h-2 rounded-full bg-orange-500" />
-                                        <Heading level="h3" className="text-lg font-bold">Practice Buying & Selling</Heading>
+                                        <Heading level="h3" className="text-lg font-bold">Place Buy & Sell Orders</Heading>
                                     </div>
                                     <Text muted className="text-sm">
-                                        Simple simulation interface. Practice placing buy and sell orders with virtual money — no real funds involved, just pure learning.
+                                        A simple interface to place LuSE buy and sell orders, routed to a licensed broker for execution. Track every stage from submitted to executed.
                                     </Text>
                                 </div>
                             </div>
@@ -239,7 +243,7 @@ const DownloadAppPage: React.FC = () => {
                                         <Heading level="h3" className="text-lg font-bold">Watchlist</Heading>
                                     </div>
                                     <Text muted className="text-sm">
-                                        Save stocks you find interesting. Monitor price changes and understand what drives them — great preparation for when real investing launches.
+                                        Save LuSE and U.S. stocks you find interesting. Monitor price changes and understand what drives them — great preparation for your next order.
                                     </Text>
                                 </div>
                             </div>
@@ -259,7 +263,7 @@ const DownloadAppPage: React.FC = () => {
                                         <Heading level="h3" className="text-lg font-bold">Zambian Markets (LuSE)</Heading>
                                     </div>
                                     <Text muted className="text-sm">
-                                        Browse Lusaka Securities Exchange (LuSE) stocks with real price data. Simulated LuSE trading is coming soon.
+                                        Browse Lusaka Securities Exchange (LuSE) stocks with live price data, and place orders routed to a licensed broker. Investing on the LuSE is launching soon.
                                     </Text>
                                 </div>
                             </div>
@@ -268,10 +272,10 @@ const DownloadAppPage: React.FC = () => {
                         {/* CTA Below Gallery */}
                         <div className="text-center mt-16">
                             <Text className="text-muted-foreground mb-6">
-                                Ready to start learning and practicing investing safely?
+                                Ready to start investing on the LuSE?
                             </Text>
                             <div className="flex flex-col sm:flex-row justify-center gap-4">
-                                <a href="https://play.google.com/apps/testing/com.revridge.app" target="_blank" rel="noopener noreferrer">
+                                <a href="https://play.google.com/store/apps/details?id=com.revridge.app" target="_blank" rel="noopener noreferrer">
                                     <Button size="lg" className="h-14 px-8 min-w-[200px]">
                                         Download App (Android)
                                     </Button>
@@ -291,13 +295,13 @@ const DownloadAppPage: React.FC = () => {
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800 to-zinc-950" />
                             <div className="relative z-10 space-y-6 max-w-2xl mx-auto">
                                 <Heading level="h2" className="text-3xl md:text-4xl font-bold text-white">
-                                    Learn investing. Build confidence. Africa wins.
+                                    Invest on the LuSE. Africa wins.
                                 </Heading>
                                 <Text className="text-zinc-400">
-                                    Download the early beta on Android or join our iOS waitlist to start practicing investing safely — completely free, no real money involved.
+                                    Download the early beta on Android or join our iOS waitlist for early access to investing on the LuSE through licensed brokers — with a free U.S. practice sandbox included.
                                 </Text>
                                 <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-                                    <a href="https://play.google.com/apps/testing/com.revridge.app" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://play.google.com/store/apps/details?id=com.revridge.app" target="_blank" rel="noopener noreferrer">
                                         <Button variant="secondary" className="min-w-[200px]">Download App (Android)</Button>
                                     </a>
                                     <Button variant="outline" className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 min-w-[200px]" onClick={openWaitlist}>Join Waitlist (iOS)</Button>

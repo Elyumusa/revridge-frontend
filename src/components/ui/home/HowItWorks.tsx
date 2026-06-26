@@ -1,35 +1,35 @@
 import React from 'react';
 import { Heading, Text, Button } from '@/components/design-system';
-import { Download, Wallet, TrendingUp, Rocket, ArrowRight } from 'lucide-react';
+import { Download, Wallet, Send, LineChart, ArrowRight } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const steps = [
     {
         number: "01",
-        title: "Download & Create Account",
-        description: "Get the app from Google Play or App Store. Sign up in under 2 minutes with just your email.",
+        title: "Download & Verify Your Account",
+        description: "Get the app from Google Play or App Store. Sign up and complete identity verification (KYC) so we can route your orders to a licensed broker.",
         icon: Download,
         color: "from-blue-500 to-cyan-500",
     },
     {
         number: "02",
-        title: "Practice with Virtual Cash",
-        description: "Start with virtual money to practice. Learn to buy and sell stocks without any risk to real money.",
+        title: "Place an Order on the LuSE",
+        description: "Browse Lusaka Securities Exchange stocks, choose buy or sell, and enter your quantity. Your order intent is captured in Revridge.",
         icon: Wallet,
         color: "from-purple-500 to-pink-500",
     },
     {
         number: "03",
-        title: "Explore & Learn",
-        description: "Browse U.S. and Zambian stocks. Read company info, check prices, and learn what makes a good investment.",
-        icon: TrendingUp,
+        title: "We Route It to a Licensed Broker",
+        description: "Revridge sends your order to a licensed broker, who executes it on the LuSE. Track it live: Submitted → Sent to broker → Executed.",
+        icon: Send,
         color: "from-orange-500 to-red-500",
     },
     {
         number: "04",
-        title: "Invest for Real (Coming Soon)",
-        description: "When you're ready and we launch real investing, deposit money and start building your real investment portfolio.",
-        icon: Rocket,
+        title: "Watch Your Portfolio Grow",
+        description: "Broker-confirmed fills update your holdings, performance, and history. Invest while you learn — no waiting to get started.",
+        icon: LineChart,
         color: "from-green-500 to-emerald-500",
     },
 ];
@@ -46,14 +46,14 @@ const HowItWorks: React.FC = () => {
                 {/* Header */}
                 <div className="flex flex-col items-center text-center space-y-4 mb-16 animate-fade-in-up">
                     <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary">
-                        <Rocket size={16} />
-                        <span>Simple & Easy</span>
+                        <Send size={16} />
+                        <span>Simple & Transparent</span>
                     </div>
                     <Heading level="h2" className="text-4xl md:text-6xl font-bold tracking-tight">
                         How It Works
                     </Heading>
                     <Text size="lg" className="max-w-2xl text-muted-foreground">
-                        Start practicing in 4 simple steps. No complicated forms, no confusing jargon — just a clear path from total beginner to confident investor.
+                        From signup to your first trade in 4 clear steps. No jargon, no black boxes — just a simple path from placing an order to watching it execute.
                     </Text>
                 </div>
 
@@ -101,13 +101,13 @@ const HowItWorks: React.FC = () => {
                         <div className="space-y-6">
                             <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
                                 <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse" />
-                                Live Demo Available
+                                Early Beta Available
                             </div>
                             <Heading level="h3" className="text-3xl md:text-4xl font-bold">
                                 See It in Action
                             </Heading>
                             <Text size="lg" className="text-muted-foreground">
-                                Download the app now and explore with virtual money. No credit card required, no risk - just pure learning.
+                                Download the app to explore LuSE and U.S. markets, place orders, and track every stage of execution. Investing on the LuSE is launching soon — get early access today.
                             </Text>
                             <div className="flex flex-col sm:flex-row gap-4 pt-4">
                                 <NavLink to="/download">
@@ -142,10 +142,10 @@ const HowItWorks: React.FC = () => {
 
                             {/* Floating Elements */}
                             <div className="absolute -top-4 -right-4 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg animate-bounce">
-                                +$2,450
+                                Executed
                             </div>
                             <div className="absolute -bottom-4 -left-4 bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                                Demo Mode
+                                LuSE Orders
                             </div>
                         </div>
                     </div>
@@ -154,7 +154,7 @@ const HowItWorks: React.FC = () => {
                 {/* Bottom Note */}
                 <div className="text-center mt-12">
                     <Text className="text-muted-foreground">
-                        💡 <strong>Good to know:</strong> Most users spend a few weeks exploring and practicing before they feel truly confident. There's no rush — this is about learning, not timing the market!
+                        💡 <strong>Good to know:</strong> Revridge facilitates your orders and a licensed broker executes them on the LuSE — so you always know exactly where your investment stands.
                     </Text>
                 </div>
             </div>

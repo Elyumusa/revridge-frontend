@@ -1,44 +1,44 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, Heading, Text, Icon } from '@/components/design-system';
-import { TrendingUp, PieChart, BarChart3, Bot, BookOpen, ShieldCheck } from 'lucide-react';
+import { TrendingUp, PieChart, BarChart3, BookOpen, ShieldCheck, Eye } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const features = [
     {
-        title: "U.S. Stock Simulator",
-        description: "Practice investing safely in U.S. stocks using virtual money. Real quotes, real market data — zero real money risk.",
+        title: "Invest on the LuSE",
+        description: "Place buy and sell orders on the Lusaka Securities Exchange (LuSE). Your order goes to a licensed broker who executes it on your behalf.",
         icon: TrendingUp,
+        color: "text-emerald-500",
+    },
+    {
+        title: "Track Your Portfolio",
+        description: "Holdings, performance, and history — updated from broker-confirmed executions, not estimates. Watch your investments grow over time.",
+        icon: PieChart,
         color: "text-blue-500",
     },
     {
-        title: "Zambian Market Data",
-        description: "Explore real Lusaka Securities Exchange (LuSE) prices and market insights. Simulated LuSE investing is coming soon.",
+        title: "Order Transparency",
+        description: "Always know where your money is: Submitted → Sent to broker → Executed. No black boxes, no guessing — full visibility at every stage.",
+        icon: Eye,
+        color: "text-purple-500",
+    },
+    {
+        title: "Practice with U.S. Stocks",
+        description: "Explore U.S. markets in a free virtual sandbox with live quotes and market data — no money at stake. Pure learning, anytime.",
         icon: BarChart3,
         color: "text-green-500",
     },
     {
-        title: "Simulated Portfolio",
-        description: "Track your virtual portfolio in real time. See simulated gains, losses, and performance analytics — just like the real thing, without real money.",
-        icon: PieChart,
-        color: "text-purple-500",
-    },
-    {
         title: "Learn While You Invest",
-        description: "Practice risk-free with demo mode, access educational resources, and build your investing knowledge before committing real money.",
+        description: "Investing education that runs alongside investing, not before it. Plain-language lessons you can apply the moment you place an order.",
         icon: BookOpen,
         color: "text-yellow-500",
     },
     {
         title: "Bank-Level Security",
-        description: "Multi-factor authentication, biometric login, and enterprise-grade security to protect your account and data.",
+        description: "Multi-factor authentication, biometric login, and enterprise-grade security to protect your account, your data, and your orders.",
         icon: ShieldCheck,
         color: "text-red-500",
-    },
-    {
-        title: "Mobile-First Design",
-        description: "Learn and practice investing from your smartphone, optimized for African mobile users. Available on iOS and Android.",
-        icon: Bot,
-        color: "text-orange-500",
     },
 ];
 
@@ -51,10 +51,10 @@ const WhatWeDo: React.FC = () => {
                         Our Services
                     </div>
                     <Heading level="h2" className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                        What You Can Do Today
+                        Investing, with you in control
                     </Heading>
                     <Text className="max-w-[700px] text-muted-foreground md:text-xl">
-                        Explore real stock market data, practice with simulated investing, and build your knowledge — all without spending a single kwacha.
+                        Place orders on the LuSE through licensed brokers, track every step, and build a portfolio — with a free U.S. stock sandbox to learn along the way.
                     </Text>
                 </div>
 

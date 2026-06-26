@@ -19,7 +19,7 @@ const PrivacyPolicyPage: React.FC = () => {
                             Privacy Policy
                         </Heading>
                         <Text className="text-center text-muted-foreground text-lg">
-                            Last Updated: January 17, 2026
+                            Last Updated: June 24, 2026
                         </Text>
                     </div>
                 </section>
@@ -32,9 +32,9 @@ const PrivacyPolicyPage: React.FC = () => {
                             {/* Introduction */}
                             <div className="mb-12">
                                 <Text className="text-lg leading-relaxed">
-                                    <strong>Revridge Enterprise</strong> ("we," "our," or "us") operates the Revridge mobile application and website at{' '}
+                                    <strong>Revridge Finance</strong> ("we," "our," or "us") operates the Revridge mobile application and website at{' '}
                                     <a href="https://revridge.xyz" className="text-primary hover:underline">revridge.xyz</a>.
-                                    This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our investment platform.
+                                    Revridge is an investing platform and order-routing service that lets you place investment orders on the Lusaka Securities Exchange (LuSE) through licensed brokers, with a free U.S. stock practice sandbox. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.
                                     Please read this policy carefully.
                                 </Text>
                             </div>
@@ -56,13 +56,21 @@ const PrivacyPolicyPage: React.FC = () => {
                                     <li>Profile picture (if uploaded)</li>
                                 </ul>
 
-                                <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">1.2 Trading Activity Data</Heading>
-                                <Text className="mb-4">We collect information about your trading activities:</Text>
+                                <Text className="mb-4">To invest on the LuSE, you must complete identity verification (KYC). For this we additionally collect:</Text>
                                 <ul className="list-disc pl-6 space-y-2 mb-6">
-                                    <li>Virtual portfolio holdings</li>
-                                    <li>Trade history (buy/sell orders)</li>
+                                    <li>Government-issued identification details (e.g. National Registration Card, passport, or driver's license number)</li>
+                                    <li>Images of your ID document and, where required, a selfie or liveness check</li>
+                                    <li>Date of birth and residential address</li>
+                                    <li>Any other information required by our licensed broker partners for onboarding and regulatory compliance</li>
+                                </ul>
+
+                                <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">1.2 Investment & Activity Data</Heading>
+                                <Text className="mb-4">We collect information about how you use the investing and practice features:</Text>
+                                <ul className="list-disc pl-6 space-y-2 mb-6">
+                                    <li>LuSE order history (buy/sell orders, status, and broker-confirmed executions)</li>
+                                    <li>Portfolio holdings and performance (updated from broker confirmations)</li>
+                                    <li>U.S. practice-sandbox activity (virtual trades, watchlists, performance)</li>
                                     <li>Watchlist preferences</li>
-                                    <li>Performance metrics</li>
                                     <li>Search queries</li>
                                 </ul>
 
@@ -145,13 +153,14 @@ const PrivacyPolicyPage: React.FC = () => {
                                 <ul className="list-disc pl-6 space-y-2">
                                     <li>Provide and maintain the app</li>
                                     <li>Create and manage your account</li>
-                                    <li>Process your demo trades</li>
-                                    <li>Track your virtual portfolio</li>
-                                    <li>Send you notifications about your portfolio performance</li>
+                                    <li>Verify your identity (KYC) and onboard you with the licensed broker that executes your orders</li>
+                                    <li>Route your LuSE orders to the broker and reflect broker-confirmed executions in your portfolio</li>
+                                    <li>Operate the U.S. practice sandbox</li>
+                                    <li>Send you notifications about your portfolio and order status</li>
                                     <li>Improve app functionality and user experience</li>
                                     <li>Analyze usage patterns and trends</li>
                                     <li>Detect and prevent fraud or abuse</li>
-                                    <li>Comply with legal obligations</li>
+                                    <li>Comply with legal and regulatory obligations</li>
                                     <li>Communicate with you about updates and features</li>
                                     <li>Provide customer support</li>
                                 </ul>
@@ -206,12 +215,15 @@ const PrivacyPolicyPage: React.FC = () => {
                                     <li>Push notifications and messaging</li>
                                 </ul>
 
-                                <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">4.2 Market Data & Trading</Heading>
+                                <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">4.2 Licensed Brokers & Market Data</Heading>
                                 <ul className="list-disc pl-6 space-y-2 mb-6">
+                                    <li>Licensed Zambian brokers who execute, settle, and custody your LuSE trades</li>
                                     <li>Licensed and regulated market data providers</li>
-                                    <li>SEC-registered broker-dealer partnerships</li>
-                                    <li>Real-time stock quotes and financial data</li>
+                                    <li>Stock quotes and financial data providers</li>
                                 </ul>
+                                <Text className="mb-6 text-sm">
+                                    To place LuSE orders, we share the information necessary to onboard you and route your orders — including your KYC details — with the licensed broker that executes them. The broker is an independent controller of the personal data it receives and handles it under its own privacy policy and applicable regulations.
+                                </Text>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">4.3 Analytics & Support</Heading>
                                 <ul className="list-disc pl-6 space-y-2 mb-6">
@@ -231,8 +243,8 @@ const PrivacyPolicyPage: React.FC = () => {
 
                                 <Text className="mb-4">We may share your information in the following circumstances:</Text>
 
-                                <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">5.1 Service Providers</Heading>
-                                <Text className="mb-6">With trusted third-party service providers who help us operate the platform, including cloud infrastructure, market data providers, and analytics services.</Text>
+                                <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">5.1 Service Providers & Brokers</Heading>
+                                <Text className="mb-6">With trusted third-party service providers who help us operate the platform — including cloud infrastructure, market data providers, analytics services, and the licensed brokers who execute, settle, and custody your LuSE trades.</Text>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">5.2 Legal Requirements</Heading>
                                 <Text className="mb-6">If required by law, court order, or government regulation.</Text>
