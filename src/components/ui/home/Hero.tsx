@@ -51,7 +51,7 @@ const Hero: React.FC<HeroProps> = ({ stayUpdatedSectionRef }) => {
                     {/* Main Headline */}
                     <div className="animate-fade-in-up space-y-4" style={{ animationDelay: '200ms' }}>
                         <Heading level="h1" className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-bold text-primary">
-                            Invest on the Lusaka Stock Exchange <br />
+                            Invest on the Lusaka Securities Exchange <br />
                             <span className="text-muted-foreground">through licensed brokers.</span>
                         </Heading>
 
