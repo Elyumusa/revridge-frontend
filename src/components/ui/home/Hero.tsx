@@ -1,108 +1,123 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Button, Heading, Text } from '@/components/design-system';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { BookOpen, ChartNoAxesCombined, Leaf, Play } from 'lucide-react';
+import { AppleMark } from '@/components/ui/StoreMarks';
+import {
+  APP_SCREEN_ASPECT,
+  APP_SCREEN_HEIGHT,
+  APP_SCREEN_WIDTH,
+  appScreens,
+} from '@/assets/appScreens';
+import { PLAY_STORE_URL, TESTFLIGHT_URL } from '@/lib/storeLinks';
 
-interface HeroProps {
-    stayUpdatedSectionRef?: React.RefObject<HTMLElement>;
+const stages = [
+  {
+    label: 'Learn',
+    copy: 'Understand the basics with clear, practical lessons.',
+    icon: BookOpen,
+  },
+  {
+    label: 'Invest',
+    copy: 'Reach real investments through licensed brokers.',
+    icon: ChartNoAxesCombined,
+  },
+  {
+    label: 'Grow',
+    copy: 'Track goals, net worth, and progress in one place.',
+    icon: Leaf,
+  },
+];
+
+export default function Hero() {
+  return (
+    <section className="overflow-hidden border-b border-border bg-[#F5F7F6]">
+      <div className="site-container grid items-center gap-14 pb-14 pt-12 lg:grid-cols-[1fr_1.02fr] lg:gap-10 lg:pb-16 lg:pt-16">
+        <div className="max-w-xl">
+          <h1 className="text-[clamp(3.6rem,8vw,6rem)] font-[820] leading-[.88] tracking-[-.04em]">
+            Learn.
+            <br />
+            Invest.
+            <br />
+            <span className="text-primary">Grow.</span>
+          </h1>
+          <p className="mt-7 text-[clamp(1.15rem,1.9vw,1.5rem)] leading-[1.4] tracking-[-.02em] text-[#17201E]">
+            One connected wealth journey.
+          </p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <a
+              className="store-action store-action--filled"
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Play size={18} fill="currentColor" /> Get Android
+            </a>
+            {/* Was a NavLink to /download that opened a waitlist modal; the
+                beta is public now, so this goes straight to TestFlight. */}
+            <a
+              className="store-action store-action--filled"
+              href={TESTFLIGHT_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <AppleMark size={19} /> Get iOS Beta
+            </a>
+          </div>
+          <p className="mt-6 text-sm leading-6 text-[color:var(--meta-ink)]">
+            Investing involves risk. Historical results are not forecasts or
+            recommendations.
+          </p>
+        </div>
+
+        {/* Two product plates, layered and tilted — the Layered Wealth Table
+            motif at hero scale. The device shots carry their own plate ground,
+            so they are framed rather than cut out. */}
+        <div className="hero-stage relative mx-auto flex w-full max-w-[560px] justify-center pb-6 pt-2 lg:pb-2">
+          <figure className="hero-plate hero-plate--back w-[46%] max-w-[260px] sm:w-[48%]">
+            <img
+              src={appScreens.invest.src}
+              alt={appScreens.invest.alt}
+              width={APP_SCREEN_WIDTH}
+              height={APP_SCREEN_HEIGHT}
+              className={`block w-full rounded-[13px] ${APP_SCREEN_ASPECT} object-cover`}
+              fetchPriority="high"
+            />
+          </figure>
+          <figure className="hero-plate hero-plate--front w-[46%] max-w-[260px] sm:w-[48%]">
+            <img
+              src={appScreens.grow.src}
+              alt={appScreens.grow.alt}
+              width={APP_SCREEN_WIDTH}
+              height={APP_SCREEN_HEIGHT}
+              className={`block w-full rounded-[13px] ${APP_SCREEN_ASPECT} object-cover`}
+              fetchPriority="high"
+            />
+          </figure>
+        </div>
+      </div>
+
+      {/* The Learn → Invest → Grow trajectory. It moved here from the old
+          calculator workbench so the journey still opens the page. The markers
+          straddle the line and the copy sits beneath, so the trajectory reads as
+          one path through three points and never strikes through the text. */}
+      <div className="site-container pb-14 lg:pb-20">
+        <div className="journey-rail grid gap-x-8 gap-y-9 border-t border-[#dce3e0] pt-9 sm:grid-cols-3 sm:pt-0">
+          <span aria-hidden="true" className="journey-trajectory" />
+          {stages.map(({ label, copy, icon: Icon }) => (
+            <div key={label} className="journey-stage">
+              {/* Only straddles the rule from sm up, where the trajectory exists
+                  to straddle. Stacked, the markers sit inside the block. */}
+              <span className="lime-marker grid h-11 w-11 place-items-center rounded-[10px] sm:-mt-[22px] sm:ring-4 sm:ring-[#F5F7F6]">
+                <Icon size={20} />
+              </span>
+              <h2 className="mt-5 text-base font-[740] tracking-[-.02em] text-[#17201E]">
+                {label}
+              </h2>
+              <p className="mt-1.5 max-w-[34ch] text-sm leading-6 text-[color:var(--meta-ink)]">
+                {copy}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
-
-const Hero: React.FC<HeroProps> = ({ stayUpdatedSectionRef }) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const scrollToStayUpdated = () => {
-        stayUpdatedSectionRef?.current?.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    return (
-        <section className="relative w-full min-h-[90vh] flex items-center overflow-hidden bg-background pt-24">
-            {/* Background Geometric Pattern */}
-            <div className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none">
-                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <pattern id="hexagons" width="50" height="43.4" patternUnits="userSpaceOnUse" patternTransform="scale(5)">
-                            <path d="M25 0 L50 14.4 L50 43.3 L25 57.7 L0 43.3 L0 14.4 Z" fill="none" stroke="currentColor" strokeWidth="1" />
-                        </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#hexagons)" />
-                </svg>
-            </div>
-
-            {/* Hexagonal Shapes Decoration (Top Right) */}
-            <div className="absolute top-0 right-0 z-0 opacity-10 pointer-events-none translate-x-1/3 -translate-y-1/4">
-                <svg width="600" height="600" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="currentColor" d="M41.7,-72.2C54.4,-64.8,65.3,-55.1,75.2,-44.5C85.1,-33.9,94,-22.3,95.6,-10.1C97.2,2.1,91.5,14.9,83.9,25.8C76.3,36.7,66.8,45.7,56.7,53.4C46.6,61.1,35.9,67.5,24.5,70.9C13.1,74.3,1,74.7,-10.4,72.9C-21.8,71.1,-32.5,67.1,-42.6,60.8C-52.7,54.5,-62.2,46,-70.1,36.1C-78,26.2,-84.3,14.9,-83.4,3.1C-82.5,-8.7,-74.4,-21,-65.6,-32.1C-56.8,-43.2,-47.3,-53.1,-36.5,-61.4C-25.7,-69.7,-13.6,-76.3,0,-76.3L0,0Z" transform="translate(100 100) scale(1.1)" />
-                </svg>
-            </div>
-
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 z-0 bg-gradient-to-r from-background via-background/90 to-transparent pointer-events-none" />
-
-            <div className="container relative z-10 px-4 md:px-6">
-                <div className="flex flex-col max-w-4xl space-y-8">
-
-                    {/* Badge / Tagline */}
-                    <div className="animate-fade-in-up" style={{ animationDelay: '0ms' }}>
-                        <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                            <span className="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
-                            Investing on the LuSE — Launching Soon
-                        </div>
-                    </div>
-
-                    {/* Main Headline */}
-                    <div className="animate-fade-in-up space-y-4" style={{ animationDelay: '200ms' }}>
-                        <Heading level="h1" className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-bold text-primary">
-                            Invest on the Lusaka Securities Exchange <br />
-                            <span className="text-muted-foreground">through licensed brokers.</span>
-                        </Heading>
-
-                        <Text size="xl" className="max-w-[700px] text-muted-foreground md:text-2xl pt-4">
-                            Revridge is your digital front door to the Lusaka Securities Exchange (LuSE). Place buy and sell orders, watch them move from submitted to executed, and build a portfolio — while you learn. U.S. stocks stay in a free practice sandbox.
-                        </Text>
-                    </div>
-
-                    {/* CTAs */}
-                    <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
-                        <NavLink to="/download">
-                            <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8" rightIcon={<ArrowRight size={20} />}>
-                                Get Early Access
-                            </Button>
-                        </NavLink>
-
-                        <NavLink to="/about">
-                            <Button variant="outline" size="lg" className="w-full sm:w-auto text-lg h-14 px-8" rightIcon={<ChevronRight size={20} />}>
-                                Learn How It Works
-                            </Button>
-                        </NavLink>
-                    </div>
-
-                    {/* Stats / Social Proof */}
-                    <div className="pt-12 flex flex-col gap-6 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
-                        <div className="flex items-center gap-8 text-muted-foreground">
-                            <div className="flex flex-col">
-                                <span className="text-2xl font-bold text-foreground">LuSE Investing</span>
-                                <span className="text-sm">Licensed brokers execute</span>
-                            </div>
-                            <div className="w-px h-10 bg-border"></div>
-                            <div className="flex flex-col">
-                                <span className="text-2xl font-bold text-foreground">Full Transparency</span>
-                                <span className="text-sm">Track every order stage</span>
-                            </div>
-                            <div className="w-px h-10 bg-border"></div>
-                            <div className="flex flex-col">
-                                <span className="text-2xl font-bold text-foreground">Free U.S. Sandbox</span>
-                                <span className="text-sm">Practice with virtual money</span>
-                            </div>
-                        </div>
-                        <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm max-w-fit">
-                            <span className="font-semibold">ℹ️ How it works:</span>
-                            <span>Revridge facilitates your orders; a licensed broker executes them on the LuSE.</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    );
-};
-
-export default Hero;

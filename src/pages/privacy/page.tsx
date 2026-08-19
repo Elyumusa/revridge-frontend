@@ -1,40 +1,35 @@
 import React from 'react';
 import { Heading, Text } from '@/components/design-system';
-import { Shield, Lock, Eye, Users, FileText, Mail, Smartphone, Camera, HardDrive, Fingerprint } from 'lucide-react';
+import { Lock, Eye, Users, FileText, Mail, Smartphone, Camera, HardDrive, Fingerprint } from 'lucide-react';
 import Footer from '@/components/ui/home/Footer';
 
 const PrivacyPolicyPage: React.FC = () => {
     return (
         <div className="flex flex-col min-h-screen bg-background">
-            <main className="flex-1">
+            <main id="main-content" className="flex-1">
                 {/* Hero Section */}
-                <section className="py-16 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-background">
-                    <div className="container px-4 md:px-6 max-w-4xl mx-auto">
-                        <div className="flex items-center justify-center mb-6">
-                            <div className="p-4 rounded-full bg-primary/10">
-                                <Shield className="h-12 w-12 text-primary" />
-                            </div>
-                        </div>
-                        <Heading level="h1" className="text-4xl md:text-5xl font-bold text-center mb-4">
+                <section className="page-hero border-b border-border">
+                    <div className="site-container max-w-4xl">
+                        <Heading level="h1" className="font-[760] tracking-[-0.04em] mb-5">
                             Privacy Policy
                         </Heading>
-                        <Text className="text-center text-muted-foreground text-lg">
-                            Last Updated: June 24, 2026
+                        <Text className="text-muted-foreground text-lg">
+                            Last Updated: August 14, 2026
                         </Text>
                     </div>
                 </section>
 
                 {/* Content */}
-                <section className="py-12">
-                    <div className="container px-4 md:px-6 max-w-4xl mx-auto">
-                        <div className="prose prose-zinc dark:prose-invert max-w-none">
+                <section className="site-section bg-white">
+                    <div className="site-container max-w-4xl">
+                        <div className="legal-copy">
 
                             {/* Introduction */}
                             <div className="mb-12">
                                 <Text className="text-lg leading-relaxed">
                                     <strong>Revridge Finance</strong> ("we," "our," or "us") operates the Revridge mobile application and website at{' '}
                                     <a href="https://revridge.xyz" className="text-primary hover:underline">revridge.xyz</a>.
-                                    Revridge is an investing platform and order-routing service that lets you place investment orders on the Lusaka Securities Exchange (LuSE) through licensed brokers, with a free U.S. stock practice sandbox. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.
+                                    Revridge helps users learn about investing, plan and track wealth goals, and place investment orders on the Lusaka Securities Exchange (LuSE) through licensed brokers. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.
                                     Please read this policy carefully.
                                 </Text>
                             </div>
@@ -50,7 +45,7 @@ const PrivacyPolicyPage: React.FC = () => {
                                 <Text className="mb-4">When you create an account, we collect:</Text>
                                 <ul className="list-disc pl-6 space-y-2 mb-6">
                                     <li>Email address</li>
-                                    <li>Password (encrypted)</li>
+                                    <li>Authentication credentials managed by our authentication provider</li>
                                     <li>Name (if provided)</li>
                                     <li>Phone number (if provided)</li>
                                     <li>Profile picture (if uploaded)</li>
@@ -65,11 +60,12 @@ const PrivacyPolicyPage: React.FC = () => {
                                 </ul>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">1.2 Investment & Activity Data</Heading>
-                                <Text className="mb-4">We collect information about how you use the investing and practice features:</Text>
+                                <Text className="mb-4">We collect information about how you use the investing, learning, and wealth-planning features:</Text>
                                 <ul className="list-disc pl-6 space-y-2 mb-6">
                                     <li>LuSE order history (buy/sell orders, status, and broker-confirmed executions)</li>
                                     <li>Portfolio holdings and performance (updated from broker confirmations)</li>
-                                    <li>U.S. practice-sandbox activity (virtual trades, watchlists, performance)</li>
+                                    <li>Learning progress and completed lessons</li>
+                                    <li>Goals, savings, net-worth entries, and calculator inputs you choose to save</li>
                                     <li>Watchlist preferences</li>
                                     <li>Search queries</li>
                                 </ul>
@@ -136,7 +132,7 @@ const PrivacyPolicyPage: React.FC = () => {
                                         <div>
                                             <Text className="font-semibold mb-1">Biometric Authentication</Text>
                                             <Text className="text-sm text-muted-foreground">
-                                                We utilize your device's native biometric hardware (such as Fingerprint or Face ID) to provide secure, frictionless login to the application. We do not collect, store, or transmit your biometric data to our servers. All biometric verification happens entirely locally on your device's secure hardware.
+                                                Where enabled, the app uses your device's biometric authentication interface (such as Fingerprint or Face ID) to unlock the application. Revridge receives the authentication result, not your fingerprint or face template; the operating system manages the biometric verification.
                                             </Text>
                                         </div>
                                     </div>
@@ -155,7 +151,7 @@ const PrivacyPolicyPage: React.FC = () => {
                                     <li>Create and manage your account</li>
                                     <li>Verify your identity (KYC) and onboard you with the licensed broker that executes your orders</li>
                                     <li>Route your LuSE orders to the broker and reflect broker-confirmed executions in your portfolio</li>
-                                    <li>Operate the U.S. practice sandbox</li>
+                                    <li>Provide learning, goal, calculator, and wealth-tracking features</li>
                                     <li>Send you notifications about your portfolio and order status</li>
                                     <li>Improve app functionality and user experience</li>
                                     <li>Analyze usage patterns and trends</li>
@@ -174,28 +170,26 @@ const PrivacyPolicyPage: React.FC = () => {
                                 </div>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">3.1 Where We Store Your Data</Heading>
-                                <Text className="mb-4">Your data is stored on secure cloud infrastructure:</Text>
+                                <Text className="mb-4">Your data is stored using managed cloud infrastructure and service providers:</Text>
                                 <ul className="list-disc pl-6 space-y-2 mb-6">
-                                    <li>Enterprise-grade cloud hosting with tier-1 providers</li>
-                                    <li>Data centers located in secure facilities worldwide</li>
-                                    <li>Compliant with international security standards (ISO 27001, SOC 2)</li>
-                                    <li>Regular security audits and penetration testing</li>
+                                    <li>Managed cloud hosting and database services</li>
+                                    <li>Infrastructure that may process data in multiple countries</li>
+                                    <li>Provider-managed physical and operational safeguards</li>
                                 </ul>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">3.2 Security Measures</Heading>
-                                <Text className="mb-4">We implement industry-leading security measures including:</Text>
+                                <Text className="mb-4">We and our providers use technical and organizational measures designed to protect personal information, including:</Text>
                                 <ul className="list-disc pl-6 space-y-2 mb-6">
-                                    <li>End-to-end encryption of data in transit (TLS 1.3)</li>
-                                    <li>AES-256 encryption of sensitive data at rest</li>
-                                    <li>Multi-factor authentication (MFA) support</li>
-                                    <li>Regular security audits and compliance reviews</li>
-                                    <li>24/7 security monitoring and threat detection</li>
-                                    <li>Strict access controls and role-based permissions</li>
+                                    <li>Encrypted network connections</li>
+                                    <li>Authenticated account access</li>
+                                    <li>Managed cloud-storage protections</li>
+                                    <li>Service access controls and permissions</li>
                                 </ul>
+                                <Text className="mb-6">No internet transmission or storage system can guarantee absolute security.</Text>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">3.3 Data Retention</Heading>
                                 <Text>
-                                    We retain your data for as long as your account is active. You can request deletion of your account and data at any time.
+                                    We retain information for as long as needed to provide the service and meet legal, security, fraud-prevention, dispute, broker, and regulatory obligations. You may request deletion of information under our control; some records may need to be retained, and a broker may retain data under its own obligations.
                                 </Text>
                             </div>
 
@@ -209,7 +203,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">4.1 Cloud Infrastructure</Heading>
                                 <ul className="list-disc pl-6 space-y-2 mb-6">
-                                    <li>Secure cloud hosting and database services</li>
+                                    <li>Cloud hosting and database services</li>
                                     <li>Authentication and user management systems</li>
                                     <li>Analytics and performance monitoring</li>
                                     <li>Push notifications and messaging</li>
@@ -218,8 +212,7 @@ const PrivacyPolicyPage: React.FC = () => {
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">4.2 Licensed Brokers & Market Data</Heading>
                                 <ul className="list-disc pl-6 space-y-2 mb-6">
                                     <li>Licensed Zambian brokers who execute, settle, and custody your LuSE trades</li>
-                                    <li>Licensed and regulated market data providers</li>
-                                    <li>Stock quotes and financial data providers</li>
+                                    <li>Market-information and stock-data providers</li>
                                 </ul>
                                 <Text className="mb-6 text-sm">
                                     To place LuSE orders, we share the information necessary to onboard you and route your orders — including your KYC details — with the licensed broker that executes them. The broker is an independent controller of the personal data it receives and handles it under its own privacy policy and applicable regulations.
@@ -231,13 +224,13 @@ const PrivacyPolicyPage: React.FC = () => {
                                     <li>Customer support and communication tools</li>
                                 </ul>
 
-                                <Text className="mb-4">All third-party services are carefully vetted for security and privacy compliance. We only share the minimum data necessary for each service to function.</Text>
+                                <Text className="mb-4">We use service providers under applicable agreements and share information needed for the relevant service, legal obligation, or user request.</Text>
                             </div>
 
                             {/* Section 5 */}
                             <div className="mb-12">
                                 <Heading level="h2" className="text-2xl font-bold mb-4">5. Data Sharing and Disclosure</Heading>
-                                <div className="bg-primary/10 border-l-4 border-primary p-4 mb-6">
+                                <div className="rounded-[10px] border border-primary/20 bg-primary/10 p-4 mb-6">
                                     <Text className="font-semibold">We do NOT sell your personal information to third parties.</Text>
                                 </div>
 
@@ -344,8 +337,8 @@ const PrivacyPolicyPage: React.FC = () => {
                             <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 mb-12">
                                 <Heading level="h3" className="text-xl font-semibold mb-3">Your Privacy Matters</Heading>
                                 <Text>
-                                    We are committed to protecting your privacy and securing your data. We use industry-standard security measures and{' '}
-                                    <strong>never sell your personal information</strong>.
+                                    We are committed to handling personal information transparently and applying safeguards appropriate to the service. We{' '}
+                                    <strong>do not sell your personal information</strong>.
                                 </Text>
                             </div>
 

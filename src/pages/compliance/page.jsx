@@ -1,157 +1,22 @@
-import React from 'react';
+import { FileText, Lock, Scale, ShieldAlert, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../components/ui/accordion";
-import { AlertCircle, FileText, ShieldCheck, Info, Scale, Lock, ShieldAlert } from "lucide-react";
 import Footer from '@/components/ui/home/Footer';
 
+const responsibilities = [
+  ['Revridge', 'Provides the technology experience, records order instructions, and communicates order status.'],
+  ['Licensed broker', 'Reviews eligible orders and is responsible for execution, settlement, custody, and applicable regulatory obligations.'],
+  ['You', 'Review the risks, fees, order details, and your circumstances before confirming a decision.'],
+];
+
 export default function CompliancePage() {
-  return (
-    <div className="flex flex-col min-h-screen bg-background">
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 border-b">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-flex items-center rounded-lg bg-muted px-3 py-1 text-sm font-medium">
-                  <ShieldCheck className="mr-1 h-4 w-4 text-primary" />
-                  Compliance & Transparency
-                </div>
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                  Building Trust Through Clarity
-                </h1>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Revridge is committed to building a trustworthy and transparent platform for investing on the Lusaka Securities Exchange (LuSE), alongside free investment education.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+  return <div className="min-h-screen bg-background">
+    <main id="main-content">
+      <header className="page-hero border-b border-border"><div className="site-container max-w-5xl"><h1 className="font-[760] tracking-[-0.04em]">Clarity about who does what.</h1><p className="section-copy mt-6">Revridge connects investors to the LuSE through licensed broker partners. These responsibilities stay distinct.</p></div></header>
 
-        {/* Status & Position */}
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-12 lg:grid-cols-2">
-              <div className="space-y-6">
-                <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
-                  <Info className="mr-1 h-3 w-3" />
-                  Current Status
-                </div>
-                <h2 className="text-3xl font-bold">A Broker Integration Layer</h2>
-                <div className="space-y-4 text-muted-foreground text-lg">
-                  <p>
-                    Revridge is an investing platform and order-routing service. We enable users to place real investment orders on the Lusaka Securities Exchange (LuSE), which are then executed by licensed third-party brokers.
-                  </p>
-                  <p className="font-medium text-foreground">
-                    Revridge is not a broker-dealer. We do not execute trades, settle transactions, or hold client funds or securities. U.S. stock features remain a free, simulated practice sandbox.
-                  </p>
-                </div>
-              </div>
-              <div className="space-y-6">
-                <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
-                  <Scale className="mr-1 h-3 w-3" />
-                  Regulatory Position
-                </div>
-                <h3 className="text-3xl font-bold">Regulatory Transparency</h3>
-                <div className="space-y-4 text-muted-foreground text-lg">
-                  <p>
-                    Revridge is not registered as a broker-dealer or investment advisor. Real trades on the LuSE are executed, settled, and custodied by licensed third-party brokers, who are responsible for regulatory compliance on the trades they process.
-                  </p>
-                  <p>
-                    We are working with licensed broker partners to facilitate order execution, and continue to align our platform with applicable Zambian capital market regulations.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <section className="site-section bg-white"><div className="site-container grid gap-12 lg:grid-cols-[0.72fr_1.28fr]"><div><h2 className="section-title">The operating model</h2><p className="section-copy mt-5">Revridge is the technology and order-routing layer—not the executing broker.</p></div><div className="divide-y divide-border border-y border-border">{responsibilities.map(([title, copy], index) => <div key={title} className="grid gap-3 py-7 sm:grid-cols-[55px_150px_1fr]"><span className="font-mono text-xs text-primary">0{index + 1}</span><h3 className="text-lg font-[720]">{title}</h3><p className="leading-7 text-muted-foreground">{copy}</p></div>)}</div></div></section>
 
-        {/* Commitment & Protection */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-slate-50 dark:bg-slate-900">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-12 lg:grid-cols-2">
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold">Our Commitment</h2>
-                <p className="text-muted-foreground">
-                  As we grow, we are committed to aligning with applicable regulations, including:
-                </p>
-                <div className="grid gap-4">
-                  {[
-                    { title: "User identity verification standards (KYC)", icon: ShieldCheck },
-                    { title: "Anti-money laundering practices (AML)", icon: Scale },
-                    { title: "Data protection and privacy laws", icon: Lock },
-                    { title: "Financial market regulations where applicable", icon: FileText }
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3 p-4 bg-background rounded-xl border shadow-sm">
-                      <item.icon className="h-5 w-5 text-primary" />
-                      <span className="font-medium">{item.title}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold">User Protection</h2>
-                <div className="space-y-4">
-                  {[
-                    "Real LuSE trades are executed and held by licensed brokers — not by Revridge",
-                    "U.S. stock features are fully simulated for practice and education",
-                    "Market data may be delayed or provided by third-party sources"
-                  ].map((text, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div className="mt-1 h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                        <div className="h-2 w-2 rounded-full bg-primary" />
-                      </div>
-                      <span className="text-lg text-muted-foreground">{text}</span>
-                    </div>
-                  ))}
-                  <div id="risk-disclosure" className="mt-6 p-6 rounded-2xl bg-yellow-50 border border-yellow-200 dark:bg-yellow-950/20 dark:border-yellow-900/50">
-                    <div className="flex items-center gap-2 mb-2 text-yellow-800 dark:text-yellow-400">
-                      <ShieldAlert className="h-5 w-5" />
-                      <span className="font-bold uppercase tracking-wider text-xs">Risk Disclosure</span>
-                    </div>
-                    <p className="text-yellow-900 dark:text-yellow-200 font-medium">
-                      Investing involves risk. Past performance does not guarantee future results.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <section className="site-section border-y border-border bg-[#F5F7F6]"><div className="site-container grid gap-12 lg:grid-cols-2"><div><h2 className="text-3xl font-[730] tracking-[-0.03em]">Operational commitments</h2><div className="mt-7 divide-y divide-border border-y border-border">{[[ShieldCheck, 'Identity verification standards (KYC)'], [Scale, 'Anti-money-laundering practices (AML)'], [Lock, 'Data protection and privacy requirements'], [FileText, 'Applicable capital-market requirements']].map(([Icon, text]) => <div key={text} className="flex items-center gap-4 py-5"><Icon size={20} className="text-primary" /><span className="font-[620]">{text}</span></div>)}</div></div><div><h2 className="text-3xl font-[730] tracking-[-0.03em]">What investors should know</h2><ul className="mt-7 list-disc space-y-4 pl-5 leading-7 text-muted-foreground"><li>Investing availability is subject to broker onboarding and approval.</li><li>Submitting an order does not guarantee execution or a specific price.</li><li>Market information may be delayed or supplied by third parties.</li><li>Fees and final order details should be reviewed before confirmation.</li></ul><div id="risk-disclosure" className="mt-8 rounded-[12px] border border-[#F59E0B]/35 bg-[#F59E0B]/10 p-5"><div className="flex items-center gap-2 font-[720] text-[#765000]"><ShieldAlert size={20} />Risk disclosure</div><p className="mt-2 leading-7 text-[#5E4A16]">Investing involves risk, including possible loss of capital. Past performance does not guarantee future results.</p></div></div></div></section>
 
-        {/* Documents */}
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="max-w-3xl mx-auto text-center space-y-8">
-              <h2 className="text-3xl font-bold">Policies & Documents</h2>
-              <div className="grid gap-4 sm:grid-cols-3">
-                <Link 
-                  to="/privacy"
-                  className="flex flex-col items-center gap-3 p-6 rounded-2xl border bg-background hover:bg-muted transition-colors group"
-                >
-                  <FileText className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
-                  <span className="font-bold">Privacy Policy</span>
-                </Link>
-                <Link 
-                  to="/terms"
-                  className="flex flex-col items-center gap-3 p-6 rounded-2xl border bg-background hover:bg-muted transition-colors group"
-                >
-                  <FileText className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
-                  <span className="font-bold">Terms of Service</span>
-                </Link>
-                <a 
-                  href="#risk-disclosure"
-                  className="flex flex-col items-center gap-3 p-6 rounded-2xl border bg-background hover:bg-muted transition-colors group"
-                >
-                  <FileText className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
-                  <span className="font-bold">Risk Disclosure</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
-  );
+      <section className="site-section bg-white"><div className="site-container"><h2 className="section-title">Policies and documents</h2><div className="mt-8 grid max-w-4xl divide-y divide-border border-y border-border sm:grid-cols-3 sm:divide-x sm:divide-y-0">{[["/privacy", 'Privacy policy'], ["/terms", 'Terms of service'], ['#risk-disclosure', 'Risk disclosure']].map(([href, label]) => href.startsWith('/') ? <Link key={label} className="flex items-center justify-between p-6 font-[680] hover:bg-[#F5F7F6] sm:flex-col sm:items-start sm:gap-8" to={href}><FileText className="text-primary" size={24} />{label}</Link> : <a key={label} className="flex items-center justify-between p-6 font-[680] hover:bg-[#F5F7F6] sm:flex-col sm:items-start sm:gap-8" href={href}><FileText className="text-primary" size={24} />{label}</a>)}</div></div></section>
+    </main><Footer /></div>;
 }

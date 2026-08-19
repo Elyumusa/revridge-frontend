@@ -1,393 +1,291 @@
-import React, { useState } from 'react';
-import { Button, Input, Heading, Text } from "@/components/design-system";
-import { Apple, Play, CheckCircle2, X } from "lucide-react";
-import Footer from '@/components/ui/home/Footer';
-import HowExecutionWorks from '@/components/ui/home/HowExecutionWorks';
-import { AnimatePresence, motion } from 'framer-motion';
-import ReactConfetti from 'react-confetti';
-import axios from 'axios';
-import { parseApiError, getEmailValidationError } from '@/utils/errorHandler';
+import { Play } from "lucide-react";
+import Footer from "@/components/ui/home/Footer";
+import HowExecutionWorks from "@/components/ui/home/HowExecutionWorks";
+import { AppleMark } from "@/components/ui/StoreMarks";
+import {
+  APP_SCREEN_HEIGHT,
+  APP_SCREEN_WIDTH,
+  appScreens,
+} from "@/assets/appScreens";
+import { PLAY_STORE_URL, TESTFLIGHT_URL } from "@/lib/storeLinks";
 
-// Image Assets
-const HeroAppImage = '/portfolio_page.png';
-const Google = '/google.svg';
-const Nike = '/nike.svg';
-const AppleLogo = '/Apple.svg';
+// The waitlist modal below (email capture -> /email_list/) is retired now that
+// the iOS beta is public on TestFlight, but kept commented rather than deleted
+// in case a future closed phase needs it again:
+//
+// import { FormEvent, useEffect, useRef, useState } from "react";
+// import axios from "axios";
+// import { CheckCircle2, Loader2, X } from "lucide-react";
+// import { getEmailValidationError, parseApiError } from "@/utils/errorHandler";
+//
+// function useWaitlistModal() {
+//   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+//   const [email, setEmail] = useState("");
+//   const [name, setName] = useState("");
+//   const [status, setStatus] = useState<
+//     "idle" | "loading" | "success" | "error"
+//   >("idle");
+//   const [message, setMessage] = useState("");
+//
+//   const openerRef = useRef<HTMLButtonElement>(null);
+//   const dialogRef = useRef<HTMLDivElement>(null);
+//
+//   function closeWaitlist() {
+//     setIsWaitlistOpen(false);
+//     setStatus("idle");
+//     setMessage("");
+//     setEmail("");
+//     setName("");
+//     openerRef.current?.focus();
+//   }
+//
+//   // A modal needs an escape route and somewhere to put focus; without these the
+//   // dialog traps keyboard users behind the page they came from.
+//   useEffect(() => {
+//     if (!isWaitlistOpen) return;
+//     dialogRef.current?.focus();
+//     function onKeyDown(event: KeyboardEvent) {
+//       if (event.key === "Escape") closeWaitlist();
+//     }
+//     document.addEventListener("keydown", onKeyDown);
+//     const previousOverflow = document.body.style.overflow;
+//     document.body.style.overflow = "hidden";
+//     return () => {
+//       document.removeEventListener("keydown", onKeyDown);
+//       document.body.style.overflow = previousOverflow;
+//     };
+//   }, [isWaitlistOpen]);
+//
+//   async function submitEmail(event: FormEvent) {
+//     event.preventDefault();
+//     const validationError = getEmailValidationError(email);
+//     if (validationError) {
+//       setStatus("error");
+//       setMessage(validationError);
+//       return;
+//     }
+//     setStatus("loading");
+//     try {
+//       const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
+//       const response = await axios.post(`${mainURL}/email_list/`, {
+//         email,
+//         name,
+//         source: "download_page",
+//       });
+//       if (response.status === 201) {
+//         setStatus("success");
+//         setMessage(
+//           `You're on the list. We'll notify ${email} when the iOS beta is ready.`,
+//         );
+//       }
+//     } catch (error) {
+//       const errorMessage = parseApiError(error);
+//       setStatus(
+//         errorMessage.toLowerCase().includes("already") ? "success" : "error",
+//       );
+//       setMessage(
+//         errorMessage.toLowerCase().includes("already")
+//           ? "You're already on the iOS beta list."
+//           : errorMessage,
+//       );
+//     }
+//   }
+//
+//   return { isWaitlistOpen, setIsWaitlistOpen, email, setEmail, name, setName,
+//     status, message, openerRef, dialogRef, closeWaitlist, submitEmail };
+// }
+//
+// The modal markup itself used to render at the end of this component:
+//
+// {isWaitlistOpen && (
+//   <div
+//     className="fixed inset-0 z-[80] flex items-center justify-center bg-[#00322D]/55 p-4"
+//     role="dialog"
+//     aria-modal="true"
+//     aria-labelledby="waitlist-title"
+//     onMouseDown={(event) => {
+//       if (event.currentTarget === event.target) closeWaitlist();
+//     }}
+//   >
+//     <div
+//       ref={dialogRef}
+//       tabIndex={-1}
+//       className="w-full max-w-md rounded-[14px] border border-border bg-white p-6 shadow-[0_28px_80px_rgba(0,50,45,.28)] outline-none"
+//     >
+//       <div className="flex items-start justify-between gap-4">
+//         <div>
+//           <h2 id="waitlist-title" className="text-2xl font-[730]">
+//             Join the iOS beta
+//           </h2>
+//           <p className="mt-2 text-sm leading-6 text-muted-foreground">
+//             We'll email you when a beta place is available.
+//           </p>
+//         </div>
+//         <button
+//           onClick={closeWaitlist}
+//           aria-label="Close"
+//           className="rounded-lg p-2 text-muted-foreground hover:bg-secondary"
+//         >
+//           <X size={19} />
+//         </button>
+//       </div>
+//       {status === "success" ? (
+//         <div className="mt-8 rounded-[10px] border border-[#2E7D32]/25 bg-[#2E7D32]/5 p-5 text-[#2E7D32]">
+//           <CheckCircle2 size={24} />
+//           <p className="mt-3 leading-6">{message}</p>
+//           <button className="store-action mt-6 w-full" onClick={closeWaitlist}>
+//             Done
+//           </button>
+//         </div>
+//       ) : (
+//         <form onSubmit={submitEmail} className="mt-7">
+//           <label className="block text-sm font-[650]">
+//             Name{" "}
+//             <span className="font-normal text-muted-foreground">(optional)</span>
+//             <input
+//               className="mt-2 h-12 w-full rounded-[10px] border border-input px-4 outline-none focus:border-primary"
+//               value={name}
+//               onChange={(event) => setName(event.target.value)}
+//               autoComplete="name"
+//             />
+//           </label>
+//           <label className="mt-5 block text-sm font-[650]">
+//             Email
+//             <input
+//               className="mt-2 h-12 w-full rounded-[10px] border border-input px-4 outline-none focus:border-primary"
+//               type="email"
+//               value={email}
+//               onChange={(event) => setEmail(event.target.value)}
+//               autoComplete="email"
+//               required
+//             />
+//           </label>
+//           {status === "error" && (
+//             <p className="mt-4 text-sm text-[#B71C1C]" role="alert">
+//               {message}
+//             </p>
+//           )}
+//           <button
+//             className="store-action store-action--filled mt-6 w-full"
+//             disabled={status === "loading"}
+//           >
+//             {status === "loading" ? (
+//               <>
+//                 <Loader2 className="animate-spin" size={17} />
+//                 Joining…
+//               </>
+//             ) : (
+//               "Join the beta"
+//             )}
+//           </button>
+//         </form>
+//       )}
+//     </div>
+//   </div>
+// )}
 
-const DownloadAppPage: React.FC = () => {
-    const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
-    const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-    const [message, setMessage] = useState("");
-    const [showConfetti, setShowConfetti] = useState(false);
+export default function DownloadAppPage() {
+  return (
+    <div className="min-h-screen bg-background">
+      <main id="main-content">
+        <header className="page-hero border-b border-border">
+          <div className="site-container grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+            <div>
+              <h1 className="font-[760] tracking-[-0.04em] text-foreground">
+                Your wealth journey, in your pocket.
+              </h1>
+              <p className="section-copy mt-6">
+                Learn the basics, make a plan, invest on the LuSE, and keep
+                track of everything you are building.
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <a
+                  className="store-action store-action--filled"
+                  href={PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Play size={19} />
+                  Get Android
+                </a>
+                {/* Was a button opening the waitlist modal (see the commented
+                    block above); the beta is public now, so this links
+                    straight to TestFlight. */}
+                <a
+                  className="store-action store-action--filled"
+                  href={TESTFLIGHT_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <AppleMark size={19} />
+                  Get iOS Beta
+                </a>
+              </div>
+              <p className="mt-5 text-sm text-muted-foreground">
+                Android is available now. iOS is in beta.
+              </p>
+            </div>
+            {/* The registration marks belong on the plate itself; on a padded
+                wrapper they floated in empty space and read as stray artwork. */}
+            <div className="registration-corners surface-panel mx-auto w-full max-w-[400px] overflow-hidden p-4 md:p-5">
+              <img
+                src={appScreens.invest.src}
+                alt={appScreens.invest.alt}
+                width={APP_SCREEN_WIDTH}
+                height={APP_SCREEN_HEIGHT}
+                className="block w-full rounded-[10px]"
+              />
+            </div>
+          </div>
+        </header>
 
-    const openWaitlist = () => setIsWaitlistOpen(true);
-    const closeWaitlist = () => {
-        setIsWaitlistOpen(false);
-        setStatus('idle');
-        setMessage("");
-        setEmail("");
-        setName("");
-    };
+        <section className="site-section bg-white">
+          <div className="site-container grid gap-10 md:grid-cols-[0.72fr_1.28fr] md:items-start">
+            <h2 className="section-title">
+              One app. Three connected decisions.
+            </h2>
+            <div className="divide-y divide-border border-y border-border">
+              {[
+                [
+                  "01",
+                  "Learn before the decision",
+                  "Plain-language lessons help you understand the basics and the risks.",
+                ],
+                [
+                  "02",
+                  "Invest when you are ready",
+                  "Explore LuSE-listed companies and submit eligible orders through licensed broker partners.",
+                ],
+                [
+                  "03",
+                  "Grow the whole picture",
+                  "Set goals, use planning tools, and track your net worth in the same journey.",
+                ],
+              ].map(([number, title, copy]) => (
+                <div
+                  key={number}
+                  className="grid gap-3 py-6 sm:grid-cols-[60px_1fr]"
+                >
+                  <span className="font-mono text-sm text-primary">
+                    {number}
+                  </span>
+                  <div>
+                    <h3 className="text-xl font-[700]">{title}</h3>
+                    <p className="mt-2 max-w-xl leading-7 text-muted-foreground">
+                      {copy}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-    const submitEmail = async (e: React.FormEvent) => {
-        e.preventDefault();
-        // Validate email
-        const validationError = getEmailValidationError(email);
-        if (validationError) {
-            setStatus('error');
-            setMessage(validationError);
-            return;
-        }
-
-        setStatus('loading');
-
-        try {
-            const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
-            const response = await axios.post(`${mainURL}/email_list/`, {
-                email,
-                name,
-                source: 'download_page'
-            });
-            if (response.status === 201) {
-                setStatus('success');
-                setMessage(`You're on the list! We'll notify ${email} when ready.`);
-                setShowConfetti(true);
-                setTimeout(() => setShowConfetti(false), 5000);
-            }
-        } catch (error: any) {
-            const errorMessage = parseApiError(error);
-
-            // If it's the "already on list" message, treat as success
-            if (errorMessage.includes("already")) {
-                setStatus('success');
-                setMessage("Good news! You're already on the waitlist.");
-                setShowConfetti(true);
-                setTimeout(() => setShowConfetti(false), 5000);
-            } else {
-                setStatus('error');
-                setMessage(errorMessage);
-            }
-        }
-    };
-
-    return (
-        <div className="flex flex-col min-h-screen bg-background">
-            <main className="flex-1 overflow-x-hidden">
-
-                {/* Hero Section */}
-                <section className="relative pt-24 pb-12 lg:pt-32 lg:pb-24 overflow-hidden">
-                    <div className="container px-4 md:px-6">
-                        <div className="grid lg:grid-cols-2 gap-12 items-center">
-                            <div className="space-y-8 animate-fade-in-up sm:text-center lg:text-left">
-                                <Heading level="h1" className="text-4xl md:text-6xl font-black tracking-tight leading-tight">
-                                    Two Markets. <br /> <span className="text-primary">Invest + Practice.</span>
-                                </Heading>
-                                <Text size="lg" className="text-muted-foreground text-xl md:max-w-xl mx-auto lg:mx-0">
-                                    Place buy and sell orders on the Lusaka Securities Exchange (LuSE) through licensed brokers, and explore U.S. stocks in a free practice sandbox — all in one app. Investing on the LuSE is launching soon; join the waitlist for early access.
-                                </Text>
-                                <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start pt-4">
-                                    <a href="https://play.google.com/store/apps/details?id=com.revridge.app" target="_blank" rel="noopener noreferrer">
-                                        <Button size="lg" className="h-14 px-8 min-w-[200px]" leftIcon={<Play size={20} />}>
-                                            Download Early Beta
-                                        </Button>
-                                    </a>
-                                    <Button size="lg" variant="outline" className="h-14 px-8 min-w-[200px]" onClick={openWaitlist} leftIcon={<Apple size={20} />}>
-                                        Waitlist (iOS)
-                                    </Button>
-                                </div>
-                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
-                                    <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                                    <Text size="sm" className="text-blue-600 font-medium">Currently in Beta - Join Our Growing Community</Text>
-                                </div>
-                            </div>
-
-                            {/* Phone Graphic */}
-                            <div className="relative flex justify-center lg:justify-end mt-12 lg:mt-0 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-                                <div className="relative w-[320px] h-[640px]">
-                                    {/* Background Blob */}
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 rounded-full blur-3xl transform scale-110" />
-
-                                    {/* Phone Image */}
-                                    <img
-                                        src={HeroAppImage}
-                                        alt="Revridge App"
-                                        className="relative z-10 w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
-                                    />
-
-                                    {/* Floating Badges */}
-                                    <FloatingBadge src={Google} className="top-10 -left-6 animation-float" />
-                                    <FloatingBadge src={Nike} className="bottom-20 -right-6 animation-float-delayed" />
-                                    <FloatingBadge src={AppleLogo} className="top-1/2 -right-12 animation-float" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* How Execution Works — shared transparency component */}
-                <HowExecutionWorks />
-
-                {/* App Preview Gallery */}
-                <section className="py-24 bg-secondary/30">
-                    <div className="container px-4 md:px-6">
-                        {/* Section Header */}
-                        <div className="text-center mb-16 space-y-4">
-                            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary">
-                                <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse" />
-                                <span>App Preview</span>
-                            </div>
-                            <Heading level="h2" className="text-3xl md:text-5xl font-bold">
-                                See Revridge in Action
-                            </Heading>
-                            <Text size="lg" className="text-muted-foreground max-w-2xl mx-auto">
-                                Explore the app's key features with real screenshots. Simple, intuitive, and built for you.
-                            </Text>
-                        </div>
-
-                        {/* Screenshot Gallery Grid */}
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {/* Portfolio View */}
-                            <div className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
-                                <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
-                                    <img
-                                        src="/portfolio_page.png"
-                                        alt="Portfolio view showing your simulated investments"
-                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                </div>
-                                <div className="p-6 space-y-2">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                                        <Heading level="h3" className="text-lg font-bold">Your Portfolio</Heading>
-                                    </div>
-                                    <Text muted className="text-sm">
-                                        Track your LuSE holdings in one place. Values, gains, and performance update from broker-confirmed executions — not estimates.
-                                    </Text>
-                                </div>
-                            </div>
-
-                            {/* Stock Details */}
-                            <div className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
-                                <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
-                                    <img
-                                        src="/stock_page.png"
-                                        alt="Stock details with charts and information"
-                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                </div>
-                                <div className="p-6 space-y-2">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-full bg-blue-500" />
-                                        <Heading level="h3" className="text-lg font-bold">Stock Details</Heading>
-                                    </div>
-                                    <Text muted className="text-sm">
-                                        View detailed stock information, price charts, and company data to make informed decisions.
-                                    </Text>
-                                </div>
-                            </div>
-
-                            {/* Search & Discover */}
-                            <div className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
-                                <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
-                                    <img
-                                        src="/search_page.png"
-                                        alt="Search for stocks and companies"
-                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                </div>
-                                <div className="p-6 space-y-2">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-full bg-purple-500" />
-                                        <Heading level="h3" className="text-lg font-bold">Search & Discover</Heading>
-                                    </div>
-                                    <Text muted className="text-sm">
-                                        Find stocks from U.S. and Zambian markets. Search by company name or ticker symbol.
-                                    </Text>
-                                </div>
-                            </div>
-
-                            {/* Buy & Sell */}
-                            <div className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
-                                <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
-                                    <img
-                                        src="/buy_sell_page.png"
-                                        alt="Buy and sell stocks interface"
-                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                </div>
-                                <div className="p-6 space-y-2">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-full bg-orange-500" />
-                                        <Heading level="h3" className="text-lg font-bold">Place Buy & Sell Orders</Heading>
-                                    </div>
-                                    <Text muted className="text-sm">
-                                        A simple interface to place LuSE buy and sell orders, routed to a licensed broker for execution. Track every stage from submitted to executed.
-                                    </Text>
-                                </div>
-                            </div>
-
-                            {/* Watchlist */}
-                            <div className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
-                                <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
-                                    <img
-                                        src="/wishlist.png"
-                                        alt="Watchlist of favorite stocks"
-                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                </div>
-                                <div className="p-6 space-y-2">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-full bg-pink-500" />
-                                        <Heading level="h3" className="text-lg font-bold">Watchlist</Heading>
-                                    </div>
-                                    <Text muted className="text-sm">
-                                        Save LuSE and U.S. stocks you find interesting. Monitor price changes and understand what drives them — great preparation for your next order.
-                                    </Text>
-                                </div>
-                            </div>
-
-                            {/* Zambian Market */}
-                            <div className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
-                                <div className="aspect-[9/16] relative overflow-hidden bg-zinc-900">
-                                    <img
-                                        src="/Zambian market.png"
-                                        alt="Zambian stock market (LUSE)"
-                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                </div>
-                                <div className="p-6 space-y-2">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-full bg-green-500" />
-                                        <Heading level="h3" className="text-lg font-bold">Zambian Markets (LuSE)</Heading>
-                                    </div>
-                                    <Text muted className="text-sm">
-                                        Browse Lusaka Securities Exchange (LuSE) stocks with live price data, and place orders routed to a licensed broker. Investing on the LuSE is launching soon.
-                                    </Text>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* CTA Below Gallery */}
-                        <div className="text-center mt-16">
-                            <Text className="text-muted-foreground mb-6">
-                                Ready to start investing on the LuSE?
-                            </Text>
-                            <div className="flex flex-col sm:flex-row justify-center gap-4">
-                                <a href="https://play.google.com/store/apps/details?id=com.revridge.app" target="_blank" rel="noopener noreferrer">
-                                    <Button size="lg" className="h-14 px-8 min-w-[200px]">
-                                        Download App (Android)
-                                    </Button>
-                                </a>
-                                <Button size="lg" variant="outline" onClick={openWaitlist} className="h-14 px-8 min-w-[200px]">
-                                    Join Waitlist (iOS)
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Bottom CTA */}
-                <section className="py-24 bg-background">
-                    <div className="container px-4 md:px-6">
-                        <div className="relative rounded-3xl overflow-hidden bg-zinc-900 text-white p-12 text-center">
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800 to-zinc-950" />
-                            <div className="relative z-10 space-y-6 max-w-2xl mx-auto">
-                                <Heading level="h2" className="text-3xl md:text-4xl font-bold text-white">
-                                    Invest on the LuSE. Africa wins.
-                                </Heading>
-                                <Text className="text-zinc-400">
-                                    Download the early beta on Android or join our iOS waitlist for early access to investing on the LuSE through licensed brokers — with a free U.S. practice sandbox included.
-                                </Text>
-                                <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-                                    <a href="https://play.google.com/store/apps/details?id=com.revridge.app" target="_blank" rel="noopener noreferrer">
-                                        <Button variant="secondary" className="min-w-[200px]">Download App (Android)</Button>
-                                    </a>
-                                    <Button variant="outline" className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 min-w-[200px]" onClick={openWaitlist}>Join Waitlist (iOS)</Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-            </main>
-            <Footer />
-
-            {/* Waitlist Modal */}
-            <AnimatePresence>
-                {isWaitlistOpen && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                        <motion.div
-                            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-                            onClick={closeWaitlist}
-                        />
-                        <motion.div
-                            initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-                            className="relative bg-background rounded-2xl shadow-2xl w-full max-w-md p-8 border border-border z-10"
-                        >
-                            <button onClick={closeWaitlist} className="absolute top-4 right-4 text-muted-foreground hover:text-foreground">
-                                <X size={20} />
-                            </button>
-
-                            <div className="text-center mb-6">
-                                <Heading level="h3" className="text-2xl font-bold mb-2">Join iOS Waitlist</Heading>
-                                <Text muted>Get notified when Revridge is available on the App Store to start practicing.</Text>
-                            </div>
-
-                            {status === 'success' ? (
-                                <div className="text-center py-8 space-y-4">
-                                    <div className="w-16 h-16 bg-green-500/10 text-green-500 rounded-full flex items-center justify-center mx-auto">
-                                        <CheckCircle2 size={32} />
-                                    </div>
-                                    <Text className="text-green-600 font-medium">{message}</Text>
-                                    <Button onClick={closeWaitlist} variant="outline">Close</Button>
-                                </div>
-                            ) : (
-                                <form onSubmit={submitEmail} className="space-y-4">
-                                    <div className="space-y-2 text-left">
-                                        <label className="text-sm font-medium">Name (optional)</label>
-                                        <Input
-                                            type="text"
-                                            placeholder="Your name"
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value)}
-                                            disabled={status === 'loading'}
-                                        />
-                                    </div>
-                                    <div className="space-y-2 text-left">
-                                        <label className="text-sm font-medium">Email Address</label>
-                                        <Input
-                                            type="email"
-                                            placeholder="you@example.com"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            required
-                                            disabled={status === 'loading'}
-                                        />
-                                    </div>
-                                    {status === 'error' && <Text className="text-red-500 text-sm">{message}</Text>}
-                                    <Button type="submit" className="w-full" disabled={status === 'loading'}>
-                                        {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
-                                    </Button>
-                                </form>
-                            )}
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
-
-            {showConfetti && <ReactConfetti recycle={false} numberOfPieces={200} />}
-        </div>
-    );
-};
-
-// Helper Components
-const FloatingBadge = ({ src, className }: { src: string, className?: string }) => (
-    <div className={`absolute w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform ${className}`}>
-        <img src={src} className="w-8 h-8 object-contain" alt="Brand" />
+        <HowExecutionWorks />
+      </main>
+      <Footer />
+      {/* The waitlist modal that used to render here is commented out at the
+          top of this file, alongside its state and handlers. */}
     </div>
-);
-
-export default DownloadAppPage;
+  );
+}

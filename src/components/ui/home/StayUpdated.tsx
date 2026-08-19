@@ -1,152 +1,45 @@
-import React, { useState } from 'react';
-import { Mail, Loader2, CheckCircle, AlertCircle } from "lucide-react";
-import { Input, Button, Heading, Text, Card } from '@/components/design-system';
+import { FormEvent, RefObject, useState } from 'react';
 import axios from 'axios';
-import { AnimatePresence, motion } from 'framer-motion';
-import { parseApiError, getEmailValidationError, getEmailSignupSuccessMessage } from '@/utils/errorHandler';
+import { ArrowRight, Check, Mail } from 'lucide-react';
+import { getEmailSignupSuccessMessage, getEmailValidationError, parseApiError } from '@/utils/errorHandler';
 
-interface StayUpdatedProps {
-    stayUpdatedSectionRef?: React.RefObject<HTMLElement>;
+interface Props { stayUpdatedSectionRef?: RefObject<HTMLElement>; }
+
+export default function StayUpdated({ stayUpdatedSectionRef }: Props) {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
+
+  async function submit(e: FormEvent) {
+    e.preventDefault();
+    const validation = getEmailValidationError(email);
+    if (validation) { setStatus('error'); setMessage(validation); return; }
+    setStatus('loading'); setMessage('');
+    try {
+      const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
+      await axios.post(`${mainURL}/email_list/`, { email, source: 'homepage' });
+      setStatus('success'); setMessage(getEmailSignupSuccessMessage(email));
+    } catch (error) {
+      const parsed = parseApiError(error);
+      const alreadySubscribed = parsed.toLowerCase().includes('already');
+      setStatus(alreadySubscribed ? 'success' : 'error');
+      setMessage(parsed);
+    }
+  }
+
+  return (
+    <section ref={stayUpdatedSectionRef} className="site-section bg-white" aria-labelledby="updates-title">
+      <div className="site-container grid gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-end">
+        <div><h2 id="updates-title" className="section-title">Stay close to what ships next.</h2><p className="section-copy mt-5">Product updates, new learning content, and what becomes available to invest in—sent when there is something useful to share.</p></div>
+        <form onSubmit={submit} noValidate className="surface-panel p-4 sm:p-5">
+          <label htmlFor="updates-email" className="text-sm font-[700] text-[#17201E]">Email address</label>
+          <div className="mt-2 flex flex-col gap-2 sm:flex-row">
+            <div className="relative flex-1"><Mail size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#747D7A]" /><input id="updates-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com" className="h-[52px] w-full rounded-[10px] border border-input bg-white pl-11 pr-4 text-sm outline-none focus:border-primary" aria-describedby="updates-message" /></div>
+            <button type="submit" disabled={status === 'loading'} className="store-action store-action--filled min-w-36 disabled:opacity-60">{status === 'loading' ? 'Joining…' : <>Join updates <ArrowRight size={17} /></>}</button>
+          </div>
+          {message && <p id="updates-message" role={status === 'error' ? 'alert' : 'status'} className={status === 'error' ? 'mt-3 text-sm text-[#B71C1C]' : 'mt-3 flex items-center gap-2 text-sm text-[#2E7D32]'}>{status === 'success' && <Check size={16} />}{message}</p>}
+        </form>
+      </div>
+    </section>
+  );
 }
-
-const StayUpdated: React.FC<StayUpdatedProps> = ({ stayUpdatedSectionRef }) => {
-    const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-    const [message, setMessage] = useState('');
-
-    const submitEmail = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        // Validate email
-        const validationError = getEmailValidationError(email);
-        if (validationError) {
-            setStatus('error');
-            setMessage(validationError);
-            return;
-        }
-
-        setStatus('loading');
-        setMessage('');
-
-        try {
-            const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
-            const response = await axios.post(`${mainURL}/email_list/`, {
-                email,
-                name,
-                source: 'homepage'
-            });
-
-            if (response.status === 201) {
-                setStatus('success');
-                setMessage(getEmailSignupSuccessMessage(email));
-                setEmail('');
-                setName('');
-            }
-        } catch (error: any) {
-            setStatus('error');
-            setMessage(parseApiError(error));
-        }
-    };
-
-    return (
-        <section
-            ref={stayUpdatedSectionRef}
-            className="w-full py-24 relative overflow-hidden flex items-center justify-center bg-zinc-950 text-white"
-        >
-            {/* Background Gradients */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-800 via-zinc-950 to-zinc-950 opacity-80" />
-            <div className="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-            <div className="absolute bottom-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-            <div className="container relative z-10 px-4 md:px-6">
-                <div className="flex flex-col items-center max-w-2xl mx-auto text-center space-y-8 animate-fade-in-up">
-
-                    <div className="p-4 rounded-full bg-white/5 ring-1 ring-white/10 backdrop-blur-sm">
-                        <Mail className="h-8 w-8 text-white" />
-                    </div>
-
-                    <div className="space-y-4">
-                        <Heading level="h2" className="text-3xl md:text-5xl font-bold tracking-tight text-white">
-                            Stay ahead of the curve.
-                        </Heading>
-                        <Text className="text-zinc-400 text-lg max-w-lg mx-auto">
-                            Join our exclusive waiting list to receive early access, market insights, and updates on our launch.
-                        </Text>
-                    </div>
-
-                    <Card variant="glass" className="w-full max-w-md p-2 bg-white/5 border-white/10 shadow-2xl">
-                        <form onSubmit={submitEmail} className="flex flex-col gap-2 p-1">
-                            <div className="flex flex-col sm:flex-row gap-2">
-                                <div className="relative flex-1">
-                                    <Input
-                                        type="text"
-                                        placeholder="Your name (optional)"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        className="h-12 bg-transparent border-transparent focus:border-transparent focus:ring-0 text-white placeholder:text-zinc-500 pl-4"
-                                        disabled={status === 'loading' || status === 'success'}
-                                    />
-                                </div>
-                                <div className="relative flex-1">
-                                    <Input
-                                        type="email"
-                                        placeholder="name@example.com"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        className="h-12 bg-transparent border-transparent focus:border-transparent focus:ring-0 text-white placeholder:text-zinc-500 pl-4"
-                                        disabled={status === 'loading' || status === 'success'}
-                                    />
-                                </div>
-                            </div>
-                            <Button
-                                type="submit"
-                                size="lg"
-                                className="h-12 px-8 rounded-lg bg-white text-black hover:bg-zinc-200 font-semibold transition-all"
-                                disabled={status === 'loading' || status === 'success'}
-                            >
-                                {status === 'loading' ? (
-                                    <Loader2 className="animate-spin h-5 w-5" />
-                                ) : status === 'success' ? (
-                                    <CheckCircle className="h-5 w-5" />
-                                ) : (
-                                    "Subscribe"
-                                )}
-                            </Button>
-                        </form>
-                    </Card>
-
-                    <div className="h-6">
-                        <AnimatePresence mode="wait">
-                            {status === 'success' && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0 }}
-                                    className="flex items-center text-green-400 gap-2"
-                                >
-                                    <CheckCircle size={16} />
-                                    <span className="text-sm font-medium">{message}</span>
-                                </motion.div>
-                            )}
-                            {status === 'error' && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0 }}
-                                    className="flex items-center text-red-400 gap-2"
-                                >
-                                    <AlertCircle size={16} />
-                                    <span className="text-sm font-medium">{message}</span>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    );
-};
-
-export default StayUpdated;

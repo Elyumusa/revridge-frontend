@@ -1,138 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Facebook, Linkedin, Instagram, Twitter, Mail, Info } from 'lucide-react';
-import { Text } from '@/components/design-system';
-import Logo from "@/assets/images/Revridge.png";
+import { NavLink } from 'react-router-dom';
+import Logo from '@/assets/images/logo_no_background.png';
+import SocialLinks from '@/components/ui/SocialLinks';
 
-const Footer: React.FC = () => {
-    const currentYear = new Date().getFullYear();
+const links = [
+  ['About', '/about'], ['FAQ', '/faq'], ['Support', '/support'], ['Compliance', '/compliance'],
+  ['Privacy', '/privacy'], ['Terms', '/terms'], ['Blog', '/blog'], ['Get the app', '/download'],
+];
 
-    return (
-        <footer className="w-full bg-zinc-950 text-zinc-400 border-t border-white/10 pt-16 pb-8">
-            <div className="container px-4 md:px-6">
-                <div className="grid grid-cols-1 gap-12 md:grid-cols-4 lg:grid-cols-5 mb-12">
-
-                    {/* Brand Column */}
-                    <div className="lg:col-span-2 space-y-6">
-                        <Link to="/" className="flex items-center space-x-3">
-                            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                                <img src={Logo} alt="Revridge Logo" className="w-8 h-8 object-contain" />
-                            </div>
-                            <span className="text-2xl font-bold text-white tracking-tight">Revridge</span>
-                        </Link>
-                        <Text className="max-w-xs text-zinc-500">
-                            Your digital front door to the Lusaka Securities Exchange (LuSE) — invest through licensed brokers, with full transparency at every step.
-                        </Text>
-                        <div className="flex gap-4">
-                            <SocialLink href="https://facebook.com/revridgeapp" icon={<Facebook size={20} />} label="Facebook" />
-                            <SocialLink href="https://linkedin.com/company/revridge" icon={<Linkedin size={20} />} label="LinkedIn" />
-                            <SocialLink href="https://instagram.com/revridgeapp" icon={<Instagram size={20} />} label="Instagram" />
-                            <SocialLink href="https://twitter.com/revridgeapp" icon={<Twitter size={20} />} label="Twitter" />
-                        </div>
-                    </div>
-
-                    {/* Links Columns */}
-                    <div>
-                        <h3 className="font-semibold text-white mb-6">Platform</h3>
-                        <ul className="space-y-4 text-sm">
-                            <FooterLink to="/">Home</FooterLink>
-
-                            <FooterLink to="/download">Download App</FooterLink>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="font-semibold text-white mb-6">Company</h3>
-                        <ul className="space-y-4 text-sm">
-                            <FooterLink to="/about">About Us</FooterLink>
-                            <FooterLink to="/support">Support</FooterLink>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="font-semibold text-white mb-6">Legal</h3>
-                        <ul className="space-y-4 text-sm">
-                            <FooterLink to="/terms">Terms of Service</FooterLink>
-                            <FooterLink to="/privacy">Privacy Policy</FooterLink>
-                            <FooterLink to="/compliance">Compliance</FooterLink>
-                            <FooterLink to="/compliance#risk-disclosure">Risk Disclosure</FooterLink>
-                        </ul>
-                    </div>
-                </div>
-
-                {/* Divider */}
-                <div className="w-full h-px bg-white/5 my-8" />
-
-                {/* Legal Text */}
-                <div className="space-y-6 text-xs text-zinc-600 leading-relaxed">
-                    <p>
-                        © {currentYear} Revridge Inc. All rights reserved.
-                    </p>
-
-                    {/* Beta Status Disclosure */}
-                    <div className="p-4 rounded-lg bg-blue-900/20 border border-blue-500/20">
-                        <p className="font-medium text-blue-400 mb-2 flex items-center gap-2">
-                            <Info size={14} /> Beta Status
-                        </p>
-                        <p className="text-zinc-400">
-                            Revridge is currently in early beta. While we strive for reliability, you may encounter bugs or service interruptions.
-                            Investing on the LuSE through licensed brokers is launching soon; U.S. stock features are simulated for education. We appreciate your patience and feedback as we build the future of investing in Africa.
-                        </p>
-                    </div>
-
-                    {/* Platform Status */}
-                    <div className="p-4 rounded-lg bg-zinc-900/50 border border-white/5">
-                        <p className="font-medium text-zinc-400 mb-2 flex items-center gap-2">
-                            <Info size={14} /> Investing Platform, Not a Broker
-                        </p>
-                        <p className="text-zinc-500">
-                            Revridge is an investing platform and order-routing service, not a broker-dealer. Lusaka Securities Exchange (LuSE) orders are executed by licensed third-party brokers, who handle execution, settlement, and custody.
-                            U.S. stock features are simulated for educational and practice purposes only.
-                        </p>
-                    </div>
-
-                    {/* Risk Disclosure */}
-                    <div className="p-4 rounded-lg bg-zinc-900/50 border border-white/5">
-                        <p className="font-medium text-zinc-400 mb-2 flex items-center gap-2">
-                            <Info size={14} /> Investment Risk Disclosure
-                        </p>
-                        <p className="text-zinc-500">
-                            Investing involves risk, including the possible loss of principal. Past performance does not guarantee future results.
-                            Revridge does not provide investment advice. All investment decisions are made by the user.
-                            Please invest responsibly and only with money you can afford to lose.
-                        </p>
-                    </div>
-
-                    {/* Geographic Limitations */}
-                    <p className="text-zinc-600">
-                        Revridge services are currently available to residents of Zambia. Expansion to other African countries is planned for the future.
-                        U.S. stock features are simulated for practice; investing on the Lusaka Securities Exchange (LuSE) is launching soon.
-                    </p>
-                </div>
+export default function Footer() {
+  return (
+    <footer className="bg-[#00322D] text-white">
+      <div className="site-container py-14 md:py-20">
+        <div className="grid gap-12 border-b border-white/15 pb-12 lg:grid-cols-[1.25fr_1fr]">
+          <div className="max-w-xl">
+            <div className="flex items-center gap-3">
+              <span className="grid h-11 w-11 place-items-center rounded-[12px] bg-white"><img src={Logo} alt="" width={32} height={32} className="h-8 w-8" /></span>
+              <span className="text-2xl font-[760] tracking-[-0.03em]">Revridge</span>
             </div>
-        </footer>
-    );
-};
-
-// Helper Components
-const SocialLink = ({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) => (
-    <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-10 h-10 rounded-full bg-zinc-900 border border-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300"
-        aria-label={label}
-    >
-        {icon}
-    </a>
-);
-
-const FooterLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
-    <li>
-        <Link to={to} className="hover:text-white transition-colors duration-200 block">
-            {children}
-        </Link>
-    </li>
-);
-
-export default Footer;
+            <p className="mt-6 max-w-lg text-base leading-7 text-white/75">Learn clearly, plan your goals, and follow your whole financial progress in one place — with investing available today on the LuSE.</p>
+            <SocialLinks className="mt-7" />
+          </div>
+          {/* -mx-3 keeps the links flush with the column edge while each one
+              still carries a full 44px tap target. */}
+          <nav className="-mx-3 grid grid-cols-2 gap-x-5 sm:grid-cols-4 lg:grid-cols-2" aria-label="Footer navigation">
+            {links.map(([label, to]) => <NavLink key={to} to={to} className="flex min-h-11 items-center rounded-[8px] px-3 text-sm font-semibold text-white/75 transition-colors hover:text-[#CAF300]">{label}</NavLink>)}
+          </nav>
+        </div>
+        <div className="grid gap-5 pt-8 text-sm leading-6 text-white/70 lg:grid-cols-[1fr_auto]">
+          <p className="max-w-[72ch]">Revridge is an investing technology and order-routing platform. Licensed broker partners execute, settle, and custody eligible LuSE trades. Revridge does not provide personalised investment advice.</p>
+          <p className="lg:text-right">© {new Date().getFullYear()} Revridge. Investing involves risk.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}

@@ -1,299 +1,236 @@
-import { Card, CardContent, CardHeader, CardTitle, Heading, Text, Button } from "@/components/design-system";
-import { BookOpen, Globe, ShieldCheck, Target, Rocket, TrendingUp, Zap, Heart, ArrowRight } from "lucide-react";
-import Footer from '@/components/ui/home/Footer';
-import { NavLink } from 'react-router-dom';
-import { cn } from '@/lib/utils';
+import { ArrowRight, BookOpen, Goal, Landmark } from "lucide-react";
+import { Link } from "react-router-dom";
+import Footer from "@/components/ui/home/Footer";
+import SocialLinks from "@/components/ui/SocialLinks";
+// Face-centred 112px crops of Elyu.jpg / Wongani.jpg. The originals are 232KB
+// combined for what renders as two 56px avatars.
+import ElyuPortrait from "@/assets/images/founder-elyumusa.webp";
+import WonganiPortrait from "@/assets/images/founder-wongani.webp";
 
-const values = [
-    {
-        title: "Easy to Use",
-        description: "No confusing jargon. Simple app that anyone can understand, even if you've never invested before.",
-        icon: Zap,
-        color: "text-blue-500",
-        bg: "bg-blue-500/10"
-    },
-    {
-        title: "Learn as You Go",
-        description: "Investing education runs alongside investing, not before it. Plain-language lessons you can apply the moment you place an order.",
-        icon: BookOpen,
-        color: "text-purple-500",
-        bg: "bg-purple-500/10"
-    },
-    {
-        title: "Start Small",
-        description: "You don't need thousands to invest. Place an order with an amount you're comfortable with and grow your portfolio over time.",
-        icon: TrendingUp,
-        color: "text-emerald-500",
-        bg: "bg-emerald-500/10"
-    },
-    {
-        title: "Safe & Secure",
-        description: "Licensed brokers execute and custody your securities, and bank-level security protects your personal information and data.",
-        icon: ShieldCheck,
-        color: "text-red-500",
-        bg: "bg-red-500/10"
-    },
-    {
-        title: "Local + Global",
-        description: "Invest in Zambian companies on the LuSE (like Zambeef) and explore U.S. giants (like Apple) in a free practice sandbox.",
-        icon: Globe,
-        color: "text-orange-500",
-        bg: "bg-orange-500/10"
-    },
-    {
-        title: "Built for You",
-        description: "Made by Zambians, for Zambians. We understand your needs and build features that actually help you.",
-        icon: Heart,
-        color: "text-pink-500",
-        bg: "bg-pink-500/10"
-    }
+const journey = [
+  {
+    icon: BookOpen,
+    step: "Learn",
+    copy: "Understand investing in plain language before money is involved.",
+  },
+  {
+    icon: Landmark,
+    step: "Invest",
+    copy: "Explore LuSE companies and route eligible orders through licensed broker partners.",
+  },
+  {
+    icon: Goal,
+    step: "Grow",
+    copy: "Track goals, plans, and net worth so wealth is more than one balance.",
+  },
 ];
 
 export default function AboutPage() {
-    return (
-        <div className="flex flex-col min-h-screen bg-background">
-            <main className="flex-1">
+  return (
+    <div className="min-h-screen bg-background">
+      <main id="main-content">
+        <header className="page-hero border-b border-border">
+          {/* The heading carries the weight here, so it gets the wider column;
+              at 0.9fr it broke into five lines with dead space alongside. */}
+          <div className="site-container route-frame grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
+            <h1 className="font-[760] tracking-[-0.04em] text-foreground">
+              Investing makes more sense when the journey is connected.
+            </h1>
+            <p className="section-copy lg:pb-2">
+              Revridge brings learning, financial planning, investing, and
+              progress tracking into one approachable wealth-building platform
+              for Zambia.
+            </p>
+          </div>
+        </header>
 
-                {/* Header Section */}
-                <section className="relative py-24 md:py-32 overflow-hidden">
-                    <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary/5 to-transparent" />
-                    <div className="container relative z-10 px-4 md:px-6 text-center space-y-6 animate-fade-in-up">
-                        <div className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm font-medium border-primary/20 bg-primary/5 text-primary">
-                            <Heart size={16} className="fill-current" />
-                            <span>About Revridge</span>
-                        </div>
-                        <Heading level="h1" className="text-4xl md:text-6xl font-black tracking-tight">
-                            Invest with Confidence, <br /> Learn as You Grow
-                        </Heading>
-                        <div className="max-w-4xl mx-auto space-y-6">
-                            <Text size="lg" className="text-muted-foreground md:text-xl leading-relaxed">
-                                Revridge is an investing platform designed to make investing <strong className="text-foreground">simple and accessible</strong> for everyday people,
-                                especially in Zambia and across Africa — your digital front door to the Lusaka Securities Exchange (LuSE).
-                            </Text>
+        <section className="site-section bg-white">
+          <div className="site-container grid gap-12 lg:grid-cols-[0.72fr_1.28fr]">
+            <div>
+              <h2 className="section-title">Why Revridge exists</h2>
+            </div>
+            <div className="max-w-3xl text-lg leading-8 text-muted-foreground">
+              <p>
+                Most people are shut out of investing long before they ever reach
+                a market. They are shut out by jargon, by minimums set for
+                somebody else, and by advice that assumes knowledge nobody
+                offered them. What is left is scattered: lessons in one place,
+                market information in another, goals somewhere else again.
+              </p>
+              <p className="mt-5">
+                Revridge exists to close that gap. One app where the education is
+                genuinely good, the planning tools are yours to use whether or
+                not you have money invested yet, and the investment options are
+                reachable through licensed partners — so that access grows with
+                your understanding instead of waiting on it.
+              </p>
+            </div>
+          </div>
+        </section>
 
-                            <div className="space-y-4">
-                                {/* Right Now Card */}
-                                <div className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-6">
-                                    <div className="flex items-baseline gap-2 mb-2">
-                                        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs font-bold">1</span>
-                                        <Heading level="h3" className="text-lg font-bold text-foreground">Right Now</Heading>
-                                    </div>
-                                    <Text className="text-muted-foreground">
-                                        Investing on the LuSE is launching soon — place buy and sell orders routed to licensed brokers, track every stage of execution, and build a portfolio. A free U.S. stock practice sandbox is available today.
-                                    </Text>
-                                </div>
-
-                                {/* Coming Soon Card */}
-                                <div className="bg-gradient-to-r from-blue-500/10 to-blue-500/5 border border-blue-500/20 rounded-xl p-6">
-                                    <div className="flex items-baseline gap-2 mb-2">
-                                        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 text-white text-xs font-bold">2</span>
-                                        <Heading level="h3" className="text-lg font-bold text-foreground">Coming Soon</Heading>
-                                    </div>
-                                    <Text className="text-muted-foreground">
-                                        Multi-broker support, dividends and statements, and international markets — as we grow toward a multi-broker investment platform across Africa and beyond.
-                                    </Text>
-                                </div>
-                            </div>
-                            <Text className="text-muted-foreground italic">
-                                Place orders, watch them execute, and build investing knowledge in an easy, beginner-friendly way.
-                            </Text>
-                        </div>
+        <section className="site-section border-y border-border bg-[#F5F7F6]">
+          <div className="site-container">
+            <div className="grid gap-8 lg:grid-cols-[0.68fr_1.32fr]">
+              <div>
+                <h2 className="section-title">Learn → Invest → Grow</h2>
+                <p className="section-copy mt-5">
+                  Not three separate features. One sequence that keeps context
+                  as you move.
+                </p>
+              </div>
+              <div className="divide-y divide-border border-y border-border">
+                {journey.map(({ icon: Icon, step, copy }, index) => (
+                  <div
+                    key={step}
+                    className="grid gap-4 py-7 sm:grid-cols-[48px_130px_1fr] sm:items-center"
+                  >
+                    <span className="font-mono text-xs text-muted-foreground">
+                      0{index + 1}
+                    </span>
+                    <div className="flex items-center gap-3">
+                      <span className="flex size-9 items-center justify-center rounded-[9px] bg-[#CAF300] text-[#004B44]">
+                        <Icon size={19} />
+                      </span>
+                      <h3 className="text-xl font-[720]">{step}</h3>
                     </div>
-                </section>
+                    <p className="max-w-xl leading-7 text-muted-foreground">
+                      {copy}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
-                {/* The Problem & Solution */}
-                <section className="py-16 bg-background relative z-10">
-                    <div className="container px-4 md:px-6">
-                        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-                            <div className="space-y-6">
-                                <div className="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500">
-                                    <Target size={24} />
-                                </div>
-                                <Heading level="h2" className="text-3xl md:text-4xl font-bold">The Problem We Saw</Heading>
-                                <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-                                    <Text>
-                                        Most Zambians want to invest and grow their money, but traditional investing feels:
-                                    </Text>
-                                    <ul className="space-y-2 pl-6">
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-red-500 mt-1">✗</span>
-                                            <span><strong>Too complicated</strong> - Full of confusing terms and jargon</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-red-500 mt-1">✗</span>
-                                            <span><strong>Too expensive</strong> - Requires thousands to start</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-red-500 mt-1">✗</span>
-                                            <span><strong>Too risky</strong> - No way to practice before using real money</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-red-500 mt-1">✗</span>
-                                            <span><strong>Too limited</strong> - Hard to access international markets</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-red-900 to-orange-900 border border-border">
-                                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-red-500/20 to-transparent" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <Target className="w-48 h-48 text-white/10" />
-                                </div>
-                                <div className="absolute bottom-6 left-6 right-6">
-                                    <div className="p-4 rounded-xl bg-white/5 backdrop-blur-md border border-white/10">
-                                        <Text className="text-white font-medium">"Investing shouldn't be this hard"</Text>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <section className="site-section bg-white">
+          <div className="site-container grid divide-y divide-border border-y border-border md:grid-cols-2 md:divide-x md:divide-y-0">
+            <div className="py-7 md:pr-8">
+              <h2 className="text-2xl font-[720]">
+                Built for Zambian investors
+              </h2>
+              <p className="mt-3 max-w-xl leading-7 text-muted-foreground">
+                Local market context and practical education for first-time and
+                early-stage investors. Investing is available today on the
+                Lusaka Securities Exchange.
+              </p>
+            </div>
+            <div className="py-7 md:pl-8">
+              <h2 className="text-2xl font-[720]">Broker-backed execution</h2>
+              <p className="mt-3 max-w-xl leading-7 text-muted-foreground">
+                Revridge is the technology layer. Licensed broker partners are
+                responsible for accepted order execution, settlement, and
+                custody.
+              </p>
+            </div>
+          </div>
+        </section>
 
-                        {/* Our Solution */}
-                        <div className="grid md:grid-cols-2 gap-12 items-center">
-                            <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-emerald-900 to-blue-900 border border-border order-2 md:order-1">
-                                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-500/20 to-transparent" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <Rocket className="w-48 h-48 text-white/10" />
-                                </div>
-                                <div className="absolute bottom-6 left-6 right-6">
-                                    <div className="p-4 rounded-xl bg-white/5 backdrop-blur-md border border-white/10">
-                                        <Text className="text-white font-medium">Simple. Safe. Smart.</Text>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="space-y-6 order-1 md:order-2">
-                                <div className="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500">
-                                    <Rocket size={24} />
-                                </div>
-                                <Heading level="h2" className="text-3xl md:text-4xl font-bold">Our Solution</Heading>
-                                <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-                                    <Text>
-                                        Revridge makes investing as easy as using social media:
-                                    </Text>
-                                    <ul className="space-y-2 pl-6">
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-emerald-500 mt-1">✓</span>
-                                            <span><strong>Simple language</strong> - No jargon, just plain English</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-emerald-500 mt-1">✓</span>
-                                            <span><strong>Start small</strong> - Begin with any amount you're comfortable with</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-emerald-500 mt-1">✓</span>
-                                            <span><strong>Invest on the LuSE</strong> — Place orders routed to licensed brokers</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-emerald-500 mt-1">✓</span>
-                                            <span><strong>Explore global markets</strong> — Invest locally on the LuSE and practice with U.S. companies in one app</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+        {/* Restored from the pre-redesign About page (commit 399ebb3). Two
+            phrases were adjusted to match the current LuSE-and-brokers
+            positioning — see the note in the handoff. */}
+        <section
+          className="site-section border-t border-border bg-[#F5F7F6]"
+          aria-labelledby="founders-title"
+        >
+          <div className="site-container grid gap-12 lg:grid-cols-[0.72fr_1.28fr]">
+            <div>
+              <h2 id="founders-title" className="section-title">
+                Why we built this
+              </h2>
+              <p className="section-copy mt-5">A message from our co-founders.</p>
+              <div className="mt-8 flex items-center gap-4">
+                <img
+                  src={ElyuPortrait}
+                  alt=""
+                  width={112}
+                  height={112}
+                  className="h-14 w-14 rounded-full border border-border object-cover"
+                  loading="lazy"
+                />
+                <img
+                  src={WonganiPortrait}
+                  alt=""
+                  width={112}
+                  height={112}
+                  className="-ml-7 h-14 w-14 rounded-full border border-border object-cover"
+                  loading="lazy"
+                />
+                <p className="text-sm font-[680] text-[#17201E]">
+                  Ely&rsquo;umusa &amp; Wongani
+                  <span className="mt-0.5 block font-normal text-[color:var(--meta-ink)]">
+                    Co-Founders
+                  </span>
+                </p>
+              </div>
+            </div>
 
-                {/* What Makes Us Different */}
-                <section className="py-24 bg-secondary/30">
-                    <div className="container px-4 md:px-6">
-                        <div className="text-center mb-16">
-                            <Heading level="h2" className="text-3xl font-bold mb-4">What Makes Us Different</Heading>
-                            <Text className="text-muted-foreground max-w-2xl mx-auto">
-                                We're not just another investment app. Here's what sets us apart:
-                            </Text>
-                        </div>
-                        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                            {values.map((val, idx) => (
-                                <Card key={idx} variant="glass" hoverEffect className="border-secondary/20 bg-card/30 h-full">
-                                    <CardHeader>
-                                        <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-transform group-hover:scale-110", val.bg, val.color)}>
-                                            <val.icon size={24} />
-                                        </div>
-                                        <CardTitle>{val.title}</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <Text muted className="text-sm leading-relaxed">
-                                            {val.description}
-                                        </Text>
-                                    </CardContent>
-                                </Card>
-                            ))}
-                        </div>
-                    </div>
-                </section>
+            <blockquote className="surface-panel p-6 text-lg leading-8 text-muted-foreground md:p-9">
+              <p className="text-[#17201E]">
+                <strong className="font-[720]">
+                  We started Revridge because we lived this problem.
+                </strong>
+              </p>
+              <p className="mt-5">
+                As young Zambians who wanted to grow our money, we kept running
+                into the same wall. Investing was treated as something for other
+                people — people with capital, contacts, or a finance background.
+                The knowledge sat behind jargon, the products sat behind
+                gatekeepers, and nobody was explaining either.
+              </p>
+              <p className="mt-5">
+                So we asked ourselves:{' '}
+                <strong className="font-[680] text-[#17201E]">
+                  &ldquo;What if one app could teach you properly and let you act
+                  on what you learn?&rdquo;
+                </strong>
+              </p>
+              <p className="mt-5">
+                That question is what Revridge is. Education worth the name, in
+                plain language. Tools to plan and see your whole financial
+                picture. And access to real investments, handled by licensed
+                partners — starting with the market open to Zambians today, and
+                widening as we earn the right to carry more.
+              </p>
+              <footer className="mt-7 border-t border-border pt-6">
+                <p className="italic">
+                  &ldquo;We&rsquo;re building the platform we wish existed when
+                  we were starting out — one where the door is open first and the
+                  options grow with you. If you&rsquo;ve ever felt like investing
+                  wasn&rsquo;t for you, this is for you.&rdquo;
+                </p>
+                <cite className="mt-4 block not-italic font-[680] text-primary">
+                  — Ely&rsquo;umusa &amp; Wongani, Co-Founders
+                </cite>
+              </footer>
+            </blockquote>
+          </div>
+        </section>
 
-                {/* Why We Built This (Story) */}
-                <section className="py-24 bg-background">
-                    <div className="container px-4 md:px-6">
-                        <div className="max-w-4xl mx-auto">
-                            <div className="text-center mb-12">
-                                <Heading level="h2" className="text-3xl font-bold mb-4">Why We Built This</Heading>
-                                <Text className="text-muted-foreground max-w-2xl mx-auto">
-                                    A personal story from our founders
-                                </Text>
-                            </div>
-
-                            <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-3xl p-8 md:p-12 border border-primary/20">
-                                <div className="space-y-6 text-lg leading-relaxed">
-                                    <Text>
-                                        <strong className="text-primary">We started Revridge because we lived this problem.</strong>
-                                    </Text>
-                                    <Text className="text-muted-foreground">
-                                        As young Zambians interested in growing our money, we found that traditional investing was either too complicated,
-                                        too expensive, or simply not accessible to us. We wanted to buy shares in companies we believed in - both local
-                                        businesses and global brands - but the barriers were too high.
-                                    </Text>
-                                    <Text className="text-muted-foreground">
-                                        So we asked ourselves: <strong>"What if investing was as easy as ordering food on your phone?"</strong>
-                                    </Text>
-                                    <Text className="text-muted-foreground">
-                                        That question led us to build Revridge - an app where anyone can invest on the Lusaka Securities Exchange,
-                                        track every stage of their orders, and learn as they grow their portfolio. No finance degree needed. No huge capital required.
-                                        Just you, your phone, and the desire to grow your money.
-                                    </Text>
-                                    <div className="pt-6 border-t border-primary/20">
-                                        <Text className="text-muted-foreground italic">
-                                            "We're building the investment platform we wish existed when we were starting out.
-                                            If you've ever felt like investing wasn't for you - this is for you."
-                                        </Text>
-                                        {/* <Text className="text-primary font-semibold mt-4">
-                                            - Ely'umusa & Wongani, Co-Founders
-                                        </Text> */}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* CTA Section */}
-                <section className="py-24 bg-gradient-to-br from-primary/10 to-primary/5">
-                    <div className="container px-4 md:px-6">
-                        <div className="max-w-3xl mx-auto text-center space-y-8">
-                            <Heading level="h2" className="text-3xl md:text-4xl font-bold">
-                                Ready to Start Investing?
-                            </Heading>
-                            <Text size="lg" className="text-muted-foreground">
-                                Join the waitlist for early access to investing on the LuSE through Revridge. Place orders through licensed brokers, track every step, and learn as you grow your portfolio.
-                            </Text>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                                <NavLink to="/download">
-                                    <Button size="lg" rightIcon={<ArrowRight size={20} />}>
-                                        Download App
-                                    </Button>
-                                </NavLink>
-                                <NavLink to="/">
-                                    <Button variant="outline" size="lg">
-                                        Learn More
-                                    </Button>
-                                </NavLink>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-            </main>
-            <Footer />
-        </div>
-    );
+        <section className="site-section bg-[#00322D] text-white">
+          <div className="site-container flex flex-col justify-between gap-8 md:flex-row md:items-end">
+            <div>
+              <h2 className="max-w-2xl text-4xl font-[740] tracking-[-0.035em] text-white md:text-5xl">
+                See the journey in the app.
+              </h2>
+              <p className="mt-4 max-w-xl text-white/70">
+                Android is available now. iOS is in beta.
+              </p>
+              <p className="mt-8 text-sm font-[680] text-white/60">
+                Follow Revridge
+              </p>
+              <SocialLinks className="mt-3" />
+            </div>
+            <Link
+              className="store-action shrink-0 border-white bg-white text-[#004B44] hover:bg-[#F5F7F6]"
+              to="/download"
+            >
+              Get the app <ArrowRight size={18} />
+            </Link>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
 }
