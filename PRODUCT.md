@@ -34,7 +34,8 @@ Revridge is a **wealth-building platform**, not a LuSE trading app. The LuSE is 
 - Revridge does not provide personalised investment advice.
 - Licensed broker partners execute, settle, and custody eligible LuSE trades.
 - Investing availability is subject to identity verification, broker approval, market conditions, and applicable product requirements.
-- The website includes an investment calculator whose chart updates from the selected stock. Its functionality and backend calls are established product behavior and must be preserved through frontend redesigns.
+- The homepage's calculator is the Grow Calculator: a generic, client-side compound-growth illustration (starting amount, monthly top-up, years, an illustrative annual-growth assumption). It makes no backend or market-data calls. It replaced an earlier version that fetched live LuSE closing prices per company/period, which was retired by explicit product decision (2026-08) over API load at scale — do not reintroduce a market-data-fetching calculator on this page without that decision being revisited.
+- The Grow Calculator's growth-rate options (bank interest, government bonds, unit trusts) are illustrative comparison benchmarks, not products Revridge offers — unit trusts in particular are a planned future instrument (see Positioning) and must not be presented as available through Revridge today. Keep the disclaimer that the percentages are estimates, not guaranteed or current rates.
 - Existing backend integrations, API contracts, submissions, routes, and functional behavior must be preserved unless a future product decision explicitly changes them.
 - International-market expansion and other roadmap capabilities must not be presented as currently available.
 - The exact legal entity wording is unresolved in the current website, which variously uses “Revridge Finance” and “Revridge Inc.” Future legal copy must preserve existing wording until the authoritative entity name is confirmed.

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import Hero from '@/components/ui/home/Hero';
-import InvestmentCalculator from '@/components/ui/InvestmentCalculator';
+import GrowCalculator from '@/components/ui/GrowCalculator';
 import ProductJourney from '@/components/ui/home/ProductJourney';
 import DownloadOurApp from '@/components/ui/home/DownloadOurApp';
 import WhyRevridge from '@/components/ui/home/WhyRevridge';
@@ -15,7 +15,7 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <main id="main-content" className="flex-1">
         <Hero />
-        <InvestmentCalculator />
+        <GrowCalculator />
         <ProductJourney />
         <HowExecutionWorks />
         <DownloadOurApp />
