@@ -1,93 +1,28 @@
-import React, { useState, useRef } from 'react';
-import { BookOpen } from "lucide-react"
-import { Input } from "../input"
-import { Button } from '../button';
+import { useState } from 'react';
 import axios from 'axios';
-import { parseApiError, getEmailValidationError, getEmailSignupSuccessMessage } from '../../../utils/errorHandler';
+import { Mail } from 'lucide-react';
+import { parseApiError } from '@/utils/errorHandler';
 
-const SubscribeToNewsletter = () => {
-  const [email, setEmail] = useState("")
-  const [name, setName] = useState("")
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('');
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    // Here you would typically send the email to your backend
-    if (!isValidEmail(email)) {
-      setErrorMessage('Invalid email address.');
-      return;
-    }
+export default function SubscribeToNewsletter() {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [status, setStatus] = useState('idle');
+  const [message, setMessage] = useState('');
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setStatus('error'); setMessage('Enter a valid email address.'); return; }
+    setStatus('loading'); setMessage('');
     try {
       const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
-      const response = await axios.post(`${mainURL}/email_list/`, {
-        email,
-        name,
-        source: 'blog'
-      });
-      //console.log(`status: ${response.status}`)
-      if (response.status === 201) {
-        setIsSubmitted(true)
-        setErrorMessage('')
-        setName('')
-      } else {
-        setErrorMessage('An error occurred. Please try again later.');
-        setIsSubmitted(false)
-      }
-      //console.log("Email submitted:", email)
+      const response = await axios.post(`${mainURL}/email_list/`, { email, name, source: 'blog' });
+      if (response.status === 201) { setStatus('success'); setMessage('You’re subscribed.'); }
     } catch (error) {
-      const errorMessage = parseApiError(error);
-
-      // If already on list, show as success
-      if (errorMessage.includes("already")) {
-        setIsSubmitted(true);
-        setErrorMessage('');
-      } else {
-        setErrorMessage(errorMessage);
-        setIsSubmitted(false);
-      }
+      const parsed = parseApiError(error);
+      setStatus(parsed.toLowerCase().includes('already') ? 'success' : 'error');
+      setMessage(parsed.toLowerCase().includes('already') ? 'You’re already subscribed.' : parsed);
     }
   }
-  function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-  return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <BookOpen className="h-12 w-12 text-primary" />
-          <h2 className="text-2xl font-bold">Subscribe to Our Newsletter</h2>
-          <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-            Get the latest blog posts and market insights delivered directly to your inbox.
-          </p>
-          <div className="w-full max-w-sm space-y-2">
-            <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-sm space-y-2">
-              <Input
-                type="text"
-                placeholder="Your name (optional)"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <div className="flex w-full space-x-2">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <Button type="submit">Subscribe</Button>
-              </div>
-            </form>
-            {errorMessage && <p>{errorMessage}</p>}
-            {isSubmitted && (
-              <p className="text-green-600 dark:text-green-400">Thank you for subscribing!</p>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
 
-export default SubscribeToNewsletter
+  return <section className="border-y border-border bg-[#F5F7F6] py-10"><div className="site-container grid gap-6 md:grid-cols-[0.8fr_1.2fr] md:items-end"><div><h2 className="text-2xl font-[720]">Useful updates, occasionally.</h2><p className="mt-2 text-muted-foreground">New articles and market learning from Revridge.</p></div><form onSubmit={handleSubmit} className="grid gap-2 sm:grid-cols-[0.7fr_1fr_auto]"><input className="h-12 rounded-[10px] border border-input bg-white px-4 text-sm outline-none focus:border-primary" placeholder="Name (optional)" value={name} onChange={(event) => setName(event.target.value)} /><div className="relative"><Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={17} /><input className="h-12 w-full rounded-[10px] border border-input bg-white pl-11 pr-4 text-sm outline-none focus:border-primary" type="email" placeholder="Email address" value={email} onChange={(event) => setEmail(event.target.value)} required /></div><button className="store-action store-action--filled h-12" disabled={status === 'loading'}>{status === 'loading' ? 'Joining…' : 'Subscribe'}</button>{message && <p className={status === 'error' ? 'text-sm text-[#B71C1C] sm:col-span-3' : 'text-sm text-[#2E7D32] sm:col-span-3'}>{message}</p>}</form></div></section>;
+}

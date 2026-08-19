@@ -1,4 +1,3 @@
-import { Heading, Text, Card, CardContent } from "@/components/design-system";
 import { ChevronDown } from "lucide-react";
 import Footer from '@/components/ui/home/Footer';
 import { useState } from 'react';
@@ -16,81 +15,69 @@ interface FAQCategory {
 
 const faqCategories: FAQCategory[] = [
     {
-        title: "General",
+        title: "Getting Started",
         faqs: [
             {
                 question: "What is Revridge?",
-                answer: "Revridge is an investing platform and your digital front door to the Lusaka Securities Exchange (LuSE). You place real buy and sell orders on LuSE stocks, a licensed broker executes them on your behalf, and you track every stage from submitted to executed. U.S. stocks are available in a free practice sandbox."
+                answer: "Revridge is a wealth-building app. It helps you learn about investing, plan and track financial goals, follow your net worth, and invest when you are ready. Investing is available today on the Lusaka Securities Exchange (LuSE)."
             },
             {
                 question: "Can I invest real money on Revridge?",
-                answer: "Yes. You can place real buy and sell orders on LuSE stocks through Revridge; a licensed broker executes them on your behalf. Investing on the LuSE is launching soon — join the waitlist to be notified. U.S. stocks remain a free, simulated practice sandbox."
+                answer: "Eligible users can submit LuSE investment orders through Revridge. Orders are routed to a licensed broker for review and execution. Availability depends on identity verification, broker approval, market hours, and applicable product requirements."
             },
             {
                 question: "Is Revridge a bank or a broker?",
-                answer: "No. Revridge is neither a bank nor a broker-dealer. It's an investing platform and order-routing service. Real trades on the LuSE are executed, settled, and custodied by licensed third-party brokers. U.S. stock features are simulated for education."
+                answer: "No. Revridge is a technology platform. Licensed broker partners are responsible for executing, settling, and holding securities associated with LuSE orders. Revridge does not hold client securities."
             },
             {
-                question: "Is this safe to use?",
-                answer: "Yes. Your real orders go to licensed brokers who handle execution, settlement, and custody of your securities. Your account data is protected with bank-level security, and you can see the status of every order at every stage."
+                question: "Where should I begin?",
+                answer: "Start in Learn to understand the basics, set a goal in Grow, and visit Invest when you are ready to explore LuSE-listed companies and complete the required onboarding."
             },
             {
                 question: "Who can use Revridge?",
-                answer: "Revridge is currently available to residents of Zambia. Expansion to other African countries is planned for the future."
+                answer: "The current product is focused on Zambia. Some investing features may have additional residency, age, identity, or broker-approval requirements."
             }
         ]
     },
     {
-        title: "Markets & Investing",
+        title: "Investing",
         faqs: [
             {
-                question: "Can I invest in Zambian stocks?",
-                answer: "Yes. You can place real buy and sell orders on Lusaka Securities Exchange (LuSE) stocks through Revridge, routed to a licensed broker for execution. Investing on the LuSE is launching soon."
+                question: "Which market is available in Invest?",
+                answer: "Investing through Revridge is currently available on shares listed on the Lusaka Securities Exchange (LuSE). Any other product or market you may have seen discussed is not available yet, and we will say so clearly in the app when that changes."
             },
             {
                 question: "How does execution work?",
-                answer: "When you place an order, Revridge captures your order intent and routes it to a licensed broker. The broker executes it on the LuSE and returns the fill — price, time, and any fees. You track the whole lifecycle live: Submitted → Sent to broker → Executed. Your portfolio updates from broker-confirmed executions, not estimates."
-            },
-            {
-                question: "What U.S. stocks can I explore?",
-                answer: "You can explore and practice investing in most stocks listed on major U.S. exchanges (NYSE, NASDAQ) in a free virtual sandbox. All U.S. features are simulated — no real money is involved."
-            },
-            {
-                question: "What is simulation mode?",
-                answer: "Simulation (sandbox) mode lets you practice buying and selling U.S. stocks using virtual money. It's completely risk-free — there's no real money involved — and it's designed to help you learn how markets work. It applies only to U.S. stocks; LuSE investing is real."
+                answer: "Revridge records your order and routes it to a licensed broker. The broker reviews and, when accepted, executes it on the LuSE. Your order status and portfolio are updated from broker confirmations."
             },
             {
                 question: "What are the fees?",
-                answer: "U.S. stock simulation is free to use. For investing on the LuSE, broker execution fees and any applicable charges will be shown clearly before you place an order, and detailed fee information will be shared in advance of launch."
+                answer: "Applicable broker, exchange, regulatory, and service charges should be shown before an order is confirmed. Review the order summary carefully because fees may vary by order and partner."
             },
             {
-                question: "What are fractional shares?",
-                answer: "Fractional shares allow you to buy a portion of a stock rather than a whole share. For example, if a stock costs ZMW 1,000 per share, you could invest a smaller amount and own a fraction of a share. This makes expensive stocks more accessible — a concept you can explore today in the U.S. sandbox."
+                question: "Does submitting an order guarantee execution?",
+                answer: "No. An order can remain pending, be rejected, expire, or execute at a different available price. Market conditions and broker checks affect the outcome."
             }
         ]
     },
     {
-        title: "Platform & Technology",
+        title: "Learn, Grow & Track",
         faqs: [
             {
-                question: "What platforms are supported?",
-                answer: "Revridge is available as a mobile app for both iOS and Android devices."
+                question: "What can I learn in the app?",
+                answer: "Learn includes structured financial lessons, investing basics, risk and diversification topics, and a searchable jargon buster."
             },
             {
-                question: "Is there a demo mode?",
-                answer: "Yes! You can practice trading U.S. stocks risk-free in a virtual sandbox before (or alongside) placing real LuSE orders. It's perfect for learning how markets work and building your investing confidence."
+                question: "Does Revridge hold the money in my savings goals?",
+                answer: "No. Savings goals are tracking tools. You keep money in your own bank or mobile-money account and record progress in Revridge."
             },
             {
-                question: "How do I download the app?",
-                answer: "Our Android app is currently available in early beta. iOS users can join our waitlist on the Download page to be notified when the app is ready."
+                question: "Are calculator results guaranteed?",
+                answer: "No. Calculators are educational planning estimates based on the inputs you provide. Actual returns, inflation, taxes, fees, and market conditions can differ."
             },
             {
-                question: "What is the current status of the platform?",
-                answer: "Revridge is in early beta. U.S. stock simulation is available today, and investing on the LuSE through licensed brokers is launching soon. We're actively gathering feedback and improving the platform."
-            },
-            {
-                question: "Do I need internet to use the app?",
-                answer: "The app has offline mode support with cached data, but you'll need an internet connection for real-time quotes and to execute trades."
+                question: "What does the Home screen track?",
+                answer: "Home brings together your next action, learning progress, LuSE portfolio snapshot, current goal, net worth, and recent activity where data is available."
             }
         ]
     },
@@ -99,7 +86,7 @@ const faqCategories: FAQCategory[] = [
         faqs: [
             {
                 question: "How is my data protected?",
-                answer: "We use bank-level encryption, secure authentication, and follow industry best practices for data protection to ensure your information is safe."
+                answer: "Revridge uses encrypted network connections, authenticated access, and access controls appropriate to the service. See the Privacy Policy for the categories of data we collect and the service providers involved."
             },
             {
                 question: "What authentication methods are available?",
@@ -107,7 +94,7 @@ const faqCategories: FAQCategory[] = [
             },
             {
                 question: "Is my money safe?",
-                answer: "Your real LuSE orders are executed and held by licensed brokers, who are responsible for execution, settlement, and custody — Revridge does not hold client funds or securities. Your personal data and account details are protected with bank-level security, and you can track the status of every order in real time. U.S. stock features are simulated, so no real money is at risk there."
+                answer: "Revridge does not custody securities. A licensed broker partner is responsible for execution, settlement, and custody for accepted LuSE orders. Investing always carries risk, including possible loss of capital."
             },
             {
                 question: "What if I forget my PIN?",
@@ -115,7 +102,7 @@ const faqCategories: FAQCategory[] = [
             },
             {
                 question: "Who has access to my personal information?",
-                answer: "Your personal information is protected and only used for account management and regulatory compliance. We do not sell your data to third parties. See our Privacy Policy for full details."
+                answer: "Authorised Revridge personnel and service providers may access information where needed to operate the service. Broker partners receive information required for onboarding and orders. See the Privacy Policy for details."
             }
         ]
     },
@@ -124,11 +111,11 @@ const faqCategories: FAQCategory[] = [
         faqs: [
             {
                 question: "How do I get help?",
-                answer: "You can use in-app support, email us through our Support page, or check this FAQ section. We aim to respond to all inquiries within 24-48 hours during beta."
+                answer: "You can use in-app support, email us through our Support page, or check this FAQ section. Response times can vary during beta."
             },
             {
                 question: "What are support hours?",
-                answer: "During beta, we provide email support with responses within 24-48 hours. As we grow, we plan to add live chat during market hours and phone support for complex issues."
+                answer: "During beta, you can contact us through email, WhatsApp, and the in-app support options. Response times and channels may change as the service develops."
             },
             {
                 question: "How do I report a bug?",
@@ -149,9 +136,9 @@ const FAQAccordion = ({ question, answer }: FAQItem) => {
         <div className="border-b border-border last:border-0">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full py-6 flex items-center justify-between text-left hover:text-primary transition-colors group"
+                className="group flex w-full items-center justify-between py-6 text-left hover:text-primary"
             >
-                <Text className="font-semibold text-lg pr-4 group-hover:text-primary">{question}</Text>
+                <span className="pr-4 text-lg font-[670] group-hover:text-primary">{question}</span>
                 <ChevronDown
                     size={20}
                     className={cn(
@@ -166,7 +153,7 @@ const FAQAccordion = ({ question, answer }: FAQItem) => {
                     isOpen ? "max-h-96 pb-6" : "max-h-0"
                 )}
             >
-                <Text className="text-muted-foreground leading-relaxed">{answer}</Text>
+                <p className="max-w-3xl leading-7 text-muted-foreground">{answer}</p>
             </div>
         </div>
     );
@@ -175,39 +162,26 @@ const FAQAccordion = ({ question, answer }: FAQItem) => {
 export default function FAQPage() {
     return (
         <div className="flex flex-col min-h-screen bg-background">
-            <main className="flex-1">
-                {/* Hero Section */}
-                <section className="relative py-24 md:py-32 overflow-hidden">
-                    <div className="absolute inset-0 z-0 bg-secondary/20 skew-y-3 origin-top-left scale-110" />
-                    <div className="container relative z-10 px-4 md:px-6 text-center space-y-6 animate-fade-in-up">
-                        <Heading level="h1" className="text-4xl md:text-6xl font-black tracking-tight">
-                            Frequently Asked Questions
-                        </Heading>
-                        <Text size="lg" className="max-w-3xl mx-auto text-muted-foreground md:text-xl leading-relaxed">
-                            Everything you need to know about Revridge, investing, and our platform.
-                        </Text>
+            <main id="main-content" className="flex-1">
+                <header className="page-hero border-b border-border">
+                    <div className="site-container max-w-5xl">
+                        <h1 className="font-[760] tracking-[-0.04em]">Clear answers before you move money.</h1>
+                        <p className="section-copy mt-6">How Revridge works, what licensed brokers handle, and what to expect from investing on the LuSE.</p>
                     </div>
-                </section>
+                </header>
 
                 {/* FAQ Categories */}
-                <section className="py-16 bg-background">
-                    <div className="container px-4 md:px-6 max-w-4xl mx-auto">
-                        <div className="space-y-12">
+                <section className="site-section bg-white">
+                    <div className="site-container max-w-5xl">
+                        <div className="space-y-16">
                             {faqCategories.map((category, idx) => (
-                                <div key={idx} className="space-y-6">
-                                    <div className="flex items-center gap-3">
-                                        <div className="h-1 w-12 bg-primary rounded-full" />
-                                        <Heading level="h2" className="text-2xl font-bold">
-                                            {category.title}
-                                        </Heading>
-                                    </div>
-                                    <Card variant="glass" className="border-border/50">
-                                        <CardContent className="p-0">
+                                <div key={idx} className="grid gap-6 md:grid-cols-[220px_1fr]">
+                                    <h2 className="text-2xl font-[720]">{category.title}</h2>
+                                    <div className="border-y border-border">
                                             {category.faqs.map((faq, faqIdx) => (
                                                 <FAQAccordion key={faqIdx} {...faq} />
                                             ))}
-                                        </CardContent>
-                                    </Card>
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -215,19 +189,15 @@ export default function FAQPage() {
                 </section>
 
                 {/* Still Have Questions CTA */}
-                <section className="py-24 bg-secondary/30">
-                    <div className="container px-4 md:px-6">
-                        <div className="max-w-3xl mx-auto text-center space-y-6">
-                            <Heading level="h2" className="text-3xl md:text-4xl font-bold">
-                                Still Have Questions?
-                            </Heading>
-                            <Text className="text-muted-foreground text-lg">
-                                Can't find the answer you're looking for? Our support team is here to help.
-                            </Text>
-                            <div className="pt-4">
+                <section className="site-section border-t border-border bg-[#F5F7F6]">
+                    <div className="site-container">
+                        <div className="max-w-3xl space-y-6">
+                            <h2 className="section-title">Still have a question?</h2>
+                            <p className="section-copy">Send it to the Revridge support team.</p>
+                            <div>
                                 <a
                                     href="/support"
-                                    className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8"
+                                    className="store-action store-action--filled"
                                 >
                                     Contact Support
                                 </a>

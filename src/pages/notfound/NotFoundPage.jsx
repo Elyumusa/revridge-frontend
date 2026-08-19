@@ -1,18 +1,25 @@
-import React from 'react'
-import { FaExclamationTriangle } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
-const NotFoundPage = () => {
-  return (
-    <section className="text-center flex flex-col justify-center items-center h-96">
-      <FaExclamationTriangle className='text-yellow-400 fa-4x mb-4'/>
-      <h1 className="text-6xl font-bold mb-4">404 Not Found</h1>
-      <p className="text-xl mb-5">This page does not exist</p>
-      <Link
-        to="/"
-        className="text-white bg-indigo-700 hover:bg-indigo-900 rounded-md px-3 py-2 mt-4"
-        >Go Back</Link>
-    </section>
-  )
-}
+import { ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
+import Footer from "@/components/ui/home/Footer";
 
-export default NotFoundPage
+export default function NotFoundPage() {
+  return (
+    <div className="min-h-screen bg-background">
+      <main id="main-content" className="page-hero min-h-[62vh]">
+        <div className="site-container route-frame">
+          <h1 className="font-[760] tracking-[-0.04em]">
+            This page is off the map.
+          </h1>
+          <p className="section-copy mt-6">
+            The link may have moved, or the address may be incomplete.
+          </p>
+          <Link className="store-action store-action--filled mt-8" to="/">
+            <ArrowLeft size={18} />
+            Back to Revridge
+          </Link>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+}

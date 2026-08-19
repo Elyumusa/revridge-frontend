@@ -1,398 +1,612 @@
-import { useState, useEffect } from 'react';
-import { Slider } from "@/components/ui/slider";
-import { Button, Card, Heading, Text } from "@/components/design-system";
-import { cn } from "@/lib/utils";
-import { ArrowUp, ArrowDown, TrendingUp, Calendar } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import axios from "axios";
-import { motion, AnimatePresence } from "framer-motion";
-import { ResponsiveContainer, XAxis, YAxis, Tooltip, AreaChart, Area } from 'recharts';
+import {
+  Area,
+  AreaChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import {
+  AlertTriangle,
+  ArrowDown,
+  ArrowUp,
+  CalendarClock,
+  RefreshCw,
+  TrendingUp,
+} from "lucide-react";
 
-// Logos (served from public folder)
-const Tesla = '/tesla.svg';
-const Apple = "/Apple.svg";
-const Spot = '/spotify.svg';
-const MSFT = '/microsoft.svg';
-const Nvidia = '/nvidia-7.svg';
-const SBUX = '/starbucks.svg';
-const Google = '/google.svg';
-const Meta = '/meta-facebook.svg';
-const Netflix = '/netflix.svg';
+import { Slider } from "@/components/ui/slider";
+import { cn } from "@/lib/utils";
 
-// Interfaces
 interface Company {
   id: string;
   name: string;
-  logo: string;
-  gradient: string;
+  shortName: string;
+}
+
+interface HistoryPoint {
+  date: string;
+  close: number;
 }
 
 interface CalculationResult {
-  split: number;
-  latest_price: string;
+  symbol: string;
+  company_name: string;
+  currency: "ZMW";
   old_price: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
+  latest_price: string;
+  start_date: string;
+  /** The API returns `calculation_date`; older payloads used `latest_date`. */
+  latest_date?: string;
+  calculation_date?: string;
+  history?: HistoryPoint[];
+  split?: number | string;
+  is_mock?: boolean;
 }
 
-// Data
 const companies: Company[] = [
-  { id: 'TSLA', name: 'Tesla', logo: `${Tesla}?height=40&width=40`, gradient: "from-red-500 to-red-900" },
-  { id: 'AAPL', name: 'Apple', logo: `${Apple}?height=40&width=40`, gradient: "from-gray-400 to-gray-800" },
-  { id: 'GOOGL', name: 'Google', logo: `${Google}?height=40&width=40`, gradient: "from-green-500 to-green-900" },
-  { id: 'AMZN', name: 'Amazon', logo: `https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg`, gradient: "from-yellow-500 to-orange-900" }, // Added Amazon
-  { id: 'MSFT', name: 'Microsoft', logo: `${MSFT}?height=40&width=40`, gradient: "from-blue-500 to-blue-900" },
-  { id: 'NVDA', name: 'Nvidia', logo: `${Nvidia}?height=40&width=40`, gradient: "from-green-400 to-emerald-900" },
-  { id: 'NFLX', name: 'Netflix', logo: `${Netflix}?height=40&width=40`, gradient: "from-red-600 to-red-950" },
-  { id: 'META', name: 'Meta', logo: `${Meta}?height=40&width=40`, gradient: "from-blue-400 to-blue-800" },
-  { id: 'SBUX', name: 'Starbucks', logo: `${SBUX}?height=40&width=40`, gradient: "from-green-600 to-green-900" },
+  { id: "CECZ", name: "Copperbelt Energy", shortName: "CEC" },
+  { id: "ZNCO", name: "Zanaco", shortName: "ZAN" },
+  { id: "ZMBF", name: "Zambeef", shortName: "ZMB" },
+  { id: "ATEL", name: "Airtel Zambia", shortName: "AIR" },
+  { id: "ZSUG", name: "Zambia Sugar", shortName: "ZSG" },
+  { id: "CHIL", name: "Chilanga Cement", shortName: "CHI" },
+  { id: "PUMA", name: "Puma Energy", shortName: "PUM" },
+  { id: "BATZ", name: "BAT Zambia", shortName: "BAT" },
+  { id: "AECI", name: "AECI Mining", shortName: "AEC" },
 ];
 
 const timeFrames = [
-  { id: 1, label: '1 Year' },
-  { id: 2, label: '2 Years' },
-  { id: 3, label: '3 Years' },
-  { id: 5, label: '5 Years' },
+  { years: 1, label: "1Y" },
+  { years: 2, label: "2Y" },
+  { years: 3, label: "3Y" },
+  { years: 5, label: "5Y" },
 ];
 
+const minAmount = 100;
+const maxAmount = 100_000;
+
+function sliderPosition(amount: number) {
+  const min = Math.log(minAmount);
+  const max = Math.log(maxAmount);
+  return ((Math.log(amount) - min) / (max - min)) * 100;
+}
+
+function amountFromSlider(position: number) {
+  const min = Math.log(minAmount);
+  const max = Math.log(maxAmount);
+  const raw = Math.exp(min + ((max - min) * position) / 100);
+  return Math.round(raw / 10) * 10;
+}
+
+function formatKwacha(value: number, maximumFractionDigits = 0) {
+  return new Intl.NumberFormat("en-ZM", {
+    style: "currency",
+    currency: "ZMW",
+    currencyDisplay: "code",
+    maximumFractionDigits,
+  }).format(value);
+}
+
+/**
+ * Historical closing prices change at most once a trading day, and the response
+ * varies only by (symbol, period) — nine companies and four periods, so the
+ * whole feature has 36 possible answers. Caching them per session turns a
+ * browsing user's dozens of requests into at most one per combination they
+ * actually open.
+ *
+ * This is a client-side floor, not the real fix: a shared cache in front of the
+ * API is what makes upstream load independent of how many people visit.
+ */
+const RESULT_TTL_MS = 12 * 60 * 60 * 1000;
+const resultCache = new Map<string, { at: number; data: CalculationResult }>();
+
+function resultCacheKey(symbol: string, years: number) {
+  return `revridge:calc:${symbol}:${years}`;
+}
+
+function readCachedResult(
+  symbol: string,
+  years: number,
+  ignoreAge = false,
+): CalculationResult | null {
+  const key = resultCacheKey(symbol, years);
+  const fresh = (entry: { at: number; data: CalculationResult }) =>
+    ignoreAge || Date.now() - entry.at < RESULT_TTL_MS;
+
+  const inMemory = resultCache.get(key);
+  if (inMemory && fresh(inMemory)) return inMemory.data;
+
+  try {
+    const raw = window.sessionStorage.getItem(key);
+    if (!raw) return null;
+    const entry = JSON.parse(raw) as { at: number; data: CalculationResult };
+    if (!entry?.data || !fresh(entry)) return null;
+    resultCache.set(key, entry);
+    return entry.data;
+  } catch {
+    // Private browsing and storage-blocked contexts fall back to memory only.
+    return null;
+  }
+}
+
+function writeCachedResult(
+  symbol: string,
+  years: number,
+  data: CalculationResult,
+) {
+  const key = resultCacheKey(symbol, years);
+  const entry = { at: Date.now(), data };
+  resultCache.set(key, entry);
+  try {
+    window.sessionStorage.setItem(key, JSON.stringify(entry));
+  } catch {
+    // Memory cache still applies.
+  }
+}
+
+function formatMediumDate(value?: string) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toLocaleDateString("en-ZM", { dateStyle: "medium" });
+}
+
 export default function InvestmentCalculator() {
-  const [selectedCompany, setSelectedCompany] = useState<Company>(companies[0]);
+  const [selectedCompany, setSelectedCompany] = useState(companies[0]);
   const [selectedTimeFrame, setSelectedTimeFrame] = useState(1);
-  const [investmentAmount, setInvestmentAmount] = useState(100);
-  const [percentageGain, setPercentageGain] = useState(0);
-  const [finalAmount, setFinalAmount] = useState(100);
-  const [loading, setLoading] = useState(true);
+  const [investmentAmount, setInvestmentAmount] = useState(1_000);
+  const investmentAmountRef = useRef(investmentAmount);
   const [apiData, setApiData] = useState<CalculationResult | null>(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  // Chart data state
-  const [chartData, setChartData] = useState<{ name: string, value: number }[]>([]);
+  const [requestNonce, setRequestNonce] = useState(0);
+  // Tracks which nonce has already been honoured, so "Try again" bypasses the
+  // cache once instead of disabling it for the rest of the session.
+  const servedNonceRef = useRef(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    fetchReturns();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCompany, selectedTimeFrame]);
+    investmentAmountRef.current = investmentAmount;
+  }, [investmentAmount]);
 
-  // Recalculate when investment amount changes (local only, no API call needed if data exists)
+  // Nothing is fetched until the section is close to the viewport. Visitors who
+  // read the hero and leave cost the market API nothing at all.
   useEffect(() => {
-    if (apiData) {
-      const latest = parseFloat(apiData.latest_price);
-      const old = parseFloat(apiData.old_price);
-      const split = typeof apiData.split === 'number' ? apiData.split : parseFloat(apiData.split as string) || 1;
-
-      const sharesAtOldPrice = investmentAmount / old;
-      const sharesAfterSplit = split * sharesAtOldPrice;
-      const newAmount = sharesAfterSplit * latest;
-
-      const percIncrease = ((newAmount - investmentAmount) / investmentAmount) * 100;
-
-      setFinalAmount(newAmount);
-      setPercentageGain(percIncrease);
-
-      // Generate chart data
-      const points = [];
-      for (let i = 0; i <= 10; i++) {
-        const t = i / 10;
-        const value = investmentAmount + (newAmount - investmentAmount) * (t * t); // Quadratic ease-in
-        points.push({ name: `${i}`, value: value });
-      }
-      setChartData(points);
+    const element = sectionRef.current;
+    if (!element || isVisible) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
+      return;
     }
-  }, [investmentAmount, apiData]);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [isVisible]);
 
-  const fetchReturns = async () => {
-    setLoading(true);
-    setError(null);
-    const selectedDate = new Date();
-    const year = selectedDate.getFullYear();
-    const newYear = year - selectedTimeFrame;
-    selectedDate.setFullYear(newYear);
+  useEffect(() => {
+    if (!isVisible) return;
+    const controller = new AbortController();
 
-    const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL || "http://localhost:8000";
-    const apiUrl = `${mainURL}/api/investment_calculator/?start=${selectedDate.toLocaleDateString('en-CA')}&symbol=${selectedCompany.id}&amount=${investmentAmount}`;
+    // The response depends only on symbol and period — every amount is derived
+    // client-side from old_price/latest_price — so a combination fetched once is
+    // good for the whole session.
+    const isRetry = requestNonce !== servedNonceRef.current;
+    servedNonceRef.current = requestNonce;
 
-    try {
-      const result = await axios.get(apiUrl);
-      const data = result.data;
-
-      setApiData(data);
-      calculateAndSetValues(investmentAmount, data);
-
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      
-      if (axios.isAxiosError(error) && error.response?.status === 429) {
-        setError("Market throughput limit reached. Please wait a moment before your next calculation.");
-        // When throttled, we don't fall back to mock data to keep the UI honest
-        return;
-      }
-
-      // Fallback mock data only for other errors (network/server down)
-      const mockData = {
-        split: 1,
-        latest_price: (Math.random() * 200 + 100).toString(),
-        old_price: (Math.random() * 100 + 50).toString()
-      };
-      setApiData(mockData);
-      calculateAndSetValues(investmentAmount, mockData);
-    } finally {
+    const cached = readCachedResult(selectedCompany.id, selectedTimeFrame);
+    if (cached && !isRetry) {
+      setApiData(cached);
+      setError(null);
       setLoading(false);
+      return;
     }
-  };
 
-  const calculateAndSetValues = (amount: number, data: CalculationResult) => {
-    // Always calculate based on current amount and price data
-    // Don't use backend's pre-calculated new_amount/perc_increase as they're for the original API request amount
-    const latest = parseFloat(data.latest_price);
-    const old = parseFloat(data.old_price);
-    const split = typeof data.split === 'number' ? data.split : parseFloat(data.split as string) || 1;
+    async function fetchReturns() {
+      setLoading(true);
+      setError(null);
+      setApiData(null);
 
-    const sharesAtOldPrice = amount / old;
-    const sharesAfterSplit = split * sharesAtOldPrice;
-    const newAmount = sharesAfterSplit * latest;
+      const selectedDate = new Date();
+      selectedDate.setFullYear(selectedDate.getFullYear() - selectedTimeFrame);
+      const backend =
+        import.meta.env.VITE_REVRIDGE_BACKEND_URL || "http://localhost:8000";
 
-    const percIncrease = ((newAmount - amount) / amount) * 100;
-
-    setFinalAmount(newAmount);
-    setPercentageGain(percIncrease);
-
-    // Generate chart data
-    const points = [];
-    for (let i = 0; i <= 10; i++) {
-      const t = i / 10;
-      const value = amount + (newAmount - amount) * (t * t); // Quadratic ease-in
-      points.push({ name: `${i}`, value: value });
+      try {
+        const response = await axios.get<CalculationResult>(
+          `${backend}/api/investment_calculator/`,
+          {
+            params: {
+              start: selectedDate.toLocaleDateString("en-CA"),
+              symbol: selectedCompany.id,
+              amount: investmentAmountRef.current,
+            },
+            signal: controller.signal,
+          },
+        );
+        writeCachedResult(selectedCompany.id, selectedTimeFrame, response.data);
+        setApiData(response.data);
+      } catch (requestError) {
+        if (axios.isCancel(requestError)) return;
+        const status = axios.isAxiosError(requestError)
+          ? requestError.response?.status
+          : null;
+        const message = axios.isAxiosError<{ error?: string }>(requestError)
+          ? requestError.response?.data?.error
+          : null;
+        // A stale cached answer beats an empty chart: these are historical
+        // closes, so yesterday's copy is still the right shape.
+        const fallback = readCachedResult(
+          selectedCompany.id,
+          selectedTimeFrame,
+          true,
+        );
+        if (fallback) {
+          setApiData(fallback);
+          return;
+        }
+        setError(
+          status === 429
+            ? "Too many requests just now. Give it a moment and try again."
+            : message ||
+                "Historical LuSE prices are temporarily unavailable. Please try again.",
+        );
+      } finally {
+        if (!controller.signal.aborted) setLoading(false);
+      }
     }
-    setChartData(points);
-  };
 
-  const formatCurrency = (val: number) => {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
-  };
+    fetchReturns();
+    return () => controller.abort();
+  }, [selectedCompany, selectedTimeFrame, requestNonce, isVisible]);
 
-  // Logarithmic scale for better UX
-  // Map slider percentage (0-100) to dollar amount ($10-$10,000)
-  const minAmount = 10;
-  const maxAmount = 10000;
+  const calculation = useMemo(() => {
+    if (!apiData) return null;
+    const oldPrice = Number(apiData.old_price);
+    const latestPrice = Number(apiData.latest_price);
+    if (
+      !Number.isFinite(oldPrice) ||
+      !Number.isFinite(latestPrice) ||
+      oldPrice <= 0
+    )
+      return null;
 
-  const toLog = (val: number) => {
-    if (val <= 0) return 0;
-    const minv = Math.log(minAmount);
-    const maxv = Math.log(maxAmount);
-    const scale = (maxv - minv) / 100;
-    return (Math.log(val) - minv) / scale;
-  };
+    const parsedSplit =
+      typeof apiData.split === "number"
+        ? apiData.split
+        : Number(apiData.split || 1);
+    const split =
+      Number.isFinite(parsedSplit) && parsedSplit > 0 ? parsedSplit : 1;
+    const shares = (investmentAmount / oldPrice) * split;
+    const finalAmount = shares * latestPrice;
+    const percentage =
+      ((finalAmount - investmentAmount) / investmentAmount) * 100;
+    const history = apiData.history?.length
+      ? apiData.history.map((point) => ({
+          date: point.date,
+          value: point.close * shares,
+        }))
+      : Array.from({ length: 11 }, (_, index) => ({
+          date: new Date(
+            Date.now() -
+              ((10 - index) / 10) * selectedTimeFrame * 365.25 * 86400000,
+          ).toISOString(),
+          value:
+            investmentAmount +
+            (finalAmount - investmentAmount) * (index / 10) ** 2,
+        }));
+    return { finalAmount, percentage, history };
+  }, [apiData, investmentAmount, selectedTimeFrame]);
 
-  const fromLog = (val: number) => {
-    const minv = Math.log(minAmount);
-    const maxv = Math.log(maxAmount);
-    const scale = (maxv - minv) / 100;
+  const latestDateLabel = formatMediumDate(
+    apiData?.latest_date ?? apiData?.calculation_date,
+  );
 
-    const rawValue = Math.exp(minv + scale * val);
-
-    // NO rounding - return exact value to prevent dead zones
-    // The display will format it nicely with toLocaleString()
-    return Math.round(rawValue * 100) / 100; // Round to 2 decimal places only
-  };
-
+  const gain = calculation ? calculation.percentage >= 0 : true;
 
   return (
-    <section className="py-24 w-full bg-background relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
-      <div className="absolute bottom-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl translate-y-1/3 translate-x-1/3" />
-
-      <div className="container px-4 md:px-6 relative z-10">
-        <div className="text-center mb-16 space-y-4 animate-fade-in-up">
-          <Heading level="h2" className="text-4xl md:text-5xl font-bold">
-            Simulate Your Potential Returns
-          </Heading>
-          <Text className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            See how your money could have grown if you invested in top global companies.
-            <br />
-            <span className="text-sm opacity-70">Based on historical market data. Past performance is not indicative of future results.</span>
-          </Text>
+    <section
+      id="calculator"
+      ref={sectionRef}
+      className="site-section scroll-mt-20 border-b border-border bg-white"
+    >
+      <div className="site-container">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="mx-auto text-[clamp(2rem,4vw,3.4rem)] leading-[1] tracking-[-.035em]">
+            See what a holding could have done.
+          </h2>
+          <p className="section-copy mx-auto mt-5">
+            Pick a company, choose how far back to look, and set an amount. The
+            figures come from historical closing prices — a way to build
+            intuition, not a forecast.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="mt-14 grid gap-10 xl:grid-cols-[minmax(0,.88fr)_minmax(0,1.12fr)] xl:gap-14">
+          <div className="space-y-9">
+            <div>
+              <h3 id="company-picker-label" className="text-xs font-[700] uppercase tracking-[.1em] text-[color:var(--meta-ink)]">
+                Select a company
+              </h3>
+              <div
+                role="group"
+                aria-labelledby="company-picker-label"
+                className="mt-4 grid grid-cols-3 gap-3"
+              >
+                {companies.map((company) => {
+                  const isSelected = selectedCompany.id === company.id;
+                  return (
+                    <button
+                      type="button"
+                      key={company.id}
+                      onClick={() => setSelectedCompany(company)}
+                      aria-pressed={isSelected}
+                      title={company.name}
+                      className={cn(
+                        "company-tile flex flex-col items-center gap-2 rounded-[12px] border p-3 text-center",
+                        isSelected
+                          ? "company-tile--selected border-primary/25 bg-[#E7EFED]"
+                          : "border-transparent",
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "grid h-11 w-11 place-items-center rounded-full text-[11px] font-[780] transition-colors",
+                          isSelected
+                            ? "bg-primary text-white"
+                            : "bg-white text-primary ring-1 ring-[color:var(--line)]",
+                        )}
+                      >
+                        {company.shortName}
+                      </span>
+                      <span
+                        className={cn(
+                          "w-full truncate text-[11px] leading-4",
+                          isSelected
+                            ? "text-[color:var(--meta-ink-on-teal)]"
+                            : "text-[color:var(--meta-ink)]",
+                        )}
+                      >
+                        {company.name}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
-          {/* LEFT COLUMN: CONTROLS */}
-          <div className="lg:col-span-12 xl:col-span-5 space-y-8 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
-
-            {/* Company Selection Grid */}
-            <div className="space-y-4">
-              <Text weight="medium" className="text-muted-foreground uppercase tracking-wider text-sm">Select a Company</Text>
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 gap-4">
-                {companies.map((company) => (
+            <div>
+              <h3 id="period-label" className="text-xs font-[700] uppercase tracking-[.1em] text-[color:var(--meta-ink)]">
+                Investment duration
+              </h3>
+              <div
+                role="group"
+                aria-labelledby="period-label"
+                className="mt-4 flex flex-wrap gap-2"
+              >
+                {timeFrames.map((frame) => (
                   <button
-                    key={company.id}
-                    onClick={() => setSelectedCompany(company)}
+                    key={frame.years}
+                    type="button"
+                    onClick={() => setSelectedTimeFrame(frame.years)}
+                    aria-pressed={selectedTimeFrame === frame.years}
                     className={cn(
-                      "flex flex-col items-center justify-center p-4 rounded-xl transition-all duration-300 border border-transparent",
-                      selectedCompany.id === company.id
-                        ? "bg-secondary shadow-inner scale-95 ring-1 ring-primary/20"
-                        : "hover:bg-secondary/50 hover:shadow-md hover:-translate-y-1"
+                      "h-11 rounded-full px-6 text-sm font-[700] transition-colors",
+                      selectedTimeFrame === frame.years
+                        ? "bg-primary text-white"
+                        : "border border-[color:var(--line)] bg-white text-[color:var(--meta-ink-strong)] hover:border-primary hover:text-primary",
                     )}
                   >
-                    <div className="w-10 h-10 mb-2 p-1 rounded-full bg-white flex items-center justify-center shadow-sm">
-                      <img src={company.logo} alt={company.name} className="w-full h-full object-contain" />
-                    </div>
-                    <span className="text-xs font-medium truncate w-full text-center">{company.name}</span>
+                    {frame.years} {frame.years === 1 ? "year" : "years"}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Timeframe Selection */}
-            <div className="space-y-4">
-              <Text weight="medium" className="text-muted-foreground uppercase tracking-wider text-sm">Investment Duration</Text>
-              <div className="flex flex-wrap gap-2">
-                {timeFrames.map((frame) => (
-                  <Button
-                    key={frame.id}
-                    variant={selectedTimeFrame === frame.id ? "primary" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedTimeFrame(frame.id)}
-                    className={cn(
-                      "rounded-full px-6 transition-all",
-                      selectedTimeFrame === frame.id ? "shadow-md" : "hover:bg-accent"
-                    )}
-                  >
-                    {frame.label}
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            {/* Investment Slider */}
-            <div className="space-y-6 p-6 rounded-xl bg-secondary/30 backdrop-blur-sm border border-border/50">
-              <div className="flex justify-between items-end">
-                <Text weight="medium" className="text-muted-foreground uppercase tracking-wider text-sm">Initial Investment</Text>
-                <div className="text-2xl font-bold font-mono bg-background px-3 py-1 rounded-md shadow-sm border border-border">
-                  ${investmentAmount.toLocaleString()}
-                </div>
+            <div className="rounded-[14px] border border-border bg-[#F5F7F6] p-5 sm:p-6">
+              <div className="flex items-end justify-between gap-4">
+                <label
+                  htmlFor="initial-investment"
+                  className="text-xs font-[700] uppercase tracking-[.1em] text-[color:var(--meta-ink)]"
+                >
+                  Initial investment
+                </label>
+                <output className="tabular rounded-[10px] border border-border bg-white px-3 py-1 text-xl font-[800] tracking-[-.02em] text-[#17201E]">
+                  {formatKwacha(investmentAmount)}
+                </output>
               </div>
               <Slider
-                value={[toLog(investmentAmount)]}
+                id="initial-investment"
+                value={[sliderPosition(investmentAmount)]}
                 min={0}
                 max={100}
                 step={0.1}
-                onValueChange={(vals) => {
-                  console.log('🎚️ Slider moved to:', vals[0], '%');
-                  const newVal = fromLog(vals[0]);
-                  console.log('💰 Calculated amount:', newVal);
-                  console.log('📊 Previous amount:', investmentAmount);
-                  console.log('🔄 Will update:', newVal !== investmentAmount);
-                  setInvestmentAmount(newVal);
-                }}
-                className="py-4"
+                onValueChange={([value]) =>
+                  setInvestmentAmount(amountFromSlider(value))
+                }
+                className="mt-6 py-2"
+                aria-label="Initial investment in Zambian kwacha"
               />
-              <div className="relative text-xs text-muted-foreground h-4">
-                {/* Labels positioned according to logarithmic scale */}
-                <span className="absolute" style={{ left: `${toLog(10)}%`, transform: 'translateX(-50%)' }}>$10</span>
-                <span className="absolute" style={{ left: `${toLog(100)}%`, transform: 'translateX(-50%)' }}>$100</span>
-                <span className="absolute" style={{ left: `${toLog(500)}%`, transform: 'translateX(-50%)' }}>$500</span>
-                <span className="absolute" style={{ left: `${toLog(1000)}%`, transform: 'translateX(-50%)' }}>$1k</span>
-                <span className="absolute" style={{ left: `${toLog(5000)}%`, transform: 'translateX(-50%)' }}>$5k</span>
-                <span className="absolute" style={{ left: `${toLog(10000)}%`, transform: 'translateX(-50%)' }}>$10k</span>
+              {/* Ticks sit at their true position on the logarithmic track
+                  rather than at even intervals. */}
+              <div className="tabular relative mt-2 h-4 text-[11px] text-[color:var(--meta-ink)]">
+                {[100, 500, 2_000, 10_000, 100_000].map((mark) => (
+                  <span
+                    key={mark}
+                    className="absolute -translate-x-1/2 whitespace-nowrap"
+                    style={{ left: `${sliderPosition(mark)}%` }}
+                  >
+                    {mark >= 1000 ? `${mark / 1000}k` : mark}
+                  </span>
+                ))}
               </div>
             </div>
-
           </div>
 
-          {/* RIGHT COLUMN: RESULTS */}
-          <div className="lg:col-span-12 xl:col-span-7 h-full flex flex-col animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-            <Card variant="glass" className="h-full flex flex-col p-8 md:p-10 relative overflow-hidden ring-1 ring-white/10">
+          <div className="surface-panel flex min-w-0 flex-col p-6 md:p-8">
+            <p className="text-base text-[color:var(--meta-ink)]">
+              {formatKwacha(investmentAmount)} invested in {selectedCompany.name} over{" "}
+              {selectedTimeFrame} {selectedTimeFrame === 1 ? "year" : "years"}{" "}
+              would be worth
+            </p>
 
-              {/* Background Gradient for specific company */}
-              <div className={cn(
-                "absolute top-0 right-0 w-2/3 h-full opacity-10 blur-3xl bg-gradient-to-l transition-colors duration-700",
-                selectedCompany.gradient
-              )} />
+            <div className="mt-4 flex flex-wrap items-baseline gap-4">
+              {loading ? (
+                <div className="h-16 w-72 animate-pulse rounded-[12px] bg-[#EDF1EF]" />
+              ) : calculation ? (
+                <>
+                  <p className="tabular text-[clamp(2.75rem,6vw,4.5rem)] font-[820] leading-none tracking-[-.04em] text-[#17201E]">
+                    {formatKwacha(calculation.finalAmount)}
+                  </p>
+                  <span
+                    className={cn(
+                      "tabular inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-[760]",
+                      gain
+                        ? "bg-[#E6F0E7] text-[#256B29]"
+                        : "bg-[#FBE9E9] text-[#B71C1C]",
+                    )}
+                  >
+                    {gain ? <ArrowUp size={15} /> : <ArrowDown size={15} />}
+                    {Math.abs(calculation.percentage).toFixed(2)}%
+                  </span>
+                </>
+              ) : (
+                <p className="tabular text-[clamp(2.75rem,6vw,4.5rem)] font-[820] leading-none tracking-[-.04em] text-[color:var(--meta-ink)]">
+                  —
+                </p>
+              )}
+            </div>
 
-              <div className="relative z-10 flex flex-col h-full justify-between gap-8">
-
-                {/* Header Result */}
-                <div className="space-y-4">
-                  {error && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg"
+            <div className="mt-8 min-w-0 flex-1">
+              {error ? (
+                <div className="grid h-[300px] place-items-center rounded-[12px] bg-[#FFF6F6] p-6 text-center">
+                  <div>
+                    <AlertTriangle className="mx-auto text-[#B71C1C]" />
+                    <p className="mt-3 text-sm font-semibold text-[#B71C1C]">
+                      {error}
+                    </p>
+                    <button
+                      type="button"
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary underline"
+                      onClick={() => setRequestNonce((value) => value + 1)}
                     >
-                      <Text className="text-red-600 dark:text-red-400 text-sm font-medium">
-                        {error}
-                      </Text>
-                    </motion.div>
+                      <RefreshCw size={15} /> Try again
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className="h-[300px] min-w-0 lg:h-[340px]"
+                  aria-label={`Historical value chart for ${selectedCompany.name}`}
+                >
+                  {loading ? (
+                    <div className="h-full animate-pulse rounded-[12px] bg-[#F0F3F2]" />
+                  ) : (
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart
+                        data={calculation?.history || []}
+                        margin={{ top: 8, right: 0, left: 0, bottom: 0 }}
+                      >
+                        <defs>
+                          <linearGradient
+                            id="luse-value-fill"
+                            x1="0"
+                            y1="0"
+                            x2="0"
+                            y2="1"
+                          >
+                            <stop
+                              offset="5%"
+                              stopColor="#004B44"
+                              stopOpacity={0.26}
+                            />
+                            <stop
+                              offset="95%"
+                              stopColor="#004B44"
+                              stopOpacity={0}
+                            />
+                          </linearGradient>
+                        </defs>
+                        <XAxis dataKey="date" hide />
+                        <YAxis hide domain={["dataMin", "auto"]} />
+                        <Tooltip
+                          cursor={{
+                            stroke: "#004B44",
+                            strokeWidth: 1,
+                            strokeDasharray: "4 4",
+                          }}
+                          contentStyle={{
+                            background: "#fff",
+                            border: "1px solid #E2E7E5",
+                            borderRadius: 10,
+                            boxShadow: "0 12px 30px rgba(0,75,68,.08)",
+                          }}
+                          formatter={(value) => [
+                            formatKwacha(Number(value), 2),
+                            "Illustrated value",
+                          ]}
+                          labelFormatter={(label) =>
+                            formatMediumDate(String(label)) ?? ""
+                          }
+                        />
+                        <Area
+                          type="monotone"
+                          dataKey="value"
+                          stroke="#004B44"
+                          strokeWidth={3}
+                          fillOpacity={1}
+                          fill="url(#luse-value-fill)"
+                          activeDot={{
+                            r: 5,
+                            fill: "#CAF300",
+                            stroke: "#004B44",
+                            strokeWidth: 2,
+                          }}
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
                   )}
-                  <Text className="text-muted-foreground text-lg">Your {selectedTimeFrame} year investment would be worth</Text>
-                  <div className="flex flex-wrap items-baseline gap-4">
-                    {loading ? (
-                      <div className="h-16 w-64 bg-secondary/50 animate-pulse rounded-lg" />
-                    ) : (
-                      <h3 className="text-6xl md:text-7xl font-black tracking-tighter">
-                        {formatCurrency(finalAmount)}
-                      </h3>
-                    )}
-
-                    {!loading && (
-                      <div className={cn(
-                        "px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1",
-                        percentageGain >= 0 ? "bg-green-500/20 text-green-600 dark:text-green-400" : "bg-red-500/20 text-red-600 dark:text-red-400"
-                      )}>
-                        {percentageGain >= 0 ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
-                        {Math.abs(percentageGain).toFixed(2)}%
-                      </div>
-                    )}
-                  </div>
                 </div>
+              )}
+            </div>
 
-                {/* Chart Area */}
-                <div className="flex-1 w-full min-h-[300px] mt-4">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={chartData}>
-                      <defs>
-                        <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="currentColor" className="text-primary" stopOpacity={0.3} />
-                          <stop offset="95%" stopColor="currentColor" className="text-primary" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <XAxis dataKey="name" hide />
-                      <YAxis hide domain={['dataMin', 'auto']} />
-                      <Tooltip
-                        contentStyle={{ backgroundColor: 'var(--background)', borderRadius: '8px', border: '1px solid var(--border)' }}
-                        formatter={(value: any) => [formatCurrency(Number(value) || 0), 'Value']}
-                        labelClassName="hidden"
-                      />
-                      <Area
-                        type="monotone"
-                        dataKey="value"
-                        stroke="currentColor"
-                        className="text-primary"
-                        strokeWidth={3}
-                        fillOpacity={1}
-                        fill="url(#colorValue)"
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
-
-                {/* Footer Info */}
-                <div className="flex items-center gap-4 text-sm text-muted-foreground pt-6 border-t border-border/50">
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 bg-secondary rounded-full"><TrendingUp size={16} /></div>
-                    <span>Real market data</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 bg-secondary rounded-full"><Calendar size={16} /></div>
-                    <span>Updated daily</span>
-                  </div>
-                  <div className="ml-auto">
-                    Powered by <span className="font-bold text-foreground">Revridge Intelligence</span>
-                  </div>
-                </div>
-
-              </div>
-            </Card>
+            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6 text-sm text-[color:var(--meta-ink)]">
+              <span className="flex items-center gap-2">
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-[#F0F3F2] text-primary">
+                  <TrendingUp size={16} />
+                </span>
+                {apiData?.is_mock ? (
+                  <span className="font-[700] text-[#765000]">
+                    Demonstration data
+                  </span>
+                ) : (
+                  "Historical closing prices"
+                )}
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-[#F0F3F2] text-primary">
+                  <CalendarClock size={16} />
+                </span>
+                {latestDateLabel ? `Through ${latestDateLabel}` : "Not a forecast"}
+              </span>
+              <span className="sm:ml-auto">
+                Powered by{" "}
+                <span className="font-[760] text-[#17201E]">
+                  Revridge Intelligence
+                </span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
