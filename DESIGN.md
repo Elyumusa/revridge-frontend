@@ -165,6 +165,19 @@ The visual world explicitly rejects dark or crypto-coded styling, generic AI-gen
 - Compact, precise controls with stable tabular numbers.
 - Equal visual weight for Android and iOS actions.
 
+## Showcase Layer (homepage, adopted 2026-10)
+
+The homepage was rebuilt by explicit product decision to carry a bolder, Revolut-inspired showcase feel in Revridge's own colours. Where this section conflicts with the rules below, it wins on the homepage and in shared chrome (navigation, footer); the same layer now covers every route: `.page-hero` is the shared deep-teal route hero (white display h1, lime links, white pills), body sections sit on Planning Field with white 24–36px rounded panels (`.page-panel` for long legal copy), and closing CTAs use the rounded teal stage. The Layered Wealth Table rules below remain for the retired workbench vocabulary only.
+
+- **Structure:** full-bleed deep-teal hero (`.hero-glow`) with oversized display type (`.display-xl`), then alternating centred-headline stories (`.display-lg`) over large rounded media panels; one deep-teal band (Invest) for rhythm; a bento grid; a rounded closing CTA stage.
+- **Buttons:** pills (`.pill-btn` + `--teal`, `--white`, `--lime`, `--glass`). Android and iOS stay identical in size and fill.
+- **Shapes:** media panels and story cards use 24–48px radii (`.media-card`, `rounded-[clamp(24px,3vw,36px)]`). Device shots sit on their own flat `#E9E9E9` ground, so panels holding them use exactly that colour.
+- **Depth:** floating chips (`.float-chip`) and hero/invest media may carry soft shadows. Chips describe real product states only — never returns, counts, or ratings.
+- **Phones on colour:** device shots carry a flat #E9E9E9 plate, so on a teal field use the transparent cutouts (`appCutouts`) rather than putting a grey tile on the green; show handsets whole, never cropped by their container.
+- **Colour:** lime may highlight a headline word, chip icons, and step numbers; it still never fills a section. The dark fields are deep teal, never black or neon.
+- **Motion:** sections fade and rise in once (`Reveal`); the hero card trio opens with scroll. Everything renders static under `prefers-reduced-motion`.
+- **Navigation:** on the homepage the rail starts in the hero's deep teal with a white logo and links, and turns white once the page scrolls.
+
 ## Colors
 
 The palette is a locally grounded teal-and-lime system set on quiet green-gray fields; semantic colors communicate state and never become the brand atmosphere.
@@ -299,7 +312,7 @@ Company rows are compact working selections rather than promotional cards. Each 
 
 ### Investment Calculator
 
-The calculator keeps controls and results in one White plate. Historical-period chips, a Deep Teal slider, tabular Kwacha values, a Deep Teal area trajectory, lime active dots, restrained grid lines, and explicit loading/error states make the data feel usable rather than decorative. Preserve its API-driven behavior and functional state hierarchy.
+The Grow Calculator is pure client-side arithmetic (see PRODUCT.md): a segmented growth-rate control under the headline, a white result plate with a large tabular Kwacha value and a Deep Teal area trajectory with lime active dots, and a white controls plate with three sliders, both inside one rounded Planning Field panel. Keep the estimates disclaimer directly beneath it.
 
 ### Layered Wealth Table
 

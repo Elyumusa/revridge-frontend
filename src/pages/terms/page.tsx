@@ -10,7 +10,7 @@ const TermsOfServicePage: React.FC = () => {
                 {/* Hero Section */}
                 <section className="page-hero border-b border-border">
                     <div className="site-container max-w-4xl">
-                        <Heading level="h1" className="font-[760] tracking-[-0.04em] mb-5">
+                        <Heading level="h1" className="mb-5">
                             Terms of Service
                         </Heading>
                         <Text className="text-muted-foreground text-lg">
@@ -20,8 +20,8 @@ const TermsOfServicePage: React.FC = () => {
                 </section>
 
                 {/* Content */}
-                <section className="site-section bg-white">
-                    <div className="site-container max-w-4xl">
+                <section className="bg-[#F5F7F6] py-12 md:py-20">
+                    <div className="site-container page-panel max-w-4xl">
                         <div className="legal-copy">
 
                             {/* Introduction */}

@@ -165,18 +165,18 @@ export default function FAQPage() {
             <main id="main-content" className="flex-1">
                 <header className="page-hero border-b border-border">
                     <div className="site-container max-w-5xl">
-                        <h1 className="font-[760] tracking-[-0.04em]">Clear answers before you move money.</h1>
+                        <h1>Clear answers before you move money.</h1>
                         <p className="section-copy mt-6">How Revridge works, what licensed brokers handle, and what to expect from investing on the LuSE.</p>
                     </div>
                 </header>
 
                 {/* FAQ Categories */}
-                <section className="site-section bg-white">
+                <section className="bg-[#F5F7F6] py-16 md:py-24">
                     <div className="site-container max-w-5xl">
-                        <div className="space-y-16">
+                        <div className="space-y-6">
                             {faqCategories.map((category, idx) => (
-                                <div key={idx} className="grid gap-6 md:grid-cols-[220px_1fr]">
-                                    <h2 className="text-2xl font-[720]">{category.title}</h2>
+                                <div key={idx} className="grid gap-6 rounded-[clamp(24px,3vw,36px)] bg-white p-7 md:grid-cols-[220px_1fr] md:p-10">
+                                    <h2 className="text-2xl font-[680] tracking-[-.03em]">{category.title}</h2>
                                     <div className="border-y border-border">
                                             {category.faqs.map((faq, faqIdx) => (
                                                 <FAQAccordion key={faqIdx} {...faq} />
@@ -189,15 +189,15 @@ export default function FAQPage() {
                 </section>
 
                 {/* Still Have Questions CTA */}
-                <section className="site-section border-t border-border bg-[#F5F7F6]">
+                <section className="bg-white py-16 md:py-24">
                     <div className="site-container">
-                        <div className="max-w-3xl space-y-6">
-                            <h2 className="section-title">Still have a question?</h2>
-                            <p className="section-copy">Send it to the Revridge support team.</p>
+                        <div className="hero-glow rounded-[clamp(28px,4vw,48px)] p-8 text-white sm:p-12 lg:p-16 space-y-6">
+                            <h2 className="display-lg max-w-[12ch] text-white">Still have a question?</h2>
+                            <p className="lead-copy max-w-[40ch] text-white/75">Send it to the Revridge support team.</p>
                             <div>
                                 <a
                                     href="/support"
-                                    className="store-action store-action--filled"
+                                    className="pill-btn pill-btn--white"
                                 >
                                     Contact Support
                                 </a>

@@ -31,7 +31,7 @@ export default function SocialLinks({ tone = 'dark', className }: Props) {
             rel="noreferrer"
             aria-label={`Revridge on ${label}`}
             className={cn(
-              'grid h-11 w-11 place-items-center rounded-[10px] border transition-colors',
+              'grid h-11 w-11 place-items-center rounded-full border transition-colors',
               tone === 'dark'
                 ? 'border-white/20 text-white/75 hover:border-[#CAF300] hover:text-[#CAF300]'
                 : 'border-border text-[color:var(--meta-ink)] hover:border-primary hover:text-primary',

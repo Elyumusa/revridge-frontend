@@ -3,6 +3,10 @@ import exploreLuse from '@/assets/images/explore-luse-device.webp';
 import practiceInvesting from '@/assets/images/practice-investing-device.webp';
 import planFuture from '@/assets/images/plan-future-device.webp';
 import analyzePortfolio from '@/assets/images/analyze-portfolio-device.webp';
+import learnCutout from '@/assets/images/learn-investing-cutout.webp';
+import exploreCutout from '@/assets/images/explore-luse-cutout.webp';
+import planCutout from '@/assets/images/plan-future-cutout.webp';
+import portfolioCutout from '@/assets/images/analyze-portfolio-cutout.webp';
 
 /**
  * Device shots of the Revridge app, cropped from the App Store marketing frames
@@ -17,6 +21,20 @@ import analyzePortfolio from '@/assets/images/analyze-portfolio-device.webp';
 export const APP_SCREEN_WIDTH = 1242;
 export const APP_SCREEN_HEIGHT = 2280;
 export const APP_SCREEN_ASPECT = 'aspect-[1242/2280]';
+
+/**
+ * Transparent cutouts of the same four handsets (grey ground and shadow removed,
+ * trimmed to the phone). They sit straight on a coloured field — the deep-teal
+ * bands — where the flat #E9E9E9 plate of the device shots would read as a grey
+ * rectangle. Cropped to the phone, so their aspect differs from the one above;
+ * give the <img> only a width and let the height follow.
+ */
+export const appCutouts = {
+  learn: { src: learnCutout, width: 792, height: 1427 },
+  invest: { src: exploreCutout, width: 588, height: 1062 },
+  grow: { src: planCutout, width: 792, height: 1426 },
+  portfolio: { src: portfolioCutout, width: 788, height: 1427 },
+} as const;
 
 export const appScreens = {
   learn: {

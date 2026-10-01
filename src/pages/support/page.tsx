@@ -48,14 +48,14 @@ export default function SupportPage() {
       <main id="main-content">
         <header className="page-hero border-b border-border">
           <div className="site-container max-w-5xl">
-            <h1 className="font-[760] tracking-[-0.04em] text-foreground">Help, without the runaround.</h1>
+            <h1>Help, without the runaround.</h1>
             <p className="section-copy mt-6">Ask about the app, LuSE investing, or your account. We’ll route your message to the right place.</p>
           </div>
         </header>
 
-        <section className="site-section bg-white">
-          <div className="site-container grid gap-12 lg:grid-cols-[0.72fr_1.28fr]">
-            <aside>
+        <section className="bg-[#F5F7F6] py-16 md:py-24">
+          <div className="site-container grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
+            <aside className="rounded-[clamp(24px,3vw,36px)] bg-white p-7 md:p-9">
               <h2 className="text-2xl font-[720]">Contact Revridge</h2>
               <p className="mt-3 max-w-sm text-muted-foreground">Response times can vary while the product is in beta.</p>
               <div className="mt-8 divide-y divide-border border-y border-border">
@@ -65,23 +65,23 @@ export default function SupportPage() {
               </div>
             </aside>
 
-            <form onSubmit={handleSubmit} className="surface-panel p-6 md:p-9">
+            <form onSubmit={handleSubmit} className="rounded-[clamp(24px,3vw,36px)] bg-white p-7 md:p-10">
               <h2 className="text-2xl font-[720]">Send a message</h2>
               <div className="mt-7 grid gap-5 sm:grid-cols-2">
-                <label className="text-sm font-[650]">Name<input className="mt-2 h-12 w-full rounded-[10px] border border-input bg-white px-4 font-normal outline-none focus:border-primary" name="name" value={formData.name} onChange={handleInputChange} autoComplete="name" required /></label>
-                <label className="text-sm font-[650]">Email<input className="mt-2 h-12 w-full rounded-[10px] border border-input bg-white px-4 font-normal outline-none focus:border-primary" type="email" name="email" value={formData.email} onChange={handleInputChange} autoComplete="email" required /></label>
+                <label className="text-sm font-[650]">Name<input className="mt-2 h-12 w-full rounded-full border border-input bg-white px-5 font-normal outline-none focus:border-primary" name="name" value={formData.name} onChange={handleInputChange} autoComplete="name" required /></label>
+                <label className="text-sm font-[650]">Email<input className="mt-2 h-12 w-full rounded-full border border-input bg-white px-5 font-normal outline-none focus:border-primary" type="email" name="email" value={formData.email} onChange={handleInputChange} autoComplete="email" required /></label>
               </div>
-              <label className="mt-5 block text-sm font-[650]">Topic<select className="mt-2 h-12 w-full rounded-[10px] border border-input bg-white px-4 font-normal outline-none focus:border-primary" name="category" value={formData.category} onChange={handleInputChange}><option value="general">General question</option><option value="technical">Technical support</option><option value="billing">Account or fees</option><option value="feedback">Product feedback</option></select></label>
-              <label className="mt-5 block text-sm font-[650]">Message<textarea className="mt-2 min-h-36 w-full rounded-[10px] border border-input bg-white p-4 font-normal outline-none focus:border-primary" name="message" value={formData.message} onChange={handleInputChange} required /></label>
+              <label className="mt-5 block text-sm font-[650]">Topic<select className="mt-2 h-12 w-full rounded-full border border-input bg-white px-5 font-normal outline-none focus:border-primary" name="category" value={formData.category} onChange={handleInputChange}><option value="general">General question</option><option value="technical">Technical support</option><option value="billing">Account or fees</option><option value="feedback">Product feedback</option></select></label>
+              <label className="mt-5 block text-sm font-[650]">Message<textarea className="mt-2 min-h-36 w-full rounded-[24px] border border-input bg-white p-5 font-normal outline-none focus:border-primary" name="message" value={formData.message} onChange={handleInputChange} required /></label>
               {message && <div role={status === 'error' ? 'alert' : 'status'} className={cn('mt-5 flex items-start gap-2 rounded-[10px] border p-4 text-sm', status === 'error' ? 'border-[#B71C1C]/20 bg-[#B71C1C]/5 text-[#B71C1C]' : 'border-[#2E7D32]/20 bg-[#2E7D32]/5 text-[#2E7D32]')}>{status === 'error' ? <AlertCircle size={18} /> : <CheckCircle2 size={18} />}<span>{message}</span></div>}
-              <button disabled={status === 'loading'} className="store-action store-action--filled mt-6 disabled:opacity-60" type="submit">{status === 'loading' ? <><Loader2 className="animate-spin" size={17} /> Sending…</> : <>Send message <Send size={17} /></>}</button>
+              <button disabled={status === 'loading'} className="pill-btn pill-btn--teal mt-6 disabled:opacity-60" type="submit">{status === 'loading' ? <><Loader2 className="animate-spin" size={17} /> Sending…</> : <>Send message <Send size={17} /></>}</button>
             </form>
           </div>
         </section>
 
-        <section className="site-section border-t border-border bg-[#F5F7F6]">
+        <section className="bg-white py-16 md:py-24">
           <div className="site-container max-w-4xl">
-            <h2 className="section-title">Common questions</h2>
+            <h2 className="display-lg">Common questions</h2>
             <div className="mt-8 border-y border-border">
               {faqs.map((faq, index) => <div key={faq.question} className="border-b border-border last:border-0"><button className="flex w-full items-center justify-between gap-4 py-6 text-left font-[680]" onClick={() => setFaqOpen(faqOpen === index ? null : index)} aria-expanded={faqOpen === index}>{faq.question}<ChevronDown size={19} className={cn('shrink-0 transition-transform', faqOpen === index && 'rotate-180')} /></button>{faqOpen === index && <p className="max-w-2xl pb-6 leading-7 text-muted-foreground">{faq.answer}</p>}</div>)}
             </div>

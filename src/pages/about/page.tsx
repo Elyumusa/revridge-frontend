@@ -2,6 +2,7 @@ import { ArrowRight, BookOpen, Goal, Landmark } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/ui/home/Footer";
 import SocialLinks from "@/components/ui/SocialLinks";
+import Reveal from "@/components/ui/home/Reveal";
 // Face-centred 112px crops of Elyu.jpg / Wongani.jpg. The originals are 232KB
 // combined for what renders as two 56px avatars.
 import ElyuPortrait from "@/assets/images/founder-elyumusa.webp";
@@ -33,7 +34,7 @@ export default function AboutPage() {
           {/* The heading carries the weight here, so it gets the wider column;
               at 0.9fr it broke into five lines with dead space alongside. */}
           <div className="site-container route-frame grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
-            <h1 className="font-[760] tracking-[-0.04em] text-foreground">
+            <h1>
               Investing makes more sense when the journey is connected.
             </h1>
             <p className="section-copy lg:pb-2">
@@ -47,9 +48,11 @@ export default function AboutPage() {
         <section className="site-section bg-white">
           <div className="site-container grid gap-12 lg:grid-cols-[0.72fr_1.28fr]">
             <div>
-              <h2 className="section-title">Why Revridge exists</h2>
+              <Reveal>
+                <h2 className="display-lg max-w-[10ch]">Why Revridge exists</h2>
+              </Reveal>
             </div>
-            <div className="max-w-3xl text-lg leading-8 text-muted-foreground">
+            <Reveal className="max-w-3xl text-lg leading-8 text-muted-foreground">
               <p>
                 Most people are shut out of investing long before they ever reach
                 a market. They are shut out by jargon, by minimums set for
@@ -64,65 +67,57 @@ export default function AboutPage() {
                 reachable through licensed partners — so that access grows with
                 your understanding instead of waiting on it.
               </p>
-            </div>
+            </Reveal>
           </div>
         </section>
 
-        <section className="site-section border-y border-border bg-[#F5F7F6]">
+        <section className="site-section bg-[#F5F7F6]">
           <div className="site-container">
-            <div className="grid gap-8 lg:grid-cols-[0.68fr_1.32fr]">
-              <div>
-                <h2 className="section-title">Learn → Invest → Grow</h2>
-                <p className="section-copy mt-5">
-                  Not three separate features. One sequence that keeps context
-                  as you move.
-                </p>
-              </div>
-              <div className="divide-y divide-border border-y border-border">
-                {journey.map(({ icon: Icon, step, copy }, index) => (
-                  <div
-                    key={step}
-                    className="grid gap-4 py-7 sm:grid-cols-[48px_130px_1fr] sm:items-center"
-                  >
-                    <span className="font-mono text-xs text-muted-foreground">
-                      0{index + 1}
+            <Reveal className="mx-auto max-w-3xl text-center">
+              <h2 className="display-lg mx-auto max-w-[14ch]">Learn → Invest → Grow</h2>
+              <p className="lead-copy mx-auto mt-5 max-w-[42ch] text-[color:var(--muted-ink)]">
+                Not three separate features. One sequence that keeps context as
+                you move.
+              </p>
+            </Reveal>
+            <div className="mt-12 grid gap-4 md:grid-cols-3">
+              {journey.map(({ icon: Icon, step, copy }, index) => (
+                <Reveal key={step} delay={index * 0.08}>
+                  <div className="h-full rounded-[28px] bg-white p-8 transition-transform duration-300 hover:-translate-y-1 motion-reduce:hover:translate-y-0">
+                    <span className="lime-marker grid h-12 w-12 place-items-center rounded-full">
+                      <Icon size={21} />
                     </span>
-                    <div className="flex items-center gap-3">
-                      <span className="flex size-9 items-center justify-center rounded-[9px] bg-[#CAF300] text-[#004B44]">
-                        <Icon size={19} />
-                      </span>
-                      <h3 className="text-xl font-[720]">{step}</h3>
-                    </div>
-                    <p className="max-w-xl leading-7 text-muted-foreground">
-                      {copy}
+                    <p className="tabular mt-8 text-sm font-[700] text-[color:var(--meta-ink)]">
+                      0{index + 1}
                     </p>
+                    <h3 className="mt-1 text-2xl font-[680] tracking-[-.03em]">{step}</h3>
+                    <p className="mt-3 leading-7 text-[color:var(--meta-ink)]">{copy}</p>
                   </div>
-                ))}
-              </div>
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>
 
         <section className="site-section bg-white">
-          <div className="site-container grid divide-y divide-border border-y border-border md:grid-cols-2 md:divide-x md:divide-y-0">
-            <div className="py-7 md:pr-8">
-              <h2 className="text-2xl font-[720]">
-                Built for Zambian investors
-              </h2>
-              <p className="mt-3 max-w-xl leading-7 text-muted-foreground">
-                Local market context and practical education for first-time and
-                early-stage investors. Investing is available today on the
-                Lusaka Securities Exchange.
-              </p>
-            </div>
-            <div className="py-7 md:pl-8">
-              <h2 className="text-2xl font-[720]">Broker-backed execution</h2>
-              <p className="mt-3 max-w-xl leading-7 text-muted-foreground">
-                Revridge is the technology layer. Licensed broker partners are
-                responsible for accepted order execution, settlement, and
-                custody.
-              </p>
-            </div>
+          <div className="site-container grid gap-4 md:grid-cols-2">
+            {[
+              [
+                "Built for Zambian investors",
+                "Local market context and practical education for first-time and early-stage investors. Investing is available today on the Lusaka Securities Exchange.",
+              ],
+              [
+                "Broker-backed execution",
+                "Revridge is the technology layer. Licensed broker partners are responsible for accepted order execution, settlement, and custody.",
+              ],
+            ].map(([title, copy], index) => (
+              <Reveal key={title} delay={index * 0.08}>
+                <div className="h-full rounded-[28px] bg-[#F5F7F6] p-8 md:p-10">
+                  <h2 className="text-[clamp(1.5rem,2.4vw,2rem)] font-[680] tracking-[-.03em]">{title}</h2>
+                  <p className="mt-4 max-w-md leading-7 text-[color:var(--meta-ink)]">{copy}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </section>
 
@@ -130,12 +125,12 @@ export default function AboutPage() {
             phrases were adjusted to match the current LuSE-and-brokers
             positioning — see the note in the handoff. */}
         <section
-          className="site-section border-t border-border bg-[#F5F7F6]"
+          className="site-section bg-white"
           aria-labelledby="founders-title"
         >
           <div className="site-container grid gap-12 lg:grid-cols-[0.72fr_1.28fr]">
             <div>
-              <h2 id="founders-title" className="section-title">
+              <h2 id="founders-title" className="display-lg max-w-[9ch]">
                 Why we built this
               </h2>
               <p className="section-copy mt-5">A message from our co-founders.</p>
@@ -165,7 +160,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <blockquote className="surface-panel p-6 text-lg leading-8 text-muted-foreground md:p-9">
+            <blockquote className="rounded-[clamp(24px,3vw,36px)] bg-[#F5F7F6] p-7 text-lg leading-8 text-muted-foreground md:p-12">
               <p className="text-[#17201E]">
                 <strong className="font-[720]">
                   We started Revridge because we lived this problem.
@@ -207,26 +202,25 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="site-section bg-[#00322D] text-white">
-          <div className="site-container flex flex-col justify-between gap-8 md:flex-row md:items-end">
-            <div>
-              <h2 className="max-w-2xl text-4xl font-[740] tracking-[-0.035em] text-white md:text-5xl">
-                See the journey in the app.
-              </h2>
-              <p className="mt-4 max-w-xl text-white/70">
-                Android is available now. iOS is in beta.
-              </p>
-              <p className="mt-8 text-sm font-[680] text-white/60">
-                Follow Revridge
-              </p>
-              <SocialLinks className="mt-3" />
+        <section className="bg-white pb-16 md:pb-24">
+          <div className="site-container">
+            <div className="hero-glow flex flex-col justify-between gap-8 rounded-[clamp(28px,4vw,48px)] p-8 text-white sm:p-12 md:flex-row md:items-end lg:p-16">
+              <div>
+                <h2 className="display-lg max-w-[12ch] text-white">
+                  See the journey in the app.
+                </h2>
+                <p className="lead-copy mt-4 max-w-xl text-white/75">
+                  Android is available now. iOS is in beta.
+                </p>
+                <p className="mt-8 text-sm font-[680] text-white/70">
+                  Follow Revridge
+                </p>
+                <SocialLinks className="mt-3" />
+              </div>
+              <Link className="pill-btn pill-btn--white shrink-0" to="/download">
+                Get the app <ArrowRight size={18} />
+              </Link>
             </div>
-            <Link
-              className="store-action shrink-0 border-white bg-white text-[#004B44] hover:bg-[#F5F7F6]"
-              to="/download"
-            >
-              Get the app <ArrowRight size={18} />
-            </Link>
           </div>
         </section>
       </main>

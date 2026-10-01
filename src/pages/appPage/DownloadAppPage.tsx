@@ -2,11 +2,8 @@ import { Play } from "lucide-react";
 import Footer from "@/components/ui/home/Footer";
 import HowExecutionWorks from "@/components/ui/home/HowExecutionWorks";
 import { AppleMark } from "@/components/ui/StoreMarks";
-import {
-  APP_SCREEN_HEIGHT,
-  APP_SCREEN_WIDTH,
-  appScreens,
-} from "@/assets/appScreens";
+import Reveal from "@/components/ui/home/Reveal";
+import { appCutouts, appScreens } from "@/assets/appScreens";
 import { PLAY_STORE_URL, TESTFLIGHT_URL } from "@/lib/storeLinks";
 
 // The waitlist modal below (email capture -> /email_list/) is retired now that
@@ -191,7 +188,7 @@ export default function DownloadAppPage() {
         <header className="page-hero border-b border-border">
           <div className="site-container grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
-              <h1 className="font-[760] tracking-[-0.04em] text-foreground">
+              <h1>
                 Your wealth journey, in your pocket.
               </h1>
               <p className="section-copy mt-6">
@@ -200,7 +197,7 @@ export default function DownloadAppPage() {
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a
-                  className="store-action store-action--filled"
+                  className="pill-btn pill-btn--white"
                   href={PLAY_STORE_URL}
                   target="_blank"
                   rel="noreferrer"
@@ -212,7 +209,7 @@ export default function DownloadAppPage() {
                     block above); the beta is public now, so this links
                     straight to TestFlight. */}
                 <a
-                  className="store-action store-action--filled"
+                  className="pill-btn pill-btn--white"
                   href={TESTFLIGHT_URL}
                   target="_blank"
                   rel="noreferrer"
@@ -221,61 +218,51 @@ export default function DownloadAppPage() {
                   Get iOS Beta
                 </a>
               </div>
-              <p className="mt-5 text-sm text-muted-foreground">
+              <p className="mt-5 text-sm">
                 Android is available now. iOS is in beta.
               </p>
             </div>
-            {/* The registration marks belong on the plate itself; on a padded
-                wrapper they floated in empty space and read as stray artwork. */}
-            <div className="registration-corners surface-panel mx-auto w-full max-w-[400px] overflow-hidden p-4 md:p-5">
+            {/* Transparent cutouts: the flat grey plate of the standard device
+                shots read as a hole against the teal hero. */}
+            <div className="relative mx-auto flex w-full max-w-[520px] items-end justify-center">
               <img
-                src={appScreens.invest.src}
+                src={appCutouts.invest.src}
                 alt={appScreens.invest.alt}
-                width={APP_SCREEN_WIDTH}
-                height={APP_SCREEN_HEIGHT}
-                className="block w-full rounded-[10px]"
+                width={appCutouts.invest.width}
+                height={appCutouts.invest.height}
+                className="relative z-10 w-[47%] max-w-[250px] -rotate-2 drop-shadow-[0_30px_40px_rgba(0,20,18,.45)]"
+              />
+              <img
+                src={appCutouts.grow.src}
+                alt={appScreens.grow.alt}
+                width={appCutouts.grow.width}
+                height={appCutouts.grow.height}
+                className="-ml-[6%] mt-10 w-[47%] max-w-[250px] translate-y-6 rotate-2 drop-shadow-[0_30px_40px_rgba(0,20,18,.45)]"
               />
             </div>
           </div>
         </header>
 
-        <section className="site-section bg-white">
-          <div className="site-container grid gap-10 md:grid-cols-[0.72fr_1.28fr] md:items-start">
-            <h2 className="section-title">
-              One app. Three connected decisions.
-            </h2>
-            <div className="divide-y divide-border border-y border-border">
+        <section className="bg-white py-20 md:py-28">
+          <div className="site-container">
+            <Reveal className="mx-auto max-w-3xl text-center">
+              <h2 className="display-lg mx-auto max-w-[14ch]">
+                One app. Three connected decisions.
+              </h2>
+            </Reveal>
+            <div className="mt-14 grid gap-4 md:grid-cols-3">
               {[
-                [
-                  "01",
-                  "Learn before the decision",
-                  "Plain-language lessons help you understand the basics and the risks.",
-                ],
-                [
-                  "02",
-                  "Invest when you are ready",
-                  "Explore LuSE-listed companies and submit eligible orders through licensed broker partners.",
-                ],
-                [
-                  "03",
-                  "Grow the whole picture",
-                  "Set goals, use planning tools, and track your net worth in the same journey.",
-                ],
-              ].map(([number, title, copy]) => (
-                <div
-                  key={number}
-                  className="grid gap-3 py-6 sm:grid-cols-[60px_1fr]"
-                >
-                  <span className="font-mono text-sm text-primary">
-                    {number}
-                  </span>
-                  <div>
-                    <h3 className="text-xl font-[700]">{title}</h3>
-                    <p className="mt-2 max-w-xl leading-7 text-muted-foreground">
-                      {copy}
-                    </p>
+                ["01", "Learn before the decision", "Plain-language lessons help you understand the basics and the risks."],
+                ["02", "Invest when you are ready", "Explore LuSE-listed companies and submit eligible orders through licensed broker partners."],
+                ["03", "Grow the whole picture", "Set goals, use planning tools, and track your net worth in the same journey."],
+              ].map(([number, title, copy], index) => (
+                <Reveal key={number} delay={index * 0.08}>
+                  <div className="h-full rounded-[28px] bg-[#F5F7F6] p-8">
+                    <span className="lime-marker tabular grid h-12 w-12 place-items-center rounded-full text-sm font-[760]">{number}</span>
+                    <h3 className="mt-8 text-xl font-[680] tracking-[-.025em]">{title}</h3>
+                    <p className="mt-3 leading-7 text-[color:var(--meta-ink)]">{copy}</p>
                   </div>
-                </div>
+                </Reveal>
               ))}
             </div>
           </div>

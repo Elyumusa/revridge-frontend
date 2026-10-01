@@ -1,58 +1,75 @@
 import { Play } from "lucide-react";
 import { AppleMark } from "@/components/ui/StoreMarks";
-import {
-  APP_SCREEN_HEIGHT,
-  APP_SCREEN_WIDTH,
-  appScreens,
-} from "@/assets/appScreens";
+import Reveal from "@/components/ui/home/Reveal";
+import { appCutouts, appScreens } from "@/assets/appScreens";
 import { PLAY_STORE_URL, TESTFLIGHT_URL } from "@/lib/storeLinks";
 
+/** Closing call to action: one rounded teal stage, text on the left, and two
+ *  handsets standing directly on the teal. They are transparent cutouts — the
+ *  flat grey plate of the standard device shots looked like a hole in the green. */
 export default function DownloadOurApp() {
   return (
-    <section className="overflow-hidden bg-[#00322D] text-white">
-      <div className="site-container grid items-center gap-10 py-16 lg:grid-cols-[1fr_.85fr] lg:py-20">
-        <div className="max-w-2xl">
-          <h2 className="text-[clamp(2.4rem,5.2vw,4.4rem)] leading-[.98] tracking-[-.04em] text-white">
-            Your wealth journey, ready when you are.
-          </h2>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-white/75">
-            Android is available on Google Play. Join the iOS beta to learn, set
-            goals, track your net worth, and invest on the LuSE.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={PLAY_STORE_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="store-action border-white bg-white text-primary hover:border-[#CAF300] hover:bg-[#CAF300] hover:text-primary"
-            >
-              <Play size={18} fill="currentColor" /> Get Android
-            </a>
-            {/* Was a NavLink to /download that opened a waitlist modal; the
-                beta is public now, so this goes straight to TestFlight. */}
-            <a
-              href={TESTFLIGHT_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="store-action border-white bg-white text-primary hover:border-[#CAF300] hover:bg-[#CAF300] hover:text-primary"
-            >
-              <AppleMark size={19} /> Get iOS Beta
-            </a>
+    <section className="bg-white py-16 md:py-24" aria-labelledby="download-title">
+      <div className="site-container">
+        <Reveal y={48}>
+          <div className="hero-glow relative overflow-hidden rounded-[clamp(28px,4vw,48px)] px-6 pb-12 pt-14 text-white sm:px-10 md:px-14 lg:grid lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:gap-6 lg:py-0">
+            <div className="pb-10 lg:py-20">
+              <h2
+                id="download-title"
+                className="display-lg max-w-[12ch] text-white"
+              >
+                Your wealth journey starts here.
+              </h2>
+              <p className="lead-copy mt-6 max-w-[40ch] text-white/75">
+                Android is live on Google Play. Join the iOS beta to learn, set
+                goals, track your net worth, and invest on the LuSE.
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="pill-btn pill-btn--white"
+                >
+                  <Play size={17} fill="currentColor" /> Get Android
+                </a>
+                {/* Was a NavLink to /download that opened a waitlist modal; the
+                    beta is public now, so this goes straight to TestFlight. */}
+                <a
+                  href={TESTFLIGHT_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="pill-btn pill-btn--white"
+                >
+                  <AppleMark size={18} /> Get iOS Beta
+                </a>
+              </div>
+            </div>
+
+            {/* Both handsets are shown whole and offset in height, so they read
+                as a pair standing on the teal rather than clipped by the panel. */}
+            <div className="relative mx-auto flex w-full max-w-[560px] items-center justify-center lg:max-w-none lg:py-16">
+              <img
+                src={appCutouts.learn.src}
+                alt={appScreens.learn.alt}
+                width={appCutouts.learn.width}
+                height={appCutouts.learn.height}
+                className="relative z-10 -mt-8 w-[46%] max-w-[250px] -rotate-2 drop-shadow-[0_30px_40px_rgba(0,20,18,.45)]"
+                loading="lazy"
+                decoding="async"
+              />
+              <img
+                src={appCutouts.invest.src}
+                alt={appScreens.invest.alt}
+                width={appCutouts.invest.width}
+                height={appCutouts.invest.height}
+                className="-ml-[6%] mt-10 w-[46%] max-w-[250px] rotate-2 drop-shadow-[0_30px_40px_rgba(0,20,18,.45)]"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           </div>
-        </div>
-        {/* The device shot is already on its own plate, so it sits directly on
-            the dark band with a hairline rather than inside a second frame. */}
-        <figure className="mx-auto w-full max-w-[380px] overflow-hidden rounded-[20px] border border-white/15">
-          <img
-            src={appScreens.learn.src}
-            alt={appScreens.learn.alt}
-            width={APP_SCREEN_WIDTH}
-            height={APP_SCREEN_HEIGHT}
-            className="block w-full"
-            loading="lazy"
-            decoding="async"
-          />
-        </figure>
+        </Reveal>
       </div>
     </section>
   );

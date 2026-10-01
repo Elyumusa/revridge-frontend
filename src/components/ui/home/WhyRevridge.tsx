@@ -6,6 +6,7 @@ import {
   PiggyBank,
   ShieldCheck,
 } from 'lucide-react';
+import Reveal from '@/components/ui/home/Reveal';
 
 /**
  * Restored from the previous site's "Why Choose Revridge" / FeaturesAndPerks
@@ -59,38 +60,71 @@ const perks = [
 export default function WhyRevridge() {
   return (
     <section
-      className="site-section border-t border-border bg-white"
+      className="bg-[#F5F7F6] py-20 md:py-28"
       aria-labelledby="why-revridge-title"
     >
       <div className="site-container">
-        <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-          <h2 id="why-revridge-title" className="section-title">
+        <Reveal className="mx-auto max-w-4xl text-center">
+          <h2 id="why-revridge-title" className="display-lg mx-auto max-w-[13ch]">
             Investing, built around you.
           </h2>
-          <p className="section-copy lg:pb-1">
-            Everything you need to build wealth with confidence: financial
-            education worth the name, tools to plan and track goals, and
+          <p className="lead-copy mx-auto mt-6 max-w-[50ch] text-[color:var(--muted-ink)]">
+            Education worth the name, tools to plan and track goals, and
             investing handled by licensed brokers with every step visible to you.
           </p>
-        </div>
+        </Reveal>
 
-        {/* A ruled grid rather than six floating cards — the system is
-            border-first, and drop shadows are reserved for the workbench. */}
-        <div className="mt-14 grid border-t border-border sm:grid-cols-2 lg:grid-cols-3">
-          {perks.map(({ title, description, icon: Icon }) => (
-            <div
-              key={title}
-              className="border-b border-border py-8 sm:[&:nth-child(odd)]:pr-8 sm:[&:nth-child(even)]:border-l sm:[&:nth-child(even)]:pl-8 lg:pr-8 lg:[&:nth-child(even)]:border-l-0 lg:[&:nth-child(even)]:pl-0 lg:[&:not(:nth-child(3n+1))]:border-l lg:[&:not(:nth-child(3n+1))]:pl-8"
-            >
-              <span className="lime-marker grid h-11 w-11 place-items-center rounded-[10px]">
-                <Icon size={21} />
-              </span>
-              <h3 className="mt-5 text-lg tracking-[-.02em]">{title}</h3>
-              <p className="mt-3 max-w-[42ch] leading-7 text-[color:var(--meta-ink)]">
-                {description}
-              </p>
-            </div>
-          ))}
+        {/* Bento: the first tile carries the deep-teal field so the grid has
+            one anchor; the rest stay white on the planning field. */}
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {perks.map(({ title, description, icon: Icon }, index) => {
+            const featured = index === 0;
+            return (
+              <Reveal
+                key={title}
+                delay={(index % 3) * 0.08}
+                className={
+                  featured
+                    ? 'sm:col-span-2 lg:row-span-2'
+                    : index === perks.length - 1
+                      ? 'sm:col-span-2 lg:col-span-1'
+                      : ''
+                }
+              >
+                <article
+                  className={
+                    featured
+                      ? 'hero-glow flex h-full min-h-[300px] flex-col justify-between rounded-[28px] p-8 text-white transition-transform duration-300 hover:-translate-y-1 motion-reduce:hover:translate-y-0'
+                      : 'flex h-full flex-col rounded-[28px] bg-white p-8 transition-transform duration-300 hover:-translate-y-1 motion-reduce:hover:translate-y-0'
+                  }
+                >
+                  <span className="lime-marker grid h-12 w-12 place-items-center rounded-full">
+                    <Icon size={21} />
+                  </span>
+                  <div className={featured ? 'mt-16' : 'mt-8'}>
+                    <h3
+                      className={
+                        featured
+                          ? 'text-[clamp(1.8rem,3vw,2.6rem)] font-[680] leading-[1.02] tracking-[-.04em] text-white'
+                          : 'text-xl font-[680] tracking-[-.025em]'
+                      }
+                    >
+                      {title}
+                    </h3>
+                    <p
+                      className={
+                        featured
+                          ? 'mt-4 max-w-[36ch] leading-7 text-white/75'
+                          : 'mt-3 max-w-[42ch] leading-7 text-[color:var(--meta-ink)]'
+                      }
+                    >
+                      {description}
+                    </p>
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

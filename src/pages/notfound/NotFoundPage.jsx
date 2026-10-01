@@ -7,7 +7,7 @@ export default function NotFoundPage() {
     <div className="min-h-screen bg-background">
       <main id="main-content" className="page-hero min-h-[62vh]">
         <div className="site-container route-frame">
-          <h1 className="font-[760] tracking-[-0.04em]">
+          <h1>
             This page is off the map.
           </h1>
           <p className="section-copy mt-6">
