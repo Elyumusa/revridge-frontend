@@ -54,7 +54,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 </div>
 
                 {error && (
-                    <p className="text-[0.8rem] font-medium text-destructive flex items-center animate-slide-in-left">
+                    <p className="text-[0.8rem] font-medium text-destructive flex items-center animate-in slide-in-from-left-2 duration-200">
                         <AlertCircle className="w-3 h-3 mr-1" />
                         {error}
                     </p>

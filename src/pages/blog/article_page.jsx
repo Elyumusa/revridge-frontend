@@ -1,84 +1,16 @@
-import React from 'react'
-import { ArrowLeft, Calendar, User, Tag } from "lucide-react"
-import { Button } from "../../components/ui/button"
-import { useNavigate } from 'react-router-dom'
-import { NavLink, useLocation } from 'react-router-dom';
-// Mock data for a single blog post
-/*const blogPost = {
-  id: 1,
-  title: "Understanding Market Trends in 2024",
-  content: `
-    <p>The financial markets are constantly evolving, and staying ahead of the curve is crucial for investors. As we look towards 2024, several key trends are emerging that could shape the investment landscape.</p>
-    
-    <h2>1. The Rise of Sustainable Investing</h2>
-    <p>Environmental, Social, and Governance (ESG) factors are becoming increasingly important to investors. Companies with strong ESG profiles are likely to see increased interest from both institutional and retail investors.</p>
-    
-    <h2>2. Artificial Intelligence in Finance</h2>
-    <p>AI and machine learning are revolutionizing financial analysis and decision-making. From algorithmic trading to risk assessment, AI is becoming an indispensable tool in the financial sector.</p>
-    
-    <h2>3. Cryptocurrency and Blockchain</h2>
-    <p>Despite volatility, cryptocurrencies and blockchain technology continue to gain traction. Institutional adoption and regulatory clarity could further legitimize this asset class.</p>
-    
-    <h2>4. Shift Towards Passive Investing</h2>
-    <p>The trend towards passive investing, particularly through ETFs, is expected to continue. However, there's also growing interest in factor-based and smart beta strategies.</p>
-    
-    <h2>Conclusion</h2>
-    <p>As we navigate the complex world of finance in 2024, staying informed about these trends will be crucial. Investors should remain adaptable and open to new opportunities while maintaining a balanced, long-term perspective.</p>
-  `,
-  date: "May 15, 2024",
-  author: "Jane Doe",
-  category: "Market Analysis",
-}*/
+import { ArrowLeft, Calendar, Tag, User } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Footer from '@/components/ui/home/Footer';
 
-const ArticlePage=() => {
-    const location = useLocation();
-    const blogPost = location.state;
-    const navigate = useNavigate()
+export default function ArticlePage() {
+  const blogPost = useLocation().state;
+  const navigate = useNavigate();
 
-  const handleGoBack = () => {
-    navigate(-1) // This will navigate to the previous page
-  }
-    return (
-    <div className="container mx-auto px-4 py-8">
-      <Button variant="ghost" className="mb-4" onClick={handleGoBack}>
-        <ArrowLeft className="mr-2" size={20} />
-        Back to Blog
-      </Button>
+  if (!blogPost) return <div className="min-h-screen bg-background"><main id="main-content" className="page-hero"><div className="site-container max-w-3xl"><h1 className="text-4xl font-[740] tracking-[-0.035em]">This article needs a fresh link.</h1><p className="section-copy mt-5">Open it again from the Revridge article list.</p><Link className="store-action store-action--filled mt-8" to="/blog">Back to articles</Link></div></main><Footer /></div>;
 
-      <article className="max-w-3xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">{blogPost.title}</h1>
-        
-        <div className="flex flex-wrap items-center text-gray-600 mb-8">
-          <div className="flex items-center mr-4 mb-2">
-            <Calendar size={16} className="mr-1" />
-            <span>{blogPost.date}</span>
-          </div>
-          <div className="flex items-center mr-4 mb-2">
-            <User size={16} className="mr-1" />
-            <span>{blogPost.author}</span>
-          </div>
-          <div className="flex items-center mb-2">
-            <Tag size={16} className="mr-1" />
-            <span>{blogPost.category}</span>
-          </div>
-        </div>
+  const title = blogPost.headline || blogPost.title;
+  const date = blogPost.created_at || blogPost.date;
+  const symbols = Array.isArray(blogPost.symbols) ? blogPost.symbols.join(', ') : blogPost.symbols || blogPost.category;
 
-        <div 
-          className="prose max-w-none"
-          dangerouslySetInnerHTML={{ __html: blogPost.content }}
-        />
-
-        <div className="mt-8 pt-4 border-t">
-          <h3 className="text-xl font-semibold mb-4">Share this article</h3>
-          <div className="flex space-x-4">
-            <Button variant="outline">Twitter</Button>
-            <Button variant="outline">Facebook</Button>
-            <Button variant="outline">LinkedIn</Button>
-          </div>
-        </div>
-      </article>
-    </div>
-  )
+  return <div className="min-h-screen bg-background"><main id="main-content"><article><header className="page-hero border-b border-border"><div className="site-container max-w-4xl"><button className="mb-10 inline-flex items-center gap-2 text-sm font-[650] text-primary hover:text-[#006B62]" onClick={() => navigate(-1)}><ArrowLeft size={17} />Back to articles</button><h1 className="font-[760] tracking-[-0.04em]">{title}</h1><div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted-foreground">{date && <span className="flex items-center gap-2"><Calendar size={16} />{date}</span>}{blogPost.author && <span className="flex items-center gap-2"><User size={16} />{blogPost.author}</span>}{symbols && <span className="flex items-center gap-2"><Tag size={16} />{symbols}</span>}</div></div></header><div className="site-section bg-white"><div className="article-prose site-container max-w-3xl" dangerouslySetInnerHTML={{ __html: blogPost.content }} /></div></article></main><Footer /></div>;
 }
-
-export default ArticlePage

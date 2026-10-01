@@ -3,14 +3,31 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="./src/assets/images/Revridge.png" />
+  <!-- Served from /public so the icon survives the production build; the old
+       ./src/assets path resolved only in dev and declared the wrong MIME type. -->
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="Place real investment orders on the Lusaka Securities Exchange (LuSE) through licensed brokers, track every step from submitted to executed, and build a real portfolio — with a free U.S. stock practice sandbox." />
-  <title>Revridge — Invest on the Lusaka Securities Exchange</title>
+  <meta name="theme-color" content="#004B44" />
+  <meta name="description" content="Revridge is a wealth-building app for Zambia: learn investing in plain language, plan your goals, track your progress, and invest — today on the Lusaka Securities Exchange." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Revridge" />
+  <meta property="og:title" content="Revridge — Learn. Invest. Grow wealth." />
+  <meta property="og:description" content="One connected journey for building wealth: investing knowledge, goals and planning, progress tracking, and investing on the LuSE through licensed brokers." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@revridgeapp" />
+  <title>Revridge — Learn. Invest. Grow wealth.</title>
 </head>
 
 <body>
+  <!--
+    THESIS: Revridge is one working wealth journey, not a generic fintech hero or a stack of feature cards.
+    OWN-WORLD: Soft green-gray drafting surfaces, deep-teal working lines, lime registration points, white product plates, and crisp functional controls.
+    STORY: A Zambian beginner sees the Learn → Invest → Grow path, tries real LuSE data, and chooses Android or iOS with equal confidence.
+    FIRST VIEWPORT: Concise store actions occupy the left third; a live LuSE company list, calculator controls, and API-driven chart share one wide planning table on the right.
+    FORM: Layered Wealth Table, grounded direction 5, seed 41009d9b.
+    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+  -->
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>

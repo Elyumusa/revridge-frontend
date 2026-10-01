@@ -1,274 +1,216 @@
-"use client"
-
-import React, { useState, useEffect } from 'react'
-import { format } from 'date-fns'
-import { Calendar as CalendarIcon, AlertTriangle, AppleIcon, PlayIcon, Search } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { Input } from '@/components/ui/input'
-// import DownloadAppButton from '@/components/ui/DownloadAppButton'
+import { AlertTriangle, CalendarDays, Loader2, Search } from "lucide-react";
+import Footer from "@/components/ui/home/Footer";
 
+function firstOfMonth(value) {
+  const date = value ? new Date(`${value}-01T00:00:00`) : new Date();
+  date.setDate(1);
+  return date;
+}
+
+/** LuSE dividends are declared in kwacha; the table was printing a dollar sign. */
+function formatKwacha(value) {
+  const amount = Number(value);
+  if (!Number.isFinite(amount)) return "—";
+  return new Intl.NumberFormat("en-ZM", {
+    style: "currency",
+    currency: "ZMW",
+    currencyDisplay: "code",
+    minimumFractionDigits: 2,
+  }).format(amount);
+}
+
+function formatMediumDate(value) {
+  if (!value) return "—";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "—";
+  return date.toLocaleDateString("en-ZM", { dateStyle: "medium" });
+}
 
 export default function DividendCalendar() {
-  let currentDate = new Date();
-  currentDate.setDate(1)
-  const [date, setDate] = useState(currentDate)
-  const [dividends, setDividends] = useState([])
+  const [month, setMonth] = useState(new Date().toISOString().slice(0, 7));
+  const [dividends, setDividends] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("")
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchDividends = async (params) => {
-      const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
-      const apiUrl = `${mainURL}/api/div_calendar/?start=${date.toLocaleDateString('en-CA')}`;
+    let live = true;
+    async function fetchDividends() {
+      setLoading(true);
+      setError("");
       try {
-        const result = await axios.get(apiUrl)
-        const data = result.data
-        //console.log(`Data show: ${import.meta.env.VITE_REVRIDGE_BACKEND_URL}`)
-        if ('cash_dividends' in data && data['cash_dividends'].length !== 0) {
-          //console.log(`dividend: ${data['cash_dividends'][0].ex_date}`)
-          setDividends(data['cash_dividends'])
-        } else {
-          setDividends([])
+        const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
+        const result = await axios.get(
+          `${mainURL}/api/div_calendar/?start=${firstOfMonth(month).toLocaleDateString("en-CA")}`,
+        );
+        if (live) setDividends(result.data.cash_dividends || []);
+      } catch {
+        if (live) {
+          setDividends([]);
+          setError("Dividend data could not be loaded right now.");
         }
-
-      } catch (error) {
-        setDividends([])
-        console.log(`Error: ${error}`);
       } finally {
-        setLoading(false);
+        if (live) setLoading(false);
       }
     }
     fetchDividends();
+    return () => {
+      live = false;
+    };
+  }, [month]);
 
-  }, [date])
-  const handleSearch = () => {
-    // In a real application, this would trigger an API call or filter the data
-    //console.log("Searching for:", searchTerm)
-    const fetchDividends = async (params) => {
+  async function handleSearch(event) {
+    event.preventDefault();
+    setLoading(true);
+    setError("");
+    try {
       const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
-      const apiUrl = `${mainURL}/api/div_cal_stock/?query=${searchTerm}`;
-      try {
-        const result = await axios.get(apiUrl)
-        const data = result.data
-        if ('cash_dividends' in data && data['cash_dividends'].length !== 0) {
-          //console.log(`dividend in search: ${data['cash_dividends'][0].ex_date}`)
-          setDividends(data['cash_dividends'])
-        } else {
-          setDividends([])
-        }
-
-      } catch (error) {
-        setDividends([])
-        //console.log(`Error: ${error}`);
-      } finally {
-        setLoading(false);
-      }
+      const result = await axios.get(
+        `${mainURL}/api/div_cal_stock/?query=${encodeURIComponent(searchTerm.trim())}`,
+      );
+      setDividends(result.data.cash_dividends || []);
+    } catch {
+      setDividends([]);
+      setError("No dividend data could be returned for that search.");
+    } finally {
+      setLoading(false);
     }
-    fetchDividends();
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle className="text-3xl font-bold">Understanding Dividends</CardTitle>
-          <CardDescription className="text-lg">Your Gateway to Passive Income</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="prose max-w-none">
-            <p className="text-lg leading-relaxed mb-4">
-              Imagine you own a slice of a successful company. Now, what if that company decided to share its profits with you? That's essentially what a dividend is!
-            </p>
-            <p className="text-lg leading-relaxed mb-4">
-              When a company earns profits, it can choose to reinvest that money back into the business or distribute some of it to its shareholders. This distribution is called a dividend. It's like a "thank you" payment for believing in the company and investing your money.
-            </p>
-            <p className="text-lg leading-relaxed">
-              Dividends are typically paid out regularly, often quarterly, and can provide a steady stream of income for investors. It's one of the ways you can earn money from stocks without having to sell your shares. Pretty cool, right?
+    <div className="min-h-screen bg-background">
+      <main id="main-content">
+        <header className="page-hero border-b border-border">
+          <div className="site-container route-frame max-w-5xl">
+            <h1 className="font-[760] tracking-[-0.04em]">
+              Dividend dates, in one view.
+            </h1>
+            <p className="section-copy mt-6">
+              Search a supported company or review the configured market
+              calendar by month.
             </p>
           </div>
-        </CardContent>
-      </Card>
-
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Search for Stock Dividends</CardTitle>
-          <CardDescription>Enter a stock symbol to find its dividend information</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex space-x-2">
-            <Input
-              type="text"
-              placeholder="Enter stock symbol (e.g., AAPL)"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="flex-grow"
-            />
-            <Button onClick={handleSearch}>
-              <Search className="mr-2 h-4 w-4" /> Search
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Dividend Calendar</CardTitle>
-          <CardDescription>View upcoming dividend payments for your selected month</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-[280px] justify-start text-left font-normal",
-                    !date && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {date ? format(date, "MMMM yyyy") : <span>Pick a month</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={(newDate) => {
-                    //console.log(`newDate: ${newDate.toLocaleDateString('en-CA')}`)
-                    //newDate.setDate(1);
-                    newDate && setDate(newDate)
-                  }}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-            <p className="text-sm text-muted-foreground mt-2 sm:mt-0">
-              Showing dividends for {format(date, "MMMM yyyy")}
-            </p>
-          </div>
-
-          {dividends.length > 0 ? (
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Company</TableHead>
-                    <TableHead>Symbol</TableHead>
-                    <TableHead>Amount</TableHead>
-                    <TableHead>Payment Date</TableHead>
-                    <TableHead>Ex-Dividend Date</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {dividends.map((dividend) => (
-                    <TableRow key={dividend.id}>
-                      <TableCell className="font-medium">{dividend.symbol}</TableCell>
-                      <TableCell>{dividend.symbol}</TableCell>
-                      <TableCell>${dividend.rate.toFixed(2)}</TableCell>
-                      <TableCell>{format(new Date(dividend.payable_date), "MMMM d, yyyy")}</TableCell>
-                      <TableCell>{format(new Date(dividend.ex_date), "MMMM d, yyyy")}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+        </header>
+        <section className="site-section bg-white">
+          <div className="site-container max-w-6xl">
+            <div className="grid gap-4 md:grid-cols-[0.72fr_1.28fr]">
+              <label className="surface-panel draft-grid p-5 text-sm font-[650]">
+                Calendar month
+                <div className="relative mt-2">
+                  <CalendarDays
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-primary"
+                    size={18}
+                  />
+                  <input
+                    type="month"
+                    className="h-12 w-full rounded-[10px] border border-input pl-11 pr-4 outline-none focus:border-primary"
+                    value={month}
+                    onChange={(event) => setMonth(event.target.value)}
+                  />
+                </div>
+              </label>
+              <form onSubmit={handleSearch} className="surface-panel draft-grid p-5">
+                <label htmlFor="dividend-search" className="text-sm font-[650]">
+                  Company or symbol
+                </label>
+                <div className="mt-2 flex flex-col gap-2 sm:flex-row">
+                  <input
+                    id="dividend-search"
+                    name="dividend-search"
+                    className="h-12 flex-1 rounded-[10px] border border-input px-4 outline-none focus:border-primary"
+                    value={searchTerm}
+                    onChange={(event) => setSearchTerm(event.target.value)}
+                    placeholder="Enter a supported company"
+                    required
+                  />
+                  <button className="store-action store-action--filled">
+                    <Search size={17} />
+                    Search
+                  </button>
+                </div>
+              </form>
             </div>
-          ) : (searchTerm != "" ? <p className="text-center text-muted-foreground py-4">The company you searched for either does not exist, was incorrectly entered or does not give out Dividends.
-            <br />Ensure you are entering the company name correctly or the company ticker symbol e.g the Ticker symbol for "The Coca-Cola Company" is "KO"</p> :
-            <p className="text-center text-muted-foreground py-4">No dividends found for the selected month.</p>
-          )}
-        </CardContent>
-        <CardFooter className="flex flex-col items-start">
-          <div className="w-full">
-            <h3 className="font-bold">Column Definitions</h3>
-            <ul className="list-disc pl-4 space-y-2">
-              <li><strong>Company:</strong> The name of the company paying the dividend.</li>
-              <li><strong>Symbol:</strong> The stock ticker symbol for the company.</li>
-              <li><strong>Amount:</strong> The dividend amount per share in USD.</li>
-              <li><strong>Payment Date:</strong> The date when the dividend will be paid to shareholders.</li>
-              <li><strong>Ex-Dividend Date:</strong> The date on or after which a security trades without its dividend. To receive the dividend, you must own the stock before this date.</li>
-            </ul>
-          </div>
-
-          <Alert variant="warning" className="mt-6">
-            <AlertTriangle className="h-4 w-4" />
-            <AlertTitle>Investing Warning</AlertTitle>
-            <AlertDescription>
-              Investing in stocks carries risks, including the potential loss of principal. Past performance does not guarantee future results. Be sure to research thoroughly and consider consulting with a financial advisor before making investment decisions.
-            </AlertDescription>
-          </Alert>
-
-          <Card className="w-full mt-6">
-            <CardHeader>
-              <CardTitle>Start Earning Dividends Today</CardTitle>
-              <CardDescription>
-                Found a stock you're interested in? Buy shares and start earning dividends today using our app.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col sm:flex-row gap-4">
-                {/* <DownloadAppButton/> */}
-                {/* <Button className="w-full sm:w-auto" size="lg">
-                  <AppleIcon className="mr-2 h-5 w-5" />
-                  Download for iOS
-                </Button>
-                <Button className="w-full sm:w-auto" size="lg">
-                  <PlayIcon className="mr-2 h-5 w-5" />
-                  Download for Android
-                </Button> */}
+            <div className="mt-10">
+              <div className="flex items-end justify-between gap-5 border-b border-border pb-5">
+                <h2 className="text-3xl font-[730] tracking-[-0.03em]">
+                  Dividend calendar
+                </h2>
+                <span className="text-sm text-muted-foreground">
+                  {firstOfMonth(month).toLocaleDateString("en-ZM", {
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </span>
               </div>
-            </CardContent>
-          </Card>
-        </CardFooter>
-      </Card>
+              {loading ? (
+                <div className="grid h-48 place-items-center">
+                  <Loader2 className="animate-spin text-primary" />
+                </div>
+              ) : error ? (
+                <p className="py-10 text-[#B71C1C]" role="alert">
+                  {error}
+                </p>
+              ) : dividends.length ? (
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[760px] text-left">
+                    <caption className="sr-only">
+                      Dividend amounts and dates for the selected companies
+                    </caption>
+                    <thead className="border-b border-border text-xs uppercase tracking-[0.06em] text-muted-foreground">
+                      <tr>
+                        <th scope="col" className="px-3 py-4">Company</th>
+                        <th scope="col" className="px-3 py-4">Symbol</th>
+                        <th scope="col" className="px-3 py-4">Amount</th>
+                        <th scope="col" className="px-3 py-4">Payment date</th>
+                        <th scope="col" className="px-3 py-4">Ex-dividend date</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      {dividends.map((dividend) => (
+                        <tr
+                          key={
+                            dividend.id ||
+                            `${dividend.symbol}-${dividend.ex_date}`
+                          }
+                        >
+                          <th scope="row" className="px-3 py-5 text-left font-[650]">
+                            {dividend.company || dividend.symbol}
+                          </th>
+                          <td className="px-3 py-5">{dividend.symbol}</td>
+                          <td className="px-3 py-5 tabular">
+                            {formatKwacha(dividend.rate)}
+                          </td>
+                          <td className="px-3 py-5 tabular">
+                            {formatMediumDate(dividend.payable_date)}
+                          </td>
+                          <td className="px-3 py-5 tabular">
+                            {formatMediumDate(dividend.ex_date)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <p className="py-10 text-muted-foreground">
+                  No dividends found for this selection.
+                </p>
+              )}
+            </div>
+            <div className="mt-8 flex gap-3 rounded-[12px] border border-[#F59E0B]/30 bg-[#F59E0B]/10 p-5 text-[#5E4A16]">
+              <AlertTriangle className="mt-1 shrink-0" size={20} />
+              <p className="leading-7">
+                Dividend dates and amounts can change. Verify company
+                announcements and understand the investment risks before making
+                a decision.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
     </div>
-  )
+  );
 }
-
-
-
-// Mock data for dividends
-// const mockDividends = [
-//   { id: 1, company: "Apple Inc.", symbol: "AAPL", amount: 0.24, paymentDate: "2024-05-15", ex_date: "2024-05-11" },
-//   { id: 2, company: "Microsoft Corporation", symbol: "MSFT", amount: 0.68, paymentDate: "2024-05-10", ex_date: "2024-05-06" },
-//   { id: 3, company: "Johnson & Johnson", symbol: "JNJ", amount: 1.19, paymentDate: "2024-05-22", ex_date: "2024-05-18" },
-//   { id: 4, company: "Procter & Gamble Co.", symbol: "PG", amount: 0.94, paymentDate: "2024-05-17", ex_date: "2024-05-13" },
-//   { id: 5, company: "Coca-Cola Company", symbol: "KO", amount: 0.46, paymentDate: "2024-05-30", ex_date: "2024-05-26" },
-// ]
-
-/*const filteredDividends = mockDividends.filter(dividend => 
-  new Date(dividend.paymentDate).getMonth() === date.getMonth() &&
-  new Date(dividend.paymentDate).getFullYear() === date.getFullYear()
-)*/

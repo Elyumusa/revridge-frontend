@@ -1,80 +1,76 @@
-import { NavLink } from 'react-router-dom';
-import { Button, Heading, Text } from '@/components/design-system';
-import { Apple, Play, CheckCircle2 } from 'lucide-react';
+import { Play } from "lucide-react";
+import { AppleMark } from "@/components/ui/StoreMarks";
+import Reveal from "@/components/ui/home/Reveal";
+import { appCutouts, appScreens } from "@/assets/appScreens";
+import { PLAY_STORE_URL, TESTFLIGHT_URL } from "@/lib/storeLinks";
 
-const features = [
-    "LuSE orders via licensed brokers",
-    "Free U.S. stock practice sandbox",
-    "Secure biometric login",
-    "Portfolio tracking & insights"
-];
-
-const DownloadOurApp: React.FC = () => {
-    return (
-        <section className="w-full py-24 bg-background relative overflow-hidden">
-            {/* Decorative Circles */}
-            <div className="absolute top-1/2 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
-            <div className="absolute bottom-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl translate-y-1/3 translate-x-1/3" />
-
-            <div className="container px-4 md:px-6 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-
-                    {/* Left Column: Text Content */}
-                    <div className="space-y-8 animate-fade-in-up">
-                        <div className="space-y-4">
-                            <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm font-medium">
-                                Mobile App
-                            </div>
-                            <Heading level="h2" className="text-4xl md:text-5xl font-bold tracking-tight">
-                                Invest on the LuSE from your phone.
-                            </Heading>
-                            <Text size="lg" className="text-muted-foreground">
-                                Download the app to place orders on the Lusaka Securities Exchange through licensed brokers, track every stage of execution, and explore U.S. stocks in a free practice sandbox — from anywhere.
-                            </Text>
-                        </div>
-
-                        <ul className="space-y-3">
-                            {features.map((feature, index) => (
-                                <li key={index} className="flex items-center gap-3 text-muted-foreground">
-                                    <CheckCircle2 className="h-5 w-5 text-primary" />
-                                    <span>{feature}</span>
-                                </li>
-                            ))}
-                        </ul>
-
-                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                            <NavLink to="/download">
-                                <Button size="lg" className="w-full sm:w-auto min-w-[160px] h-14" leftIcon={<Apple size={20} />}>
-                                    App Store
-                                </Button>
-                            </NavLink>
-                            <NavLink to="/download">
-                                <Button variant="outline" size="lg" className="w-full sm:w-auto min-w-[160px] h-14" leftIcon={<Play size={20} />}>
-                                    Google Play
-                                </Button>
-                            </NavLink>
-                        </div>
-                    </div>
-
-                    {/* Right Column: Phone Mockup */}
-                    <div className="relative flex justify-center lg:justify-end animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-                        {/* Abstract decorative card behind phone */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[550px] bg-gradient-to-tr from-secondary to-primary/20 rounded-[40px] rotate-[-6deg] blur-sm z-0" />
-
-                        {/* Phone Frame with Real Screenshot */}
-                        <div className="relative z-10 w-[280px] h-[580px] bg-zinc-950 rounded-[40px] border-8 border-zinc-900 shadow-2xl overflow-hidden ring-1 ring-white/10">
-                            {/* Real App Screenshot */}
-                            <img
-                                src="/LUSE STOCKS.png"
-                                alt="Revridge App - LUSE Stocks"
-                                className="w-full h-full object-cover object-top"
-                            />
-                        </div>
-                    </div>
-                </div>
+/** Closing call to action: one rounded teal stage, text on the left, and two
+ *  handsets standing directly on the teal. They are transparent cutouts — the
+ *  flat grey plate of the standard device shots looked like a hole in the green. */
+export default function DownloadOurApp() {
+  return (
+    <section className="bg-white py-16 md:py-24" aria-labelledby="download-title">
+      <div className="site-container">
+        <Reveal y={48}>
+          <div className="hero-glow relative overflow-hidden rounded-[clamp(28px,4vw,48px)] px-6 pb-12 pt-14 text-white sm:px-10 md:px-14 lg:grid lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:gap-6 lg:py-0">
+            <div className="pb-10 lg:py-20">
+              <h2
+                id="download-title"
+                className="display-lg max-w-[12ch] text-white"
+              >
+                Your wealth journey starts here.
+              </h2>
+              <p className="lead-copy mt-6 max-w-[40ch] text-white/75">
+                Android is live on Google Play. Join the iOS beta to learn, set
+                goals, track your net worth, and invest on the LuSE.
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="pill-btn pill-btn--white"
+                >
+                  <Play size={17} fill="currentColor" /> Get Android
+                </a>
+                {/* Was a NavLink to /download that opened a waitlist modal; the
+                    beta is public now, so this goes straight to TestFlight. */}
+                <a
+                  href={TESTFLIGHT_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="pill-btn pill-btn--white"
+                >
+                  <AppleMark size={18} /> Get iOS Beta
+                </a>
+              </div>
             </div>
-        </section>
-    );
-};
 
-export default DownloadOurApp;
+            {/* Both handsets are shown whole and offset in height, so they read
+                as a pair standing on the teal rather than clipped by the panel. */}
+            <div className="relative mx-auto flex w-full max-w-[560px] items-center justify-center lg:max-w-none lg:py-16">
+              <img
+                src={appCutouts.learn.src}
+                alt={appScreens.learn.alt}
+                width={appCutouts.learn.width}
+                height={appCutouts.learn.height}
+                className="relative z-10 -mt-8 w-[46%] max-w-[250px] -rotate-2 drop-shadow-[0_30px_40px_rgba(0,20,18,.45)]"
+                loading="lazy"
+                decoding="async"
+              />
+              <img
+                src={appCutouts.invest.src}
+                alt={appScreens.invest.alt}
+                width={appCutouts.invest.width}
+                height={appCutouts.invest.height}
+                className="-ml-[6%] mt-10 w-[46%] max-w-[250px] rotate-2 drop-shadow-[0_30px_40px_rgba(0,20,18,.45)]"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}

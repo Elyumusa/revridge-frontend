@@ -1,114 +1,171 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/design-system';
-import Logo from '@/assets/images/Revridge.png';
-import { cn } from '@/lib/utils';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { Menu, Play, X } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import Logo from "@/assets/images/logo_no_background.png";
+import { AppleMark } from "@/components/ui/StoreMarks";
+import { PLAY_STORE_URL, TESTFLIGHT_URL } from "@/lib/storeLinks";
+import { cn } from "@/lib/utils";
 
-const Navbar: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-    const location = useLocation();
+const navItems = [
+  { label: "Learn", to: "/#learn" },
+  { label: "Invest", to: "/#invest" },
+  { label: "Grow", to: "/#grow" },
+  { label: "About", to: "/about" },
+  { label: "Help", to: "/support" },
+];
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-    // Close mobile menu on route change
-    useEffect(() => {
-        setIsOpen(false);
-    }, [location]);
+  // Every route opens on a deep-teal hero, so the rail starts teal to read as
+  // one field with it, then turns white once the page moves.
+  const onHero = !scrolled && !open;
 
-    const navItems = [
-        { to: "/about", label: "About" },
-        { to: "/support", label: "Support" },
-        // Removed: Dividend Calendar, Stock Predictor, Trading Bot
-    ];
-
-    return (
-        <header
-            className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
-                scrolled ? "bg-background/80 backdrop-blur-md border-border/50 py-2 shadow-sm" : "bg-transparent border-transparent py-4"
-            )}
+  return (
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b transition-colors duration-300",
+        onHero
+          ? "border-transparent bg-[#00322D]"
+          : "border-border bg-white/95 backdrop-blur",
+      )}
+    >
+      <div className="site-container flex h-[72px] items-center justify-between gap-6">
+        <NavLink
+          to="/"
+          className="flex items-center gap-2.5"
+          aria-label="Revridge home"
+          onClick={() => setOpen(false)}
         >
-            <div className="container px-4 md:px-6 mx-auto flex items-center justify-between">
+          <img
+            src={Logo}
+            alt=""
+            width={40}
+            height={40}
+            className={cn(
+              "h-10 w-10 object-contain transition-[filter]",
+              onHero && "brightness-0 invert",
+            )}
+          />
+          <span
+            className={cn(
+              "text-xl font-[780] tracking-[-0.03em] transition-colors",
+              onHero ? "text-white" : "text-[#17201E]",
+            )}
+          >
+            Revridge
+          </span>
+        </NavLink>
 
-                {/* Logo */}
-                <NavLink className="flex items-center gap-3 z-50 relative" to="/">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-zinc-900 to-black flex items-center justify-center shadow-lg border border-white/10">
-                        <img className="h-6 w-6 object-contain" src={Logo} alt="Revridge Code" />
-                    </div>
-                    <span className={cn("text-xl font-bold tracking-tight transition-colors", scrolled ? "text-foreground" : "text-foreground/90")}>
-                        Revridge
-                    </span>
-                </NavLink>
+        <nav
+          className="hidden items-center gap-8 lg:flex"
+          aria-label="Primary navigation"
+        >
+          {navItems.map((item) => (
+            <NavLink
+              key={item.label}
+              to={item.to}
+              className={({ isActive }) =>
+                cn(
+                  // -my-3/py-3 grows the hit area without changing the rail height.
+                  "-my-3 rounded-[8px] py-3 text-sm font-semibold transition-colors",
+                  onHero
+                    ? "text-white/85 hover:text-[#CAF300]"
+                    : "text-[#17201E] hover:text-primary",
+                  isActive && !item.to.startsWith("/#") && !onHero && "text-primary",
+                )
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
 
-                {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-8">
-                    {navItems.map((item) => (
-                        <NavLink
-                            key={item.to}
-                            to={item.to}
-                            className={({ isActive }) => cn(
-                                "text-sm font-medium transition-colors hover:text-primary",
-                                isActive ? "text-foreground font-semibold" : "text-muted-foreground"
-                            )}
-                        >
-                            {item.label}
-                        </NavLink>
-                    ))}
-                    <NavLink to="/download">
-                        <Button size="sm" variant={scrolled ? "primary" : "secondary"}>Download App</Button>
-                    </NavLink>
-                </nav>
+        <div className="hidden items-center gap-2 lg:flex">
+          <a
+            href={PLAY_STORE_URL}
+            target="_blank"
+            rel="noreferrer"
+            className={cn("pill-btn pill-btn--sm", onHero ? "pill-btn--white" : "pill-btn--teal")}
+          >
+            <Play size={15} fill="currentColor" />
+            Android
+          </a>
+          {/* Was a NavLink to /download that opened a waitlist modal; the beta
+              is public now, so this goes straight to TestFlight. */}
+          <a
+            href={TESTFLIGHT_URL}
+            target="_blank"
+            rel="noreferrer"
+            className={cn("pill-btn pill-btn--sm", onHero ? "pill-btn--white" : "pill-btn--teal")}
+          >
+            <AppleMark size={16} />
+            iOS Beta
+          </a>
+        </div>
 
-                {/* Mobile Toggle */}
-                <button
-                    className="md:hidden z-50 p-2 text-foreground"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {isOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+        <button
+          type="button"
+          className={cn(
+            "grid h-11 w-11 place-items-center rounded-full border lg:hidden",
+            onHero ? "border-white/30 text-white" : "border-border text-primary",
+          )}
+          onClick={() => setOpen((value) => !value)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+        >
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
 
-                {/* Mobile Menu Overlay */}
-                <AnimatePresence>
-                    {isOpen && (
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="fixed inset-0 bg-background pt-24 px-6 md:hidden z-40"
-                        >
-                            <nav className="flex flex-col gap-6">
-                                {navItems.map((item) => (
-                                    <NavLink
-                                        key={item.to}
-                                        to={item.to}
-                                        className={({ isActive }) => cn(
-                                            "text-2xl font-medium border-b border-border/50 pb-4 flex justify-between items-center",
-                                            isActive ? "text-foreground" : "text-muted-foreground"
-                                        )}
-                                    >
-                                        {item.label}
-                                        <ChevronRight size={16} className="opacity-50" />
-                                    </NavLink>
-                                ))}
-                                <NavLink to="/download" className="mt-4">
-                                    <Button className="w-full" size="lg">Download App</Button>
-                                </NavLink>
-                            </nav>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+      {open && (
+        <nav
+          className="border-t border-border bg-white px-4 py-5 lg:hidden"
+          aria-label="Mobile navigation"
+        >
+          <div className="mx-auto flex max-w-md flex-col gap-1">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.label}
+                to={item.to}
+                onClick={() => setOpen(false)}
+                className="rounded-[10px] px-4 py-3 font-semibold text-[#17201E] hover:bg-secondary"
+              >
+                {item.label}
+              </NavLink>
+            ))}
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <a
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="pill-btn pill-btn--teal"
+              >
+                <Play size={16} fill="currentColor" />
+                Android
+              </a>
+              <a
+                href={TESTFLIGHT_URL}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpen(false)}
+                className="pill-btn pill-btn--teal"
+              >
+                <AppleMark size={17} />
+                iOS Beta
+              </a>
             </div>
-        </header>
-    );
-};
-
-export default Navbar;
+          </div>
+        </nav>
+      )}
+    </header>
+  );
+}

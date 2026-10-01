@@ -1,108 +1,150 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Button, Heading, Text } from '@/components/design-system';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { BookOpen, Check, Play, Target } from 'lucide-react';
+import { AppleMark } from '@/components/ui/StoreMarks';
+import {
+  APP_SCREEN_HEIGHT,
+  APP_SCREEN_WIDTH,
+  appScreens,
+} from '@/assets/appScreens';
+import { PLAY_STORE_URL, TESTFLIGHT_URL } from '@/lib/storeLinks';
 
-interface HeroProps {
-    stayUpdatedSectionRef?: React.RefObject<HTMLElement>;
+/**
+ * Showcase hero: oversized headline on a full-bleed deep-teal field, equal
+ * platform pills, and a trio of product cards that open up as the page
+ * scrolls. The chips over the cards describe real product states (a lesson,
+ * an order handed to a broker, a goal) — never returns or customer counts.
+ */
+export default function Hero() {
+  const stageRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: stageRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const centerScale = useTransform(scrollYProgress, [0.25, 0.6], [1, 1.06]);
+  const sideLeftX = useTransform(scrollYProgress, [0.25, 0.6], ['0%', '-8%']);
+  const sideRightX = useTransform(scrollYProgress, [0.25, 0.6], ['0%', '8%']);
+  const sideY = useTransform(scrollYProgress, [0.25, 0.6], ['0%', '-6%']);
+
+  return (
+    <section className="hero-glow relative overflow-hidden text-white">
+      <div className="site-container pb-10 pt-12 sm:pt-16 lg:pt-20">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <h1 className="display-xl max-w-[12ch] text-white">
+            Learn. Invest. <span className="text-[#CAF300]">Grow.</span>
+          </h1>
+          <p className="lead-copy mt-6 max-w-[40ch] text-white/80">
+            Your wealth, built in one app. Learn the basics, plan your goals,
+            and invest on the LuSE today.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              className="pill-btn pill-btn--white"
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Play size={17} fill="currentColor" /> Get Android
+            </a>
+            {/* Was a NavLink to /download that opened a waitlist modal; the
+                beta is public now, so this goes straight to TestFlight. */}
+            <a
+              className="pill-btn pill-btn--white"
+              href={TESTFLIGHT_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <AppleMark size={18} /> Get iOS Beta
+            </a>
+          </div>
+        </motion.div>
+      </div>
+
+      <div ref={stageRef} className="site-container relative pb-16 pt-6 lg:pb-24">
+        <div className="relative mx-auto flex max-w-[1080px] items-end justify-center gap-4 lg:gap-6">
+          <motion.figure
+            style={reduceMotion ? undefined : { x: sideLeftX, y: sideY }}
+            className="media-card -mb-12 hidden w-[28%] md:block"
+          >
+            <img
+              src={appScreens.learn.src}
+              alt={appScreens.learn.alt}
+              width={APP_SCREEN_WIDTH}
+              height={APP_SCREEN_HEIGHT}
+              className="block w-full"
+              fetchPriority="high"
+            />
+            <div className="absolute inset-x-3 bottom-3 flex justify-center">
+              <span className="float-chip">
+                <span className="float-chip__icon"><BookOpen size={17} /></span>
+                <span className="text-left text-sm leading-tight">
+                  <span className="block font-[700]">Lesson complete</span>
+                  <span className="text-[color:var(--meta-ink)]">What is a dividend?</span>
+                </span>
+              </span>
+            </div>
+          </motion.figure>
+
+          <motion.figure
+            style={reduceMotion ? undefined : { scale: centerScale }}
+            className="media-card z-10 w-full max-w-[380px] origin-bottom shadow-[0_40px_90px_rgba(0,20,18,.45)] md:w-[36%]"
+          >
+            <img
+              src={appScreens.invest.src}
+              alt={appScreens.invest.alt}
+              width={APP_SCREEN_WIDTH}
+              height={APP_SCREEN_HEIGHT}
+              className="block w-full"
+              fetchPriority="high"
+            />
+            <div className="absolute inset-x-3 bottom-4 flex justify-center">
+              <span className="float-chip">
+                <span className="float-chip__icon"><Check size={18} strokeWidth={2.6} /></span>
+                <span className="text-left text-sm leading-tight">
+                  <span className="block font-[700]">Order sent to your broker</span>
+                  <span className="text-[color:var(--meta-ink)]">LuSE · Awaiting confirmation</span>
+                </span>
+              </span>
+            </div>
+          </motion.figure>
+
+          <motion.figure
+            style={reduceMotion ? undefined : { x: sideRightX, y: sideY }}
+            className="media-card -mb-12 hidden w-[28%] md:block"
+          >
+            <img
+              src={appScreens.grow.src}
+              alt={appScreens.grow.alt}
+              width={APP_SCREEN_WIDTH}
+              height={APP_SCREEN_HEIGHT}
+              className="block w-full"
+              fetchPriority="high"
+            />
+            <div className="absolute inset-x-3 bottom-3 flex justify-center">
+              <span className="float-chip">
+                <span className="float-chip__icon"><Target size={17} /></span>
+                <span className="text-left text-sm leading-tight">
+                  <span className="block font-[700]">House deposit</span>
+                  <span className="mt-1 block h-1.5 w-28 overflow-hidden rounded-full bg-[#E2E7E5]">
+                    <span className="block h-full w-[62%] rounded-full bg-[#004B44]" />
+                  </span>
+                </span>
+              </span>
+            </div>
+          </motion.figure>
+        </div>
+
+        <p className="mt-14 text-center text-xs leading-5 text-white/60 md:mt-20">
+          Investing involves risk. Illustrations show product features, not
+          forecasts or recommendations.
+        </p>
+      </div>
+    </section>
+  );
 }
-
-const Hero: React.FC<HeroProps> = ({ stayUpdatedSectionRef }) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const scrollToStayUpdated = () => {
-        stayUpdatedSectionRef?.current?.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    return (
-        <section className="relative w-full min-h-[90vh] flex items-center overflow-hidden bg-background pt-24">
-            {/* Background Geometric Pattern */}
-            <div className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none">
-                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <pattern id="hexagons" width="50" height="43.4" patternUnits="userSpaceOnUse" patternTransform="scale(5)">
-                            <path d="M25 0 L50 14.4 L50 43.3 L25 57.7 L0 43.3 L0 14.4 Z" fill="none" stroke="currentColor" strokeWidth="1" />
-                        </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#hexagons)" />
-                </svg>
-            </div>
-
-            {/* Hexagonal Shapes Decoration (Top Right) */}
-            <div className="absolute top-0 right-0 z-0 opacity-10 pointer-events-none translate-x-1/3 -translate-y-1/4">
-                <svg width="600" height="600" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="currentColor" d="M41.7,-72.2C54.4,-64.8,65.3,-55.1,75.2,-44.5C85.1,-33.9,94,-22.3,95.6,-10.1C97.2,2.1,91.5,14.9,83.9,25.8C76.3,36.7,66.8,45.7,56.7,53.4C46.6,61.1,35.9,67.5,24.5,70.9C13.1,74.3,1,74.7,-10.4,72.9C-21.8,71.1,-32.5,67.1,-42.6,60.8C-52.7,54.5,-62.2,46,-70.1,36.1C-78,26.2,-84.3,14.9,-83.4,3.1C-82.5,-8.7,-74.4,-21,-65.6,-32.1C-56.8,-43.2,-47.3,-53.1,-36.5,-61.4C-25.7,-69.7,-13.6,-76.3,0,-76.3L0,0Z" transform="translate(100 100) scale(1.1)" />
-                </svg>
-            </div>
-
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 z-0 bg-gradient-to-r from-background via-background/90 to-transparent pointer-events-none" />
-
-            <div className="container relative z-10 px-4 md:px-6">
-                <div className="flex flex-col max-w-4xl space-y-8">
-
-                    {/* Badge / Tagline */}
-                    <div className="animate-fade-in-up" style={{ animationDelay: '0ms' }}>
-                        <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                            <span className="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
-                            Investing on the LuSE — Launching Soon
-                        </div>
-                    </div>
-
-                    {/* Main Headline */}
-                    <div className="animate-fade-in-up space-y-4" style={{ animationDelay: '200ms' }}>
-                        <Heading level="h1" className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-bold text-primary">
-                            Invest on the Lusaka Securities Exchange <br />
-                            <span className="text-muted-foreground">through licensed brokers.</span>
-                        </Heading>
-
-                        <Text size="xl" className="max-w-[700px] text-muted-foreground md:text-2xl pt-4">
-                            Revridge is your digital front door to the Lusaka Securities Exchange (LuSE). Place buy and sell orders, watch them move from submitted to executed, and build a portfolio — while you learn. U.S. stocks stay in a free practice sandbox.
-                        </Text>
-                    </div>
-
-                    {/* CTAs */}
-                    <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
-                        <NavLink to="/download">
-                            <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8" rightIcon={<ArrowRight size={20} />}>
-                                Get Early Access
-                            </Button>
-                        </NavLink>
-
-                        <NavLink to="/about">
-                            <Button variant="outline" size="lg" className="w-full sm:w-auto text-lg h-14 px-8" rightIcon={<ChevronRight size={20} />}>
-                                Learn How It Works
-                            </Button>
-                        </NavLink>
-                    </div>
-
-                    {/* Stats / Social Proof */}
-                    <div className="pt-12 flex flex-col gap-6 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
-                        <div className="flex items-center gap-8 text-muted-foreground">
-                            <div className="flex flex-col">
-                                <span className="text-2xl font-bold text-foreground">LuSE Investing</span>
-                                <span className="text-sm">Licensed brokers execute</span>
-                            </div>
-                            <div className="w-px h-10 bg-border"></div>
-                            <div className="flex flex-col">
-                                <span className="text-2xl font-bold text-foreground">Full Transparency</span>
-                                <span className="text-sm">Track every order stage</span>
-                            </div>
-                            <div className="w-px h-10 bg-border"></div>
-                            <div className="flex flex-col">
-                                <span className="text-2xl font-bold text-foreground">Free U.S. Sandbox</span>
-                                <span className="text-sm">Practice with virtual money</span>
-                            </div>
-                        </div>
-                        <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm max-w-fit">
-                            <span className="font-semibold">ℹ️ How it works:</span>
-                            <span>Revridge facilitates your orders; a licensed broker executes them on the LuSE.</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    );
-};
-
-export default Hero;

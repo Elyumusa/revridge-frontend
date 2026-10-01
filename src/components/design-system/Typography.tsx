@@ -43,7 +43,7 @@ const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
                     "scroll-m-20",
                     sizes[level],
                     weights[weight],
-                    gradient && "bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 dark:from-white dark:via-gray-200 dark:to-white animate-shimmer bg-[length:200%_auto]",
+                    gradient && "text-primary",
                     className
                 )}
                 {...props}

@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .env
+
+# Impeccable design-skill scratch cache (mocks, review screenshots, session state)
+.impeccable/
