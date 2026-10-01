@@ -175,6 +175,7 @@ The homepage was rebuilt by explicit product decision to carry a bolder, Revolut
 - **Depth:** floating chips (`.float-chip`) and hero/invest media may carry soft shadows. Chips describe real product states only — never returns, counts, or ratings.
 - **Phones on colour:** device shots carry a flat #E9E9E9 plate, so on a teal field use the transparent cutouts (`appCutouts`) rather than putting a grey tile on the green; show handsets whole, never cropped by their container.
 - **Colour:** lime may highlight a headline word, chip icons, and step numbers; it still never fills a section. The dark fields are deep teal, never black or neon.
+- **Hero backdrop:** `HeroBackdrop` — outlined words slide on a tilt behind drifting, linking points; the pointer lights the words lime and pulls the points into a cluster. Decorative and aria-hidden; keep it free of figures, prices or counts, and keep the left fade so the headline reads first. Touch gets drifting points only; reduced motion gets one still frame.
 - **Motion:** sections fade and rise in once (`Reveal`); the hero card trio opens with scroll. Everything renders static under `prefers-reduced-motion`.
 - **Navigation:** on the homepage the rail starts in the hero's deep teal with a white logo and links, and turns white once the page scrolls.
 

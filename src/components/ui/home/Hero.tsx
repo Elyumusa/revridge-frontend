@@ -2,12 +2,9 @@ import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { BookOpen, Check, Play, Target } from 'lucide-react';
 import { AppleMark } from '@/components/ui/StoreMarks';
-import {
-  APP_SCREEN_HEIGHT,
-  APP_SCREEN_WIDTH,
-  appScreens,
-} from '@/assets/appScreens';
+import { appCutouts, appScreens } from '@/assets/appScreens';
 import { PLAY_STORE_URL, TESTFLIGHT_URL } from '@/lib/storeLinks';
+import HeroBackdrop from '@/components/ui/home/HeroBackdrop';
 
 /**
  * Showcase hero: oversized headline on a full-bleed deep-teal field, equal
@@ -30,7 +27,8 @@ export default function Hero() {
 
   return (
     <section className="hero-glow relative overflow-hidden text-white">
-      <div className="site-container pb-10 pt-12 sm:pt-16 lg:pt-20">
+      <HeroBackdrop />
+      <div className="site-container relative z-10 pb-10 pt-12 sm:pt-16 lg:pt-20">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -66,21 +64,21 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <div ref={stageRef} className="site-container relative pb-16 pt-6 lg:pb-24">
-        <div className="relative mx-auto flex max-w-[1080px] items-end justify-center gap-4 lg:gap-6">
+      <div ref={stageRef} className="site-container relative z-10 pb-16 pt-6 lg:pb-24">
+        <div className="relative mx-auto flex max-w-[1120px] items-end justify-center gap-8 lg:gap-16">
           <motion.figure
-            style={reduceMotion ? undefined : { x: sideLeftX, y: sideY }}
-            className="media-card -mb-12 hidden w-[28%] md:block"
+            style={reduceMotion ? { rotate: -5 } : { x: sideLeftX, y: sideY, rotate: -5 }}
+            className="relative -mb-12 hidden w-[26%] md:block"
           >
             <img
-              src={appScreens.learn.src}
+              src={appCutouts.learn.src}
               alt={appScreens.learn.alt}
-              width={APP_SCREEN_WIDTH}
-              height={APP_SCREEN_HEIGHT}
-              className="block w-full"
-              fetchPriority="high"
+              width={appCutouts.learn.width}
+              height={appCutouts.learn.height}
+              className="block w-full drop-shadow-[0_30px_40px_rgba(0,20,18,.45)]"
+              {...{ fetchpriority: 'high' }}
             />
-            <div className="absolute inset-x-3 bottom-3 flex justify-center">
+            <div className="absolute inset-x-0 bottom-8 flex justify-center">
               <span className="float-chip">
                 <span className="float-chip__icon"><BookOpen size={17} /></span>
                 <span className="text-left text-sm leading-tight">
@@ -93,17 +91,17 @@ export default function Hero() {
 
           <motion.figure
             style={reduceMotion ? undefined : { scale: centerScale }}
-            className="media-card z-10 w-full max-w-[380px] origin-bottom shadow-[0_40px_90px_rgba(0,20,18,.45)] md:w-[36%]"
+            className="relative z-10 w-full max-w-[380px] origin-bottom md:w-[34%]"
           >
             <img
-              src={appScreens.invest.src}
+              src={appCutouts.invest.src}
               alt={appScreens.invest.alt}
-              width={APP_SCREEN_WIDTH}
-              height={APP_SCREEN_HEIGHT}
-              className="block w-full"
-              fetchPriority="high"
+              width={appCutouts.invest.width}
+              height={appCutouts.invest.height}
+              className="block w-full drop-shadow-[0_30px_40px_rgba(0,20,18,.45)]"
+              {...{ fetchpriority: 'high' }}
             />
-            <div className="absolute inset-x-3 bottom-4 flex justify-center">
+            <div className="absolute inset-x-0 bottom-10 flex justify-center">
               <span className="float-chip">
                 <span className="float-chip__icon"><Check size={18} strokeWidth={2.6} /></span>
                 <span className="text-left text-sm leading-tight">
@@ -115,18 +113,18 @@ export default function Hero() {
           </motion.figure>
 
           <motion.figure
-            style={reduceMotion ? undefined : { x: sideRightX, y: sideY }}
-            className="media-card -mb-12 hidden w-[28%] md:block"
+            style={reduceMotion ? { rotate: 5 } : { x: sideRightX, y: sideY, rotate: 5 }}
+            className="relative -mb-12 hidden w-[26%] md:block"
           >
             <img
-              src={appScreens.grow.src}
+              src={appCutouts.grow.src}
               alt={appScreens.grow.alt}
-              width={APP_SCREEN_WIDTH}
-              height={APP_SCREEN_HEIGHT}
-              className="block w-full"
-              fetchPriority="high"
+              width={appCutouts.grow.width}
+              height={appCutouts.grow.height}
+              className="block w-full drop-shadow-[0_30px_40px_rgba(0,20,18,.45)]"
+              {...{ fetchpriority: 'high' }}
             />
-            <div className="absolute inset-x-3 bottom-3 flex justify-center">
+            <div className="absolute inset-x-0 bottom-8 flex justify-center">
               <span className="float-chip">
                 <span className="float-chip__icon"><Target size={17} /></span>
                 <span className="text-left text-sm leading-tight">
