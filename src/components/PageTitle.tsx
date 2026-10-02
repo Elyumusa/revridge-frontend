@@ -22,6 +22,8 @@ const titles: Record<string, string> = {
     '/div_calendar': `Dividend calendar — ${SUFFIX}`,
     '/stock-predictor': `Price prediction — ${SUFFIX}`,
     '/trading-bot': `Market analysis — ${SUFFIX}`,
+    '/confirm-subscription': `Confirm subscription — ${SUFFIX}`,
+    '/unsubscribe': `Unsubscribe — ${SUFFIX}`,
 };
 
 export default function PageTitle() {
