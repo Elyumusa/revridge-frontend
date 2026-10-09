@@ -16,9 +16,20 @@ Revridge gives Zambian investors one connected journey for learning, planning, i
 
 ## Positioning
 
-Revridge's core difference is its connected **Learn → Invest → Grow** journey: plain-language financial education, planning tools, LuSE investing through operational licensed-broker partnerships, and progress tracking in one product.
+**Brand promise: Build wealth beyond borders.** Supporting line: *Start investing locally. Grow toward broader opportunities.*
 
-Revridge is a **wealth-building platform**, not a LuSE trading app. The LuSE is the market where investing is available today, not the boundary of what the product is for; further instruments (for example US equities and unit trusts) are intended but are not part of the current version. Copy must therefore avoid two failure modes: presenting the LuSE as the whole purpose of the product, and presenting any not-yet-released instrument as available. Phrase the LuSE as what you can invest in *today* while learning, goals, planning, and net worth tracking describe the product itself.
+Revridge is a **wealth-building platform**, not a LuSE trading app. Its core method is the connected **Learn → Invest → Grow** journey: plain-language financial education, planning tools, real investing through operational licensed-broker partnerships, and progress tracking in one product.
+
+The LuSE is the **current starting point**, the market where real-money investing is available today, not the boundary of the company. Copy states the ambition with confidence and keeps three things visibly separate: what a customer can do today, where Revridge is heading, and what the licensed broker does.
+
+Rules for copy:
+
+- Lead with the wealth-building purpose; introduce LuSE investing as the first available way to act on it ("start investing locally").
+- "Beyond borders" is a direction, never an availability claim. Wherever it appears, the same view or the adjacent copy must say what is available today. No real-money investing outside the LuSE (US equities, ETFs, unit trusts, other markets) may be described as available, and no dates, returns, or approvals are promised.
+- Simulations, calculators, benchmarks, and education are never described as real investments.
+- Revridge is the technology and order-routing layer; the licensed broker executes, settles, and custodies. Do not describe Revridge itself as a broker.
+- Calls to action describe what exists now (Get Android, Get iOS Beta, Start investing locally); avoid ones that imply unavailable global trading.
+- Keep the tagline varied: the promise anchors the hero, meta, and footer; other pages use wording suited to their job.
 
 ## Operating Context
 
@@ -45,7 +56,7 @@ Revridge is a **wealth-building platform**, not a LuSE trading app. The LuSE is 
 - Product name: Revridge.
 - Core product language: **Learn → Invest → Grow**.
 - The product should communicate in plain language suitable for people who may be new to investing.
-- Zambia and the LuSE are present-day product commitments, not generic market examples.
+- Zambia and the LuSE are the present-day starting point and product commitment, not generic market examples and not the whole identity.
 - The mobile app is the palette authority for the wider Revridge brand. Its core colors are primary deep teal `#004B44`, supporting teal `#006B62`, lime accent `#CAF300`, deep teal gradient stop `#00322D`, and white `#FFFFFF`.
 - Brand neutrals are near-black green `#17201E`, muted gray-green `#66706D`, softer gray-green `#747D7A`, subtle icon gray-green `#9AA29F`, soft green-gray background `#F5F7F6`, pale gray-blue surface `#F7F9FB`, pale teal-gray border `#E2E7E5`, and white cards `#FFFFFF`.
 - Semantic colors remain functional rather than becoming major brand colors: positive `#2E7D32` or `#4CAF50`, destructive `#B71C1C`, favorite/remove `#C43C4B`, warning `#F59E0B`, and net-worth accent `#7257B6`.

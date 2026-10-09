@@ -17,7 +17,7 @@ export default function Footer() {
               <span className="grid h-11 w-11 place-items-center rounded-[12px] bg-white"><img src={Logo} alt="" width={32} height={32} className="h-8 w-8" /></span>
               <span className="text-2xl font-[760] tracking-[-0.03em]">Revridge</span>
             </div>
-            <p className="mt-6 max-w-lg text-base leading-7 text-white/75">Learn clearly, plan your goals, and follow your whole financial progress in one place — with investing available today on the LuSE.</p>
+            <p className="mt-6 max-w-lg text-base leading-7 text-white/75">Build wealth beyond borders. Learn, plan, and invest in one place, starting with local investing on the LuSE today.</p>
             <SocialLinks className="mt-7" />
           </div>
           {/* -mx-3 keeps the links flush with the column edge while each one

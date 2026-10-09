@@ -34,6 +34,10 @@ const faqCategories: FAQCategory[] = [
                 answer: "Start in Learn to understand the basics, set a goal in Grow, and visit Invest when you are ready to explore LuSE-listed companies and complete the required onboarding."
             },
             {
+                question: "Is Revridge only for the LuSE?",
+                answer: "No. Revridge is built to help people build wealth: learning, goal planning, net worth tracking, and investing, together in one app. Today, real investing is available on the Lusaka Securities Exchange (LuSE), and we want to widen the opportunities over time. Nothing beyond the LuSE is available to invest in yet, and we will say so clearly in the app when that changes."
+            },
+            {
                 question: "Who can use Revridge?",
                 answer: "The current product is focused on Zambia. Some investing features may have additional residency, age, identity, or broker-approval requirements."
             }
@@ -166,7 +170,7 @@ export default function FAQPage() {
                 <header className="page-hero border-b border-border">
                     <div className="site-container max-w-5xl">
                         <h1>Clear answers before you move money.</h1>
-                        <p className="section-copy mt-6">How Revridge works, what licensed brokers handle, and what to expect from investing on the LuSE.</p>
+                        <p className="section-copy mt-6">How Revridge works, what licensed brokers handle, and what you can invest in today.</p>
                     </div>
                 </header>
 

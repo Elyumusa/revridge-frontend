@@ -49,7 +49,7 @@ export default function SupportPage() {
         <header className="page-hero border-b border-border">
           <div className="site-container max-w-5xl">
             <h1>Help, without the runaround.</h1>
-            <p className="section-copy mt-6">Ask about the app, LuSE investing, or your account. We’ll route your message to the right place.</p>
+            <p className="section-copy mt-6">Ask about the app, investing, or your account. We’ll route your message to the right place.</p>
           </div>
         </header>
 

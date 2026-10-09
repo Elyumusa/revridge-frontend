@@ -11,7 +11,7 @@ const facts = [
   { title: 'Live on Google Play', detail: 'Android, available now', icon: <Play size={22} fill="currentColor" /> },
   { title: 'iOS public beta', detail: 'Join through TestFlight', icon: <AppleMark size={23} /> },
   { title: 'Licensed brokers', detail: 'Execute and custody every order', icon: <ShieldCheck size={23} /> },
-  { title: 'Built in Zambia', detail: 'Priced in kwacha, for here', icon: <MapPin size={23} /> },
+  { title: 'Starting in Zambia', detail: 'Local investing today, wider over time', icon: <MapPin size={23} /> },
 ];
 
 export default function TrustStrip() {

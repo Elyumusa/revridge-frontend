@@ -22,11 +22,14 @@ export default function InvestStory() {
         <div>
           <Reveal>
             <h2 id="invest-title" className="display-lg max-w-[12ch] text-white">
-              Invest on the LuSE, <span className="text-[#CAF300]">today.</span>
+              Start investing locally, <span className="text-[#CAF300]">today.</span>
             </h2>
             <p className="lead-copy mt-6 max-w-[44ch] text-white/75">
+              The LuSE is where real investing starts on Revridge today.
               Explore companies you already know, then place eligible orders
-              through licensed broker partners — with every step visible.
+              through licensed broker partners, with every step visible.
+              Broader opportunities are where we are heading, not what you can
+              invest in yet.
             </p>
           </Reveal>
 

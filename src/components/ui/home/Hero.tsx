@@ -38,8 +38,8 @@ export default function Hero() {
             Learn. Invest. <span className="text-[#CAF300]">Grow.</span>
           </h1>
           <p className="lead-copy mt-6 max-w-[40ch] text-white/80">
-            Your wealth, built in one app. Learn the basics, plan your goals,
-            and invest on the LuSE today.
+            Build wealth beyond borders. Start investing locally on the LuSE
+            today, and grow toward broader opportunities.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a

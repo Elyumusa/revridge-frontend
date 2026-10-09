@@ -192,8 +192,8 @@ export default function DownloadAppPage() {
                 Your wealth journey, in your pocket.
               </h1>
               <p className="section-copy mt-6">
-                Learn the basics, make a plan, invest on the LuSE, and keep
-                track of everything you are building.
+                Learn the basics, plan your goals, start investing locally on
+                the LuSE, and track everything you are building.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -253,7 +253,7 @@ export default function DownloadAppPage() {
             <div className="mt-14 grid gap-4 md:grid-cols-3">
               {[
                 ["01", "Learn before the decision", "Plain-language lessons help you understand the basics and the risks."],
-                ["02", "Invest when you are ready", "Explore LuSE-listed companies and submit eligible orders through licensed broker partners."],
+                ["02", "Invest when you are ready", "Start with LuSE-listed companies and submit eligible orders through licensed broker partners."],
                 ["03", "Grow the whole picture", "Set goals, use planning tools, and track your net worth in the same journey."],
               ].map(([number, title, copy], index) => (
                 <Reveal key={number} delay={index * 0.08}>
