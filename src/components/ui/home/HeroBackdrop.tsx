@@ -5,10 +5,10 @@ import { useEffect, useRef } from 'react';
 const bands = [
   { key: 'learn-a', text: 'LEARN · INVEST · GROW · LEARN · INVEST · GROW ·' },
   { key: 'wealth-a', text: 'WEALTH · WEALTH · WEALTH · WEALTH · WEALTH · WEALTH ·' },
-  { key: 'zambia-a', text: 'BUILT IN ZAMBIA · BUILT IN ZAMBIA · BUILT IN ZAMBIA ·' },
+  { key: 'zambia-a', text: 'BUILD WEALTH · BEYOND BORDERS · BUILD WEALTH ·' },
   { key: 'learn-b', text: 'GROW · LEARN · INVEST · GROW · LEARN · INVEST ·' },
   { key: 'wealth-b', text: 'WEALTH · WEALTH · WEALTH · WEALTH · WEALTH · WEALTH ·' },
-  { key: 'zambia-b', text: 'BUILT IN ZAMBIA · BUILT IN ZAMBIA · BUILT IN ZAMBIA ·' },
+  { key: 'zambia-b', text: 'BUILD WEALTH · BEYOND BORDERS · BUILD WEALTH ·' },
   { key: 'learn-c', text: 'INVEST · GROW · LEARN · INVEST · GROW · LEARN ·' },
 ];
 

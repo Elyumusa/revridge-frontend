@@ -17,7 +17,7 @@ const journey = [
   {
     icon: Landmark,
     step: "Invest",
-    copy: "Explore LuSE companies and route eligible orders through licensed broker partners.",
+    copy: "Start with real local investing on the LuSE, through licensed broker partners.",
   },
   {
     icon: Goal,
@@ -39,8 +39,9 @@ export default function AboutPage() {
             </h1>
             <p className="section-copy lg:pb-2">
               Revridge brings learning, financial planning, investing, and
-              progress tracking into one approachable wealth-building platform
-              for Zambia.
+              progress tracking into one wealth-building platform. We are
+              starting in Zambia with real local investing, and building toward
+              broader opportunities over time.
             </p>
           </div>
         </header>
@@ -103,8 +104,8 @@ export default function AboutPage() {
           <div className="site-container grid gap-4 md:grid-cols-2">
             {[
               [
-                "Built for Zambian investors",
-                "Local market context and practical education for first-time and early-stage investors. Investing is available today on the Lusaka Securities Exchange.",
+                "Starting in Zambia",
+                "Local market context and practical education for first-time and early-stage investors. Real investing is available today on the Lusaka Securities Exchange; our ambition is to help you build wealth across more opportunities over time.",
               ],
               [
                 "Broker-backed execution",

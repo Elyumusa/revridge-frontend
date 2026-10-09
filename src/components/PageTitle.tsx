@@ -9,7 +9,7 @@ const SUFFIX = 'Revridge';
  * so the wording stays consistent with the navigation.
  */
 const titles: Record<string, string> = {
-    '/': 'Revridge — Learn. Invest. Grow wealth.',
+    '/': 'Revridge — Build wealth beyond borders.',
     '/about': `About — ${SUFFIX}`,
     '/support': `Help and support — ${SUFFIX}`,
     '/faq': `Frequently asked questions — ${SUFFIX}`,

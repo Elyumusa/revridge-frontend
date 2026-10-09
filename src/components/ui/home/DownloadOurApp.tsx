@@ -21,8 +21,9 @@ export default function DownloadOurApp() {
                 Your wealth journey starts here.
               </h2>
               <p className="lead-copy mt-6 max-w-[40ch] text-white/75">
-                Android is live on Google Play. Join the iOS beta to learn, set
-                goals, track your net worth, and invest on the LuSE.
+                Android is live on Google Play. Join the iOS beta to learn, plan
+                your goals, track your net worth, and start investing locally
+                on the LuSE.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a
