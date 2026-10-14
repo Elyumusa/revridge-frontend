@@ -1,6 +1,8 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import axios from 'axios';
 import { AlertCircle, CheckCircle2, ChevronDown, Loader2, Mail, MessageCircle, Phone, Send } from 'lucide-react';
+import { Honeypot, Turnstile, TurnstileHandle } from '@/components/BotProtection';
+import { TURNSTILE_ENABLED, TURNSTILE_PENDING_MESSAGE } from '@/lib/turnstile';
 import Footer from '@/components/ui/home/Footer';
 import { parseApiError } from '@/utils/errorHandler';
 import { cn } from '@/lib/utils';
@@ -17,6 +19,9 @@ export default function SupportPage() {
   const [formData, setFormData] = useState({ name: '', email: '', category: 'general', message: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const turnstileRef = useRef<TurnstileHandle>(null);
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setFormData((current) => ({ ...current, [event.target.name]: event.target.value }));
@@ -24,19 +29,20 @@ export default function SupportPage() {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    if (TURNSTILE_ENABLED && !turnstileToken) { setStatus('error'); setMessage(TURNSTILE_PENDING_MESSAGE); return; }
     setStatus('loading');
     setMessage('');
     try {
       const mainURL = import.meta.env.VITE_REVRIDGE_BACKEND_URL;
-      const response = await axios.post(`${mainURL}/support/`, formData);
-      if (response.status === 201) {
-        setStatus('success');
-        setMessage(response.data.message || "Thank you. We'll get back to you soon.");
-        setFormData({ name: '', email: '', category: 'general', message: '' });
-      }
+      const response = await axios.post(`${mainURL}/support/`, { ...formData, website: honeypot, turnstile_token: turnstileToken });
+      setStatus('success');
+      setMessage(response.data?.message || "Thank you. We'll get back to you soon.");
+      setFormData({ name: '', email: '', category: 'general', message: '' });
     } catch (error) {
       setStatus('error');
       setMessage(parseApiError(error));
+    } finally {
+      turnstileRef.current?.reset();
     }
   }
 
@@ -65,7 +71,8 @@ export default function SupportPage() {
               </div>
             </aside>
 
-            <form onSubmit={handleSubmit} className="rounded-[clamp(24px,3vw,36px)] bg-white p-7 md:p-10">
+            <form onSubmit={handleSubmit} className="relative rounded-[clamp(24px,3vw,36px)] bg-white p-7 md:p-10">
+              <Honeypot value={honeypot} onChange={setHoneypot} />
               <h2 className="text-2xl font-[720]">Send a message</h2>
               <div className="mt-7 grid gap-5 sm:grid-cols-2">
                 <label className="text-sm font-[650]">Name<input className="mt-2 h-12 w-full rounded-full border border-input bg-white px-5 font-normal outline-none focus:border-primary" name="name" value={formData.name} onChange={handleInputChange} autoComplete="name" required /></label>
@@ -73,6 +80,7 @@ export default function SupportPage() {
               </div>
               <label className="mt-5 block text-sm font-[650]">Topic<select className="mt-2 h-12 w-full rounded-full border border-input bg-white px-5 font-normal outline-none focus:border-primary" name="category" value={formData.category} onChange={handleInputChange}><option value="general">General question</option><option value="technical">Technical support</option><option value="billing">Account or fees</option><option value="feedback">Product feedback</option></select></label>
               <label className="mt-5 block text-sm font-[650]">Message<textarea className="mt-2 min-h-36 w-full rounded-[24px] border border-input bg-white p-5 font-normal outline-none focus:border-primary" name="message" value={formData.message} onChange={handleInputChange} required /></label>
+              <Turnstile ref={turnstileRef} onToken={setTurnstileToken} className="mt-5" />
               {message && <div role={status === 'error' ? 'alert' : 'status'} className={cn('mt-5 flex items-start gap-2 rounded-[10px] border p-4 text-sm', status === 'error' ? 'border-[#B71C1C]/20 bg-[#B71C1C]/5 text-[#B71C1C]' : 'border-[#2E7D32]/20 bg-[#2E7D32]/5 text-[#2E7D32]')}>{status === 'error' ? <AlertCircle size={18} /> : <CheckCircle2 size={18} />}<span>{message}</span></div>}
               <button disabled={status === 'loading'} className="pill-btn pill-btn--teal mt-6 disabled:opacity-60" type="submit">{status === 'loading' ? <><Loader2 className="animate-spin" size={17} /> Sending…</> : <>Send message <Send size={17} /></>}</button>
             </form>

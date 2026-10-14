@@ -11,6 +11,20 @@ function stringField(value: unknown, field: string): string | null {
     return typeof value[field] === 'string' ? value[field] : null;
 }
 
+const FIELD_LABELS: Record<string, string> = { name: 'Name', email: 'Email', message: 'Message', category: 'Topic' };
+
+/** First DRF field error, e.g. {"message": ["Message must be at least 10 characters long."]}. */
+function firstFieldError(data: UnknownRecord): string | null {
+    for (const [field, value] of Object.entries(data)) {
+        const text = Array.isArray(value) ? value.find((item) => typeof item === 'string') : value;
+        if (typeof text === 'string') {
+            const label = FIELD_LABELS[field];
+            return label && !text.toLowerCase().startsWith(label.toLowerCase()) ? `${label}: ${text}` : text;
+        }
+    }
+    return null;
+}
+
 export const parseApiError = (error: unknown): string => {
     const candidate = isRecord(error) ? error : {};
     const response = isRecord(candidate.response) ? candidate.response : null;
@@ -21,24 +35,12 @@ export const parseApiError = (error: unknown): string => {
 
         switch (status) {
             case 400: {
-                if (typeof data === 'string') {
-                    if (data.includes('already exists.')) {
-                        return "Great news! You're already on our list. Check your inbox for updates!";
-                    }
-                    return data;
-                }
+                if (typeof data === 'string') return data;
 
                 if (isRecord(data)) {
-                    const rawEmail = data.email;
-                    const emailError = Array.isArray(rawEmail)
-                        ? (typeof rawEmail[0] === 'string' ? rawEmail[0] : null)
-                        : (typeof rawEmail === 'string' ? rawEmail : null);
-                    if (emailError?.includes('already exists.')) {
-                        return "Great news! You're already on our list. Check your inbox for updates!";
-                    }
-                    if (emailError) return emailError;
-                    return stringField(data, 'message')
-                        || stringField(data, 'detail')
+                    return stringField(data, 'detail')
+                        || stringField(data, 'message')
+                        || firstFieldError(data)
                         || 'Invalid request. Please check your input and try again.';
                 }
 
@@ -74,7 +76,7 @@ export const parseApiError = (error: unknown): string => {
 };
 
 export const getEmailSignupSuccessMessage = (email: string): string =>
-    `Success! Check ${email} for your confirmation.`;
+    `Almost done! Check ${email} and click the link to confirm your subscription.`;
 
 export const isValidEmail = (email: string): boolean =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
