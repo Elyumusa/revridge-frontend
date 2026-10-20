@@ -22,9 +22,6 @@ export const parseApiError = (error: unknown): string => {
         switch (status) {
             case 400: {
                 if (typeof data === 'string') {
-                    if (data.includes('already exists.')) {
-                        return "Great news! You're already on our list. Check your inbox for updates!";
-                    }
                     return data;
                 }
 
@@ -33,9 +30,6 @@ export const parseApiError = (error: unknown): string => {
                     const emailError = Array.isArray(rawEmail)
                         ? (typeof rawEmail[0] === 'string' ? rawEmail[0] : null)
                         : (typeof rawEmail === 'string' ? rawEmail : null);
-                    if (emailError?.includes('already exists.')) {
-                        return "Great news! You're already on our list. Check your inbox for updates!";
-                    }
                     if (emailError) return emailError;
                     return stringField(data, 'message')
                         || stringField(data, 'detail')
@@ -71,16 +65,4 @@ export const parseApiError = (error: unknown): string => {
     return typeof candidate.message === 'string'
         ? candidate.message
         : 'An unexpected error occurred. Please try again.';
-};
-
-export const getEmailSignupSuccessMessage = (email: string): string =>
-    `Success! Check ${email} for your confirmation.`;
-
-export const isValidEmail = (email: string): boolean =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-export const getEmailValidationError = (email: string): string | null => {
-    if (!email) return 'Email address is required.';
-    if (!isValidEmail(email)) return 'Please enter a valid email address.';
-    return null;
 };
