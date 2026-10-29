@@ -1,10 +1,9 @@
 import learnInvesting from '@/assets/images/learn-investing-device.webp';
-import exploreLuse from '@/assets/images/explore-luse-device.webp';
 import practiceInvesting from '@/assets/images/practice-investing-device.webp';
+import practiceInvestingCutout from '@/assets/images/practice-investing-cutout.webp';
 import planFuture from '@/assets/images/plan-future-device.webp';
 import analyzePortfolio from '@/assets/images/analyze-portfolio-device.webp';
 import learnCutout from '@/assets/images/learn-investing-cutout.webp';
-import exploreCutout from '@/assets/images/explore-luse-cutout.webp';
 import planCutout from '@/assets/images/plan-future-cutout.webp';
 import portfolioCutout from '@/assets/images/analyze-portfolio-cutout.webp';
 
@@ -14,9 +13,7 @@ import portfolioCutout from '@/assets/images/analyze-portfolio-cutout.webp';
  * compete with the page's own headings — and are normalised to one device-to-frame
  * ratio so several can sit side by side without looking different sizes.
  *
- * They share one aspect ratio rather than one pixel size: the LuSE explorer was
- * supplied at a smaller resolution, and upscaling it to match would only soften
- * it. Give every <img> the ratio below rather than these exact numbers.
+ * Give every <img> the ratio below rather than these exact numbers.
  */
 export const APP_SCREEN_WIDTH = 1242;
 export const APP_SCREEN_HEIGHT = 2280;
@@ -31,7 +28,7 @@ export const APP_SCREEN_ASPECT = 'aspect-[1242/2280]';
  */
 export const appCutouts = {
   learn: { src: learnCutout, width: 792, height: 1427 },
-  invest: { src: exploreCutout, width: 588, height: 1062 },
+  invest: { src: practiceInvestingCutout, width: 926, height: 1699 },
   grow: { src: planCutout, width: 792, height: 1426 },
   portfolio: { src: portfolioCutout, width: 788, height: 1427 },
 } as const;
@@ -42,8 +39,8 @@ export const appScreens = {
     alt: 'The Revridge Learn screen, showing lessons, a jargon buster, and financial calculators',
   },
   invest: {
-    src: exploreLuse,
-    alt: 'The Explore LuSE screen in the Revridge app, listing companies such as AECI, Airtel Networks Zambia, and BAT Zambia with their kwacha prices',
+    src: practiceInvesting,
+    alt: 'Illustrative Revridge U.S. stock detail screen showing Apple. Prices are examples; paper trading uses virtual money.',
   },
   grow: {
     src: planFuture,
@@ -51,13 +48,9 @@ export const appScreens = {
   },
   portfolio: {
     src: analyzePortfolio,
-    alt: 'The Revridge portfolio screen, showing total value, cash, and invested balances',
+    alt: 'Illustrative Revridge paper portfolio screen showing virtual cash and balances; these are separate from real net worth',
   },
-  /**
-   * Unused on the site. This frame shows a US-listed company with a Buy button,
-   * which reads as a claim that US equities are available today. Do not put it
-   * on a marketing surface until that is actually true.
-   */
+  /** Illustrative U.S. stock screen; pair with visible paper trading context. */
   practice: {
     src: practiceInvesting,
     alt: 'A company page in the Revridge app, showing the price chart and the option to place an order',

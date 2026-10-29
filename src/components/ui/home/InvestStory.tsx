@@ -2,13 +2,12 @@ import { Check } from 'lucide-react';
 import Reveal from '@/components/ui/home/Reveal';
 import { appCutouts, appScreens } from '@/assets/appScreens';
 
-/** Same four steps as the retired HowExecutionWorks band — the broker's role
- *  must stay explicit wherever investing is described (PRODUCT.md). */
+/** Explain the Alpaca Connect paper journey and the roles of both services. */
 const steps = [
-  { title: 'Choose a LuSE company', copy: 'Review the company information and decide what fits your own plan.' },
-  { title: 'Complete onboarding', copy: 'Eligible investors complete identity and broker requirements before ordering.' },
-  { title: 'Revridge routes the order', copy: 'Your order goes to an operational licensed broker partner for review.' },
-  { title: 'The broker confirms it', copy: 'The broker executes, settles, and holds your shares; Revridge shows you the confirmed status.' },
+  { title: 'Explore a U.S. stock', copy: 'Learn about supported securities before making a decision.' },
+  { title: 'Connect your Alpaca account', copy: 'Alpaca handles account opening and identity checks. You choose what Revridge may access.' },
+  { title: 'Grant trading permission', copy: 'A read-only connection shows your account; trading requires a separate grant.' },
+  { title: 'Practice with virtual money', copy: 'Submit paper orders and follow their status. Live trading awaits Alpaca approval and release.' },
 ];
 
 export default function InvestStory() {
@@ -22,14 +21,10 @@ export default function InvestStory() {
         <div>
           <Reveal>
             <h2 id="invest-title" className="display-lg max-w-[12ch] text-white">
-              Start investing locally, <span className="text-[#CAF300]">today.</span>
+              Explore U.S. investing, <span className="text-[#CAF300]">step by step.</span>
             </h2>
             <p className="lead-copy mt-6 max-w-[44ch] text-white/75">
-              The LuSE is where real investing starts on Revridge today.
-              Explore companies you already know, then place eligible orders
-              through licensed broker partners, with every step visible.
-              Broader opportunities are where we are heading, not what you can
-              invest in yet.
+              Connect an Alpaca account you own to view it in Revridge. Paper trading is available for practice with virtual money. Alpaca handles account opening, verification, funding, and brokerage services. Live trading is awaiting approval.
             </p>
           </Reveal>
 
@@ -60,11 +55,12 @@ export default function InvestStory() {
             loading="lazy"
             decoding="async"
           />
+          <p className="mt-3 text-center text-xs text-white/70">Illustrative screen and price. Paper trading uses virtual money.</p>
           <span className="float-chip absolute left-0 top-[18%] hidden sm:inline-flex lg:-left-6">
             <span className="float-chip__icon"><Check size={18} strokeWidth={2.6} /></span>
             <span className="text-sm leading-tight">
-              <span className="block font-[700]">Executed by your broker</span>
-              <span className="text-[color:var(--meta-ink)]">Status updated in the app</span>
+              <span className="block font-[700]">Paper trading with Alpaca</span>
+              <span className="text-[color:var(--meta-ink)]">Virtual money · separate from net worth</span>
             </span>
           </span>
         </Reveal>

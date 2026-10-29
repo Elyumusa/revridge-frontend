@@ -12,8 +12,8 @@ const cards = [
     screen: appScreens.grow,
   },
   {
-    title: 'Your net worth, in one place',
-    copy: 'Follow cash, investments, and progress together as they change.',
+    title: 'Practice stays separate',
+    copy: 'Track your real net worth while keeping paper cash and positions outside it. The screen shown is an illustrative paper portfolio.',
     screen: appScreens.portfolio,
   },
 ];

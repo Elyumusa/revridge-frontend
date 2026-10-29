@@ -22,25 +22,25 @@ const perks = [
   {
     title: 'Start with an amount you choose',
     description:
-      'There is no minimum fortune to begin. Put in an amount you are comfortable with, and add to it as your confidence grows.',
+      'Build a savings goal with an amount you choose. Track progress without moving money into Revridge.',
     icon: Coins,
   },
   {
     title: 'Always in the know',
     description:
-      'Every order carries a status you can see: submitted, sent to the broker, executed. You always know where your money stands — no black boxes.',
+      'See whether an Alpaca paper order is pending, filled, canceled, or rejected. Paper balances stay separate from real net worth.',
     icon: Eye,
   },
   {
     title: 'Investing, protected',
     description:
-      'Orders are handled by licensed brokers who execute and custody your securities, and your data is protected at every step.',
+      'Alpaca handles account opening, identity checks, funding, execution, and custody. Revridge accesses your account only with your Connect permission.',
     icon: ShieldCheck,
   },
   {
     title: 'Explore companies you can name',
     description:
-      'Browse the companies you already see around you. Learn what they do, how their share price moves, and why people invest in them.',
+      'Explore supported U.S. companies, learn what they do, and review their market information before deciding what to practise.',
     icon: BarChart3,
   },
   {
@@ -70,7 +70,7 @@ export default function WhyRevridge() {
           </h2>
           <p className="lead-copy mx-auto mt-6 max-w-[50ch] text-[color:var(--muted-ink)]">
             Education worth the name, tools to plan and track goals, and
-            investing handled by licensed brokers with every step visible to you.
+            paper trading through Alpaca Connect, clearly separate from live investing.
           </p>
         </Reveal>
 

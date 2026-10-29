@@ -61,7 +61,7 @@ export default function StockTradingBot() {
               Experimental market analysis.
             </h1>
             <p className="section-copy mt-6">
-              A separate research utility. It is not the Revridge LuSE order
+              A separate research utility. It is not the Revridge Alpaca Connect order
               flow and its output is not investment advice.
             </p>
           </div>
