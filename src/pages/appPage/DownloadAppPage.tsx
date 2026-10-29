@@ -192,8 +192,8 @@ export default function DownloadAppPage() {
                 Your wealth journey, in your pocket.
               </h1>
               <p className="section-copy mt-6">
-                Learn the basics, plan your goals, start investing locally on
-                the LuSE, and track everything you are building.
+                Learn the basics, plan your goals, explore U.S. securities,
+                and practise with virtual money through Alpaca Connect.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -221,6 +221,7 @@ export default function DownloadAppPage() {
               <p className="mt-5 text-sm">
                 Android is available now. iOS is in beta.
               </p>
+              <p className="mt-2 text-sm text-white/70">Paper trading uses virtual money. Live trading awaits Alpaca approval. App screens and prices are illustrative.</p>
             </div>
             {/* Transparent cutouts: the flat grey plate of the standard device
                 shots read as a hole against the teal hero. */}
@@ -253,7 +254,7 @@ export default function DownloadAppPage() {
             <div className="mt-14 grid gap-4 md:grid-cols-3">
               {[
                 ["01", "Learn before the decision", "Plain-language lessons help you understand the basics and the risks."],
-                ["02", "Invest when you are ready", "Start with LuSE-listed companies and submit eligible orders through licensed broker partners."],
+                ["02", "Invest when you are ready", "Explore U.S. stocks and practise with an Alpaca paper account. Live trading awaits approval."],
                 ["03", "Grow the whole picture", "Set goals, use planning tools, and track your net worth in the same journey."],
               ].map(([number, title, copy], index) => (
                 <Reveal key={number} delay={index * 0.08}>

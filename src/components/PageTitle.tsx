@@ -19,7 +19,6 @@ const titles: Record<string, string> = {
     '/article': `Article — ${SUFFIX}`,
     '/privacy': `Privacy policy — ${SUFFIX}`,
     '/terms': `Terms of service — ${SUFFIX}`,
-    '/div_calendar': `Dividend calendar — ${SUFFIX}`,
     '/stock-predictor': `Price prediction — ${SUFFIX}`,
     '/trading-bot': `Market analysis — ${SUFFIX}`,
 };

@@ -17,118 +17,46 @@ const faqCategories: FAQCategory[] = [
     {
         title: "Getting Started",
         faqs: [
-            {
-                question: "What is Revridge?",
-                answer: "Revridge is a wealth-building app. It helps you learn about investing, plan and track financial goals, follow your net worth, and invest when you are ready. Investing is available today on the Lusaka Securities Exchange (LuSE)."
-            },
-            {
-                question: "Can I invest real money on Revridge?",
-                answer: "Eligible users can submit LuSE investment orders through Revridge. Orders are routed to a licensed broker for review and execution. Availability depends on identity verification, broker approval, market hours, and applicable product requirements."
-            },
-            {
-                question: "Is Revridge a bank or a broker?",
-                answer: "No. Revridge is a technology platform. Licensed broker partners are responsible for executing, settling, and holding securities associated with LuSE orders. Revridge does not hold client securities."
-            },
-            {
-                question: "Where should I begin?",
-                answer: "Start in Learn to understand the basics, set a goal in Grow, and visit Invest when you are ready to explore LuSE-listed companies and complete the required onboarding."
-            },
-            {
-                question: "Is Revridge only for the LuSE?",
-                answer: "No. Revridge is built to help people build wealth: learning, goal planning, net worth tracking, and investing, together in one app. Today, real investing is available on the Lusaka Securities Exchange (LuSE), and we want to widen the opportunities over time. Nothing beyond the LuSE is available to invest in yet, and we will say so clearly in the app when that changes."
-            },
-            {
-                question: "Who can use Revridge?",
-                answer: "The current product is focused on Zambia. Some investing features may have additional residency, age, identity, or broker-approval requirements."
-            }
+            { question: "What is Revridge?", answer: "Revridge brings investing education, goals, savings tracking, and U.S. stock discovery together. You can connect an Alpaca account you own to view it and, with trading permission, use paper trading." },
+            { question: "Can I invest real money on Revridge?", answer: "Not yet. Paper trading with virtual money is available. Live trading through Alpaca Connect awaits Alpaca approval and a separate release; we will clearly identify it when available." },
+            { question: "Is Revridge a bank or broker?", answer: "No. Revridge provides the app and requests your permission through Alpaca Connect. Alpaca opens and administers your brokerage account and handles identity checks, funding, orders, settlement, and custody." },
+            { question: "Where should I begin?", answer: "Explore Learn and Grow without an Alpaca account. In Invest, you can learn about U.S. securities and connect your own Alpaca paper account for practice." },
+            { question: "Who can use Revridge?", answer: "You can use learning and planning features without connecting an Alpaca account. Alpaca determines eligibility for its accounts and services under its own requirements." }
         ]
     },
     {
-        title: "Investing",
+        title: "Alpaca Connect & Investing",
         faqs: [
-            {
-                question: "Which market is available in Invest?",
-                answer: "Investing through Revridge is currently available on shares listed on the Lusaka Securities Exchange (LuSE). Any other product or market you may have seen discussed is not available yet, and we will say so clearly in the app when that changes."
-            },
-            {
-                question: "How does execution work?",
-                answer: "Revridge records your order and routes it to a licensed broker. The broker reviews and, when accepted, executes it on the LuSE. Your order status and portfolio are updated from broker confirmations."
-            },
-            {
-                question: "What are the fees?",
-                answer: "Applicable broker, exchange, regulatory, and service charges should be shown before an order is confirmed. Review the order summary carefully because fees may vary by order and partner."
-            },
-            {
-                question: "Does submitting an order guarantee execution?",
-                answer: "No. An order can remain pending, be rejected, expire, or execute at a different available price. Market conditions and broker checks affect the outcome."
-            }
+            { question: "Which investments are in Invest?", answer: "The current Invest experience focuses on supported U.S. securities through Alpaca. LuSE shares and unit trusts are not offered in this experience." },
+            { question: "What permission does Revridge request?", answer: "Connect lets you authorize Revridge to view your Alpaca account. Trading permission is separate. Revridge cannot submit or cancel orders with a read-only connection. You can disconnect or reconnect in the app." },
+            { question: "Who opens and funds my Alpaca account?", answer: "Alpaca handles account opening, identity checks, deposits, withdrawals, statements, and account administration on its own service. Revridge does not ask for your Alpaca password, bank credentials, or Trading API keys." },
+            { question: "How does paper trading work?", answer: "Paper orders use virtual money and a paper Alpaca account. They are for practice and are never included in your real net worth. An order may be accepted without being filled." },
+            { question: "What are the fees?", answer: "Review any applicable fees and order details in Alpaca's terms and the relevant order flow. Revridge does not quote a fixed fee here because live trading has not launched." },
+            { question: "Does submitting an order guarantee a fill?", answer: "No. An order may remain pending, fill, be canceled, or be rejected. A submitted or accepted paper order is not proof that a real trade occurred." }
         ]
     },
     {
         title: "Learn, Grow & Track",
         faqs: [
-            {
-                question: "What can I learn in the app?",
-                answer: "Learn includes structured financial lessons, investing basics, risk and diversification topics, and a searchable jargon buster."
-            },
-            {
-                question: "Does Revridge hold the money in my savings goals?",
-                answer: "No. Savings goals are tracking tools. You keep money in your own bank or mobile-money account and record progress in Revridge."
-            },
-            {
-                question: "Are calculator results guaranteed?",
-                answer: "No. Calculators are educational planning estimates based on the inputs you provide. Actual returns, inflation, taxes, fees, and market conditions can differ."
-            },
-            {
-                question: "What does the Home screen track?",
-                answer: "Home brings together your next action, learning progress, LuSE portfolio snapshot, current goal, net worth, and recent activity where data is available."
-            }
+            { question: "What can I learn in the app?", answer: "Learn includes financial lessons, investing basics, risk and diversification topics, and a searchable jargon buster." },
+            { question: "Does Revridge hold money in my savings goals?", answer: "No. Savings goals are tracking tools. You keep money in your own account and record progress in Revridge." },
+            { question: "Are calculator results guaranteed?", answer: "No. Calculators are educational estimates based on your inputs. Actual returns, inflation, taxes, fees, and market conditions can differ." },
+            { question: "What does Home track?", answer: "Home brings together learning, goals, savings, and net worth. Paper trading balances are separate from real net worth." }
         ]
     },
     {
         title: "Security & Privacy",
         faqs: [
-            {
-                question: "How is my data protected?",
-                answer: "Revridge uses encrypted network connections, authenticated access, and access controls appropriate to the service. See the Privacy Policy for the categories of data we collect and the service providers involved."
-            },
-            {
-                question: "What authentication methods are available?",
-                answer: "We offer multiple authentication options including email/password, Google Sign-In, biometric authentication (fingerprint/face ID), and PIN code protection for app access."
-            },
-            {
-                question: "Is my money safe?",
-                answer: "Revridge does not custody securities. A licensed broker partner is responsible for execution, settlement, and custody for accepted LuSE orders. Investing always carries risk, including possible loss of capital."
-            },
-            {
-                question: "What if I forget my PIN?",
-                answer: "You can reset your PIN using your email or biometric authentication (if enabled on your device)."
-            },
-            {
-                question: "Who has access to my personal information?",
-                answer: "Authorised Revridge personnel and service providers may access information where needed to operate the service. Broker partners receive information required for onboarding and orders. See the Privacy Policy for details."
-            }
+            { question: "How is my data protected?", answer: "Revridge uses encrypted connections, authenticated access, and access controls. See the Privacy Policy for the data categories and providers involved." },
+            { question: "What if my Alpaca connection expires?", answer: "Account-dependent views and trading stop until you reconnect through Alpaca. You can also disconnect Revridge without closing your Alpaca account." },
+            { question: "Who has access to my information?", answer: "Authorized Revridge personnel and service providers may access information needed to operate the app. Alpaca handles its account and verification data under its own privacy policy. See our Privacy Policy for details." }
         ]
     },
     {
         title: "Support",
         faqs: [
-            {
-                question: "How do I get help?",
-                answer: "You can use in-app support, email us through our Support page, or check this FAQ section. Response times can vary during beta."
-            },
-            {
-                question: "What are support hours?",
-                answer: "During beta, you can contact us through email, WhatsApp, and the in-app support options. Response times and channels may change as the service develops."
-            },
-            {
-                question: "How do I report a bug?",
-                answer: "You can report bugs directly through the app's feedback feature or by emailing our support team. We appreciate all feedback as it helps us improve the platform."
-            },
-            {
-                question: "Can I provide feedback or feature requests?",
-                answer: "Absolutely! We encourage beta users to share feedback and feature requests. Your input helps shape the future of Revridge. Use the in-app feedback feature or contact our support team."
-            }
+            { question: "How do I get help with Revridge?", answer: "Use in-app support or our Support page for app and connection questions. For account opening, identity checks, funding, withdrawals, and statements, contact Alpaca." },
+            { question: "How do I report a bug?", answer: "Report a problem through the app's feedback feature or our Support page, including the screen and what happened." }
         ]
     }
 ];
@@ -169,8 +97,8 @@ export default function FAQPage() {
             <main id="main-content" className="flex-1">
                 <header className="page-hero border-b border-border">
                     <div className="site-container max-w-5xl">
-                        <h1>Clear answers before you move money.</h1>
-                        <p className="section-copy mt-6">How Revridge works, what licensed brokers handle, and what you can invest in today.</p>
+                    <h1>Clear answers before you connect.</h1>
+                        <p className="section-copy mt-6">What Alpaca handles, what Revridge can access, and when trading is available.</p>
                     </div>
                 </header>
 

@@ -14,7 +14,7 @@ const TermsOfServicePage: React.FC = () => {
                             Terms of Service
                         </Heading>
                         <Text className="text-muted-foreground text-lg">
-                            Last Updated: August 14, 2026
+                            Last Updated: October 29, 2026
                         </Text>
                     </div>
                 </section>
@@ -27,7 +27,7 @@ const TermsOfServicePage: React.FC = () => {
                             {/* Introduction */}
                             <div className="mb-12">
                                 <Text className="text-lg leading-relaxed">
-                                    Welcome to <strong>Revridge</strong>, an investing platform and order-routing service that lets you place investment orders on the Lusaka Securities Exchange (LuSE) through licensed brokers. By accessing or using our mobile application or website at{' '}
+                                    Welcome to <strong>Revridge</strong>, a personal finance app with learning, planning, and U.S. investing features. Through Alpaca Connect, you can authorize Revridge to view an Alpaca account you own and, if you separately grant trading permission, submit orders for that account when the relevant trading environment is available. By accessing or using our mobile application or website at{' '}
                                     <a href="https://revridge.xyz" className="text-primary hover:underline">revridge.xyz</a>,
                                     you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our app or website.
                                 </Text>
@@ -42,14 +42,14 @@ const TermsOfServicePage: React.FC = () => {
                                             Important: How Revridge Works
                                         </Heading>
                                         <Text className="mb-4 font-semibold text-[#5E4A16]">
-                                            Revridge is an investing platform, <strong>not</strong> a broker-dealer. We route orders; licensed brokers execute them.
+                                            Revridge provides the app experience and is <strong>not</strong> a broker-dealer. Your Alpaca account is opened and administered by Alpaca.
                                         </Text>
                                         <ul className="list-disc pl-6 space-y-2 text-[#5E4A16]">
-                                            <li>You can place <strong>real buy and sell orders</strong> on LuSE-listed stocks; a licensed broker executes, settles, and custodies them</li>
-                                            <li>Revridge <strong>does not</strong> execute trades, settle transactions, or hold client funds or securities</li>
+                                            <li>Paper trading uses virtual money. Live trading through Connect awaits Alpaca approval and release; paper activity is not a real investment.</li>
+                                            <li>Alpaca handles account opening, identity checks, funding, withdrawals, execution, settlement, custody, and account administration. Revridge does not hold client funds or securities.</li>
                                             <li>Learning and planning tools are educational and do not predict or guarantee investment outcomes</li>
-                                            <li>You can track the status of every order: Submitted → Sent to broker → Executed</li>
-                                            <li className="font-semibold">LuSE investing availability depends on release status, identity checks, broker approval, and applicable product requirements.</li>
+                                            <li>With the required permission, Revridge can show account information and let you review and submit an order; an order may be pending, filled, canceled, or rejected.</li>
+                                            <li className="font-semibold">Account and trading eligibility depend on Alpaca requirements, granted permissions, and product availability.</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -64,10 +64,10 @@ const TermsOfServicePage: React.FC = () => {
                                 <Text className="mb-4">By creating an account and using Revridge, you acknowledge that:
                                 </Text>
                                 <ul className="list-disc pl-6 space-y-2">
-                                    <li>You are at least 18 years old or have parental/guardian consent</li>
+                                    <li>You are at least 18 years old</li>
                                     <li>You have read and understood these Terms of Service</li>
                                     <li>You agree to comply with all applicable laws and regulations</li>
-                                    <li>You understand that Revridge is an investing platform and order-routing service, not a broker-dealer, and that LuSE orders are executed by licensed third-party brokers</li>
+                                    <li>You understand that Revridge is not a broker-dealer and that Alpaca provides the brokerage account and handles orders submitted through an authorized connection</li>
                                 </ul>
                             </div>
 
@@ -85,12 +85,12 @@ const TermsOfServicePage: React.FC = () => {
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">2.2 Identity Verification (KYC)</Heading>
                                 <Text className="mb-6">
-                                    To place orders on the LuSE, you must complete identity verification (Know Your Customer, or KYC). You agree to provide accurate, current identification and supporting documents, and to keep them up to date. We share the information necessary to onboard you with the licensed broker that executes your orders.
+                                    Alpaca handles identity verification and any supporting documents needed to open and use your Alpaca account. You provide that information to Alpaca under its own process and terms. Revridge does not collect Alpaca onboarding documents through Connect.
                                 </Text>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">2.3 The Broker Relationship</Heading>
                                 <Text className="mb-6">
-                                    Real orders on the LuSE are executed, settled, and custodied by a licensed third-party broker — not by Revridge. Your brokerage relationship, including account opening, execution, settlement, custody, and any fees, is governed by that broker's own terms and applicable regulations. Revridge facilitates order creation and tracking, and reflects broker-confirmed executions in your portfolio.
+                                    Your Alpaca account and brokerage relationship, including account opening, funding, withdrawals, execution, settlement, custody, and fees, are governed by Alpaca's own terms and applicable rules. Revridge requests your permission through Alpaca Connect to view account data and, if you choose, to trade. You can manage the connection in Revridge. Disconnecting Revridge does not close your Alpaca account.
                                 </Text>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">2.4 Learning and Planning Tools</Heading>
@@ -106,11 +106,11 @@ const TermsOfServicePage: React.FC = () => {
 
                             {/* Section 3 */}
                             <div className="mb-12">
-                                <Heading level="h2" className="text-2xl font-bold mb-4">3. The Service: Learn, Grow, and LuSE Investing</Heading>
+                                <Heading level="h2" className="text-2xl font-bold mb-4">3. The Service: Learn, Grow, and U.S. Investing</Heading>
 
-                                <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">3.1 Investing on the LuSE</Heading>
+                                <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">3.1 Investing Through Alpaca Connect</Heading>
                                 <Text className="mb-6">
-                                    Where available, eligible users may submit buy and sell orders for supported Lusaka Securities Exchange (LuSE) shares through Revridge. We route eligible orders to a licensed broker for execution. Portfolio and history information reflects status and confirmations received from the broker and may be corrected or delayed.
+                                    Revridge's Invest experience covers supported U.S. securities through an Alpaca account you own. Paper trading is available for practice with virtual money. Live trading is not currently available through Revridge and depends on Alpaca approval and a separate release. Account views require your authorization; order submission also requires trading permission. Account, portfolio, and order information comes from Alpaca and may be delayed or corrected.
                                 </Text>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">3.2 Learning and Wealth Tools</Heading>
@@ -176,7 +176,7 @@ const TermsOfServicePage: React.FC = () => {
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">6.3 No Liability for Losses</Heading>
                                 <Text>
-                                    We are not liable for any losses, damages, or consequences resulting from your use of the app, including investment decisions, broker execution outcomes, or decisions based on educational content or calculator estimates. Execution, settlement, and custody of LuSE trades are the responsibility of the licensed broker.
+                                    We are not liable for any losses, damages, or consequences resulting from your use of the app, including investment decisions, Alpaca execution outcomes, or decisions based on educational content or calculator estimates. Alpaca is responsible for brokerage account services, execution, settlement, and custody under its own terms.
                                 </Text>
                             </div>
 

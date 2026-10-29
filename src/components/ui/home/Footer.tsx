@@ -17,7 +17,7 @@ export default function Footer() {
               <span className="grid h-11 w-11 place-items-center rounded-[12px] bg-white"><img src={Logo} alt="" width={32} height={32} className="h-8 w-8" /></span>
               <span className="text-2xl font-[760] tracking-[-0.03em]">Revridge</span>
             </div>
-            <p className="mt-6 max-w-lg text-base leading-7 text-white/75">Build wealth beyond borders. Learn, plan, and invest in one place, starting with local investing on the LuSE today.</p>
+            <p className="mt-6 max-w-lg text-base leading-7 text-white/75">Build wealth beyond borders. Learn, plan, and explore U.S. investing. Paper trading is available through Alpaca Connect; live trading awaits approval.</p>
             <SocialLinks className="mt-7" />
           </div>
           {/* -mx-3 keeps the links flush with the column edge while each one
@@ -27,7 +27,7 @@ export default function Footer() {
           </nav>
         </div>
         <div className="grid gap-5 pt-8 text-sm leading-6 text-white/70 lg:grid-cols-[1fr_auto]">
-          <p className="max-w-[72ch]">Revridge is an investing technology and order-routing platform. Licensed broker partners execute, settle, and custody eligible LuSE trades. Revridge does not provide personalised investment advice.</p>
+          <p className="max-w-[72ch]">Revridge provides an app to view and, with permission, trade in an Alpaca account you own. Alpaca handles account opening, identity checks, funding, execution, settlement, and custody. Paper trading uses virtual money; live trading awaits approval. Revridge does not provide personalised investment advice.</p>
           <p className="lg:text-right">© {new Date().getFullYear()} Revridge. Investing involves risk.</p>
         </div>
       </div>

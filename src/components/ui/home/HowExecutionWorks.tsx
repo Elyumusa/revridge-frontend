@@ -2,10 +2,10 @@ import { Check, FileCheck2, Landmark, Route } from 'lucide-react';
 import Reveal from '@/components/ui/home/Reveal';
 
 const steps = [
-  { title: 'Choose a LuSE company', copy: 'Review the available company information and decide what fits your own plan.', icon: Landmark },
-  { title: 'Complete onboarding', copy: 'Eligible investors complete the identity and broker requirements before ordering.', icon: FileCheck2 },
-  { title: 'Revridge routes the order', copy: 'Your order is sent to an operational licensed broker partner for review.', icon: Route },
-  { title: 'The broker confirms execution', copy: 'The broker handles execution, settlement, and custody; Revridge reflects the confirmed status.', icon: Check },
+  { title: 'Explore U.S. stocks', copy: 'Review supported securities and decide what to practise.', icon: Landmark },
+  { title: 'Open an Alpaca account', copy: 'Alpaca handles account opening and identity checks on its own service.', icon: FileCheck2 },
+  { title: 'Choose your permissions', copy: 'Authorize account viewing and, separately, trading through Alpaca Connect.', icon: Route },
+  { title: 'Practise with virtual money', copy: 'Follow paper order status in Revridge. Live trading awaits Alpaca approval and release.', icon: Check },
 ];
 
 export default function HowExecutionWorks() {
@@ -14,7 +14,7 @@ export default function HowExecutionWorks() {
       <div className="site-container">
         <Reveal className="mx-auto max-w-3xl text-center">
           <h2 id="execution-title" className="display-lg mx-auto max-w-[14ch]">What happens when you invest.</h2>
-          <p className="lead-copy mx-auto mt-6 max-w-[48ch] text-[color:var(--muted-ink)]">Revridge supports the journey. Licensed broker partners remain responsible for the regulated execution and custody work assigned to them.</p>
+          <p className="lead-copy mx-auto mt-6 max-w-[48ch] text-[color:var(--muted-ink)]">Revridge provides the connected experience. Alpaca handles account services, funding, execution, settlement, and custody.</p>
         </Reveal>
         <ol className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map(({ title, copy, icon: Icon }, index) => (

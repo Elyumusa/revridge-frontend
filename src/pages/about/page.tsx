@@ -17,7 +17,7 @@ const journey = [
   {
     icon: Landmark,
     step: "Invest",
-    copy: "Start with real local investing on the LuSE, through licensed broker partners.",
+    copy: "Explore U.S. stocks and practise through Alpaca Connect with virtual money.",
   },
   {
     icon: Goal,
@@ -40,8 +40,8 @@ export default function AboutPage() {
             <p className="section-copy lg:pb-2">
               Revridge brings learning, financial planning, investing, and
               progress tracking into one wealth-building platform. We are
-              starting in Zambia with real local investing, and building toward
-              broader opportunities over time.
+              bringing U.S. investing into the app through Alpaca Connect.
+              Paper trading is available; live trading awaits approval.
             </p>
           </div>
         </header>
@@ -105,11 +105,11 @@ export default function AboutPage() {
             {[
               [
                 "Starting in Zambia",
-                "Local market context and practical education for first-time and early-stage investors. Real investing is available today on the Lusaka Securities Exchange; our ambition is to help you build wealth across more opportunities over time.",
+                "Practical education and financial planning for first-time investors. The current Invest experience focuses on U.S. securities and Alpaca paper trading with virtual money.",
               ],
               [
-                "Broker-backed execution",
-                "Revridge is the technology layer. Licensed broker partners are responsible for accepted order execution, settlement, and custody.",
+                "Alpaca account connection",
+                "Revridge requests your permission to view and, separately, trade in an Alpaca account you own. Alpaca handles account opening, identity checks, funding, execution, settlement, and custody.",
               ],
             ].map(([title, copy], index) => (
               <Reveal key={title} delay={index * 0.08}>
@@ -123,7 +123,7 @@ export default function AboutPage() {
         </section>
 
         {/* Restored from the pre-redesign About page (commit 399ebb3). Two
-            phrases were adjusted to match the current LuSE-and-brokers
+            phrases were adjusted to match the current Alpaca Connect
             positioning — see the note in the handoff. */}
         <section
           className="site-section bg-white"
@@ -184,9 +184,9 @@ export default function AboutPage() {
               <p className="mt-5">
                 That question is what Revridge is. Education worth the name, in
                 plain language. Tools to plan and see your whole financial
-                picture. And access to real investments, handled by licensed
-                partners — starting with the market open to Zambians today, and
-                widening as we earn the right to carry more.
+                picture. And a way to explore U.S. investing through Alpaca Connect.
+                Paper trading is available with virtual money; live trading
+                awaits Alpaca approval and release.
               </p>
               <footer className="mt-7 border-t border-border pt-6">
                 <p className="italic">

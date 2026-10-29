@@ -6,10 +6,10 @@ import { parseApiError } from '@/utils/errorHandler';
 import { cn } from '@/lib/utils';
 
 const faqs = [
-  { question: 'Can I invest on Revridge?', answer: 'Eligible users can submit LuSE orders through Revridge for review and execution by a licensed broker. Availability depends on identity verification and broker approval.' },
-  { question: 'What investments are currently supported?', answer: 'Investing through Revridge is currently available on shares listed on the Lusaka Securities Exchange (LuSE). Learning, goals, planning tools, and net worth tracking are available to everyone.' },
-  { question: 'Is investing risk-free?', answer: 'No. Licensed brokers handle execution, settlement, and custody, but investing always involves risk, including possible loss of capital.' },
-  { question: 'Where can I use Revridge?', answer: 'Revridge currently focuses on Zambia. Investing eligibility can depend on location, identity checks, and broker approval.' },
+  { question: 'Can I invest on Revridge?', answer: 'Paper trading with virtual money is available through an authorized Alpaca account. Live trading through Revridge awaits Alpaca approval and release.' },
+  { question: 'What investments are currently supported?', answer: 'Invest focuses on supported U.S. securities through Alpaca Connect. Learning, goals, planning tools, and net worth tracking do not require an Alpaca connection.' },
+  { question: 'Is investing risk-free?', answer: 'No. Paper trading uses virtual money, but future live investing would involve risk, including possible loss of capital. Alpaca handles brokerage services.' },
+  { question: 'Where can I use Revridge?', answer: 'Learning and planning features can be used without an Alpaca account. Alpaca decides account eligibility, including location and identity requirements.' },
 ];
 
 export default function SupportPage() {
@@ -49,7 +49,7 @@ export default function SupportPage() {
         <header className="page-hero border-b border-border">
           <div className="site-container max-w-5xl">
             <h1>Help, without the runaround.</h1>
-            <p className="section-copy mt-6">Ask about the app, investing, or your account. We’ll route your message to the right place.</p>
+            <p className="section-copy mt-6">Ask us about the app or your connection. Alpaca handles account opening, identity checks, funding, withdrawals, and statements.</p>
           </div>
         </header>
 

@@ -13,7 +13,7 @@ export default function StockPredictorPage() {
               Price prediction, kept in perspective.
             </h1>
             <p className="section-copy mt-6">
-              This experimental interface is separate from LuSE investing and
+              This experimental interface is separate from Alpaca Connect and
               does not generate trade recommendations.
             </p>
           </div>

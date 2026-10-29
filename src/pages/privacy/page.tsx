@@ -14,7 +14,7 @@ const PrivacyPolicyPage: React.FC = () => {
                             Privacy Policy
                         </Heading>
                         <Text className="text-muted-foreground text-lg">
-                            Last Updated: August 14, 2026
+                            Last Updated: October 29, 2026
                         </Text>
                     </div>
                 </section>
@@ -29,7 +29,7 @@ const PrivacyPolicyPage: React.FC = () => {
                                 <Text className="text-lg leading-relaxed">
                                     <strong>Revridge Finance</strong> ("we," "our," or "us") operates the Revridge mobile application and website at{' '}
                                     <a href="https://revridge.xyz" className="text-primary hover:underline">revridge.xyz</a>.
-                                    Revridge helps users learn about investing, plan and track wealth goals, and place investment orders on the Lusaka Securities Exchange (LuSE) through licensed brokers. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.
+                                    Revridge helps users learn about investing, plan and track wealth goals, and connect an Alpaca account they own to view U.S. investments and, with separate trading permission, submit orders when available. Paper trading is available with virtual money; live trading awaits Alpaca approval and release. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.
                                     Please read this policy carefully.
                                 </Text>
                             </div>
@@ -51,19 +51,15 @@ const PrivacyPolicyPage: React.FC = () => {
                                     <li>Profile picture (if uploaded)</li>
                                 </ul>
 
-                                <Text className="mb-4">To invest on the LuSE, you must complete identity verification (KYC). For this we additionally collect:</Text>
-                                <ul className="list-disc pl-6 space-y-2 mb-6">
-                                    <li>Government-issued identification details (e.g. National Registration Card, passport, or driver's license number)</li>
-                                    <li>Images of your ID document and, where required, a selfie or liveness check</li>
-                                    <li>Date of birth and residential address</li>
-                                    <li>Any other information required by our licensed broker partners for onboarding and regulatory compliance</li>
-                                </ul>
+                                <Text className="mb-6">Alpaca handles account opening and identity checks for your Alpaca account. You provide any identification documents or verification information directly to Alpaca. Revridge does not request your Alpaca password, bank credentials, Trading API keys, or identity documents for Alpaca onboarding.</Text>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">1.2 Investment & Activity Data</Heading>
                                 <Text className="mb-4">We collect information about how you use the investing, learning, and wealth-planning features:</Text>
                                 <ul className="list-disc pl-6 space-y-2 mb-6">
-                                    <li>LuSE order history (buy/sell orders, status, and broker-confirmed executions)</li>
-                                    <li>Portfolio holdings and performance (updated from broker confirmations)</li>
+                                    <li>Alpaca connection status, account identity, and permissions you grant through Connect</li>
+                                    <li>Connect authorization tokens stored on our server to maintain the connection you approved</li>
+                                    <li>Account balances, positions, and order history made available by Alpaca under your authorization</li>
+                                    <li>Order instructions and status for paper trading or an approved live environment, kept distinct</li>
                                     <li>Learning progress and completed lessons</li>
                                     <li>Goals, savings, net-worth entries, and calculator inputs you choose to save</li>
                                     <li>Watchlist preferences</li>
@@ -108,7 +104,7 @@ const PrivacyPolicyPage: React.FC = () => {
                                         <div>
                                             <Text className="font-semibold mb-1">Camera and Photos (Storage)</Text>
                                             <Text className="text-sm text-muted-foreground">
-                                                We request access to your device's camera and photo library exclusively to allow you to capture and upload a profile picture or to facilitate identity verification. We do not access your camera or photos in the background, and we only collect the specific images you choose to upload.
+                                                We may request access to your camera or photo library for a profile picture you choose to upload. Alpaca handles its own identity checks outside Revridge. We do not access your camera or photos in the background.
                                             </Text>
                                         </div>
                                     </div>
@@ -149,8 +145,8 @@ const PrivacyPolicyPage: React.FC = () => {
                                 <ul className="list-disc pl-6 space-y-2">
                                     <li>Provide and maintain the app</li>
                                     <li>Create and manage your account</li>
-                                    <li>Verify your identity (KYC) and onboard you with the licensed broker that executes your orders</li>
-                                    <li>Route your LuSE orders to the broker and reflect broker-confirmed executions in your portfolio</li>
+                                    <li>Connect to the Alpaca account you authorize and verify the permissions granted</li>
+                                    <li>Show authorized account information and, with trading permission, submit order instructions to Alpaca</li>
                                     <li>Provide learning, goal, calculator, and wealth-tracking features</li>
                                     <li>Send you notifications about your portfolio and order status</li>
                                     <li>Improve app functionality and user experience</li>
@@ -189,7 +185,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">3.3 Data Retention</Heading>
                                 <Text>
-                                    We retain information for as long as needed to provide the service and meet legal, security, fraud-prevention, dispute, broker, and regulatory obligations. You may request deletion of information under our control; some records may need to be retained, and a broker may retain data under its own obligations.
+                                    We retain information for as long as needed to provide the service and meet legal, security, fraud-prevention, dispute, and regulatory obligations. You may request deletion of information under our control; some records may need to be retained, and Alpaca may retain data under its own obligations.
                                 </Text>
                             </div>
 
@@ -209,13 +205,13 @@ const PrivacyPolicyPage: React.FC = () => {
                                     <li>Push notifications and messaging</li>
                                 </ul>
 
-                                <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">4.2 Licensed Brokers & Market Data</Heading>
+                                <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">4.2 Alpaca & Market Data</Heading>
                                 <ul className="list-disc pl-6 space-y-2 mb-6">
-                                    <li>Licensed Zambian brokers who execute, settle, and custody your LuSE trades</li>
+                                    <li>Alpaca, which opens and administers your brokerage account and handles identity checks, funding, orders, settlement, and custody</li>
                                     <li>Market-information and stock-data providers</li>
                                 </ul>
                                 <Text className="mb-6 text-sm">
-                                    To place LuSE orders, we share the information necessary to onboard you and route your orders — including your KYC details — with the licensed broker that executes them. The broker is an independent controller of the personal data it receives and handles it under its own privacy policy and applicable regulations.
+                                    When you authorize Alpaca Connect, Alpaca provides the account information permitted by your grant, such as account identity, balances, positions, and orders. If you grant trading permission, Revridge sends your order instructions to Alpaca. Alpaca handles your onboarding and funding information under its own privacy policy and applicable rules. Disconnecting Revridge stops its access but does not close your Alpaca account.
                                 </Text>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">4.3 Analytics & Support</Heading>
@@ -236,8 +232,8 @@ const PrivacyPolicyPage: React.FC = () => {
 
                                 <Text className="mb-4">We may share your information in the following circumstances:</Text>
 
-                                <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">5.1 Service Providers & Brokers</Heading>
-                                <Text className="mb-6">With trusted third-party service providers who help us operate the platform — including cloud infrastructure, market data providers, analytics services, and the licensed brokers who execute, settle, and custody your LuSE trades.</Text>
+                                <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">5.1 Service Providers & Alpaca</Heading>
+                                <Text className="mb-6">With trusted third-party service providers who help us operate the platform — including cloud infrastructure, market data providers, and analytics services — and with Alpaca as needed to provide the account connection and submit authorized order instructions.</Text>
 
                                 <Heading level="h3" className="text-xl font-semibold mt-6 mb-3">5.2 Legal Requirements</Heading>
                                 <Text className="mb-6">If required by law, court order, or government regulation.</Text>
