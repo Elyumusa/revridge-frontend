@@ -22,10 +22,9 @@ export default function DownloadOurApp() {
               </h2>
               <p className="lead-copy mt-6 max-w-[40ch] text-white/75">
                 Android is live on Google Play. Join the iOS beta to learn, plan
-                your goals, track your net worth, and practise U.S. investing
-                through Alpaca Connect with virtual money.
+                your goals, and track your net worth in one place.
               </p>
-              <p className="mt-3 text-sm text-white/70">Live trading awaits Alpaca approval. App screens and prices are illustrative.</p>
+              <p className="mt-3 text-sm text-white/70">App screens and prices are illustrative.</p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a
                   href={PLAY_STORE_URL}

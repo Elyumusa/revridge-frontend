@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { BookOpen, Check, Play, Target } from 'lucide-react';
+import { BookOpen, Play, Target } from 'lucide-react';
 import { AppleMark } from '@/components/ui/StoreMarks';
 import { appCutouts, appScreens } from '@/assets/appScreens';
 import { PLAY_STORE_URL, TESTFLIGHT_URL } from '@/lib/storeLinks';
@@ -9,8 +9,8 @@ import HeroBackdrop from '@/components/ui/home/HeroBackdrop';
 /**
  * Showcase hero: oversized headline on a full-bleed deep-teal field, equal
  * platform pills, and a trio of product cards that open up as the page
- * scrolls. The chips over the cards describe a lesson, a paper order,
- * and a goal — never returns or customer counts.
+ * scrolls. The chips highlight learning and planning features without making
+ * trading claims.
  */
 export default function Hero() {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -38,7 +38,7 @@ export default function Hero() {
             Learn. Invest. <span className="text-[#CAF300]">Grow.</span>
           </h1>
           <p className="lead-copy mt-6 max-w-[40ch] text-white/80">
-            Build wealth beyond borders. Learn and plan in one place. Explore U.S. stocks and practise with an Alpaca paper account; live trading awaits approval.
+            Build wealth beyond borders. Learn the basics, plan for your goals, and explore investing at your own pace.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
@@ -100,15 +100,6 @@ export default function Hero() {
               className="block w-full rounded-[24px] drop-shadow-[0_30px_40px_rgba(0,20,18,.45)]"
               {...{ fetchpriority: 'high' }}
             />
-            <div className="absolute inset-x-0 bottom-10 flex justify-center">
-              <span className="float-chip">
-                <span className="float-chip__icon"><Check size={18} strokeWidth={2.6} /></span>
-                <span className="text-left text-sm leading-tight">
-                  <span className="block font-[700]">Paper order submitted</span>
-                  <span className="text-[color:var(--meta-ink)]">Virtual money · Awaiting fill</span>
-                </span>
-              </span>
-            </div>
           </motion.figure>
 
           <motion.figure
@@ -138,7 +129,7 @@ export default function Hero() {
         </div>
 
         <p className="mt-14 text-center text-xs leading-5 text-white/60 md:mt-20">
-          Paper trading uses virtual money. Live trading awaits approval. Illustrations are not forecasts or recommendations.
+          App screens are illustrative and are not investment advice.
         </p>
       </div>
     </section>

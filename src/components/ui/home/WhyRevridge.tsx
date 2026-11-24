@@ -4,7 +4,6 @@ import {
   Coins,
   Eye,
   PiggyBank,
-  ShieldCheck,
 } from 'lucide-react';
 import Reveal from '@/components/ui/home/Reveal';
 
@@ -26,21 +25,15 @@ const perks = [
     icon: Coins,
   },
   {
-    title: 'Always in the know',
+    title: 'See your progress',
     description:
-      'See whether an Alpaca paper order is pending, filled, canceled, or rejected. Paper balances stay separate from real net worth.',
+      'Keep your goals, plans, and financial progress together in one place.',
     icon: Eye,
-  },
-  {
-    title: 'Investing, protected',
-    description:
-      'Alpaca handles account opening, identity checks, funding, execution, and custody. Revridge accesses your account only with your Connect permission.',
-    icon: ShieldCheck,
   },
   {
     title: 'Explore companies you can name',
     description:
-      'Explore supported U.S. companies, learn what they do, and review their market information before deciding what to practise.',
+      'Explore U.S. companies, learn what they do, and get familiar with market information.',
     icon: BarChart3,
   },
   {
@@ -69,8 +62,8 @@ export default function WhyRevridge() {
             Investing, built around you.
           </h2>
           <p className="lead-copy mx-auto mt-6 max-w-[50ch] text-[color:var(--muted-ink)]">
-            Education worth the name, tools to plan and track goals, and
-            paper trading through Alpaca Connect, clearly separate from live investing.
+            Education worth the name, tools to plan ahead, and a clearer way to
+            explore investing.
           </p>
         </Reveal>
 

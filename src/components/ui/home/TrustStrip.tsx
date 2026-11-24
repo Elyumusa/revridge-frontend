@@ -1,4 +1,4 @@
-import { MapPin, Play, ShieldCheck } from 'lucide-react';
+import { BookOpen, Goal, Play } from 'lucide-react';
 import { AppleMark } from '@/components/ui/StoreMarks';
 import Reveal from '@/components/ui/home/Reveal';
 
@@ -10,8 +10,8 @@ import Reveal from '@/components/ui/home/Reveal';
 const facts = [
   { title: 'Live on Google Play', detail: 'Android, available now', icon: <Play size={22} fill="currentColor" /> },
   { title: 'iOS public beta', detail: 'Join through TestFlight', icon: <AppleMark size={23} /> },
-  { title: 'Alpaca Connect', detail: 'You choose account and trading permissions', icon: <ShieldCheck size={23} /> },
-  { title: 'Paper trading', detail: 'U.S. stocks with virtual money', icon: <MapPin size={23} /> },
+  { title: 'Learn at your pace', detail: 'Clear lessons for every starting point', icon: <BookOpen size={23} /> },
+  { title: 'Plan for your goals', detail: 'Keep your next steps in view', icon: <Goal size={23} /> },
 ];
 
 export default function TrustStrip() {

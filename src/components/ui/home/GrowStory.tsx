@@ -12,8 +12,8 @@ const cards = [
     screen: appScreens.grow,
   },
   {
-    title: 'Practice stays separate',
-    copy: 'Track your real net worth while keeping paper cash and positions outside it. The screen shown is an illustrative paper portfolio.',
+    title: 'See your full picture',
+    copy: 'Track your net worth alongside your investing activity. The screen shown is illustrative.',
     screen: appScreens.portfolio,
   },
 ];

@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import Footer from "@/components/ui/home/Footer";
 import SocialLinks from "@/components/ui/SocialLinks";
 import Reveal from "@/components/ui/home/Reveal";
-// Face-centred 112px crops of Elyu.jpg / Wongani.jpg. The originals are 232KB
-// combined for what renders as two 56px avatars.
+// Face-centred 112px crop of Elyu.jpg, rendered as a 56px avatar.
 import ElyuPortrait from "@/assets/images/founder-elyumusa.webp";
-import WonganiPortrait from "@/assets/images/founder-wongani.webp";
 
 const journey = [
   {
@@ -17,7 +15,7 @@ const journey = [
   {
     icon: Landmark,
     step: "Invest",
-    copy: "Explore U.S. stocks and practise through Alpaca Connect with virtual money.",
+    copy: "Explore U.S. stocks and learn about the companies behind them.",
   },
   {
     icon: Goal,
@@ -40,8 +38,8 @@ export default function AboutPage() {
             <p className="section-copy lg:pb-2">
               Revridge brings learning, financial planning, investing, and
               progress tracking into one wealth-building platform. We are
-              bringing U.S. investing into the app through Alpaca Connect.
-              Paper trading is available; live trading awaits approval.
+              helping you build confidence with clear lessons, thoughtful
+              planning tools, and an easier way to explore investing.
             </p>
           </div>
         </header>
@@ -105,11 +103,11 @@ export default function AboutPage() {
             {[
               [
                 "Starting in Zambia",
-                "Practical education and financial planning for first-time investors. The current Invest experience focuses on U.S. securities and Alpaca paper trading with virtual money.",
+                "Practical education and financial planning designed to help first-time investors build confidence at their own pace.",
               ],
               [
-                "Alpaca account connection",
-                "Revridge requests your permission to view and, separately, trade in an Alpaca account you own. Alpaca handles account opening, identity checks, funding, execution, settlement, and custody.",
+                "Invest when you’re ready",
+                "Explore U.S. companies, learn how investing works, and take the next step when you feel prepared.",
               ],
             ].map(([title, copy], index) => (
               <Reveal key={title} delay={index * 0.08}>
@@ -122,9 +120,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Restored from the pre-redesign About page (commit 399ebb3). Two
-            phrases were adjusted to match the current Alpaca Connect
-            positioning — see the note in the handoff. */}
+        {/* Founder message */}
         <section
           className="site-section bg-white"
           aria-labelledby="founders-title"
@@ -134,7 +130,7 @@ export default function AboutPage() {
               <h2 id="founders-title" className="display-lg max-w-[9ch]">
                 Why we built this
               </h2>
-              <p className="section-copy mt-5">A message from our co-founders.</p>
+              <p className="section-copy mt-5">A message from our Founder</p>
               <div className="mt-8 flex items-center gap-4">
                 <img
                   src={ElyuPortrait}
@@ -144,18 +140,10 @@ export default function AboutPage() {
                   className="h-14 w-14 rounded-full border border-border object-cover"
                   loading="lazy"
                 />
-                <img
-                  src={WonganiPortrait}
-                  alt=""
-                  width={112}
-                  height={112}
-                  className="-ml-7 h-14 w-14 rounded-full border border-border object-cover"
-                  loading="lazy"
-                />
                 <p className="text-sm font-[680] text-[#17201E]">
-                  Ely&rsquo;umusa &amp; Wongani
+                  Ely&rsquo;umusa
                   <span className="mt-0.5 block font-normal text-[color:var(--meta-ink)]">
-                    Co-Founders
+                    CEO
                   </span>
                 </p>
               </div>
@@ -164,18 +152,18 @@ export default function AboutPage() {
             <blockquote className="rounded-[clamp(24px,3vw,36px)] bg-[#F5F7F6] p-7 text-lg leading-8 text-muted-foreground md:p-12">
               <p className="text-[#17201E]">
                 <strong className="font-[720]">
-                  We started Revridge because we lived this problem.
+                  I started Revridge because I lived this problem.
                 </strong>
               </p>
               <p className="mt-5">
-                As young Zambians who wanted to grow our money, we kept running
+                As a young Zambian who wanted to grow my money, I kept running
                 into the same wall. Investing was treated as something for other
                 people — people with capital, contacts, or a finance background.
                 The knowledge sat behind jargon, the products sat behind
                 gatekeepers, and nobody was explaining either.
               </p>
               <p className="mt-5">
-                So we asked ourselves:{' '}
+                So I asked myself:{' '}
                 <strong className="font-[680] text-[#17201E]">
                   &ldquo;What if one app could teach you properly and let you act
                   on what you learn?&rdquo;
@@ -184,19 +172,17 @@ export default function AboutPage() {
               <p className="mt-5">
                 That question is what Revridge is. Education worth the name, in
                 plain language. Tools to plan and see your whole financial
-                picture. And a way to explore U.S. investing through Alpaca Connect.
-                Paper trading is available with virtual money; live trading
-                awaits Alpaca approval and release.
+                picture. And a way to explore U.S. investing when you feel ready.
               </p>
               <footer className="mt-7 border-t border-border pt-6">
                 <p className="italic">
-                  &ldquo;We&rsquo;re building the platform we wish existed when
-                  we were starting out — one where the door is open first and the
+                  &ldquo;I&rsquo;m building the platform I wish existed when
+                  I was starting out — one where the door is open first and the
                   options grow with you. If you&rsquo;ve ever felt like investing
                   wasn&rsquo;t for you, this is for you.&rdquo;
                 </p>
                 <cite className="mt-4 block not-italic font-[680] text-primary">
-                  — Ely&rsquo;umusa &amp; Wongani, Co-Founders
+                  — Ely&rsquo;umusa, CEO
                 </cite>
               </footer>
             </blockquote>

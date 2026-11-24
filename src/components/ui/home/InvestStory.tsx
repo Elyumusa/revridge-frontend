@@ -1,13 +1,11 @@
-import { Check } from 'lucide-react';
 import Reveal from '@/components/ui/home/Reveal';
 import { appCutouts, appScreens } from '@/assets/appScreens';
 
-/** Explain the Alpaca Connect paper journey and the roles of both services. */
+/** Introduce investing for beginners and explain the current practice option. */
 const steps = [
   { title: 'Explore a U.S. stock', copy: 'Learn about supported securities before making a decision.' },
-  { title: 'Connect your Alpaca account', copy: 'Alpaca handles account opening and identity checks. You choose what Revridge may access.' },
-  { title: 'Grant trading permission', copy: 'A read-only connection shows your account; trading requires a separate grant.' },
-  { title: 'Practice with virtual money', copy: 'Submit paper orders and follow their status. Live trading awaits Alpaca approval and release.' },
+  { title: 'Learn as you go', copy: 'Build your understanding before choosing what to do next.' },
+  { title: 'Try it out', copy: 'Place a practice order and follow its progress.' },
 ];
 
 export default function InvestStory() {
@@ -24,7 +22,7 @@ export default function InvestStory() {
               Explore U.S. investing, <span className="text-[#CAF300]">step by step.</span>
             </h2>
             <p className="lead-copy mt-6 max-w-[44ch] text-white/75">
-              Connect an Alpaca account you own to view it in Revridge. Paper trading is available for practice with virtual money. Alpaca handles account opening, verification, funding, and brokerage services. Live trading is awaiting approval.
+              Explore U.S. stocks and practise with virtual money. Live investing is not available yet.
             </p>
           </Reveal>
 
@@ -55,14 +53,7 @@ export default function InvestStory() {
             loading="lazy"
             decoding="async"
           />
-          <p className="mt-3 text-center text-xs text-white/70">Illustrative screen and price. Paper trading uses virtual money.</p>
-          <span className="float-chip absolute left-0 top-[18%] hidden sm:inline-flex lg:-left-6">
-            <span className="float-chip__icon"><Check size={18} strokeWidth={2.6} /></span>
-            <span className="text-sm leading-tight">
-              <span className="block font-[700]">Paper trading with Alpaca</span>
-              <span className="text-[color:var(--meta-ink)]">Virtual money · separate from net worth</span>
-            </span>
-          </span>
+          <p className="mt-3 text-center text-xs text-white/70">Illustrative screen and price.</p>
         </Reveal>
       </div>
     </section>
